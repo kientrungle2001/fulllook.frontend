@@ -1,0 +1,25 @@
+.full{float: left; width: 100%;}
+.footer-bottom{background: #17181a; color: #7b9f8c; padding: 12px;}
+.footer-text{color: #333333; font-size: 15px; padding: 60px 0px;}
+.mt-40{margin-top: 40px;}
+.footer-gradient{background: linear-gradient(#88dfff, #aae8ff);}
+.header{background: #6dccfd;}
+.relative{position: relative;}
+.absolute{position: absolute;}
+.top20{top: 20px;}
+#tonghop{background: #1c439a;}
+#thithu{background: #f6b746;}
+#practice{background: linear-gradient(#e0fcf5, #f3f3b3);}
+.bg5{background: url(../images/background5.png) no-repeat;
+    background-size: cover;}
+@media (min-width: 768px) {
+	.navbar-brand{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+    }
+    .main-menu{border-radius: 40px;}
+    .box-practice{width: 20%; float: left; padding: 15px;}
+    .box-thithu{width: 20%; float: left; margin: 15px; background: white;}
+}
