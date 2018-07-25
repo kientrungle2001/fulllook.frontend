@@ -476,15 +476,15 @@
 		<div class="row">
 			<div class="col-12 col-md-6">
 				<h3 class="heading text-uppercase text-center mb-3 text-white">đăng ký tư vấn</h3>
-				<div class="form-group">
+				<div class="form-group mb-4">
 				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Họ tên">
 				    
 				</div>
-				<div class="form-group">
+				<div class="form-group mb-4">
 				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Số điện thoại">
 				    
 				</div>
-				<div class="form-group">
+				<div class="form-group mb-4">
 				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
 				    
 				</div>
@@ -493,9 +493,18 @@
 				</div>
 			</div>
 			<div class="col-12 col-md-6">
-				<h3 class="heading text-uppercase text-center text-white">Học phí</h3>
-				<div class="box-hocphi">
-					Học và ôn thi bằng tiếng Việt,  tiếng anh và song ngữ  Chỉ 600.
+				<h3 class="heading text-uppercase mb-3 text-center text-white">Học phí</h3>
+				<div class="box-hocphi full text-center">
+					<div class="hocphi full">
+						Học và ôn thi bằng tiếng Việt,<br>  
+						tiếng anh và song ngữ  <br> 
+						Chỉ <span class="fs29">600.00</span> VNĐ <br> 
+						CHO<span class="fs29">1 năm</span> sử dụng<br> 
+					</div>
+					
+					<a href="#" class="buynow full">
+						Mua ngay
+					</a>
 				</div>
 			</div>
 		</div>
@@ -504,13 +513,10 @@
 <!--end-->
 
 <div class="full bg5">
-	<div class="container d-none d-sm-block">
-
-		<div class="text-white text-center  heading">
-		Ý KIẾN CHUYÊN GIA VÀ NGƯỜI DÙNG
+	<div class="text-white text-center mt-5 mb-3  heading">
+		người dùng nói gì về Full Look?
 		</div>
-		
-
+	<div class="container d-none d-sm-block">
 		<div id="slidebootstrap" class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner">	
 				<div class="carousel-item active">
