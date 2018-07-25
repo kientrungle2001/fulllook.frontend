@@ -1,9 +1,8 @@
 
 <div id="practice" class="full">
 	<div class="container">
-		<div style="margin-bottom: 15px;" class="text-center btnclick textlt">
-		Luyện tập <br>
-		-----
+		<div style="margin-bottom: 15px;" class="text-center fs40 heading">
+		Luyện tập
 		</div>
 	</div>
 
@@ -147,48 +146,47 @@
 <!--end practice -->
 <div id="tonghop" class="full">
 	<div class="container">
-		<div style="margin-bottom: 15px;" class="text-center btnclick textlt">
-		Ôn luyện tổng hợp <br>
-		-----
+		<div class="text-center heading mt-2 mb-4 text-white  fs40">
+		Ôn luyện tổng hợp
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn ltth full mb-3 btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth  btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth  btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 btn-primary">Đề số 1</div>
+				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
 			</div>
 		</div>
 	</div>
@@ -198,63 +196,318 @@
 <!--end tonghop -->
 <div id="thithu" class="full">
 	<div class="container">
-		<div style="margin-bottom: 15px;" class="text-center btnclick textlt">
-			Thi thử Trần Đại Nghĩa <br>
-		-----
+		<div class="text-center heading mt-2 mb-4 text-white">
+			Thi thử Trần Đại Nghĩa 
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="box-thithu full-xs">
-				<div class="bg-white">
-					<h3 class="text-center xanh head-box">Đề thi thử 1</h3>
-					<div class="box-body">
-						<div class="text-uppercase link-box testnumber text-center" onclick="testnumber(this);return false;" data-test="256" data-week="1455" data-trial="1">
-								<a href="" class="text-color">
-								Tổ Hợp 1: KHTN &amp; Toán </a>
-						</div>
-													
-						<div class="text-uppercase link-box testnumber text-center" onclick="testnumber(this);return false;" data-test="255" data-week="1455" data-trial="1">
-								<a href="" class="text-color">
-								Tổ Hợp 2: KHXH &amp; Tiếng Anh 						</a>
-						</div>
-													
-					</div>	
-				</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
 			</div>
-			<div class="box-thithu full-xs">
-				<div class="bg-white">
-					<h3 class="text-center xanh head-box">Đề thi thử 1</h3>
-					<div class="box-body">
-						<div class="text-uppercase link-box testnumber text-center" onclick="testnumber(this);return false;" data-test="256" data-week="1455" data-trial="1">
-								<a href="" class="text-color">
-								Tổ Hợp 1: KHTN &amp; Toán </a>
-						</div>
-													
-						<div class="text-uppercase link-box testnumber text-center" onclick="testnumber(this);return false;" data-test="255" data-week="1455" data-trial="1">
-								<a href="" class="text-color">
-								Tổ Hợp 2: KHXH &amp; Tiếng Anh 						</a>
-						</div>
-													
-					</div>	
-				</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
 			</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-thithu bg-white full-xs">
+				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-thithu bg-white full-xs">
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color readall">
+							Xem tất cả đề thi <br/><br/>
+							<img src="/assets/images/readall.png"/>
+						</a>
+					</div>
+												
+					
+												
+				</div>	
+			</div>
+
 		</div>
 		
 	</div>
 </div>
 <!--end thithu -->	
-<img src="/assets/images/background3.png" alt="" class="full" />
+<div class="full bg3">
+	<div class="text-white text-center mt-2 mb-3  heading">
+		Đề thi Trần Đại Nghĩa các năm
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="box-tdn bg-white full-xs">
+				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-tdn bg-white full-xs">
+				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-tdn bg-white full-xs">
+				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-tdn bg-white full-xs">
+				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+			<div class="box-tdn bg-white full-xs">
+				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
+				<div class="box-body">
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần trắc nghiệm 
+						</a>
+					</div>
+												
+					<div class="link-box text-center">
+						<a href="" class="text-color">
+							Phần tự luận					
+						</a>
+					</div>
+												
+				</div>	
+			</div>
+		</div>
+	</div>		
+</div>
+<!--end-->
 <img src="/assets/images/lydo.png" alt="" class="full" />
-<img src="/assets/images/background4.png" alt="" class="full" />
 
+<div class="full bg4">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-6">
+				<h3 class="heading text-uppercase text-center mb-3 text-white">đăng ký tư vấn</h3>
+				<div class="form-group">
+				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Họ tên">
+				    
+				</div>
+				<div class="form-group">
+				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Số điện thoại">
+				    
+				</div>
+				<div class="form-group">
+				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+				    
+				</div>
+				<div class="form-group text-center">
+					<div class="btn dangki">Đăng kí <img style="max-width: 25px; float: right;" src="/assets/images/button.png"/></div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6">
+				<h3 class="heading text-uppercase text-center text-white">Học phí</h3>
+				<div class="box-hocphi">
+					Học và ôn thi bằng tiếng Việt,  tiếng anh và song ngữ  Chỉ 600.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end-->
 
 <div class="full bg5">
 	<div class="container d-none d-sm-block">
 
-		<div class=" fff223 text-center  fs30 cadena mgt30 mgb15 full">
-		Ý KIẾN CHUYÊN GIA VÀ NGƯỜI DÙNG<br>
-		- - - - -
+		<div class="text-white text-center  heading">
+		Ý KIẾN CHUYÊN GIA VÀ NGƯỜI DÙNG
 		</div>
 		
 
@@ -638,9 +891,8 @@
 			</div>
 		</div>
 	</div>
-	<div class=" fff223 text-center  fs30 cadena mgt10 full">
-		THỐNG KÊ<br>
-		- - - - -
+	<div class=" text-center heading text-white">
+		THỐNG KÊ
 	</div>
 	<div class="full">
 		<div class="container mgb50">

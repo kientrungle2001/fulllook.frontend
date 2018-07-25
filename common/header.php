@@ -5,35 +5,37 @@
            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="container">
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav">
+            <div class="navbar-collapse fs14 cl-green collapse">
+                <ul class="navbar-nav menu-top1">
                     <li class="nav-item">
-                        Hotline: 0965 90 91 95
+                        <img src="/assets/images/hotline.png"/> Hotline: 0965 90 91 95
                     </li>
                     <li class="nav-item">
-                        <select>
+                        &nbsp;
+                        <select class="select-top">
                             <option>Chọn ngôn ngữ</option>
                         </select>
                     </li>
                     <li class="nav-item">
-                        <select>
+                         &nbsp;
+                        <select class="select-top">
                             <option>Chọn lớp</option>
                         </select>
                     </li>
                     
                 </ul>
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav menu-top2 ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mua ngay</a>
+                        <a class="nav-link" href="#"><img src="/assets/images/cart.png"/> Mua ngay</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Nạp thẻ</a>
+                        <a class="nav-link" href="#"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Đăng nhập</a>
+                        <a class="nav-link" href="#"><img src="/assets/images/dn.png"/> Đăng nhập</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Đăng kí</a>
+                        <a class="nav-link" href="#"><img src="/assets/images/dk.png"/> Đăng kí</a>
                     </li>
                 </ul>
             
