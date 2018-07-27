@@ -12,14 +12,19 @@
                     </li>
                     <li class="nav-item">
                         &nbsp;
-                        <select class="select-top">
-                            <option>Chọn ngôn ngữ</option>
+                        <select class="select-top" ng-model="language" ng-change="changeLanguage()">
+                            <option value="" ng-selected="language==''" disabled="disabled">{{translate('Select language')}}</option>
+							<option value="en" ng-selected="language=='en'">English</option>
+							<option value="vn" ng-selected="language=='vn'">Tiếng Việt</option>
                         </select>
                     </li>
                     <li class="nav-item">
                          &nbsp;
-                        <select class="select-top">
-                            <option>Chọn lớp</option>
+                        <select class="select-top" ng-model="grade" ng-change="changeGrade()">
+                            <option value="" disabled="disabled">{{translate('Select class')}}</option>
+							<option value="3" ng-selected="grade=='3'">{{translate('Class')}} 3</option>
+							<option value="4" ng-selected="grade=='4'">{{translate('Class')}} 4</option>
+							<option value="5" ng-selected="grade=='5'">{{translate('Class')}} 5</option>
                         </select>
                     </li>
                     
@@ -54,7 +59,7 @@
                     <a href="#" class="nav-link">Giới thiệu</a>
                 </li>                   
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Luyện tập</a>
+                    <a href="#" class="nav-link">Luyện tập các môn</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Ôn luyện tổng hợp</a>
@@ -67,9 +72,6 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Kinh nghiệm</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Quà tặng</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Giải trí</a>
