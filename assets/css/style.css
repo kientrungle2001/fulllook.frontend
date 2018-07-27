@@ -73,6 +73,49 @@ body{font-family: 'Roboto';}
 .buynow{display: block; border-top: 1px dotted #ec2f3f; font-size: 32px; text-transform: uppercase;font-family: 'iCiel'; padding: 10px; color: #567e25;}
 .link-footer{margin-top: 75px;}
 .link-footer a{display: block; color: #333333; font-weight: bold; font-size: 17px; margin-bottom: 15px;}
+.thumbnail {
+    border-radius: 5px !important;
+    padding: 15px;
+    min-height: 238px;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 1px 1px #cccccc;
+    display: block;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+.fa-sort-down:before, .fa-sort-desc:before {
+    content: "\f0dd";
+}
+.care {
+    bottom: -30px;
+    left: 20px;
+    font-size: 90px;
+    color: white;
+}
+.media {
+    margin-top: 15px;
+}
+.media-left{
+	padding-right: 10px;
+}
+.fs28 {
+    font-size: 28px;
+}
+.fff223 {
+    color: #fff223;
+}
+.media-left, .media-right, .media-body {
+    display: table-cell;
+    vertical-align: top;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.white{color: white;}
 @media (min-width: 768px) {
 	.navbar-brand{
         position: absolute;
