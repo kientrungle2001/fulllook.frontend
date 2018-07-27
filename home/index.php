@@ -8,7 +8,7 @@
 
 	<div class="practice-section container">
 		<div class="box-practice text-center" ng-repeat="subject in subjects">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="{{subject.id}}" data-alias="{{subject.name}}" data-class="5">
+			<a href="/detail.php?subject_id={{subject.id}}" class="subjectclick" data-subject="{{subject.id}}" data-alias="{{subject.name}}" data-class="5">
 				<div class="white text-uppercase relative">
 					<div class="full">
 						<img ng-src="http://s1.nextnobels.com{{subject.img}}" alt="{{subject.name}}" class=" img-fluid center-block">
