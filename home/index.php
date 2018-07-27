@@ -7,138 +7,17 @@
 	</div>
 
 	<div class="practice-section container">
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
+		<div class="box-practice text-center" ng-repeat="subject in subjects">
+			<a href="#" onclick="return false;" class="subjectclick" data-subject="{{subject.id}}" data-alias="{{subject.name}}" data-class="5">
 				<div class="white text-uppercase relative">
 					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
+						<img ng-src="http://s1.nextnobels.com{{subject.img}}" alt="{{subject.name}}" class=" img-fluid center-block">
 					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
+					<div class="top20 text-center full absolute" ng-show="language=='en'">{{subject.name}}</div>
+					<div class="top20 text-center full absolute" ng-show="language=='vn'">{{subject.name_vn}}</div>
 				</div>
 			</a>
 		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-		<div class="box-practice text-center">
-			<a href="#" onclick="return false;" class="subjectclick" data-subject="51" data-alias="Mathematics" data-class="5">
-				<div class="white text-uppercase relative">
-					<div class="full">
-						<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/toan.png" alt="Mathematics" class=" img-fluid center-block">
-					</div>
-					<div class="top20 text-center full absolute">
-						Toán học
-					</div>
-					
-				</div>
-			</a>
-		</div>
-	
-
 	</div>
 
 </div>
@@ -152,41 +31,9 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-12 col-md-2">
-				<div class="btn ltth full mb-3 btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth  btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth  btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
-			</div>
-			<div class="col-12 col-md-2">
-				<div class="btn full mb-3 ltth btn-primary">Đề số 1</div>
+			<div class="col-12 col-md-2" ng-repeat="test in tests">
+				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
+				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
 			</div>
 		</div>
 	</div>
@@ -202,8 +49,8 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
+			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets">
+				<h3 class="text-center head-box">{{testSet.name}}</h3>
 				<div class="box-body">
 					<div class="link-box text-center">
 						<a href="" class="text-color">
@@ -219,156 +66,6 @@
 												
 				</div>	
 			</div>
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-thithu bg-white full-xs">
-				<h3 class="text-center head-box">Đề thi thử số 1</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-thithu bg-white full-xs">
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color readall">
-							Xem tất cả đề thi <br/><br/>
-							<img src="/assets/images/readall.png"/>
-						</a>
-					</div>
-												
-					
-												
-				</div>	
-			</div>
-
 		</div>
 		
 	</div>
