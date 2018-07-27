@@ -52,4 +52,24 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
+	
+	$scope.realTestSets = [];
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/common/getTestSets', 
+		data: {
+			categoryId: '383'
+		},
+		dataType: 'json',
+		success: function(resp) {
+			$scope.realTestSets = resp;
+			$scope.$apply();
+		}
+	});
+	
+	// advice
+	$scope.advice = {};
+	$scope.registerForAdvice = function() {
+		console.log($scope.advice);
+	};
 }]);

@@ -77,76 +77,8 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="box-tdn bg-white full-xs">
-				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-tdn bg-white full-xs">
-				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-tdn bg-white full-xs">
-				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-tdn bg-white full-xs">
-				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
-				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
-						</a>
-					</div>
-												
-				</div>	
-			</div>
-			<div class="box-tdn bg-white full-xs">
-				<h3 class="text-center head-tdn">Đề thi năm 2014</h3>
+			<div class="box-tdn bg-white full-xs" ng-repeat="testSet in realTestSets">
+				<h3 class="text-center head-tdn">{{testSet.name}}</h3>
 				<div class="box-body">
 					<div class="link-box text-center">
 						<a href="" class="text-color">
@@ -174,19 +106,19 @@
 			<div class="col-12 col-md-6">
 				<h3 class="heading text-uppercase text-center mb-3 text-white">đăng ký tư vấn</h3>
 				<div class="form-group mb-4">
-				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Họ tên">
+				    <input type="text" ng-model="advice.name" class="form-control input" placeholder="Họ tên">
 				    
 				</div>
 				<div class="form-group mb-4">
-				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Số điện thoại">
+				    <input type="text" ng-model="advice.phone" class="form-control input" placeholder="Số điện thoại">
 				    
 				</div>
 				<div class="form-group mb-4">
-				    <input type="email" class="form-control input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+				    <input type="email" ng-model="advice.email" class="form-control input" placeholder="Email">
 				    
 				</div>
 				<div class="form-group text-center">
-					<div class="btn dangki">Đăng kí <img style="max-width: 25px; float: right;" src="/assets/images/button.png"/></div>
+					<div class="btn dangki" ng-click="registerForAdvice()">Đăng kí <img style="max-width: 25px; float: right;" src="/assets/images/button.png"/></div>
 				</div>
 			</div>
 			<div class="col-12 col-md-6">
