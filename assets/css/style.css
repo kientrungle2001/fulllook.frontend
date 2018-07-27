@@ -53,9 +53,9 @@ body{font-family: 'Roboto';}
 }
 .ltth{font-size: 18px; border-radius: 30px; background: #3db4ff !important;box-shadow: 0px 3px 0px #11337e;}
 .ltth:hover{box-shadow: none;}
-.lesson{font-size: 18px; border-radius: 30px; background: #3db4ff;box-shadow: 0px 3px 0px #11337e;}
-.lesson.active{background: #11337e;}
-.lesson:hover{box-shadow: none; background: #11337e;}
+.lesson{font-size: 18px; border-radius: 30px; background: #3db4ff;box-shadow: 0px 3px 0px #007bff;}
+.lesson.active{background: #007bff !important; border: 1px solid #007bff !important;}
+.lesson:hover{box-shadow: none; background: #007bff;}
 .head-box{border-radius: 5px 5px 0px 0px; font-size: 18px; font-weight: bold; text-transform: uppercase; color: #2d2d2d; background: #ffdfa5; padding: 15px 3px;}
 .box-body{font-size: 16px; padding: 25px 0px;}
 .box-body a{color: #2d2d2d; display: block; margin-bottom: 15px; }
