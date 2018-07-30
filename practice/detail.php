@@ -201,7 +201,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div style="height: 103px;" class="relative item">
 						<img style="left: 0px; bottom: 0px; border-radius: 0px 0px 0px 5px;" class="absolute hidden-xs" src="/assets/images/bottom-left.png">
 						<img style="right: 0px; bottom: 0px; border-radius: 0px 0px 5px 0px;" class="absolute hidden-xs" src="/assets/images/bottom-right.png">
@@ -212,6 +212,50 @@
 		</div>
 	</div>
 </div>
+
+<!--show result-->
+<div class="modal" role="dialog" id="exampleModal" aria-labelledby="gridSystemModalLabel" aria-hidden="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button style="right: 15px;" type="button" class="close absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h3 class="modal-title text-center title-blue" id="gridSystemModalLabel"><b>Kết quả làm bài</b></h3>
+			</div>
+			
+			<div class="modal-body">
+				<div class="row">
+						<div class="col-md-8 question_true control-label">Số câu trả lời đúng </div> 
+						<div class="col-md-4 num_true title-blue">0</div>
+				</div>	
+				<div class="row">	
+					<div class="col-md-8 question_false control-label">Số câu trả lời sai </div> 
+					<div class="col-md-4 num_false title-red">5</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 question_total control-label">Tổng số câu </div> 
+					<div class="col-md-4 num_total">5</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class=" full text-center">
+					<button class="btn btn-sm btn-danger top10" onclick="window.location='/?class=5'"> 
+						<span >Chọn môn khác</span> 
+						<span class="glyphicon glyphicon-arrow-left"></span>
+					</button>
+					<button id="show-answers-on-dialog" class="btn btn-sm btn-danger top10 " name="show-answers" onclick="show_answers(); $('#exampleModal').modal('hide');" type="button">
+						<span class="glyphicon glyphicon-check"></span>
+						Xem đáp án							
+					</button>
+					<button type="button" class="btn btn-sm btn-success top10" onclick="window.location = '/practice/detail/51?class=5&amp;de=1'">
+						<span class="glyphicon glyphicon-arrow-right hidden-xs"></span> Làm bài khác
+					</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <style>
 .adjust-table table {
