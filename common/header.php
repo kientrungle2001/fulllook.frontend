@@ -37,10 +37,10 @@
                         <a class="nav-link" href="#"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="/assets/images/dn.png"/> Đăng nhập</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#loginRegisterModal"><img src="/assets/images/dn.png"/> Đăng nhập</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="/assets/images/dk.png"/> Đăng kí</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#loginRegisterModal"><img src="/assets/images/dk.png"/> Đăng kí</a>
                     </li>
                 </ul>
             
@@ -80,3 +80,4 @@
         </div>
     </nav>
 </div>
+<?php require 'login.php';?>

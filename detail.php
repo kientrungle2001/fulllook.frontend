@@ -1,5 +1,5 @@
 <?php require_once 'bootstrap.php';?><!DOCTYPE html>
-<html ng-app="flApp" ng-controller="HomeController">
+<html ng-app="flApp" ng-controller="PracticeController">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,6 +12,7 @@
 	
 	<script>
 		FL_API_URL = '<?php echo FL_API_URL?>';
+		subject_id = '<?php echo intval($_GET['subject_id']); ?>';
 	</script>
 </head>
 <body>
