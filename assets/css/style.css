@@ -277,6 +277,8 @@ input[type=radio], input[type=checkbox]{
     float: left;
     width: 100%;
 }
+.guide{font-size: 26px; font-weight: bold; color: #69431f; padding-top: 70px;}
+.guide .fa-star{color: #f8af08;}
 @media (min-width: 768px) {
 	.navbar-brand{
         position: absolute;

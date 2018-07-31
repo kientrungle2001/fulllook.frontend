@@ -63,10 +63,13 @@
 			<div class="col-12 col-md-9">
 				<div class="main-shadow full">
 					<h2 class="text-center title">
-					<span ng-hide="selectedTopic">Chọn bài học ở bên trái</span>
+					<span ng-hide="selectedTopic">Các chuyên đề</span>
 					<span ng-show="selectedTopic">{{selectedParentTopic.name}} - {{selectedTopic.name}}</span>
 					
 					</h2>
+
+					<div class="text-center guide"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
+
 					<div class="practice-content p-3 full" ng-show="action=='practice'">
 						<div class="row">
 							<div class="col-12 col-md-2" ng-repeat="exerciseNum in exerciseNums" ng-click="selectExercise(exerciseNum)">
@@ -201,8 +204,10 @@
 							</div>
 						</div>
 					</div>
+					
+					<img class="img-fluid full" src="/assets/images/bg-huongdan.png" />
 
-					<div style="height: 103px;" class="relative item">
+					<div style="height: 103px; display: none;" class="relative item">
 						<img style="left: 0px; bottom: 0px; border-radius: 0px 0px 0px 5px;" class="absolute hidden-xs" src="/assets/images/bottom-left.png">
 						<img style="right: 0px; bottom: 0px; border-radius: 0px 0px 5px 0px;" class="absolute hidden-xs" src="/assets/images/bottom-right.png">
 						
