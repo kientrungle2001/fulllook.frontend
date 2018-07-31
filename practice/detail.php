@@ -207,7 +207,6 @@
 					
 					<img class="img-fluid full" src="/assets/images/bg-huongdan.png" />
 
-			
 					<!--div style="height: 103px; display: none;" class="relative item">
 						<img style="left: 0px; bottom: 0px; border-radius: 0px 0px 0px 5px;" class="absolute hidden-xs" src="/assets/images/bottom-left.png">
 						<img style="right: 0px; bottom: 0px; border-radius: 0px 0px 5px 0px;" class="absolute hidden-xs" src="/assets/images/bottom-right.png">
