@@ -3,7 +3,7 @@
 		<div class="footer-content container">
 			<div class="row">
 				<div class="col-12 col-md-6">
-					<img class="mt-40" src="/assets/images/logofooter.png" />
+					<img class="mt-40" src="/assets/images/logofooter2.png" />
 					<div class="footer-text">
 						Địa chỉ: Nhà số 6, Ngõ 115 Nguyễn Khang, Cầu Giấy, Hà Nội<br/>
 						Website: Nextnobels.com<br/>
@@ -40,10 +40,10 @@
 		</div>
 	</div>
 	
-	<img class="img-fluid" src="/assets/images/footer.png" />
+	<!--img class="img-fluid" src="/assets/images/footer.png" />
 	<div class="footer-bottom text-center">
 		Bản quyền thuộc về Công Ty Cổ Phần Giáo Dục Phát Triển Trí Tuệ 
-	</div>
+	</div-->
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script>
