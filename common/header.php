@@ -49,7 +49,7 @@
         
     </nav>
 
-    <nav class="navbar navbar-expand-lg container main-menu mt-2 bg-white">
+    <nav class="navbar fix-menu navbar-expand-lg container main-menu mt-2 bg-white">
         <button class="navbar-toggler" data-target="#navigation" data-control="navigation" data-toggle="collapse">
             <span class="navbar-toggler-icon"></span>
         </button>
