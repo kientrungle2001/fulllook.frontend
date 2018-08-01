@@ -1,6 +1,6 @@
 <div class="full header">
     <nav id="topNav" class="navbar p-3 fixed-to navbar-expand-md ">
-        <a class="navbar-brand mx-auto" href="#"><img src="/assets/images/logo.png" /></a>
+        <a class="navbar-brand mx-auto" href="/"><img src="/assets/images/logo.png" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
            <span class="navbar-toggler-icon"></span>
         </button>
@@ -56,13 +56,13 @@
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="nav navbar-nav">
                 <li class="nav-item active">
-                    <a href="#" class="nav-link">Giới thiệu</a>
+                    <a href="/about.php" class="nav-link">Về phần mềm</a>
                 </li>                   
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Luyện tập các môn</a>
+                    <a href="/#practice" class="nav-link">Luyện tập các môn</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Ôn luyện tổng hợp</a>
+                    <a class="nav-link" href="/#test">Ôn luyện tổng hợp</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Đề thi Trần Đại Nghĩa</a>
