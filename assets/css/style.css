@@ -279,6 +279,24 @@ input[type=radio], input[type=checkbox]{
 }
 .guide{font-size: 26px; font-weight: bold; color: #69431f; padding-top: 70px;}
 .guide .fa-star{color: #f8af08;}
+#myTab{background: #5bc0de; border-radius: 5px;}
+#myTab a {color: white;}
+#myTab a.active{ color: #495057; }
+.label-danger {
+    background-color: #d9534f;
+}
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
 @media (min-width: 768px) {
 	.navbar-brand{
         position: absolute;
