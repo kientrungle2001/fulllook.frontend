@@ -52,7 +52,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets">
-				<h3 class="text-center head-box"><a href="/testSet.php?test_id={{testSet.id}}">{{testSet.name}}</a></h3>
+				<h3 class="text-center head-box"><a href="/testSet.php?category_id=383&test_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
 					<div class="link-box text-center">
 						<a href="" class="text-color">
@@ -80,7 +80,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="box-tdn bg-white full-xs" ng-repeat="testSet in realTestSets">
-				<h3 class="text-center head-tdn"><a href="/testSet.php?test_id={{testSet.id}}">{{testSet.name}}</a></h3>
+				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=383&test_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
 					<div class="link-box text-center">
 						<a href="" class="text-color">

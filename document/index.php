@@ -16,8 +16,8 @@
 				</div>
 				<div class="col-12 col-md-8">
 					
-					<div class="full bdbot mb-3">
-						<h3 class="text-center">Geography</h3>
+					<div class="full bdbot mb-3" ng-repeat="subject in subjects" ng-show="subjectDocuments[subject.id].length">
+						<h3 class="text-center">{{subject.name}}</h3>
 						<table class="table">
 							<thead>
 							  <tr>
@@ -29,64 +29,15 @@
 							  </tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><a href="http://s1.nextnobels.com/document/class-5/subject-Geography/Y-nghia-cua-vi-tri-dia-li-Viet-Nam-71">Ý nghĩa của vị trí địa lí Việt Nam</a>
+								<tr ng-repeat="doc in subjectDocuments[subject.id]">
+									<td><a href="/documentDetail.php?document_id={{doc.id}}">{{doc.title}}</a>
 									</td>
-									<td>2016-01-26 16:27:09</td>
+									<td>{{doc.created}}</td>
 									<td>11.55KB</td>
 									<td>0</td>
-									<td><a href="http://s1.nextnobels.com/3rdparty/Filemanager/source/Y-nghia-cua-vi-tri-dia-ly-viet-nam.docx">Tải về</a>
+									<td><a href="{{doc.url}}">Tải về</a>
 									</td>
-								</tr>
-								<tr>
-									<td><a href="http://s1.nextnobels.com/document/class-5/subject-Geography/Y-nghia-cua-vi-tri-dia-li-Viet-Nam-71">Ý nghĩa của vị trí địa lí Việt Nam</a>
-									</td>
-									<td>2016-01-26 16:27:09</td>
-									<td>11.55KB</td>
-									<td>0</td>
-									<td><a href="http://s1.nextnobels.com/3rdparty/Filemanager/source/Y-nghia-cua-vi-tri-dia-ly-viet-nam.docx">Tải về</a>
-									</td>
-								</tr>
-										
-							 
-							</tbody>
-						</table> 
-						<p class="float-right"><a href="http://s1.nextnobels.com/document/class-5/subject-Geography-50">Xem thêm</a></p>
-					</div>
-
-					<div class="full bdbot mb-3">
-						<h3 class="text-center">Geography</h3>
-						<table class="table">
-							<thead>
-							  <tr>
-								<th>Tên tài liệu</th>
-								<th>Ngày gửi lên</th>
-								<th>Dung lượng</th>
-								<th>Lượt tải</th>
-								<th></th>
-							  </tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><a href="http://s1.nextnobels.com/document/class-5/subject-Geography/Y-nghia-cua-vi-tri-dia-li-Viet-Nam-71">Ý nghĩa của vị trí địa lí Việt Nam</a>
-									</td>
-									<td>2016-01-26 16:27:09</td>
-									<td>11.55KB</td>
-									<td>0</td>
-									<td><a href="http://s1.nextnobels.com/3rdparty/Filemanager/source/Y-nghia-cua-vi-tri-dia-ly-viet-nam.docx">Tải về</a>
-									</td>
-								</tr>
-								<tr>
-									<td><a href="http://s1.nextnobels.com/document/class-5/subject-Geography/Y-nghia-cua-vi-tri-dia-li-Viet-Nam-71">Ý nghĩa của vị trí địa lí Việt Nam</a>
-									</td>
-									<td>2016-01-26 16:27:09</td>
-									<td>11.55KB</td>
-									<td>0</td>
-									<td><a href="http://s1.nextnobels.com/3rdparty/Filemanager/source/Y-nghia-cua-vi-tri-dia-ly-viet-nam.docx">Tải về</a>
-									</td>
-								</tr>
-										
-							 
+								</tr>							 
 							</tbody>
 						</table> 
 						<p class="float-right"><a href="http://s1.nextnobels.com/document/class-5/subject-Geography-50">Xem thêm</a></p>

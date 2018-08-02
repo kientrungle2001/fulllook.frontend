@@ -27,20 +27,15 @@
 			  </li>
 			</ul>
 			<div class="tab-content pt-2  mb-5" id="myTabContent">
-			  	<div class="tab-pane fade show active" id="mucdich" role="tabpanel" aria-labelledby="mucdich-tab">
-			  		Mục đích
+			  	<div class="tab-pane fade show active" id="mucdich" role="tabpanel" aria-labelledby="mucdich-tab" ng-bind-html="tabs.proposal">
 			  	</div>
-			  	<div class="tab-pane fade" id="doingu" role="tabpanel" aria-labelledby="doingu-tab">
-			  	Đội ngũ biên soạn và cố vấn
+			  	<div class="tab-pane fade" id="doingu" role="tabpanel" aria-labelledby="doingu-tab" ng-bind-html="tabs.authors">
 			  	</div>
-			  	<div class="tab-pane fade" id="cautruc" role="tabpanel" aria-labelledby="cautruc-tab">
-			  	Tiện ích
+			  	<div class="tab-pane fade" id="cautruc" role="tabpanel" aria-labelledby="cautruc-tab" ng-bind-html="tabs.structure">
 				</div>
-				<div class="tab-pane fade" id="tienich" role="tabpanel" aria-labelledby="tienich-tab">
-			  	Tiện ích
+				<div class="tab-pane fade" id="tienich" role="tabpanel" aria-labelledby="tienich-tab" ng-bind-html="tabs.advantage">
 				</div>
-				<div class="tab-pane fade" id="huongdan" role="tabpanel" aria-labelledby="huongdan-tab">
-			  	Hướng dẫn mua sản phẩm
+				<div class="tab-pane fade" id="huongdan" role="tabpanel" aria-labelledby="huongdan-tab" ng-bind-html="tabs.guide">
 				</div>
 			</div>
 
@@ -122,33 +117,19 @@
 				      <div class="btn btn-info mb-3">CHUYỂN KHOẢN NGÂN HÀNG</div>
 				</div>  
 				
-				<div class="row mb-3">
+				<div class="row mb-3" ng-repeat="bank in banks">
 					<div class="col-12 col-md-3 offset-md-1">
-						<img src="http://s1.nextnobels.com/default/skin/nobel/themes/story/media/vietin.jpg" alt="viettinbank" class="img-thumbnail img-responsive">
+						<img ng-src="{{bank.image}}" alt="bank.name" class="img-thumbnail img-responsive">
 					</div>
 					<div class="col-12 col-md-7">
 						<dl>
-							<dt>Ngân hàng TMCP công thương Việt Nam(Vietinbank)</dt>
-							<dd>Số tài khoản: 110000145741</dd>
-							<dd>Chủ tài khoản: CÔNG TY CỔ PHẦN GIÁO DỤC PHÁT TRIỂN TRÍ TUỆ VÀ SÁNG TẠO NEXT NOBELS</dd>
-							<dd>Chi nhánh: Thăng Long</dd>
+							<dt>{{bank.name}}</dt>
+							<dd>Số tài khoản: {{bank.account}}</dd>
+							<dd>Chủ tài khoản: {{bank.owner}}</dd>
+							<dd>Chi nhánh: {{bank.branch}}</dd>
 						</dl>
 					</div>
 				</div>
-				<div class="row mb-3">
-					<div class="col-12 col-md-3 offset-md-1">
-						<img src="http://s1.nextnobels.com/default/skin/nobel/themes/story/media/vietin.jpg" alt="viettinbank" class="img-thumbnail img-responsive">
-					</div>
-					<div class="col-12 col-md-7">
-						<dl>
-							<dt>Ngân hàng TMCP công thương Việt Nam(Vietinbank)</dt>
-							<dd>Số tài khoản: 110000145741</dd>
-							<dd>Chủ tài khoản: CÔNG TY CỔ PHẦN GIÁO DỤC PHÁT TRIỂN TRÍ TUỆ VÀ SÁNG TẠO NEXT NOBELS</dd>
-							<dd>Chi nhánh: Thăng Long</dd>
-						</dl>
-					</div>
-				</div>
-
 
 				<ul class="pd-30"><strong>CHÚ Ý</strong>	
 					<li>

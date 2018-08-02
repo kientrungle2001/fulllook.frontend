@@ -8,8 +8,31 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 	$scope.grade = window.localStorage.getItem('grade') || '5';
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
-	}
+	};
 	$scope.translate = function(val) {
 		return $langMap[$scope.language][val] || val;
+	};
+	$scope.tabs = {
+		proposal: `Mục đích`,
+		authors: `Đội ngũ biên soạn và cố vấn`,
+		structure: `Cấu trúc phần mềm`,
+		advantage: `Tiện ích`,
+		guide: `Hướng dẫn mua sản phẩm`
+	};
+	$scope.banks = [
+	{
+		image: 'http://s1.nextnobels.com/default/skin/nobel/themes/story/media/vietin.jpg',
+		name: 'Ngân hàng TMCP công thương Việt Nam(Vietinbank)',
+		account: '110000145741',
+		owner: 'CÔNG TY CỔ PHẦN GIÁO DỤC PHÁT TRIỂN TRÍ TUỆ VÀ SÁNG TẠO NEXT NOBELS',
+		branch: 'Thăng Long'
+	},
+	{
+		image: 'http://s1.nextnobels.com/default/skin/nobel/themes/story/media/vietin.jpg',
+		name: 'Ngân hàng TMCP công thương Việt Nam(Vietinbank)',
+		account: '110000145741',
+		owner: 'CÔNG TY CỔ PHẦN GIÁO DỤC PHÁT TRIỂN TRÍ TUỆ VÀ SÁNG TẠO NEXT NOBELS',
+		branch: 'Thăng Long'
 	}
+	];
 }]);
