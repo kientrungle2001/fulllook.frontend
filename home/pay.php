@@ -79,7 +79,7 @@
 		     		
 					<div class="form-group">
 					    <label for="txtname">Họ và tên:</label>
-					    <input type="text" class="pm_paycard_input form-control" cols="62" id="txtname" name="txtname" placeholder="Điền họ tên">
+					    <input type="text" class="pm_paycard_input form-control" cols="62" name="txtname" placeholder="Điền họ tên">
 					</div>
 					<div class="form-group">
 					    <label for="txtquantity">Số lượng thẻ:</label>
@@ -87,7 +87,7 @@
 					</div>
 					<div class="form-group">
 					    <label for="txtname">Số điện thoại:</label>
-					    <input type="text" class="pm_paycard_input form-control" cols="62" id="txtname" name="txtphone" placeholder="Điền họ tên">
+					    <input type="text" class="pm_paycard_input form-control" cols="62" name="txtphone" placeholder="Điền họ tên">
 					</div>
 					<div class="form-group">
 					    <label for="txtaddress">Địa chỉ nhận thẻ:</label>

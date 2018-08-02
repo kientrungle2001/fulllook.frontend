@@ -43,17 +43,62 @@
 				<h2>Đăng ký</h2>
 				<div class="card card-container">
 					<form class="form-signin form">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Tên đăng nhập" required autofocus>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Tên đăng nhập" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Họ và tên" required autofocus>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="password" class="form-control" placeholder="Mật khẩu" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="password" class="form-control" placeholder="Nhập lại Mật khẩu" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Email" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Số điện thoại" required>
+								</div>
+							</div>
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Mật khẩu" required>
+							<input type="date" class="form-control" placeholder="Ngày sinh">
 						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Nhập lại Mật khẩu" required>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Giới tính" >
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Tỉnh thành" >
+								</div>
+							</div>
 						</div>
 						<div class="form-group">
 							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Đăng ký</button>
+						</div>
+						<div class="form-group">
+						Bằng việc đăng ký, bạn đã đồng ý với điều khoản sử dụng và chính sách bảo mật của Next Nobels
 						</div>
 					</form><!-- /form -->
 				</div><!-- /card-container -->

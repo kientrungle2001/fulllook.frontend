@@ -10,11 +10,8 @@
 					</div>
 					
 				  	<ul class="list-group full vocabulary">
-					  <li class="list-group-item"><a href="">Cras justo odio</a></li>
-					  <li class="list-group-item"><a href="">Dapibus ac facilisis in</a></li>
-					  <li class="list-group-item"><a href="">Morbi leo risus</a></li>
-					  <li class="list-group-item"><a href="">Porta ac consectetur ac</a></li>
-					  <li class="list-group-item"><a href="">Vestibulum at eros</a></li>
+					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='vn'" ng-class="{'active': test==selectedTest}"><a href="#" ng-click="selectTest(test)">{{test.name}}</a></li>
+					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='en'" ng-class="{'active': test==selectedTest}"><a href="#" ng-click="selectTest(test)">{{test.name_en}}</a></li>
 					</ul>
 					  
 					 
@@ -24,10 +21,13 @@
 			</div>
 			<div class="col-12 col-md-9">
 				<div class="main-shadow full">
-					<h2 class="text-center title">Đề 1</h2>
+					<h2 class="text-center title" ng-show="selectedTest">{{selectedTest.name}}</h2>
+					<h2 class="text-center title" ng-hide="selectedTest">Hãy chọn một đề</h2>
 					<div class="practice-content p-3 full">
-						
-						<div class="do-practice full">
+						<div class="do-practice full" ng-show="step=='selectTest'" style="text-align: center; padding-top: 50px;">
+							<button ng-click="doTest()" class="btn btn-primary btn-lg">Bắt đầu làm</button>
+						</div>
+						<div class="do-practice full" ng-show="step=='doTest'">
 							<div class="text-center">
 								<div  class="time">
 									<img src="http://fulllook.com.vn/Themes/Songngu3/skin/images/watch.png">
@@ -35,64 +35,35 @@
 								</div>
 							</div>
 							
-							<div id="question" class="item">
+							<div id="question" class="item" ng-repeat="question in questions">
 								<div class="question full">
-									<input type="hidden" name="questions[474]" value="474">
-									<input type="hidden" name="questionType[474]" value="choice">
 									<div class="item cau">
-										<div class="stt">Câu:  1</div>
+										<div class="stt">Câu:  {{$index + 1}}</div>
 										<span class="btn volume fa fa-volume-up" onclick="read_question(this, '/3rdparty/Filemanager/source/practice/all/474.mp3');"
 										></span>
 									</div>
 
 									<div class="nobel-list-md choice">
-										<div class="ptnn-title full"> 
-												cho day so tu nhien	cho day so tu nhien	 cho day so tu nhien cho day so tu nhien		 
+										<div class="ptnn-title full" ng-bind-html="question.name"> 
 										</div>
 									
 										<table>
 											<tbody>
-												<tr>
+												<tr ng-repeat="answer in question.ref_question_answers">
 													<td>
-														<input type="radio" name="answers[474]" id="answers_474_38915" class="float-left" value="38915">
-														<span class="answers_474_38915 pl10">
-															38			
-														</span>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<input type="radio" name="answers[474]" id="answers_474_38915" class="float-left" value="38915">
-														<span class="answers_474_38915 pl10">
-															38			
-														</span>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<input type="radio" name="answers[474]" id="answers_474_38915" class="float-left" value="38915">
-														<span class="answers_474_38915 pl10">
-															38			
-														</span>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<input type="radio" name="answers[474]" id="answers_474_38915" class="float-left" value="38915">
-														<span class="answers_474_38915 pl10">
-															38			
+														<input type="radio" ng-model="answers[question.id]" class="float-left" value="{{answer.id}}" />
+														<span class="answers_474_38915 pl10" ng-bind-html="answer.content">
 														</span>
 													</td>
 												</tr>
 											</tbody>
 										</table>
 								
-										<a href="#mobile-explan-474" class="explanation top10 hidden btn btn-success btn-show-exp" data-toggle="collapse">Xem lý giải
+										<a href="#mobile-explan-474" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse">Xem lý giải
 										</a>
 								
 										<div id="mobile-explan-474" class="collapse lygiai top10 item">
-											<div class="item mb-2">
-												ong huu		
+											<div class="item mb-2" ng-bind-html="question.explaination">
 											</div>
 									
 											<div class="item">
@@ -111,13 +82,13 @@
 													  <div class="modal-body">
 														 <div class="w100p">
 															<label for="exampleInputEmail1">Nội dung:</label>
-															<textarea style="height: 150px !important;" id="contentError474" name="contentError" class="form-control"></textarea>
+															<textarea style="height: 150px !important;" id="contentError474" name="contentError" class="form-control" ng-model="report[question.id]"></textarea>
 														  </div>
 											 
 													  </div>
 													  <div class="modal-footer">
 														
-														<button onclick="reportError(474);" type="button" class="btn btn-primary">Báo lỗi</button>
+														<button ng-click="reportError(question);" type="button" class="btn btn-primary">Báo lỗi</button>
 													  </div>
 													</div>
 												  </div>
@@ -134,105 +105,6 @@
 								</div>
 								<!--end question-->
 
-								<div class="question full">
-									<input type="hidden" name="questions[474]" value="474">
-									<input type="hidden" name="questionType[474]" value="choice">
-									<div class="item cau">
-										<div class="stt">Câu:  1</div>
-										<span class="btn volume fa fa-volume-off" onclick="read_question(this, '/3rdparty/Filemanager/source/practice/all/474.mp3');"
-										></span>
-									</div>
-
-									<div class="nobel-list-md choice">
-										<div class="ptnn-title full"> 
-												cho day so tu nhien	cho day so tu nhien	 cho day so tu nhien cho day so tu nhien		 
-										</div>
-									
-										<table>
-											<tbody>
-												<tr>
-													<td>
-														<input type="radio" name="answers[474]" id="answers_474_38915" class="float-left" value="38915">
-														<span class="answers_474_38915 pl10">
-															38			
-														</span>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<input type="radio" name="answers[474]" id="answers_474_38915" class="float-left" value="38915">
-														<span class="answers_474_38915 pl10">
-															38			
-														</span>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<input type="radio" name="answers[474]" id="answers_474_38915" class="float-left" value="38915">
-														<span class="answers_474_38915 pl10">
-															38			
-														</span>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<input type="radio" name="answers[474]" id="answers_474_38915" class="float-left" value="38915">
-														<span class="answers_474_38915 pl10">
-															38			
-														</span>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-								
-										<a href="#mobile-explan-474" class="explanation top10 hidden btn btn-success btn-show-exp" data-toggle="collapse">Xem lý giải
-										</a>
-								
-										<div id="mobile-explan-474" class="collapse lygiai top10 item">
-											<div class="item mb-2">
-												ong huu		
-											</div>
-									
-											<div class="item">
-												<div class="btn btn-danger" data-toggle="modal" data-target="#report474">
-													Báo lỗi			
-												</div>
-										
-												<div class="modal fade" id="report474" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-												  <div class="modal-dialog" role="document">
-													<div class="modal-content">
-													  <div class="modal-header">
-														<button style="right: 15px;" type="button" class="close absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-														<h4 class="modal-title" id="myModalLabel">Báo lỗi</h4>
-													  </div>
-													  <div class="modal-body">
-														 <div class="w100p">
-															<label for="exampleInputEmail1">Nội dung:</label>
-															<textarea style="height: 150px !important;" id="contentError474" name="contentError" class="form-control"></textarea>
-														  </div>
-											 
-													  </div>
-													  <div class="modal-footer">
-														
-														<button onclick="reportError(474);" type="button" class="btn btn-primary">Báo lỗi</button>
-													  </div>
-													</div>
-												  </div>
-												</div>
-										
-											</div>
-											<!--end report-->
-									
-										</div>
-										<!--Lý giải -->
-									</div>
-								</div>
-								<div class="line-question">
-								</div>
-								<!--end question-->
-
-								
 							</div>
 
 							<div class="text-center full mb-3 relative">				

@@ -1,5 +1,5 @@
 <?php require_once 'bootstrap.php';?><!DOCTYPE html>
-<html ng-app="flApp" ng-controller="HomeController">
+<html ng-app="flApp" ng-controller="TestController">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,5 +18,6 @@
 	<?php include('common/header.php'); ?>
 	<?php include('test/test.php'); ?>
 	<?php include('common/footer.php'); ?>
+	<script src="/assets/angular/test.js"></script>
 </body>
 </html>
