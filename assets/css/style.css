@@ -306,6 +306,9 @@ input[type=radio], input[type=checkbox]{
     border-bottom: 1px solid #BBDDC5;
     font-size: 14px;
 }
+.right-img{width: 51px;}
+.menu-git{cursor: pointer;}
+.menu-git:hover{background: #ffc107 !important;}
 @media (min-width: 768px) {
 	.navbar-brand{
         position: absolute;
