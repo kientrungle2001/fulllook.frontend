@@ -93,7 +93,7 @@
 					    <label for="txtaddress">Địa chỉ nhận thẻ:</label>
 					    <textarea class="form-control" id="txtaddress" name="txtaddress" cols="62" rows="3"></textarea>
 					</div>
-		         
+		         	<input type="submit" id="ordercard_button" class="btn btn-success" value=" ĐẶT MUA">
 		        </form>        
 		   </div>
 		   

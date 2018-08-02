@@ -297,6 +297,15 @@ input[type=radio], input[type=checkbox]{
     vertical-align: baseline;
     border-radius: .25em;
 }
+.box-document{background-color: #eeeeee; font-size: 14px;}
+.box-document img{width: 51px; display: block;
+    margin-right: auto;
+    margin-left: auto;}
+.bdbot {
+    
+    border-bottom: 1px solid #BBDDC5;
+    font-size: 14px;
+}
 @media (min-width: 768px) {
 	.navbar-brand{
         position: absolute;
