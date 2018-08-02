@@ -76,7 +76,7 @@
                     <a href="/#thithu" class="nav-link">Thi thử Trần Đại Nghĩa</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Kinh nghiệm</a>
+                    <a href="/document.php" class="nav-link">Kinh nghiệm</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Giải trí</a>
