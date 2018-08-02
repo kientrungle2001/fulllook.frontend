@@ -6,7 +6,7 @@ $langMap = {
 		'Class': 'Lớp'
 	}
 };
-flApp = angular.module('flApp', ['ngSanitize']);
+flApp = angular.module('flApp', ["ngSanitize", "ngJaxBind"]);
 
 flApp.filter('sanitizer', ['$sce', function($sce) {
         return function(url) {

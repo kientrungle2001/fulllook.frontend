@@ -112,14 +112,16 @@
 									</div>
 
 									<div class="nobel-list-md choice">
-										<div class="ptnn-title full" ng-bind-html="question.name"></div>
+										<div class="ptnn-title full" mathjax-bind="question.name"></div>
 									
 										<table>
 											<tbody>
 												<tr ng-repeat="answer in question.ref_question_answers">
 													<td>
 														<input type="radio" class="float-left" name="question_answers_{{question.id}}" value="{{answer.id}}" ng-model="user_answers[question.id]">
-														<span class="answers_474_38915 pl10" ng-bind-html="answer.content"></span>
+														<span class="answers_474_38915 pl10" mathjax-bind="answer.content"></span>
+	
+
 													</td>
 												</tr>
 											</tbody>
