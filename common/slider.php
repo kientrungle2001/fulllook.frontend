@@ -23,10 +23,13 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="/assets/images/slider.png" alt="Second slide">
+        <img class="d-block w-100" src="/assets/images/slider4.png" alt="Second slide">
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="/assets/images/slider.png" alt="Third slide">
+        <img class="d-block w-100" src="/assets/images/slider3.png" alt="Third slide">
+      </div>
+       <div class="carousel-item">
+        <img class="d-block w-100" src="/assets/images/slider2.png" alt="Four slide">
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

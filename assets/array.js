@@ -145,7 +145,31 @@ function buildBottomTree(arr) {
 	});
 	return roots;
 }
+function get_class(obj) {
+	return obj.constructor.name;
+}
 
+function is_a(obj, className) {
+	return obj !== null && obj.constructor.name == className;
+}
+function is_string(obj) {
+	return is_a(obj, 'String');
+}
+function is_numeric(obj) {
+	return is_a(obj, 'Number');
+}
+function is_array(obj) {
+	return is_a(obj, 'Array');
+}
+function is_function(obj) {
+	return is_a(obj, 'Function');
+}
+function is_boolean(obj) {
+	return is_a(obj, 'Boolean');
+}
+function is_object(obj) {
+	return is_a(obj, 'Object');
+}
 function array_map (callback) { // eslint-disable-line camelcase
   //  discuss at: http://locutus.io/php/array_map/
   // original by: Andrea Giammarchi (http://webreflection.blogspot.com)

@@ -1,2 +1,2 @@
 <?php
-define('FL_API_URL', 'http://api2.nextnobels.com');
+define('FL_API_URL', 'http://fulllook.vn:1337');
