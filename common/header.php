@@ -31,10 +31,10 @@
                 </ul>
                 <ul class="navbar-nav menu-top2 ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="/assets/images/cart.png"/> Mua ngay</a>
+                        <a class="nav-link" href="/about.php"><img src="/assets/images/cart.png"/> Mua ngay</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
+                        <a class="nav-link" href="/about.php"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#loginRegisterModal"><img src="/assets/images/dn.png"/> Đăng nhập</a>

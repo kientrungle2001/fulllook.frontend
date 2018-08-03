@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<?php require_once 'bootstrap.php';?><!DOCTYPE html>
+<html ng-app="flApp" ng-controller="DocumentDetailController">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,12 +9,14 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.6.3/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="/assets/js/bootstrap.bundle.min.js"></script>
+	<script>
+		FL_API_URL = '<?php echo FL_API_URL?>';
+	</script>
 </head>
 <body>
 	<?php include('common/header.php'); ?>
-	<?php include('git/index.php'); ?>
+	<?php include('document/list.php'); ?>
 	<?php include('common/footer.php'); ?>
+	<script src="/assets/angular/documentList.js"></script>
 </body>
 </html>

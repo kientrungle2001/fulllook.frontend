@@ -3,7 +3,7 @@
 </style>
 <div class="full">
 	<div class="container">
-		<div class="t-weight text-center btn full mt-3 mb-3 btn-primary">Tài liệu học tập</div>
+		<div class="t-weight text-center full mt-3 mb-3 bg-primary p-1"><a href="/document.php" style="color:white;">Tài liệu học tập</a> - <a href="/documentList.php?subject_id={{subject.id}}" style="color:white;">{{subject.name_vn}}</a></div>
 		<div class="full">
 			<div class="row">
 				<div class="col-12 col-md-2 pr-0">
@@ -15,34 +15,21 @@
 					</a>
 				</div>
 				<div class="col-12 col-md-8">
-					
-					<div class="full bdbot mb-3" ng-repeat="subject in subjects" ng-show="subjectDocuments[subject.id].length">
-						<h3 class="text-center">{{subject.name}}</h3>
-						<table class="table">
-							<thead>
-							  <tr>
-								<th>Tên tài liệu</th>
-								<th>Ngày gửi lên</th>
-								<th>Dung lượng</th>
-								<th>Lượt tải</th>
-								<th></th>
-							  </tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="doc in subjectDocuments[subject.id]">
-									<td><a href="/documentDetail.php?document_id={{doc.id}}">{{doc.title}}</a>
-									</td>
-									<td>{{doc.created}}</td>
-									<td>0</td>
-									<td>0</td>
-									<td><a href="{{doc.file}}">Tải về</a>
-									</td>
-								</tr>							 
-							</tbody>
-						</table> 
-						<p class="float-right"><a href="/documentList.php?subject_id={{subject.id}}">Xem thêm</a></p>
+					<div class="full bdbot mb-3">
+						<h1 class="text-center">{{doc.title}}</h1>
+						<div class="document-content" ng-bind-html="doc.content">
+						</div>
+						<div class="text-center">
+							<a href="http://docs.google.com/viewer?embedded=true&url={{encode(doc.file)}}" class="document-iframe" ng-show="doc.file">Xem tài liệu</a>
+						</div>
+						
+						<h2>Tài liệu khác</h2>
+						<ul>
+							<li ng-repeat="doc in docs">
+								<a href="/documentDetail.php?document_id={{doc.id}}">{{doc.title}}</a>
+							</li>
+						</ul>
 					</div>
-
 				</div>
 				<div class="col-12 col-md-2 pl-0">
 					<a href="http://s1.nextnobels.com">
@@ -67,3 +54,23 @@
 		
 	</div>
 </div>
+<style>
+.document-content table{
+	width: 100%;
+	
+}
+.document-content table tr td, .document-content table tr th {
+	border: 1px solid black;
+	border-collapse: collapsed;
+}
+.document-content table img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.document-iframe {
+	border: none;
+	width: 100%;
+	height: 600px;
+}
+</style>
