@@ -14,6 +14,18 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		return $langMap[$scope.language][val] || val;
 	}
 	
+	$scope.parseTranslate = function(str) {
+		if(str) {
+			str = str.replace(/\[start\](.*)\[end\]/g, `<button class="btn btn-primary" data-toggle="collapse" onclick="jQuery(this).next().collapse('toggle')">Dịch</button><div class="collapse"><div class="card card-body">$1</div></div>`);
+			str = str.replace(/\[fix\](.*)\[endfix\]/g, `<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'/3rdparty/Filemanager/source/audiovocabulary/$1.mp3');"></span>`);
+			str = str.replace(/\[audio\](.*)\[endaudio\]/g, `<span class="btn btn-default glyphicon glyphicon-volume-up" onclick="read_question(this,'/3rdparty/Filemanager/source/audiovocabulary/$1.mp3');"></span>`);
+			
+			
+			return str;
+		};
+		return '';
+	};
+	
 	$scope.topics = [];
 	$scope.subject = {};
 	

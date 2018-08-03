@@ -17,7 +17,7 @@
 				<div class="col-12 col-md-8">
 					<div class="full bdbot mb-3">
 						<h1 class="text-center">{{doc.title}}</h1>
-						<div class="document-content" ng-bind-html="doc.content">
+						<div class="document-content" ng-bind-html="doc.content | translate">
 						</div>
 						<div class="text-center">
 							<a href="http://docs.google.com/viewer?embedded=true&url={{encode(doc.file)}}" class="document-iframe" ng-show="doc.file">Xem tài liệu</a>

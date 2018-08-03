@@ -202,7 +202,7 @@
 							<div class="name-detail text-center">
 							{{selectedVocabulary.title}}
 							</div>
-							<div class="text-justify adjust-table" ng-bind-html="selectedVocabulary.content | sanitizer">
+							<div class="text-justify adjust-table" mathjax-bind="parseTranslate(selectedVocabulary.content)">
 							</div>
 						</div>
 					</div>
