@@ -79,7 +79,7 @@
                     <a href="/document.php" class="nav-link">Kinh nghiệm</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Giải trí</a>
+                    <a href="/gift.php" class="nav-link">Giải trí</a>
                 </li>
             </ul>
         </div>

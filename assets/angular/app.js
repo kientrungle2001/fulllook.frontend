@@ -27,3 +27,19 @@ flApp.filter('repeat', ['$sce', function($sce) {
 		return number ? str.repeat(number) : '';
 	};
 }]);
+
+flApp.filter('gift', ['$sce', function($sce) {
+        return function(str) {
+			if(str) {
+				var result = '';
+				var strs = str.split('=====');
+				result += strs[0];
+				if(typeof strs[1] !== 'undefined') {
+					result += `<button class="btn btn-primary" data-toggle="collapse" onclick="jQuery(this).next().collapse('toggle')">Lyrics</button><div class="collapse"><div class="card card-body">`+strs[1]+`</div></div>`;
+				}
+				return $sce.trustAsHtml(result);
+			};
+			
+			return '';
+        };
+}]);
