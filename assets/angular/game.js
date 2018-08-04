@@ -27,6 +27,8 @@ flApp.controller('GameController', ['$scope', function($scope) {
 	};
 	$scope.loadGameTypes();
 	$scope.selectGameType = function(){
+		$scope.play = false;
+		$scope.selectedGameTopic = '';
 		$scope.loadGaneTopics($scope.selectedGameType);
 	}
 	$scope.loadGaneTopics = function(gamecode){
@@ -38,18 +40,16 @@ flApp.controller('GameController', ['$scope', function($scope) {
 				success: function(resp) {
 
 					var gameTopics = buildBottomTree(resp);
-					$scope.gameTopics = treefy(gameTopics, 0);
-					console.log(gameTopics);
-					console.log($scope.gameTopics);
+					$scope.muatuTopics = treefy(gameTopics, 0);
 					$scope.$apply();
 				}
 			});	
 		}else if(gamecode == 'dragWord'){
 			jQuery.ajax({
-				url: FL_API_URL +'/game?gamecode=dragWord', 
+				url: FL_API_URL +'/games?gamecode=dragWord', 
 				dataType: 'json',
 				success: function(resp) {
-					$scope.gameTopics = buildBottomTree(resp);
+					$scope.dragTopics = resp;
 					$scope.$apply();
 				}
 			});	
@@ -57,6 +57,50 @@ flApp.controller('GameController', ['$scope', function($scope) {
 		else{
 			$scope.gameTopics = [];
 		}
+	}
+	var u = new URL(location.href);
+	$scope.selectedGameType = u.searchParams.get('gameType');
+	if($scope.selectedGameType){
+		$scope.loadGaneTopics($scope.selectedGameType);
+	}
+	$scope.selectedGameTopic = u.searchParams.get('gameTopic');
+
+	
+	$scope.playGame = function(){
+		
+		if(!$scope.selectedGameType){
+			alert('Bạn chưa chọn loại game');
+			jQuery('#gameType').focus();
+			return false;
+		}
+		if(!$scope.selectedGameTopic){
+			alert('Bạn chưa chọn chủ đề');
+			jQuery('#gameTopic').focus();
+			return false;
+		}
+		if($scope.selectedGameType && $scope.selectedGameTopic){
+			
+			window.location.href = '/game.php?gameType='+$scope.selectedGameType+'&gameTopic='+$scope.selectedGameTopic;
+			// $scope.play = true;
+
+			// if($scope.selectedGameType == 'muatu'){
+			// 	jQuery.ajax({
+			// 		url: FL_API_URL +'/games?gamecode=muatu&game_topic_id='+$scope.selectedGameTopic, 
+			// 		dataType: 'json',
+			// 		success: function(resp) {
+			// 			var totalWord = resp[0].dataword.split(/,[ ]*/).length;
+			// 			var allWord = resp[0].dataword.split(/,[ ]*/).chunk(5);
+			// 			var trueWord = resp[0].datatrue.split(/,[ ]*/);
+			// 			$scope.$apply();
+			// 			RainWord.init(allWord, trueWord, totalWord);
+			// 		}
+			// 	});		
+			// }else if($scope.selectedGameType == 'dragWord'){
+
+			// }
+
+		}
+
 	}
 
 }]);

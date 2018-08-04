@@ -18,5 +18,22 @@
 	<?php include('game/index.php'); ?>
 	<?php include('common/footer.php'); ?>
 	<script src="/assets/angular/game.js"></script>
+	<?php if(isset($_GET['gameType']) && isset($_GET['gameTopic']) && $_GET['gameType'] == 'muatu' ){ ?>
+	<script>
+		jQuery(function(){
+    		jQuery.ajax({
+				url: FL_API_URL +'/games?gamecode=muatu&game_topic_id='+<?= $_GET['gameTopic']; ?>, 
+				dataType: 'json',
+				success: function(resp) {
+					var totalWord = resp[0].dataword.split(/,[ ]*/).length;
+					var allWord = resp[0].dataword.split(/,[ ]*/).chunk(5);
+					var trueWord = resp[0].datatrue.split(/,[ ]*/);
+					RainWord.init(allWord, trueWord, totalWord);
+				}
+			});	
+    	});	
+    	
+	</script>
+	<?php } ?>
 </body>
 </html>
