@@ -37,6 +37,9 @@ flApp.filter('gift', ['$sce', function($sce) {
 				if(typeof strs[1] !== 'undefined') {
 					result += `<button class="btn btn-primary" data-toggle="collapse" onclick="jQuery(this).next().collapse('toggle')">Lyrics</button><div class="collapse"><div class="card card-body">`+strs[1]+`</div></div>`;
 				}
+				if(typeof strs[2] !== 'undefined') {
+					result += `<div><strong>Questions:</strong> ` + strs[2] + `</div>`;
+				}
 				return $sce.trustAsHtml(result);
 			};
 			

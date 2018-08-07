@@ -114,50 +114,58 @@
 									<div class="nobel-list-md choice">
 										<div class="ptnn-title full" mathjax-bind="question.name"></div>
 									
-										<table>
+										<table class="full">
 											<tbody>
-												<tr ng-repeat="answer in question.ref_question_answers">
-													<td>
-														<input type="radio" class="float-left" name="question_answers_{{question.id}}" value="{{answer.id}}" ng-model="user_answers[question.id]">
+												<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'bg-primary text-white': showAnswersStep=='showAnswers' && answer.status==1}">
+													<td style="padding: 10px;">
+														<input type="radio" class="float-left" name="question_answers_{{question.id}}" value="{{answer.id}}" ng-model="user_answers[question.id]" ng-disabled="practiceStep=='finishPractice'" ng-change="selectAnswer(question, answer)" />
 														<span class="answers_474_38915 pl10" mathjax-bind="answer.content"></span>
 	
 
 													</td>
 												</tr>
+												<tr class="bg-success text-white" ng-show="showAnswersStep=='showAnswers' && isRightAnswer(question)">
+													<td style="padding: 10px;">
+														Bạn đã trả lời đúng
+													</td>
+												</tr>
+												<tr class="bg-warning text-white" ng-show="showAnswersStep=='showAnswers' && !isRightAnswer(question)">
+													<td style="padding: 10px;">
+														Bạn đã trả lời sai
+													</td>
+												</tr>
 											</tbody>
 										</table>
 								
-										<a href="#mobile-explan-474" class="explanation top10 hidden btn btn-success btn-show-exp" data-toggle="collapse">Xem lý giải
+										<a href="#mobile-explan-{{question.id}}" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse" ng-show="showAnswersStep=='showAnswers'">Xem lý giải
 										</a>
 								
-										<div id="mobile-explan-474" class="collapse lygiai top10 item">
-											<div class="item mb-2">
-												ong huu		
-											</div>
+										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" ng-show="showAnswersStep=='showAnswers'">
+											<div class="item mb-2" mathjax-bind="getExplaination(question)"></div>
 									
 											<div class="item">
-												<div class="btn btn-danger" data-toggle="modal" data-target="#report474">
+												<div class="btn btn-danger" data-toggle="modal" data-target="#report{{question.id}}">
 													Báo lỗi			
 												</div>
 										
-												<div class="modal fade" id="report474" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												<div class="modal fade" id="report{{question.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 												  <div class="modal-dialog" role="document">
 													<div class="modal-content">
 													  <div class="modal-header">
 														<button style="right: 15px;" type="button" class="close absolute" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 
-														<h4 class="modal-title" id="myModalLabel">Báo lỗi</h4>
+														<h4 class="modal-title" id="myModalLabel{{question.id}}">Báo lỗi</h4>
 													  </div>
 													  <div class="modal-body">
 														 <div class="w100p">
-															<label for="exampleInputEmail1">Nội dung:</label>
-															<textarea style="height: 150px !important;" id="contentError474" name="contentError" class="form-control"></textarea>
+															<label for="contentError{{question.id}}">Nội dung:</label>
+															<textarea style="height: 150px !important;" id="contentError{{question.id}}" name="contentError" class="form-control" ng-model="report.content"></textarea>
 														  </div>
 											 
 													  </div>
 													  <div class="modal-footer">
 														
-														<button onclick="reportError(474);" type="button" class="btn btn-primary">Báo lỗi</button>
+														<button ng-click="reportError(question);" type="button" class="btn btn-primary">Báo lỗi</button>
 													  </div>
 													</div>
 												  </div>
@@ -178,14 +186,14 @@
 							</div>
 
 							<div class="text-center full mb-3 relative">				
-								<button id="finish-choice" class="btn btn-primary btt-practice " name="finish-choice" onclick="finish_choice();"><span class="fa fa-check"></span>
-									Hoàn thành					
+								<button id="finish-choice" class="btn btn-primary btt-practice " name="finish-choice" ng-click="finishPractice()" ng-disabled="practiceStep=='finishPractice'"><span class="fa fa-check"></span>
+									Hoàn thành
 								</button>
-								<button id="view-result" class="btn btt-practice btn-success" data-toggle="modal" data-target="#exampleModal" name="view-result" style=""><span class="fa fa-list-alt"></span>
-									Xem kết quả					
+								<button id="view-result" class="btn btt-practice btn-success" data-toggle="modal" data-target="#resultModal" name="view-result"  ng-show="practiceStep=='finishPractice'"><span class="fa fa-list-alt"></span>
+									Xem kết quả
 								</button>
-								<button id="show-answers" class="btn btt-practice btn-danger " name="show-answers" onclick="show_answers();"  ><span class="fa fa-check"></span>
-								Xem đáp án					
+								<button id="show-answers" class="btn btt-practice btn-danger " name="show-answers" ng-click="showAnswers();" ng-show="practiceStep=='finishPractice'" ng-disabled="showAnswersStep=='showAnswers'"><span class="fa fa-check"></span>
+								Xem đáp án
 								</button>
 							</div>
 
@@ -208,12 +216,6 @@
 					</div>
 					
 					<img class="img-fluid full" src="/assets/images/bg-huongdan.png" />
-
-					<!--div style="height: 103px; display: none;" class="relative item">
-						<img style="left: 0px; bottom: 0px; border-radius: 0px 0px 0px 5px;" class="absolute hidden-xs" src="/assets/images/bottom-left.png">
-						<img style="right: 0px; bottom: 0px; border-radius: 0px 0px 5px 0px;" class="absolute hidden-xs" src="/assets/images/bottom-right.png">
-						
-					</div-->	
 				</div>
 			</div>
 		</div>
@@ -221,7 +223,7 @@
 </div>
 
 <!--show result-->
-<div class="modal" role="dialog" id="exampleModal" aria-labelledby="gridSystemModalLabel" aria-hidden="false">
+<div class="modal" role="dialog" id="resultModal" aria-labelledby="gridSystemModalLabel" aria-hidden="false">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -232,28 +234,28 @@
 			<div class="modal-body">
 				<div class="row">
 						<div class="col-md-8 question_true control-label">Số câu trả lời đúng </div> 
-						<div class="col-md-4 num_true title-blue">0</div>
+						<div class="col-md-4 num_true title-blue">{{totalRights}}</div>
 				</div>	
 				<div class="row">	
 					<div class="col-md-8 question_false control-label">Số câu trả lời sai </div> 
-					<div class="col-md-4 num_false title-red">5</div>
+					<div class="col-md-4 num_false title-red">{{totalWrongs}}</div>
 				</div>
 				<div class="row">
 					<div class="col-md-8 question_total control-label">Tổng số câu </div> 
-					<div class="col-md-4 num_total">5</div>
+					<div class="col-md-4 num_total">{{totalQuestions}}</div>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<div class=" full text-center">
-					<button class="btn btn-sm btn-danger top10" onclick="window.location='/?class=5'"> 
+					<button class="btn btn-sm btn-danger top10" onclick="window.location='/#practice'"> 
 						<span >Chọn môn khác</span> 
 						<span class="glyphicon glyphicon-arrow-left"></span>
 					</button>
-					<button id="show-answers-on-dialog" class="btn btn-sm btn-danger top10 " name="show-answers" onclick="show_answers(); $('#exampleModal').modal('hide');" type="button">
+					<button id="show-answers-on-dialog" class="btn btn-sm btn-danger top10 " name="show-answers"  ng-click="showAnswers();" ng-show="practiceStep=='finishPractice'" ng-disabled="showAnswersStep=='showAnswers'" type="button" onclick="jQuery('#resultModal').modal('hide');">
 						<span class="glyphicon glyphicon-check"></span>
 						Xem đáp án							
 					</button>
-					<button type="button" class="btn btn-sm btn-success top10" onclick="window.location = '/practice/detail/51?class=5&amp;de=1'">
+					<button type="button" class="btn btn-sm btn-success top10" onclick="jQuery('#resultModal').modal('hide'); jQuery(window).scrollTop(0)">
 						<span class="glyphicon glyphicon-arrow-right hidden-xs"></span> Làm bài khác
 					</button>
 					
@@ -276,5 +278,8 @@
 .adjust-table table img {
 	width: 100%;
 	display: flex;
+}
+.text-white {
+	color: white !important;
 }
 </style>

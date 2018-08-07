@@ -16,7 +16,7 @@
 				</div>
 				<div class="col-12 col-md-8">
 					
-					<div class="full bdbot mb-3" ng-repeat="subject in subjects" ng-show="subjectDocuments[subject.id].length">
+					<div class="full bdbot mb-3">
 						<h3 class="text-center">{{subject.name}}</h3>
 						<table class="table">
 							<thead>
@@ -29,15 +29,13 @@
 							  </tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="doc in subjectDocuments[subject.id]">
-									<td><a href="/documentDetail.php?document_id={{doc.id}}">{{doc.title}}</a>
-									</td>
+								<tr ng-repeat="doc in docs">
+									<td><a href="/documentDetail.php?document_id={{doc.id}}">{{doc.title}}</a></td>
 									<td>{{doc.created}}</td>
 									<td>0</td>
 									<td>0</td>
-									<td><a href="{{doc.file}}">Tải về</a>
-									</td>
-								</tr>							 
+									<td><a href="{{doc.file}}">Tải về</a></td>
+								</tr>
 							</tbody>
 						</table> 
 						<p class="float-right"><a href="/documentList.php?subject_id={{subject.id}}">Xem thêm</a></p>

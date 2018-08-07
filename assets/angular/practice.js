@@ -102,6 +102,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		$scope.selectedExerciseNum = exerciseNum;
 	};
 	$scope.startPractice = function() {
+		
 		jQuery.ajax({
 			type: 'post',
 			url: FL_API_URL +'/subject/getExerciseQuestions', 
@@ -113,17 +114,90 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 			},
 			success: function(resp) {
 				$scope.step = 'startPractice';
+				$scope.practiceStep = 'startPractice';
+				$scope.showAnswersStep = 'startPractice';
 				$scope.questions = resp;
+				$scope.user_question_answers = {};
 				$scope.$apply();
 			}
 		});
 	};
+	$scope.user_question_answers = {};
 	$scope.selectAnswer = function(question, answer) {
-		console.log(question, answer);
+		$scope.user_question_answers[question.id] = answer.id;
+		console.log($scope.user_question_answers);
 	};
+	
 	
 	$scope.selectVocabulary = function(vocabulary) {
 		$scope.action = 'vocabulary';
 		$scope.selectedVocabulary = vocabulary;
+	};
+	$scope.finishPractice = function() {
+		console.log($scope.user_question_answers);
+		$scope.practiceStep = 'finishPractice';
+		$scope.totalQuestions = $scope.questions.length;
+		$scope.totalRights = 0;
+		$scope.questions.forEach(function(question) {
+			if($scope.isRightAnswer(question)) {
+				$scope.totalRights++;
+			}
+		});
+		$scope.totalWrongs = $scope.totalQuestions - $scope.totalRights;
+		jQuery('#resultModal').modal('show');
+		var userId = 8;
+		jQuery.ajax({
+			type: 'post',
+			url: FL_API_URL + '/subject/saveToBook',
+			data: {
+				userId:  userId,
+				subjectId: $scope.subject.id,
+				topicId: $scope.selectedTopic.id,
+				exerciseNum: $scope.selectedExerciseNum,
+				user_answers: $scope.user_question_answers,
+				totalQuestions: $scope.totalQuestions,
+				totalRights: $scope.totalRights,
+				totalWrongs: $scope.totalWrongs
+			},
+			success: function(resp) {
+				
+			}
+		});
+	};
+	
+	$scope.showAnswers = function() {
+		$scope.showAnswersStep = 'showAnswers';
+	};
+	
+	$scope.getExplaination = function(question) {
+		var explaination = null;
+		question.ref_question_answers.forEach(function(answer) {
+			if(answer.status == 1 || answer.status == '1' ) {
+				explaination = answer.recommend;
+			}
+		});
+		if(!explaination || explaination == '') {
+			explaination = question.explaination;
+		}
+		return explaination;
+	};
+	$scope.report = {};
+	$scope.reportError = function(question) {
+		console.log($scope.report.content);
+		console.log(question);
+	};
+	$scope.isRightAnswer = function(question) {
+		var rightId = null;
+		question.ref_question_answers.forEach(function(answer) {
+			if(answer.status == 1 || answer.status == '1' ) {
+				rightId = answer.id;
+			}
+		});
+		if(typeof $scope.user_question_answers[question.id] != 'undefined') {
+			if(rightId == $scope.user_question_answers[question.id]) {
+				return true;
+			}
+		}
+		return false;
 	};
 }]);
