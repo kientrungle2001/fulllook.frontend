@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require('./bootstrap.php'); ?><!DOCTYPE html>
 <html ng-app="flApp" ng-controller="AboutController">
 <head>
 	<meta charset="utf-8">
@@ -9,6 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.6.3/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+	<script>
+		FL_API_URL = '<?php echo FL_API_URL?>';
+	</script>
 </head>
 <body>
 	<?php include('common/header.php'); ?>

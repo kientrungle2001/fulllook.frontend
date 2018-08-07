@@ -1,2 +1,3 @@
 <?php
-define('FL_API_URL', 'http://fulllook.vn:1337');
+session_start();
+define('FL_API_URL', 'http://fulllooktdn.vn:1337');

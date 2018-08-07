@@ -1,3 +1,4 @@
+
 <div class="full practice pb-5">
 	<div class="container mt-4 mb-3">
 		<div class="main-shadow full p-3">
@@ -27,15 +28,15 @@
 			  </li>
 			</ul>
 			<div class="tab-content pt-2  mb-5" id="myTabContent">
-			  	<div class="tab-pane fade show active" id="mucdich" role="tabpanel" aria-labelledby="mucdich-tab" ng-bind-html="tabs.proposal">
+			  	<div class="tab-pane fade show active bg-light" id="mucdich" role="tabpanel" aria-labelledby="mucdich-tab" ng-bind-html="tabs.proposal">
 			  	</div>
-			  	<div class="tab-pane fade" id="doingu" role="tabpanel" aria-labelledby="doingu-tab" ng-bind-html="tabs.authors">
+			  	<div class="tab-pane fade bg-light" id="doingu" role="tabpanel" aria-labelledby="doingu-tab" ng-bind-html="tabs.authors">
 			  	</div>
-			  	<div class="tab-pane fade" id="cautruc" role="tabpanel" aria-labelledby="cautruc-tab" ng-bind-html="tabs.structure">
+			  	<div class="tab-pane fade bg-light" id="cautruc" role="tabpanel" aria-labelledby="cautruc-tab" ng-bind-html="tabs.structure">
 				</div>
-				<div class="tab-pane fade" id="tienich" role="tabpanel" aria-labelledby="tienich-tab" ng-bind-html="tabs.advantage">
+				<div class="tab-pane fade bg-light" id="tienich" role="tabpanel" aria-labelledby="tienich-tab" ng-bind-html="tabs.advantage">
 				</div>
-				<div class="tab-pane fade" id="huongdan" role="tabpanel" aria-labelledby="huongdan-tab" ng-bind-html="tabs.guide">
+				<div class="tab-pane fade bg-light" id="huongdan" role="tabpanel" aria-labelledby="huongdan-tab" ng-bind-html="tabs.guide">
 				</div>
 			</div>
 
@@ -70,29 +71,30 @@
 				     </span> 
 			  	</div>
 				
-				<form style="width: 60%; margin: 0px auto;" id="orderCardFormFL" onsubmit="return ordercard(); return false;" method="post">
+				<form style="width: 60%; margin: 0px auto;" id="orderCardFormFL"  method="post">
 		     		
 					<div class="form-group">
 					    <label for="txtname">Họ và tên:</label>
-					    <input type="text" class="pm_paycard_input form-control" cols="62" name="txtname" placeholder="Điền họ tên">
+					    <input type="text" class="pm_paycard_input form-control" cols="62" name="txtname" ng-model="order.fullname" placeholder="Điền họ tên" required>
 					</div>
 					<div class="form-group">
 					    <label for="txtquantity">Số lượng thẻ:</label>
-					    <input type="text" class="pm_paycard_input form-control" cols="62" id="txtquantity" name="txtquantity" placeholder="Điền họ tên">
+					    <input type="number" class="pm_paycard_input form-control" cols="62" id="txtquantity" name="txtquantity" placeholder="Số lượng thẻ" ng-model="order.quantity" required>
 					</div>
 					<div class="form-group">
 					    <label for="txtname">Số điện thoại:</label>
-					    <input type="text" class="pm_paycard_input form-control" cols="62" name="txtphone" placeholder="Điền họ tên">
+					    <input type="text" class="pm_paycard_input form-control" cols="62" name="txtphone" placeholder="Điền số điện thoại" ng-model="order.phone" required>
 					</div>
 					<div class="form-group">
 					    <label for="txtaddress">Địa chỉ nhận thẻ:</label>
-					    <textarea class="form-control" id="txtaddress" name="txtaddress" cols="62" rows="3"></textarea>
+					    <textarea class="form-control" id="txtaddress" name="txtaddress" placeholder="Địa chỉ nhận thẻ" cols="62" rows="3" ng-model="order.address" required></textarea>
 					</div>
-		         	<input type="submit" id="ordercard_button" class="btn btn-success" value=" ĐẶT MUA">
-		        </form>        
-		   </div>
-		   
-
+		         	<input type="submit" id="ordercard_button" class="btn btn-success" ng-click="doOrder()" value=" ĐẶT MUA">			
+		         	<label ng-model ="resultOrder" ng-bind="resultOrder" class="text-success font-weight-bold"></label>  
+		        </form> 
+		             
+		   </div>		   
+			
 		   <div class="full bg-light p-3 mb-3" id="paycardfl">
 				<div class="text-center">
 				    <div class="btn btn-danger mb-3">NẠP THẺ FULLOOK</div>
@@ -101,15 +103,27 @@
 			      <span><strong>Chú ý: </strong>Bạn hãy cào thẻ và  điền mã kích hoạt vào ô bên dưới rồi nhấn "Nạp thẻ" để hoàn thành.</span>
 			    </div>
 
-			      <form style="width: 60%; margin: 0px auto;" id="paycardflForm" onsubmit="return paycardfl(); return false;" method="post">
+			      <form style="width: 60%; margin: 0px auto;" id="paycardflForm" method="post">
 			      		<div class="form-group">
 						    <label for="flcardId">Nhập mã kích hoạt:</label>
-						    <input type="text" autocomplete="off" class="pm_paycard_input form-control" id="flcardId" name="flcardId" placeholder="Nhập mã kích hoạt">
+						    <input type="text" ng-model="paycard.pincard" autocomplete="off" class="pm_paycard_input form-control" id="flcardId" required  name="flcardId" placeholder="Nhập mã kích hoạt">							
 						</div>
-			             
-			            <input type="submit" class="btn btn-danger" value=" NẠP THẺ">
-			      </form>
-				
+			            <?php if(isset($_SESSION['userId'])){
+			            	$userId = $_SESSION['userId'];
+			            	$username = $_SESSION['username'];
+			            } else {
+			            	$userId = 0;
+			            	$username =0;
+			            }  ?>
+			            
+			             <h5>
+			             	<span ng-model="resultcheck" ng-init="resultcheck=false"></span>             	
+							  <label ng-model ="resultTrue" ng-bind="resultTrue" class="text-success font-weight-bold" ng-if="resultcheck"></label>
+							
+							<label  ng-model ="resultFalse" ng-bind="resultFalse" class="text-danger font-weight-bold" ng-hide="resultcheck"></label>
+						</h5>			      		
+			            <input type="submit" class="btn btn-danger" ng-click="payCardFl('<?php echo $userId ?>', '<?php echo $username ?>')" value=" NẠP THẺ">
+			      </form>				
 			</div>
 
 			<div class="full bg-light p-3 mb-3" id="bankfl">
@@ -129,14 +143,14 @@
 							<dd>Chi nhánh: {{bank.branch}}</dd>
 						</dl>
 					</div>
-				</div>
+				</div>				
 
 				<ul class="pd-30"><strong>CHÚ Ý</strong>	
 					<li>
 					<strong>Cần ghi chính xác thông tin của chủ tài khoản và chi nhánh ngân hàng</strong> của Công ty CP Giáo dục Phát triển Trí tuệ và Sáng tạo Next Nobels. Trường hợp chuyển tiền qua SMS Banking, nếu tên công ty quá dài, chỉ được viết tắt cụm : Công ty Cổ phần (CT CP), không được viết tắt những từ còn lại. Đặc biệt, tên Next Nobels có chữ “s” ở cuối.
 					
 					</li>
-					<li><strong>Nội dung chuyển tiền: Cần ghi ngắn gọn, đúng cấu trúc:</strong> Full look, tên đăng nhập trên Next Nobels, số điện thoại liên hệ của bạn. Ví dụ: <strong>Full Look, gaubeo, 0936 738 986 </strong>. <br>
+					<li><strong>Nội dung chuyển tiền: Cần ghi ngắn gọn, đúng cấu trúc:</strong> Full look, tên đăng nhập trên FullLook, số điện thoại liên hệ của bạn. Ví dụ: <strong>Full Look, gaubeo, 0936 738 986 </strong>. <br>
 					<strong>Tránh ghi nội dung dài như: Nguyễn Văn A, mua tài khoản Full Look, tên đăng nhập: nguyenvana, điện thoại: 0989xxxxxx</strong> bởi vì tin nhắn ngân hàng thông báo việc có người chuyển tiền vào tài khoản của chúng tôi rất ngắn nên nếu bạn ghi nội dung chuyển tiền dài, <strong>chúng tôi thường không nhận được đầy đủ thông tin trong nội dung bạn viết</strong> đặc biệt là thông tin về số điện thoại và tài khoản đăng nhập của bạn. Trong trường hợp đó, chúng tôi thường không kích hoạt được tài khoản cho bạn luôn. </li>
 					<!--li>Nếu bạn chuyển tiền qua máy ATM phải ghi đầy đủ: Tên sản phẩm, số điện thoại của bạn, tên đăng nhập của bạn trên Nextnobels.com(ví dụ: FULL LOOK 0996896968 fantbitt)</li-->
 					<li>Bạn vui lòng giữ lại biên nhận chuyển khoản. Lưu ý: Khách hàng chuyển tiền vào tài khoản ngân hàng Đông Á vui lòng gọi điện cho trung tâm sau khi chuyển tiền</li>

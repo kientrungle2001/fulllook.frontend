@@ -12,6 +12,19 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 	$scope.translate = function(val) {
 		return $langMap[$scope.language][val] || val;
 	}
+	$scope.doRegister = function(){
+		jQuery.post(FL_API_URL+'/register/userRegister',$scope.register, function(data, textStatus, xhr) {
+			$scope.statusRegister = data;
+			$scope.$apply();
+		});
+				
+	}
+	$scope.doLogin = function() {
+		
+		jQuery.post(FL_API_URL+'/login/userLogin', $scope.login, function(resp) {			
+			$scope.$apply();
+		});
+	}
 	$scope.subjects = [];
 	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
 		$scope.subjects = resp;

@@ -16,10 +16,10 @@
 				<div class="card card-container">
 					<form class="form-signin form">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Tên đăng nhập" required autofocus>
+							<input type="text" class="form-control" placeholder="Tên đăng nhập" required autofocus ng-model="login.username">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Mật khẩu" required>
+							<input type="password" class="form-control" placeholder="Mật khẩu" required ng-model="login.password">
 						</div>
 						<div class="form-group">
 						<div id="remember" class="checkbox">
@@ -29,7 +29,7 @@
 						</div>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Đăng nhập</button>
+							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" ng-click="doLogin()">Đăng nhập</button>
 						</div>
 					</form><!-- /form -->
 					<a href="#" class="forgot-password">
@@ -46,60 +46,61 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Tên đăng nhập" required>
+									<input type="text" class="form-control" placeholder="Tên đăng nhập" ng-model="register.username" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Họ và tên" required autofocus>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<input type="password" class="form-control" placeholder="Mật khẩu" required>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input type="password" class="form-control" placeholder="Nhập lại Mật khẩu" required>
+									<input type="text" class="form-control" placeholder="Họ và tên" ng-model="register.name" required autofocus>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Email" required>
+									<input type="password" class="form-control" placeholder="Mật khẩu" ng-model="register.password" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Số điện thoại" required>
+									<input type="password" class="form-control" placeholder="Nhập lại Mật khẩu" ng-model="register.repassword" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Email" ng-model="register.email" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Số điện thoại" ng-model="register.phone" required>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" placeholder="Ngày sinh">
+							<input type="date" class="form-control" ng-model="register.date" placeholder="Ngày sinh">
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Giới tính" >
+									<input type="text" class="form-control" placeholder="Giới tính" ng-model="register.sex" >
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Tỉnh thành" >
+									<input type="text" class="form-control" placeholder="Tỉnh thành" ng-model="register.areacode" >
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Đăng ký</button>
+							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" ng-click ="doRegister()">Đăng ký</button>
 						</div>
 						<div class="form-group">
 						Bằng việc đăng ký, bạn đã đồng ý với điều khoản sử dụng và chính sách bảo mật của Next Nobels
 						</div>
+						
 					</form><!-- /form -->
 				</div><!-- /card-container -->
 			</div>
