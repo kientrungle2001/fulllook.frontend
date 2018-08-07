@@ -34,6 +34,13 @@
     	});	
     	
 	</script>
+	<?php } else if(isset($_GET['gameType']) && isset($_GET['gameTopic']) && $_GET['gameType'] == 'dragWord') { ?>
+		<script>
+			jQuery(function(){
+				Factorys.getGame().start();
+				
+			});
+		</script>	
 	<?php } ?>
 </body>
 </html>

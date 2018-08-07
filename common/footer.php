@@ -81,9 +81,10 @@
 	<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
 	<script type="text/x-mathjax-config"> 
 		MathJax.Hub.Config({
+			showMathMenu: false,
 			tex2jax: {
 		    	inlineMath: [['[\/','\/]'], ['\\(','\\)']],
-		    	processEscapes: true
+		    	processEscapes: false
 		    }
 		}); 
 	</script>
