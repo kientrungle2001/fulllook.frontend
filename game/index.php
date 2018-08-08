@@ -585,25 +585,25 @@
 		                    //gameOverTxt.y = this.stage.canvas.height / 2;
 		                    //this.stage.addChild(gameOverTxt);
 		                    //this.display();
-		                    var gamecode = "muatu";
-		                    var gameTopic = "9";
+		                    var gamecode = "<?php echo $_GET['gameType']; ?>";
+		                    var gameTopic = "<?php echo $_GET['gameTopic']; ?>";
 		                    var check = 1;
-		                    /*$.ajax({
+		                    jQuery.ajax({
 		                        type: "POST",
-		                        url: '/game/save',
+		                        url: FL_API_URL+'/game/gameSave',
 		                        data: {score:that.score, live:that.live, gamecode:gamecode, gameTopic:gameTopic, check:check},
 		                        success: function(data) {
 		                            if(data) {
 
 
-		                                var rate = JSON.parse(data);
+		                                var rate = data;
 		                                if(that.clickFalse.length > 0) {
 		                                    var wordFalse = that.clickFalse;
 		                                    wordFalse.toString();
 		                                    document.getElementById("clickFlase").innerHTML = wordFalse;
 		                                    document.getElementById("showWordFalse").style.display = 'block';
 
-		                                    $('#showGame').show();
+		                                    jQuery('#showGame').show();
 		                                }
 		                               if(that.wordDel.length > 0 ) {
 		                                   var wordTrue = that.wordDel;
@@ -611,14 +611,14 @@
 		                                   document.getElementById("wordDel").innerHTML = wordTrue;
 		                                   document.getElementById("showWordTrue").style.display = 'block';
 
-		                                   $('#showGame').show();
+		                                   jQuery('#showGame').show();
 		                               }
 		                                if(that.clickTrue.length > 0 ) {
 		                                    var wordTrue = that.clickTrue;
 		                                    wordTrue.toString();
 		                                    document.getElementById("clickTrue").innerHTML = wordTrue;
 		                                    document.getElementById("showWord").style.display = 'block';
-		                                    $('#showGame').show();
+		                                    jQuery('#showGame').show();
 		                                }
 
 		                                var msg ="Xếp hạng: " + rate.rating +'/'+ rate.total;
@@ -666,7 +666,7 @@
 		                            }
 		                        }
 		                    });
-		                    */
+		                    
 		                    return false;
 		                }
 		            };
@@ -686,8 +686,8 @@
 
 				<div class="row">
 					<div class="col-12 col-md-9">
-						<strong class="item" style="margin: 10px 0px;">
-							Choose the words that belong to the bird topic?				
+						<strong id="question" class="item" style="margin: 10px 0px;">
+										{{question}}	
 						</strong>
 						
 						<canvas style='width: 100% !important;' id="canvas" width='900px' height="570">
@@ -698,10 +698,60 @@
 
 						
 						<button id="showGame" style="display:none;"  type="button" class="btn btn-danger" data-toggle="modal" data-target=".showGame"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Game results</button>
+						<!--show game -->
+						<div class="modal fade showGame" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+			                <div class="modal-dialog modal-lg">
+			                    <div class="modal-content">
+			                        <div class="modal-header">
+			                            <button style="right: 15px; position: absolute;" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			                            <h4 class="modal-title" id="gridSystemModalLabel">Game results</h4>
+			                        </div>
+			                        <div class="modal-body">
+			                            <div class="alert alert-success" >
+			                                <b id="showWord" style="color: black; display:none;" >Correct words clicked: <span style="color:red;" id="clickTrue"></span></b><br>
+			                                <b id="showWordFalse" style="color: black; display:none;" >Wrong words clicked: <span style="color:red;" id="clickFlase"></span> </b> <br>
+			                                <b id="showWordTrue" style="color: black; display:none;" >Correct Words unclicked: <span style="color:red;" id="wordDel"></span></b> </br>
+											<p>Note: Double click on the word to see translate into Vietnamese</p>		
+			                            
+										</div>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
 				
 					</div>
 					<div class="col-12 col-md-3">
-						
+						<h4>Rating</h4>
+						<style>
+						.tablerate{
+							width: 100%;
+							border: 1px solid #cccccc;
+							
+						}
+						.tablerate tr td{
+							text-align: center;
+							border: 1px solid #cccccc;
+							padding: 6px;
+						}
+						.tablerate tr th{
+							text-align: center;
+							border: 1px solid #cccccc;
+							padding: 3px;
+						}
+						</style>
+						<table class='tablerate'>
+							<tr>
+								<th>Username</th>
+								<th>Score</th>
+								<th>live</th>
+							</tr>
+							<tr ng-repeat="rank in ranks">
+								<td>{{rank.username}}</td>
+								<td>{{rank.score}}</td>
+								<td>{{rank.live}}</td>
+							</tr>
+						</table>
+
 					</div>
 				</div>
 
@@ -728,7 +778,12 @@
 					cells: false,
 					board: false,
 					topics: false,
-					
+					dataCells: [],
+					dataTopics: [],
+					initGame: function(dataCells, dataTopics){
+						this.dataCells = dataCells;
+						this.dataTopics = dataTopics;
+					},
 					getGame: function() {
 						if(!this.game) {
 							this.game = new Game();
@@ -755,7 +810,7 @@
 					},
 					getCells: function () {
 						if(!this.cells) {
-							dataWords = [{"type":"Flower","name":" Marigold"},{"type":"Color","name":" Red"},{"type":"Color","name":"\u00a0White"},{"type":"Flower","name":" Daffodil"},{"type":"Subject","name":" History"},{"type":"Subject","name":" Technology"},{"type":"Flower","name":" Hyacinth"},{"type":"Color","name":" Pink"},{"type":"Color","name":" Blue"},{"type":"Subject","name":" Politics"},{"type":"Flower","name":" Orchid"},{"type":"Flower","name":"\u00a0Tulip"},{"type":"Subject","name":"\u00a0Literature"},{"type":"Subject","name":" Engineering"},{"type":"Flower","name":" Pansy"},{"type":"Subject","name":" Psychology"},{"type":"Color","name":" Black"},{"type":"Color","name":" Green"}];
+							dataWords = this.dataCells;
 							this.cells = [];
 							var h = 0;
 							for(var i = 0; i < dataWords.length; i++) {
@@ -774,7 +829,7 @@
 					},
 					getTopics: function () {
 						if(!this.topics) {
-							var dataTopics = [{"type":"Subject","name":"Subject"},{"type":"Color","name":"Color"},{"type":"Flower","name":"Flower"}];
+							var dataTopics = this.dataTopics;
 							this.topics = [];
 							for(var i = 0; i<dataTopics.length; i++) {
 								var t = dataTopics[i];

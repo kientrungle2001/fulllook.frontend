@@ -1,5 +1,5 @@
 <?php require('./bootstrap.php'); ?><!DOCTYPE html>
-<html ng-app="flApp" ng-controller="GameController">
+<html ng-app="flApp" id="GameController" ng-controller="GameController">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,23 +21,32 @@
 	<?php if(isset($_GET['gameType']) && isset($_GET['gameTopic']) && $_GET['gameType'] == 'muatu' ){ ?>
 	<script>
 		jQuery(function(){
-    		jQuery.ajax({
-				url: FL_API_URL +'/games?gamecode=muatu&game_topic_id='+<?= $_GET['gameTopic']; ?>, 
-				dataType: 'json',
-				success: function(resp) {
-					var totalWord = resp[0].dataword.split(/,[ ]*/).length;
-					var allWord = resp[0].dataword.split(/,[ ]*/).chunk(5);
-					var trueWord = resp[0].datatrue.split(/,[ ]*/);
-					RainWord.init(allWord, trueWord, totalWord);
+
+			var $scope = angular.element('#GameController').scope();
+			var intervalId = setInterval(function(){
+				if(typeof($scope.allWord) != 'undefined'){
+					RainWord.init($scope.allWord, $scope.trueWord, $scope.totalWord);
+					clearInterval(intervalId);
 				}
-			});	
+			}, 100);
+			
+    		
     	});	
     	
 	</script>
 	<?php } else if(isset($_GET['gameType']) && isset($_GET['gameTopic']) && $_GET['gameType'] == 'dragWord') { ?>
 		<script>
 			jQuery(function(){
-				Factorys.getGame().start();
+				
+				var $scope = angular.element('#GameController').scope();
+				var intervalId = setInterval(function(){
+					if(typeof($scope.dataCells) != 'undefined' && $scope.dataTopics != 'undefined'){
+						Factorys.initGame($scope.dataCells, $scope.dataTopics);
+						Factorys.getGame().start();
+						clearInterval(intervalId);
+					}
+				}, 100);
+				
 				
 			});
 		</script>	
