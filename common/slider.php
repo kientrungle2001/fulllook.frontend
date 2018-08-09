@@ -22,13 +22,13 @@
 
         </div>
       </div>
-      <div rel="#f0a8b1" class="carousel-item">
+      <div rel="#fbb5d2" class="carousel-item">
         <img class="d-block w-100" src="/assets/images/slider4.png" alt="Second slide">
       </div>
-      <div rel="#8bcd50" class="carousel-item">
+      <div rel="#7bc646" class="carousel-item">
         <img class="d-block w-100" src="/assets/images/slider3.png" alt="Third slide">
       </div>
-       <div rel="#71bbe6" class="carousel-item">
+       <div rel="#73bee9" class="carousel-item">
         <img class="d-block w-100" src="/assets/images/slider2.png" alt="Four slide">
       </div>
     </div>
