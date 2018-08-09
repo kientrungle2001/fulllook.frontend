@@ -74,6 +74,9 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.loadVocabularies();
 	
 	$scope.selectTopic = function(topic, parentTopic) {
+		if(typeof $scope.practiceIntervalId !== 'undefined') {
+			clearInterval($scope.practiceIntervalId);
+		}
 		$scope.action = 'practice';
 		$scope.step = 'selectTopic';
 		$scope.selectedExerciseNum = null;
@@ -98,8 +101,15 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	};
 	$scope.selectedExerciseNum = null;
 	$scope.selectExercise = function(exerciseNum) {
+		if(typeof $scope.practiceIntervalId !== 'undefined') {
+			clearInterval($scope.practiceIntervalId);
+		}
 		$scope.step = 'selectExercise';
 		$scope.selectedExerciseNum = exerciseNum;
+		$scope.remaining = {
+			minutes: 15,
+			seconds: 0
+		};
 	};
 	$scope.startPractice = function() {
 		
@@ -119,6 +129,19 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 				$scope.questions = resp;
 				$scope.user_question_answers = {};
 				$scope.$apply();
+				$scope.practiceIntervalId = setInterval(function() {
+					if($scope.remaining.seconds == 0) {
+						if($scope.remaining.minutes == 0) {
+							$scope.finishPractice();
+						} else {
+							$scope.remaining.minutes--;
+							$scope.remaining.seconds = 59;
+						}
+					} else {
+						$scope.remaining.seconds--;
+					}
+					$scope.$apply();
+				}, 1000);
 			}
 		});
 	};
@@ -134,6 +157,9 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		$scope.selectedVocabulary = vocabulary;
 	};
 	$scope.finishPractice = function() {
+		if(typeof $scope.practiceIntervalId !== 'undefined') {
+			clearInterval($scope.practiceIntervalId);
+		}
 		console.log($scope.user_question_answers);
 		$scope.practiceStep = 'finishPractice';
 		$scope.totalQuestions = $scope.questions.length;
@@ -146,23 +172,50 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		$scope.totalWrongs = $scope.totalQuestions - $scope.totalRights;
 		jQuery('#resultModal').modal('show');
 		var userId = 8;
+		var startTime = serverTime;
+		var duringTime = 15 * 60 - ($scope.remaining.minutes * 60 + $scope.remaining.seconds);
+		var stopTime = serverTime + duringTime;
+		var questions = [];
+		$scope.questions.forEach(function(question){
+			var answerId = 0;
+			if(typeof $scope.user_question_answers[question.id] !== 'undefined') {
+				answerId = $scope.user_question_answers[question.id];
+			}
+			questions.push({
+				questionId: question.id,
+				answerId: answerId,
+				status: $scope.isRightAnswer(question) ? 1: 0
+			});
+		});
 		jQuery.ajax({
 			type: 'post',
-			url: FL_API_URL + '/subject/saveToBook',
+			url: FL_API_URL + '/subject/updateUserBooks',
 			data: {
 				userId:  userId,
-				subjectId: $scope.subject.id,
-				topicId: $scope.selectedTopic.id,
-				exerciseNum: $scope.selectedExerciseNum,
-				user_answers: $scope.user_question_answers,
-				totalQuestions: $scope.totalQuestions,
-				totalRights: $scope.totalRights,
-				totalWrongs: $scope.totalWrongs
+				subject_id: $scope.subject.id,
+				topic_id: $scope.selectedTopic.id,
+				exercise_number: $scope.selectedExerciseNum,
+				questions: questions,
+				quantity_question: $scope.totalQuestions,
+				mark: $scope.totalRights,
+				startTime: startTime,
+				duringTime: duringTime,
+				stopTime: stopTime
 			},
 			success: function(resp) {
 				
 			}
 		});
+	};
+
+	$scope.getQuestion = function(questionId) {
+		var question = null;
+		$scope.questions.forEach(function(q) {
+			if(q.id == questionId || parseInt(q.id) == parseInt(questionId)) {
+				question = q;
+			}
+		});
+		return question;
 	};
 	
 	$scope.showAnswers = function() {

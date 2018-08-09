@@ -68,7 +68,8 @@
 					
 					</h2>
 
-					<div class="text-center guide"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
+					<div class="text-center guide" ng-hide="selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
+					<div class="text-center guide" ng-show="selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn bài để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
 
 					<div class="practice-content p-3 full" ng-show="action=='practice'">
 						<div class="row">
@@ -89,7 +90,7 @@
 							<div class="text-center">
 								<div  class="time">
 									<img src="http://fulllook.com.vn/Themes/Songngu3/skin/images/watch.png">
-									<div id="countdown" class="num-time robotofont" style="color: rgb(255, 0, 0);">00:00</div>
+									<div id="countdown" class="num-time robotofont" style="color: rgb(255, 0, 0);">{{remaining.minutes}}:{{remaining.seconds}}</div>
 								</div>
 							</div>
 							
