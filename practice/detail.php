@@ -68,8 +68,8 @@
 					
 					</h2>
 
-					<div class="text-center guide" ng-hide="selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
-					<div class="text-center guide" ng-show="selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn bài để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
+					<div class="text-center guide" ng-hide="action != 'practice' || selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
+					<div class="text-center guide" ng-show="action=='practice' && selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn bài để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
 
 					<div class="practice-content p-3 full" ng-show="action=='practice'">
 						<div class="row">
