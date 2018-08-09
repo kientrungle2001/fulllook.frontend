@@ -153,6 +153,9 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	
 	
 	$scope.selectVocabulary = function(vocabulary) {
+		if(typeof $scope.practiceIntervalId !== 'undefined') {
+			clearInterval($scope.practiceIntervalId);
+		}
 		$scope.action = 'vocabulary';
 		$scope.selectedVocabulary = vocabulary;
 	};
