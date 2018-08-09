@@ -2,10 +2,10 @@
 	<div class="container mt-4 mb-3">
 		<div class="row redirect">
 			&nbsp; &nbsp;
-			<a href="/" ng-show="language=='en'">
+			<a href="/#practice" ng-show="language=='en'">
 			Practice
 			</a>
-			<a href="/" ng-show="language=='vn'">
+			<a href="/#practice" ng-show="language=='vn'">
 			Luyện tập 
 			</a>
 			
