@@ -48,7 +48,7 @@
       var color = jQuery('#homeslider').find('.active').attr('rel');
     
       jQuery('.header').css('background', color);
-  }, 200);
+  }, 100);
 
  
 </script>
