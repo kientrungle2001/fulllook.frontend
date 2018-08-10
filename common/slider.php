@@ -22,8 +22,8 @@
 
         </div>
       </div>
-      <div rel="#fbb5d2" class="carousel-item">
-        <img class="d-block w-100" src="/assets/images/slider4.png" alt="Second slide">
+      <div rel="#fcb7d5" class="carousel-item">
+        <img class="d-block w-100" src="/assets/images/slider42.png" alt="Second slide">
       </div>
       <div rel="#7bc646" class="carousel-item">
         <img class="d-block w-100" src="/assets/images/slider3.png" alt="Third slide">
@@ -44,6 +44,12 @@
 </div>
 
 <script type="text/javascript">
+  setTimeout(function(){
+     jQuery('#homeslider').carousel({
+      interval: 10000
+    });
+  }, 100);
+ 
   var clearId = setInterval(function(){
       var color = jQuery('#homeslider').find('.active').attr('rel');
     
