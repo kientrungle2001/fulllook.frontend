@@ -32,7 +32,7 @@
 								</div>
 							</div>
 							
-							<div id="question" class="item" ng-repeat="question in questions">
+							<div class="item" ng-repeat="question in questions">
 								<div class="question full">
 									<div class="item cau">
 										<div class="stt">Câu:  {{$index + 1}}</div>
@@ -41,26 +41,35 @@
 									</div>
 
 									<div class="nobel-list-md choice">
-										<div class="ptnn-title full" ng-bind-html="question.name"> 
-										</div>
+										
 									
-										<table>
+										
+										<div class="ptnn-title full" mathjax-bind="question.name"> 
+										</div>
+
+										<table class="table">
 											<tbody>
-												<tr ng-repeat="answer in question.ref_question_answers">
-													<td>
-														<input type="radio" ng-model="answers[question.id]" class="float-left" value="{{answer.id}}" />
-														<span class="pl10" ng-bind-html="answer.content">
-														</span>
+												<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'bg-primary text-white': showAnswersStep=='showAnswers' && answer.status}">
+													<td style="padding: 10px;">
+														<input id="answer_question_{{question.id}}_{{answer.id}}" name="user_answers[{{question.id}}]" type="radio" ng-model="user_answers[question.id]" ng-change="selectAnswer(question, answer)" class="float-left" value="{{answer.id}}" />
+														<label class="pl-4" mathjax-bind="answer.content" for="answer_question_{{question.id}}_{{answer.id}}">
+														</label>
 													</td>
 												</tr>
 											</tbody>
 										</table>
+
+										<div class="clearfix text-white p-1" ng-show="showAnswersStep=='showAnswers' && isRightAnswer(question)" ng-class="{'bg-success': isRightAnswer(question)}">Bạn đã làm đúng câu này</div>
+
+										<div class="clearfix text-white p-1" ng-show="showAnswersStep=='showAnswers' && !isRightAnswer(question)" ng-class="{'bg-warning': !isRightAnswer(question)}">Bạn đã làm sai câu này</div>
 								
-										<a href="#mobile-explan-474" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse">Xem lý giải
+										<a href="#mobile-explan-{{question.id}}" class="explanation top10 btn btn-success btn-show-exp" 
+												data-toggle="collapse" ng-show="showAnswersStep=='showAnswers'">Xem lý giải
 										</a>
 								
-										<div id="mobile-explan-474" class="collapse lygiai top10 item">
-											<div class="item mb-2" ng-bind-html="question.explaination">
+										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" 
+												ng-show="showAnswersStep=='showAnswers'">
+											<div class="item mb-2" mathjax-bind="question.explaination">
 											</div>
 									
 											<div class="item">
@@ -78,7 +87,7 @@
 													  </div>
 													  <div class="modal-body">
 														 <div class="w100p">
-															<label for="exampleInputEmail1">Nội dung:</label>
+															<label>Nội dung:</label>
 															<textarea style="height: 150px !important;" id="contentError474" name="contentError" class="form-control" ng-model="report[question.id]"></textarea>
 														  </div>
 											 
@@ -105,25 +114,29 @@
 							</div>
 
 							<div class="text-center full mb-3 relative">				
-								<button id="finish-choice" class="btn btn-primary btt-practice " name="finish-choice" onclick="finish_choice();"><span class="fa fa-check"></span>
+								<button id="finish-choice" class="btn btn-primary btt-practice" name="finish-choice" 
+									ng-click="finishTest();" ng-disabled="testStep=='finishTest'"><span class="fa fa-check"></span>
 									Hoàn thành					
 								</button>
-								<button id="view-result" class="btn btt-practice btn-success" data-toggle="modal" data-target="#exampleModal" name="view-result" style=""><span class="fa fa-list-alt"></span>
+								<button id="view-result" class="btn btt-practice btn-success" 
+									data-toggle="modal" data-target="#resultModal" 
+									name="view-result" 
+									ng-show="step=='doTest' && testStep=='finishTest'"><span class="fa fa-list-alt"></span>
 									Xem kết quả					
 								</button>
-								<button id="show-answers" class="btn btt-practice btn-danger " name="show-answers" onclick="show_answers();"  ><span class="fa fa-check"></span>
-								Xem đáp án					
+								<button id="show-answers" class="btn btt-practice btn-danger " name="show-answers" 
+									ng-click="showAnswers();" 
+									ng-show="step=='doTest' && testStep=='finishTest'"
+									ng-disabled="showAnswersStep=='showAnswers'"
+									 ><span class="fa fa-check"></span>
+									Xem đáp án
 								</button>
 							</div>
-
-							
-
 						</div>			
-
 					</div>
 
 					<!--show result-->
-					<div class="modal" role="dialog" id="exampleModal" aria-labelledby="gridSystemModalLabel" aria-hidden="false">
+					<div class="modal" role="dialog" id="resultModal" aria-labelledby="resultModalLabel" aria-hidden="false">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -134,28 +147,26 @@
 								<div class="modal-body">
 									<div class="row">
 											<div class="col-md-8 question_true control-label">Số câu trả lời đúng </div> 
-											<div class="col-md-4 num_true title-blue">0</div>
+											<div class="col-md-4 num_true title-blue">{{totalRights}}</div>
 									</div>	
 									<div class="row">	
 										<div class="col-md-8 question_false control-label">Số câu trả lời sai </div> 
-										<div class="col-md-4 num_false title-red">5</div>
+										<div class="col-md-4 num_false title-red">{{totalWrongs}}</div>
 									</div>
 									<div class="row">
 										<div class="col-md-8 question_total control-label">Tổng số câu </div> 
-										<div class="col-md-4 num_total">5</div>
+										<div class="col-md-4 num_total">{{totalQuestions}}</div>
 									</div>
 								</div>
 								<div class="modal-footer">
 									<div class=" full text-center">
-										<button class="btn btn-sm btn-danger top10" onclick="window.location='/?class=5'"> 
-											<span >Chọn môn khác</span> 
-											<span class="glyphicon glyphicon-arrow-left"></span>
-										</button>
-										<button id="show-answers-on-dialog" class="btn btn-sm btn-danger top10 " name="show-answers" onclick="show_answers(); $('#exampleModal').modal('hide');" type="button">
+										<button id="show-answers-on-dialog" class="btn btn-sm btn-danger top10 " name="show-answers" 
+											ng-click="showAnswers()" onclick="jQuery('#resultModal').modal('hide');" type="button"
+											ng-disabled="showAnswersStep=='showAnswers'">
 											<span class="glyphicon glyphicon-check"></span>
 											Xem đáp án							
 										</button>
-										<button type="button" class="btn btn-sm btn-success top10" onclick="window.location = '/practice/detail/51?class=5&amp;de=1'">
+										<button type="button" class="btn btn-sm btn-success top10" onclick="jQuery('#resultModal').modal('hide'); jQuery(window).scrollTop(0);">
 											<span class="glyphicon glyphicon-arrow-right hidden-xs"></span> Làm bài khác
 										</button>
 										
@@ -166,12 +177,17 @@
 					</div>
 
 					<div style="height: 103px;" class="relative item">
-						<img style="left: 0px; bottom: 0px; border-radius: 0px 0px 0px 5px;" class="absolute hidden-xs" src="/assets/images/bottom-left.png">
-						<img style="right: 0px; bottom: 0px; border-radius: 0px 0px 5px 0px;" class="absolute hidden-xs" src="/assets/images/bottom-right.png">
-						
+						<img style="left: 0px; bottom: 0px; border-radius: 0px 0px 0px 5px;" class="absolute hidden-xs" src="/assets/images/bottom-left.png" />
+						<img style="right: 0px; bottom: 0px; border-radius: 0px 0px 5px 0px;" class="absolute hidden-xs" src="/assets/images/bottom-right.png" />
 					</div>	
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<style>
+.text-white {
+	color: white !important;
+}
+</style>

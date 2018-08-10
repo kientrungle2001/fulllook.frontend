@@ -34,6 +34,8 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	$scope.step = 'selectTest';
 	$scope.selectTest = function(test) {
 		$scope.step = 'selectTest';
+		$scope.testStep = 'selectTest';
+		$scope.showAnswersStep = 'selectTest';
 		$scope.selectedTest = test;
 		if(typeof $scope.testInterval != 'undefined') {
 			clearInterval($scope.testInterval);
@@ -45,6 +47,8 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	};
 	$scope.doTest = function() {
 		$scope.step = 'doTest';
+		$scope.testStep = 'doTest';
+		$scope.showAnswersStep = 'doTest';
 		jQuery.ajax({
 			type: 'post',
 			url: FL_API_URL +'/test/getQuestionsAnswers', 
@@ -53,6 +57,7 @@ flApp.controller('TestController', ['$scope', function($scope) {
 			},
 			dataType: 'json',
 			success: function(resp) {
+				$scope.user_question_answers = {};
 				$scope.questions = resp;
 				$scope.testInterval = setInterval(function(){
 					if($scope.remaining.seconds == 0) {
@@ -71,19 +76,91 @@ flApp.controller('TestController', ['$scope', function($scope) {
 			}
 		});
 	};
+	$scope.selectAnswer = function(question, answer) {
+		$scope.user_question_answers[question.id] = answer.id;
+	};
 	$scope.finishTest = function() {
-		$scope.step = 'finishTest';
+		$scope.testStep = 'finishTest';
 		if(typeof $scope.testInterval != 'undefined') {
 			clearInterval($scope.testInterval);
 		}
+		$scope.calculateResult();
+		$scope.saveToBook();
 		$scope.showResult();
 	};
 
+	$scope.calculateResult = function() {
+		$scope.result_user_answers = [];
+		$scope.totalQuestions = 0;
+		$scope.totalRights = 0;
+		$scope.totalWrongs = 0;
+		$scope.questions.forEach(function(question) {
+			$scope.totalQuestions++;
+			if($scope.isRightAnswer(question)) {
+				$scope.result_user_answers.push({
+					questionId: question.id,
+					answerId: $scope.user_question_answers[question.id],
+					status: 1
+				});
+				$scope.totalRights++;
+			} else {
+				$scope.result_user_answers.push({
+					questionId: question.id,
+					answerId: $scope.user_question_answers[question.id] ? $scope.user_question_answers[question.id]: 0,
+					status: 0
+				});
+				$scope.totalWrongs++;
+			}
+		});
+	};
+
+	$scope.saveToBook = function() {
+		var userId = 8;
+		var startTime = serverTime;
+		var duringTime = 15 * 60 - ($scope.remaining.minutes * 60 + $scope.remaining.seconds);
+		var stopTime = serverTime + duringTime;
+		jQuery.ajax({
+			type: 'post',
+			url: FL_API_URL + '/test/updateUserBooks',
+			data: {
+				userId:  userId,
+				subject_id: 0,
+				topic_id: 0,
+				exercise_number: 0,
+				questions: $scope.result_user_answers,
+				quantity_question: $scope.totalQuestions,
+				mark: $scope.totalRights,
+				startTime: startTime,
+				duringTime: duringTime,
+				stopTime: stopTime,
+				testId: $scope.selectedTest.id
+			},
+			success: function(resp) {
+				
+			}
+		});
+	};
+
 	$scope.showResult = function() {
-		var resultModal = '';
+		var resultModal = '#resultModal';
 		jQuery(resultModal).modal('show');
 	};
 	$scope.showAnswers = function() {
 		$scope.showAnswersStep = 'showAnswers';
+	};
+
+	$scope.isRightAnswer = function(question) {
+		var rightId = null;
+		question.ref_question_answers.forEach(function(answer) {
+			if(answer.status == 1 || answer.status == '1' ) {
+				rightId = answer.id;
+			}
+		});
+		if(typeof $scope.user_question_answers[question.id] != 'undefined') {
+			if(rightId == $scope.user_question_answers[question.id]) {
+				return true;
+			}
+		}
+		return false;
 	};
 }]);

@@ -197,7 +197,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 				userId:  userId,
 				subject_id: $scope.subject.id,
 				topic_id: $scope.selectedTopic.id,
-				exercise_number: $scope.selectedExerciseNum,
+				exercise_number: $scope.selectedExerciseNum+1,
 				questions: questions,
 				quantity_question: $scope.totalQuestions,
 				mark: $scope.totalRights,
