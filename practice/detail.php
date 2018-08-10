@@ -257,7 +257,6 @@
 					<button type="button" class="btn btn-sm btn-success top10" onclick="jQuery('#resultModal').modal('hide'); jQuery(window).scrollTop(0)">
 						<span class="glyphicon glyphicon-arrow-right hidden-xs"></span> Làm bài khác
 					</button>
-					
 				</div>
 			</div>
 		</div>
