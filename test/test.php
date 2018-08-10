@@ -13,9 +13,6 @@
 					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='vn'" ng-class="{'active': test==selectedTest}"><a href="#" ng-click="selectTest(test)">{{test.name}}</a></li>
 					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='en'" ng-class="{'active': test==selectedTest}"><a href="#" ng-click="selectTest(test)">{{test.name_en}}</a></li>
 					</ul>
-					  
-					 
-					
 				</div>
 				
 			</div>
@@ -31,7 +28,7 @@
 							<div class="text-center">
 								<div  class="time">
 									<img src="http://fulllook.com.vn/Themes/Songngu3/skin/images/watch.png">
-									<div id="countdown" class="num-time robotofont" style="color: rgb(255, 0, 0);">00:00</div>
+									<div id="countdown" class="num-time robotofont" style="color: rgb(255, 0, 0);">{{remaining.minutes}}:{{remaining.seconds}}</div>
 								</div>
 							</div>
 							
@@ -52,7 +49,7 @@
 												<tr ng-repeat="answer in question.ref_question_answers">
 													<td>
 														<input type="radio" ng-model="answers[question.id]" class="float-left" value="{{answer.id}}" />
-														<span class="answers_474_38915 pl10" ng-bind-html="answer.content">
+														<span class="pl10" ng-bind-html="answer.content">
 														</span>
 													</td>
 												</tr>
