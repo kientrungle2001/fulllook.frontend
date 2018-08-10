@@ -20,8 +20,8 @@
 								<li ng-hidden="userDetail.sex"><strong>Giới tính:</strong> Nữ</li>
 								<li ng-show="userDetail.sex"><strong>Giới tính:</strong> Nam</li>
 								<li><strong>Địa chỉ:</strong> {{userDetail.address}}</li>
-								<li><strong>Trường:</strong> </li>
-								<li><strong>Lớp:</strong> </li>
+								<li><strong>Trường:</strong>{{userDetail.schoolname}} </li>
+								<li><strong>Lớp:</strong> {{userDetail.classname}}</li>
 								<li><strong>Thành phố:</strong>{{userDetail.areacode}}</li>
 														
 								<li ng-if="<?php echo $_SESSION['checkPayment']; ?>"><strong>Thời hạn sản phẩm từ ( <?php echo $_SESSION['paymentDate']; ?> đến <?php echo $_SESSION['expiredDate']; ?> )</strong></li>
@@ -32,15 +32,15 @@
 						<!--edit infor -->
 						<div class="full bg-light" ng-show="editInfor" >
 							<!--edit infor -->
-							<form action="/History/editUser" method="Post">
+							<form >
 							  <div class="form-row">
 							    <div class="form-group col-md-4">
 							      <label for="name">Họ và Tên(*) :</label>
-							      <input type="text" class="form-control" ng-model="userDetail.name" ng-bind="userDetail.name" placeholder="Họ và Tên">
+							      <input type="text" class="form-control" ng-model="userDetail.name" placeholder="Họ và Tên">
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="phone">Điện thoại (*) :</label>
-							      <input type="text" class="form-control" ng-model="userDetail.phone" ng-bind="userDetail.phone" placeholder="Điện thoại">
+							      <input type="text" class="form-control" ng-model="userDetail.phone" placeholder="Điện thoại">
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="inputState">Giới tính: </label>
@@ -52,33 +52,34 @@
 							  </div>
 							  <div class="form-row">
 							  	<div class="form-group col-md-4">
-								    <label for="inputAddress">Địa chỉ :</label>
-								    <input type="text" class="form-control" ng-model="userDetail.address" ng-bind="userDetail.address" placeholder="Quận 1- TPHCM">
-								</div>
-								<div class="form-group col-md-6">
 									<label for="inputAddress2">Ngày sinh: </label>
 							    	<input type="date" class="form-control" ng-model="userDetail.birthday" placeholder="Ngày sinh" required >
 								</div>
+							  	<div class="form-group col-md-6">
+								    <label for="inputAddress">Địa chỉ :</label>
+								    <input type="text" class="form-control" ng-model="userDetail.address" placeholder="Quận 1- TPHCM">
+								</div>
+								
 							  </div>
 							  <div class="form-row">
 							    <div class="form-group col-md-4">
 							      <label for="school">Trường :</label>
-							      <input type="text" class="form-control" ng-model="userDetail.school" ng-bind="userDetail.school" placeholder="Trường học">
+							      <input type="text" class="form-control" ng-model="userDetail.schoolname" placeholder="Trường học">
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="class">Lớp :</label>
-							      <input type="text" class="form-control" ng-model="userDetail.class" ng-bind="userDetail.class" placeholder="Lớp học">
+							      <input type="text" class="form-control" ng-model="userDetail.classname" placeholder="Lớp học">
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="input">Tỉnh(TP): </label>
-							      <select ng-model="userDetail.areacode" ng-bind="userDetail.areacode" class="form-control">
-							        <option selected>Nam</option>
-							        <option>Nữ</option>
+							      <select ng-model="userDetail.areacode"class="form-control">
+							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes" ng-selected="areaCode.id==userDetail.areacode">{{areaCode.name}}</option>						        
 							      </select>
 							    </div>
 							  </div>
-							  <button type="submit" class="btn btn-primary">Cập nhật</button>
-							  <button type="button" class="btn btn-secondary">Hủy</button>
+							  <div class="form-group alert alert-success" ng-show="success" ng-bind-html="message"></div>
+							  <button ng-click="editUser()" class="btn btn-primary">Cập nhật</button>
+							  <button type="button" ng-click="cancelEditUser()" class="btn btn-secondary">Hủy</button>
 							</form>	
 						</div>
 
@@ -88,21 +89,24 @@
 							  <div class="form-row">
 							    <div class="form-group col-md-4">
 							      <label for="name">Mật khẩu cũ(*) :</label>
-							      <input type="password" class="form-control" ng-model="editPassword.oldPass"  placeholder="Mật khẩu cũ">
+							      <input type="password" class="form-control" ng-model="editPassword.oldPassword"  placeholder="Mật khẩu cũ">
 							    </div>
 							    
 							  </div>
 							  <div class="form-row">
 							  	<div class="form-group col-md-4">
 							      <label for="password">Mật khẩu mới (*) :</label>
-							      <input type="password" class="form-control" ng-model="editPassword.newPass"  placeholder="Mật khẩu mới">
+							      <input type="password" class="form-control" ng-model="editPassword.newPassword"  placeholder="Mật khẩu mới">
 							    </div>
 							    <div class="form-group col-md-4">
 							      <label for="password">Nhập lại mật khẩu mới (*) :</label>
-							      <input type="password" class="form-control" ng-model="editPassword.reNewPass" placeholder="Mật khẩu mới">
+							      <input type="password" class="form-control" ng-model="editPassword.reNewPassword" placeholder="Mật khẩu mới">
 							    </div>							    
 							  </div>
-							  <button type="submit" class="btn btn-primary">Cập nhật</button>
+							  <div class="form-group alert" ng-class="{'alert-danger': editPassword.success==0, 'alert-success': editPassword.success==1}" ng-show="editPassword.message" ng-bind-html="editPassword.message">
+
+							 </div>
+							  <button ng-click="changePassword()" class="btn btn-primary">Cập nhật</button>
 							  <button type="button" class="btn btn-secondary">Hủy</button>
 							</form>
 						</div>

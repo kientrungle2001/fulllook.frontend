@@ -9,13 +9,54 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		$scope.editInfor = 1;
 		
 	}
-	
+	$scope.areaCodes = [];
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/register/getAreaCode', 
+		data: {			
+		},
+		dataType: 'json',
+		success: function(resp) {
+			$scope.areaCodes = resp;			
+			$scope.$apply();
+		}
+	});
 	$scope.grade = window.localStorage.getItem('grade') || '5';
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	};
 	$scope.translate = function(val) {
 		return $langMap[$scope.language][val] || val;
+	};
+	// edit user
+	$scope.editUser = function(){
+		$scope.userDetail.userId= sessionUserId;
+		jQuery.post(FL_API_URL+'/history/editUser', $scope.userDetail, function(resp) {
+			
+		  	if(resp) {		  		
+		  		$scope.success = resp.success;
+		  		$scope.message ='<strong>' +resp.message+ '</strong>';
+		  		$scope.$apply();
+		  	}
+		});		
+	};
+	$scope.changePassword = function(){
+		if($scope.editPassword.newPassword != $scope.editPassword.reNewPassword){
+			$scope.editPassword.success = 0;
+		  	$scope.editPassword.message ='<strong> Nhập lại mật khẩu mới chưa đúng</strong>';
+		  	$scope.$apply();
+		}else{
+			$scope.editPassword.userId= sessionUserId;
+			jQuery.post(FL_API_URL+'/history/editPassword', $scope.editPassword, function(resp) {
+				
+			  	if(resp) {		  		
+			  		$scope.editPassword.success = resp.success;
+			  		$scope.editPassword.message ='<strong>' +resp.message+ '</strong>';
+			  		$scope.$apply();
+			  	}
+			});
+		}
+			
 	};
 
 	$scope.userDetail = [];
