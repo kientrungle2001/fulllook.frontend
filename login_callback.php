@@ -5,6 +5,7 @@
 	$dataUser= json_decode($dataUser,true);
 	//var_dump($dataUser);
 	$_SESSION["username"] = $dataUser['username'];
+	$_SESSION["name"] = $dataUser['name'];
 	$_SESSION["userId"] = $dataUser['userId'];
 	$_SESSION["checkPayment"] = $dataUser['checkPayment'];
 	$_SESSION["paymentDate"] = $dataUser['paymentDate'];

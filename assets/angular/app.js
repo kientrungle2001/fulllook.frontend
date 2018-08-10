@@ -46,3 +46,8 @@ flApp.filter('gift', ['$sce', function($sce) {
 			return '';
         };
 }]);
+flApp.filter('toDate', function() {
+    return function(input) {
+        return new Date(input);
+    }
+})

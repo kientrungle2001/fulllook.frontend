@@ -14,12 +14,12 @@
 			<div class="col-lg-6">
 				<h2>Đăng nhập</h2>
 				<div class="card card-container">
-					<form class="form-signin form">
+					<form class="form-signin form" action="<?php echo FL_API_URL ?>/login/userLogin" method="Post">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Tên đăng nhập" required autofocus ng-model="login.username">
+							<input type="text" class="form-control" placeholder="Tên đăng nhập" required autofocus name="username">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Mật khẩu" required ng-model="login.password">
+							<input type="password" class="form-control" placeholder="Mật khẩu" required name="password">
 						</div>
 						<div class="form-group">
 						<div id="remember" class="checkbox">
@@ -29,7 +29,7 @@
 						</div>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" ng-click="doLogin()">Đăng nhập</button>
+							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" >Đăng nhập</button>
 						</div>
 					</form><!-- /form -->
 					<a href="#" class="forgot-password">

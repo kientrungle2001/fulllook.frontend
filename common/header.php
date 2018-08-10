@@ -36,12 +36,18 @@
                      <li class="nav-item">
                         <a class="nav-link" href="/about.php"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
                     </li>
+                    <?php if(!isset($_SESSION['userId'])) :?>
                      <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#loginRegisterModal"><img src="/assets/images/dn.png"/> Đăng nhập</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#loginRegisterModal"><img src="/assets/images/dk.png"/> Đăng kí</a>
                     </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" ><?php echo $_SESSION['username'] ?></a>
+                    </li>
+                <?php endif ?>
                 </ul>
             
             </div>
@@ -81,6 +87,7 @@
                 <li class="nav-item">
                     <a href="/gift.php" class="nav-link">Giải trí</a>
                 </li>
+                
             </ul>
         </div>
     </nav>
