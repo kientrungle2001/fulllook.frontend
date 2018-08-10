@@ -10,6 +10,6 @@
 	$_SESSION["checkPayment"] = $dataUser['checkPayment'];
 	$_SESSION["paymentDate"] = $dataUser['paymentDate'];
 	$_SESSION["expiredDate"] = $dataUser['expiredDate'];
-	header('Location: http://fulllooktdn.vn');
+	header('Location: /');
 
  ?>

@@ -45,7 +45,10 @@
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link" ><?php echo $_SESSION['username'] ?></a>
+                        <a class="nav-link" >Xin chào <?php echo $_SESSION['name'] ?></a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/logout.php" >Đăng xuất</a>
                     </li>
                 <?php endif ?>
                 </ul>
