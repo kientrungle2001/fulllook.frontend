@@ -15,12 +15,14 @@
 				<h2>Đăng nhập</h2>
 				<div class="card card-container">
 					<form class="form-signin form" action="<?php echo FL_API_URL ?>/login/userLogin" method="Post">
+						<input type="hidden" name="url" value="<?php echo FL_URL  ?>">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Tên đăng nhập" required autofocus name="username">
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" placeholder="Mật khẩu" required name="password">
 						</div>
+
 						<div class="form-group">
 						<div id="remember" class="checkbox">
 							<label>
