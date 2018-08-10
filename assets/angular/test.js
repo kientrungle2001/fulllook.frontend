@@ -84,6 +84,6 @@ flApp.controller('TestController', ['$scope', function($scope) {
 		jQuery(resultModal).modal('show');
 	};
 	$scope.showAnswers = function() {
-		$scope.showAnswersStep = 'showAnswers'
-	}
+		$scope.showAnswersStep = 'showAnswers';
+	};
 }]);
