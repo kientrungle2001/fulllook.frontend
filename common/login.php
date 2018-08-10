@@ -44,60 +44,65 @@
 			<div class="col-lg-6">
 				<h2>Đăng ký</h2>
 				<div class="card card-container">
-					<form class="form-signin form">
+					<form class="form-signin form" action="<?php echo FL_API_URL ?>/register/userRegister" method="Post">
+						<input type="hidden" name="url" value="<?php echo FL_URL  ?>">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Tên đăng nhập" ng-model="register.username" required>
+									<input type="text" class="form-control" placeholder="Tên đăng nhập" name="username" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Họ và tên" ng-model="register.name" required autofocus>
+									<input type="text" class="form-control" placeholder="Họ và tên" name="name" required autofocus>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="password" class="form-control" placeholder="Mật khẩu" ng-model="register.password" required>
+									<input type="password" class="form-control" placeholder="Mật khẩu" name="password" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="password" class="form-control" placeholder="Nhập lại Mật khẩu" ng-model="register.repassword" required>
+									<input type="password" class="form-control" placeholder="Nhập lại Mật khẩu" name="repassword" required>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Email" ng-model="register.email" required>
+									<input type="text" class="form-control" placeholder="Email" name="email" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Số điện thoại" ng-model="register.phone" required>
+									<input type="text" class="form-control" placeholder="Số điện thoại" name="phone" required>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" ng-model="register.date" placeholder="Ngày sinh">
+							<input type="date" class="form-control" name="birthday" placeholder="Ngày sinh">
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Giới tính" ng-model="register.sex" >
+								<div class="form-group">						
+								      <select name="sex"  class="form-control" placeholder="giới tính" >
+								        <option value="1">Nam</option>
+								        <option value="0">Nữ</option>
+								      </select>
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Tỉnh thành" ng-model="register.areacode" >
-								</div>
+								<select name="areacode" class="form-control" placeholder="tỉnh thành" >
+							        <option ng-repeat="areaCode in areaCodes "  value="{{areaCode.id}}">{{areaCode.name}}</option>
+							        
+							      </select>
 							</div>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" ng-click ="doRegister()">Đăng ký</button>
+							<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Đăng ký</button>
 						</div>
 						<div class="form-group">
 						Bằng việc đăng ký, bạn đã đồng ý với điều khoản sử dụng và chính sách bảo mật của Next Nobels
