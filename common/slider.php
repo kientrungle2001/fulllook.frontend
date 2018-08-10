@@ -48,14 +48,7 @@
       var color = jQuery('#homeslider').find('.active').attr('rel');
     
       jQuery('.header').css('background', color);
-  }, 500);
-  // jQuery(function(){
-    
-  //   // carouselEl.carousel({
-  //   //   interval: 2000
-  //   // }).on('slid.bs.carousel', function (event) {
-  //   //   console.log(carouselItems.siblings('.active').index());
-  //   // })
-    
-  // });
+  }, 200);
+
+ 
 </script>

@@ -3,6 +3,7 @@
 </style>
 <div class="full pt-3">
 	<div class="container">
+		<?php if(isset($_SESSION['userId'])) { ?>
 		<div class="card bg-light mb-3">
 		    <div class="card-block p-3">
 		    	<div class="row">
@@ -48,7 +49,7 @@
 			<?php if(isset($_GET['gameType']) && $_GET['gameType'] == 'muatu'){ ?>
 			<div id="gamemuatu">
 				<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		        <script src="http://s1.nextnobels.com/default/skin/nobel/libgame/createjs-2015.05.21.min.js"></script>
+		        <script src="/assets/js/createjs-2015.05.21.min.js"></script>
 		        
 		        <script id="editable">
 
@@ -1415,5 +1416,10 @@
 
 
 		</div>
+	<?php } else{ ?>
+		<div class="alert text-center alert-warning">
+			Bạn cần <a href="#" data-toggle="modal" data-target="#loginRegisterModal" rel="/game"> Đăng nhập </a> để chơi thử!
+		</div>
+	<?php } ?>
 	</div>
 </div>	
