@@ -35,6 +35,13 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	$scope.selectTest = function(test) {
 		$scope.step = 'selectTest';
 		$scope.selectedTest = test;
+		if(typeof $scope.testInterval != 'undefined') {
+			clearInterval($scope.testInterval);
+		}
+		$scope.remaining = {
+			minutes: 45,
+			seconds: 0
+		};
 	};
 	$scope.doTest = function() {
 		$scope.step = 'doTest';
@@ -47,9 +54,36 @@ flApp.controller('TestController', ['$scope', function($scope) {
 			dataType: 'json',
 			success: function(resp) {
 				$scope.questions = resp;
-				
+				$scope.testInterval = setInterval(function(){
+					if($scope.remaining.seconds == 0) {
+						if($scope.remaining.minutes == 0) {
+							$scope.finishTest();
+						} else {
+							$scope.remaining.minutes--;
+							$scope.remaining.seconds = 59;
+						}
+					} else {
+						$scope.remaining.seconds--;
+					}
+					$scope.$apply();
+				}, 1000);
 				$scope.$apply();
 			}
 		});
 	};
+	$scope.finishTest = function() {
+		$scope.step = 'finishTest';
+		if(typeof $scope.testInterval != 'undefined') {
+			clearInterval($scope.testInterval);
+		}
+		$scope.showResult();
+	};
+
+	$scope.showResult = function() {
+		var resultModal = '';
+		jQuery(resultModal).modal('show');
+	};
+	$scope.showAnswers = function() {
+		$scope.showAnswersStep = 'showAnswers'
+	}
 }]);

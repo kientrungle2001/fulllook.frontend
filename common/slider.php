@@ -1,7 +1,7 @@
 <div class="full slide">
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div id="homeslider" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item relative active">
+      <div rel="#6dccfd" class="carousel-item relative active">
         <img class="d-block w-100" src="/assets/images/slider.png" alt="First slide">
         <div class="absolute language d-none d-sm-block">
           <div class="d-flex bd-highlight">
@@ -22,23 +22,40 @@
 
         </div>
       </div>
-      <div class="carousel-item">
+      <div rel="#fbb5d2" class="carousel-item">
         <img class="d-block w-100" src="/assets/images/slider4.png" alt="Second slide">
       </div>
-      <div class="carousel-item">
+      <div rel="#7bc646" class="carousel-item">
         <img class="d-block w-100" src="/assets/images/slider3.png" alt="Third slide">
       </div>
-       <div class="carousel-item">
+       <div rel="#73bee9" class="carousel-item">
         <img class="d-block w-100" src="/assets/images/slider2.png" alt="Four slide">
       </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#homeslider" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#homeslider" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
   </div>
 </div>
+
+<script type="text/javascript">
+  var clearId = setInterval(function(){
+      var color = jQuery('#homeslider').find('.active').attr('rel');
+    
+      jQuery('.header').css('background', color);
+  }, 500);
+  // jQuery(function(){
+    
+  //   // carouselEl.carousel({
+  //   //   interval: 2000
+  //   // }).on('slid.bs.carousel', function (event) {
+  //   //   console.log(carouselItems.siblings('.active').index());
+  //   // })
+    
+  // });
+</script>
