@@ -12,6 +12,11 @@
 	
 	<script>
 		FL_API_URL = '<?php echo FL_API_URL?>';
+		test_id = '<?php echo intval($_GET['test_id']); ?>';
+		serverTime = <?php echo time() ?>;
+		setInterval(function() {
+			serverTime++;
+		}, 1000);
 	</script>
 </head>
 <body>
