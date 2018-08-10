@@ -104,8 +104,6 @@
 							<p ng-bind-html="selectedTopic.content | sanitizer"></p>
 							<div ng-repeat="question in questions">
 								<div class="question full">
-									<input type="hidden" name="questions[474]" value="474">
-									<input type="hidden" name="questionType[474]" value="choice">
 									<div class="item cau">
 										<div class="stt">Câu:  {{$index+1}}</div>
 										<span class="btn volume fa fa-volume-up" onclick="read_question(this, '/3rdparty/Filemanager/source/practice/all/474.mp3');"
