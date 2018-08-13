@@ -54,6 +54,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-sanitize.min.js" integrity="sha256-FnMl43xSx3jHmcs7t2LJ3htfsCeo99XORPvzOVQN/tw=" crossorigin="anonymous"></script>
 	<script src="/assets/array.js"></script>
 
+	<script>
+		jQuery(function(){
+			jQuery('#homeslider').carousel({
+		      interval: 10000,
+		    });
+		});
+	    
+
+	</script>
+
 	<script type="text/javascript">
 		(function(ng){
 	        'use strict';

@@ -1,8 +1,7 @@
-
 <div id="practice" class="full">
 	<div class="container">
 		<div style="margin-bottom: 15px;" class="text-center fs40 heading">
-		Luyện tập
+		Luyện tập các môn
 		</div>
 	</div>
 
@@ -22,6 +21,27 @@
 
 </div>
 <img src="/assets/images/background1.png" alt="" class="full" />
+
+<div id="ontienganh" class="full">
+	<div class="container">
+		<div class="text-center heading mt-2 mb-4 text-white  fs40">
+		Ôn luyện Tiếng anh
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-2" ng-repeat="test in tests">
+			<a href="/test.php?test_id={{test.id}}">
+				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
+				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
+			</a>
+			</div>
+		</div>
+	</div>
+	
+</div>	
+
+
 <!--end practice -->
 <div id="tonghop" class="full">
 	<div class="container">
@@ -42,6 +62,9 @@
 	
 </div>	
 <img src="/assets/images/background2.png" alt="" class="full" />
+
+
+
 <!--end tonghop -->
 <div id="thithu" class="full">
 	<div class="container">
