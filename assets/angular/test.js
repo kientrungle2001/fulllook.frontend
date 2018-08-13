@@ -134,7 +134,9 @@ flApp.controller('TestController', ['$scope', function($scope) {
 				duringTime: duringTime,
 				stopTime: stopTime,
 				testId: $scope.selectedTest.id,
-				parentTest: 0
+				parentTest: 0,
+				test_name: $scope.selectedTest.name,
+				test_name_sn: $scope.selectedTest.name_sn
 			},
 			success: function(resp) {
 				
