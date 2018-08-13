@@ -209,8 +209,69 @@
 							<div class="name-detail text-center">
 							{{selectedVocabulary.title}}
 							</div>
-							<div class="text-justify adjust-table" mathjax-bind="parseTranslate(selectedVocabulary.content)">
+
+
+							<ul class="nav nav-tabs" id="tabDocument" role="tablist">
+							  <li class="nav-item">
+							    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Từ vựng</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Kiểm tra từ vựng</a>
+							  </li>
+							
+							</ul>
+							<div class="tab-content" id="tabDocumentContent">
+							  	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+									<div class="text-justify pt-2 adjust-table" mathjax-bind="parseTranslate(selectedVocabulary.content)">
+									</div>
+							  	</div>
+								<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+								
+									<div class="item text-center pt-2">
+										<input type="hidden" id="pageGame" name="pageGame" value="1">
+									
+										<button onclick="gameWords(264, 'vdrag', 51, this);" class="btn v_game btn-warning">Game 1</button>
+										
+										<button onclick="gameWords(264, 'vdt', 51, this);" class="btn v_game btn-success">Game 2</button>
+												
+										<button onclick="gameWords(264, 'vmt', 51, this);" class="btn v_game btn-info">Game 3</button>
+										<button onclick="gameWords(264, 'sortword', 51, this);" class="btn v_game btn-primary">Game 4</button>
+										<button style="opacity: 0.3;" onclick="gameWords(264, 'vdragimg', 51, this);" class="btn v_game btn-danger">Game 5</button>
+										<button style="opacity: 0.3;" onclick="gameWords(264, 'dragToPart', 51, this);" class="btn v_game btn-danger">Game 6</button>
+										<div class="item" id="resGame">
+											<img class="item" src="http://s1.nextnobels.com/default/skin/nobel/test/themes/default/media/bg_game.jpg">
+										</div>
+									</div>
+
+									<script type="text/javascript">
+										var gameScoreByPage = [];
+										var trueWordByPages = [];
+										function gameWords(id, type, cateId, that) {
+											jQuery('#pageGame').val(1);
+											jQuery('.v_game').removeClass('active_v_game');
+											jQuery(that).addClass('active_v_game');
+											if(id && type) {
+												jQuery.ajax({
+													type: "Post",
+													data: {id:id, type:type, cateId:cateId},
+													url:'/Game/gameVocabulary',
+													success: function(data){
+
+														jQuery('#resGame').html(data);
+														
+													}
+												});
+											}
+											
+
+										}
+									</script>
+
+								</div>
+							  
 							</div>
+
+							
 						</div>
 					</div>
 					
