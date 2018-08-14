@@ -35,7 +35,7 @@ body{font-family: 'Roboto';}
 .relative{position: relative;}
 .absolute{position: absolute;}
 .top20{top: 20px; font-size: 16px; font-weight: bold; color: white; font-family: 'Roboto'; text-transform: uppercase;}
-#tonghop{background: #1c439a;}
+#tonghop, #ontienganh{background: #1c439a;}
 #thithu{background: #f6b746;}
 #practice{background: linear-gradient(#e0fcf5, #f3f3b3);}
 .bg5{background: url(../images/background5.png) no-repeat;

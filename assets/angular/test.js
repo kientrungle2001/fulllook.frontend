@@ -125,7 +125,7 @@ flApp.controller('TestController', ['$scope', function($scope) {
 			data: {
 				userId:  userId,
 				subject_id: 0,
-				topic_id: 0,
+				topic_id: $scope.selectedTest.categoryId,
 				exercise_number: 0,
 				questions: $scope.result_user_answers,
 				quantity_question: $scope.totalQuestions,
@@ -133,7 +133,10 @@ flApp.controller('TestController', ['$scope', function($scope) {
 				startTime: startTime,
 				duringTime: duringTime,
 				stopTime: stopTime,
-				testId: $scope.selectedTest.id
+				testId: $scope.selectedTest.id,
+				parentTest: 0,
+				test_name: $scope.selectedTest.name,
+				test_name_sn: $scope.selectedTest.name_sn
 			},
 			success: function(resp) {
 				
