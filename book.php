@@ -1,11 +1,6 @@
 <?php require('./bootstrap.php'); ?><!DOCTYPE html>
-<?php 
-	/*$_SESSION['userId'] = 7;
-	$_SESSION["checkPayment"] = 1;
-	$_SESSION["paymentDate"] = '2017-12-12';
-	$_SESSION["expiredDate"]  = '2018-12-12';*/
- ?>
-<html ng-app="flApp" ng-controller="ProfileController">
+
+<html ng-app="flApp" ng-controller="UserBookController">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,16 +13,13 @@
 	<script>
 		FL_API_URL = '<?php echo FL_API_URL?>';
 		sessionUserId = '<?php echo $_SESSION['userId'] ?>';
-		checkPayment = '<?php echo $_SESSION["checkPayment"] ?>';
-		paymentDate = '<?php echo $_SESSION["paymentDate"] ?>';
-		expiredDate = '<?php echo $_SESSION["expiredDate"] ?>';
+		userBookId = '<?php echo $_GET['id'] ?>';
 	</script>
 </head>
 <body>
 	<?php include('common/header.php'); ?>
-	<?php include('profile/detail.php'); ?>
-	
+	<?php include('profile/book.php'); ?>	
 	<?php include('common/footer.php'); ?>
-	<script src="/assets/angular/profile.js"></script>
+	<script src="/assets/angular/book.js"></script>
 </body>
 </html>

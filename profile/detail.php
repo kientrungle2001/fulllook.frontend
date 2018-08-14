@@ -112,12 +112,14 @@
 						</div>
 						<!--edit avatar -->
 						<div class="full bg-light" ng-show="editInfor" >
-							<div class="custom-file">
-							  <input type="file" class="custom-file-input" id="customFile">
-							  <label class="custom-file-label" for="customFile">Choose file</label>
-							</div>
-							<button type="submit" class="btn btn-primary">Cập nhật</button>
-							  <button type="button" class="btn btn-secondary">Hủy</button>
+							<form enctype="multipart/form-data">				
+								<div class="custom-file">
+								  <input type="file" ng-model="editAvatar.avatar" class="custom-file-input" id="customFile">
+								  <label class="custom-file-label" for="customFile">Choose file</label>
+								</div>
+								<button ng-click="editAvatar()" class="btn btn-primary">Cập nhật</button>
+								  <button type="button" class="btn btn-secondary">Hủy</button>
+							</form>
 						</div>
 						
 					</div>
@@ -159,7 +161,7 @@
 					      <th scope="row">{{$index +1}}</th>
 					      <td ng-bind="lesson.categoryId"></td>
 					      <td ng-bind="lesson.topic.name"></td>
-					      <td><a href="/profile/book/{{lesson.exercise_number}}">Bài {{lesson.exercise_number}}</a></td>
+					      <td><a href="/book.php?id={{lesson.id}}">Bài {{lesson.exercise_number}}</a></td>
 					      <td ng-bind="lesson.mark"></td>
 					      <td ng-bind="lesson.lang"></td>
 					      <td ng-bind="lesson.duringTime"></td>
@@ -198,7 +200,7 @@
 					  <tbody>
 					    <tr ng-repeat="test in tests">
 					      <th scope="row">{{$index +1}}</th>
-					      <td><a href="/profile/book/{{test.id}}">{{test.testId.name}}</a></td>
+					      <td><a href="/book.php?id={{test.id}}">{{test.testId.name}}</a></td>
 					      <td ng-bind="test.mark"></td>
 					      <td ng-bind="test.lang"></td>
 					      <td ng-bind="test.duringTime"></td>
@@ -238,7 +240,7 @@
 					  <tbody>
 					    <tr ng-repeat="tdnTest in tdnTests">
 					      <th scope="row">{{$index +1}}</th>
-					      <td><a href="/profile/book/{{tdnTest.id}}">{{tdnTest.testId.name}}</a></td>
+					      <td><a href="/book.php?id={{tdnTest.id}}">{{tdnTest.testId.name}}</a></td>
 					      <td ng-bind="tdnTest.mark"></td>
 					      <td ng-bind="tdnTest.lang"></td>
 					      <td ng-bind="tdnTest.duringTime"></td>

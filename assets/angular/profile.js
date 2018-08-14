@@ -58,6 +58,9 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		}
 			
 	};
+	$scope.editAvatar = function(){
+		
+	};
 
 	$scope.userDetail = [];
 	jQuery.ajax({
