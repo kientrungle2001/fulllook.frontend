@@ -16,7 +16,7 @@
 							<ul class="list-unstyled" >
 								<li><strong>Họ và tên:</strong> {{userDetail.name}}</li>
 								<li><strong>Nick name:</strong> {{userDetail.username}}</li>
-								<li><strong>Ngày sinh:</strong> {{userDetail.birthday}}</li>
+								<li><strong>Ngày sinh:</strong> {{userDetail.birthday | date:"MM/dd/yyyy"}}</li>
 								<li ng-hidden="userDetail.sex"><strong>Giới tính:</strong> Nữ</li>
 								<li ng-show="userDetail.sex"><strong>Giới tính:</strong> Nam</li>
 								<li><strong>Địa chỉ:</strong> {{userDetail.address}}</li>
@@ -165,7 +165,7 @@
 					      <td ng-bind="lesson.mark"></td>
 					      <td ng-bind="lesson.lang"></td>
 					      <td ng-bind="lesson.duringTime"></td>
-					      <td ng-bind="lesson.startTime"></td>
+					      <td >{{lesson.startTime| date:'MM/dd/yyyy @ h:mma'}}</td>
 					    </tr>					    
 					    
 					  </tbody>
@@ -204,7 +204,7 @@
 					      <td ng-bind="test.mark"></td>
 					      <td ng-bind="test.lang"></td>
 					      <td ng-bind="test.duringTime"></td>
-					      <td ng-bind="test.startTime"></td>
+					      <td >{{test.startTime| date:'MM/dd/yyyy @ h:mma'}}</td>
 					      
 					    </tr>					    
 					    
@@ -244,7 +244,7 @@
 					      <td ng-bind="tdnTest.mark"></td>
 					      <td ng-bind="tdnTest.lang"></td>
 					      <td ng-bind="tdnTest.duringTime"></td>
-					      <td ng-bind="tdnTest.startTime"></td>
+					      <td >{{tdnTest.startTime| date:'MM/dd/yyyy @ h:mma'}}</td>
 					      
 					    </tr>					    
 					    
