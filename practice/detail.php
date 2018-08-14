@@ -213,10 +213,10 @@
 
 							<ul class="nav nav-tabs" id="tabDocument" role="tablist">
 							  <li class="nav-item">
-							    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Từ vựng</a>
+							    <a class="nav-link title-pr active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Từ vựng</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Kiểm tra từ vựng</a>
+							    <a class="nav-link title-pr" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Kiểm tra từ vựng</a>
 							  </li>
 							
 							</ul>
@@ -251,16 +251,19 @@
 											jQuery('.v_game').removeClass('active_v_game');
 											jQuery(that).addClass('active_v_game');
 											if(id && type) {
-												jQuery.ajax({
-													type: "Post",
-													data: {id:id, type:type, cateId:cateId},
-													url:'/Game/gameVocabulary',
-													success: function(data){
+												if(type == 'vdrag'){
+													jQuery.ajax({
+														type: "Post",
+														data: {id:id, type:type, cateId:cateId},
+														url:'/document/game/vdrag.php',
+														success: function(data){
 
-														jQuery('#resGame').html(data);
-														
-													}
-												});
+															jQuery('#resGame').html(data);
+															
+														}
+													});
+												}
+												
 											}
 											
 
