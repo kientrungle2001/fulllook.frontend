@@ -1,4 +1,4 @@
-flApp.controller('TestSetController', ['$scope', function($scope) {
+flApp.controller('TestController', ['$scope', function($scope) {
 	$scope.title = 'Công ty cổ phần giáo dục và phát triển trí tuệ sáng tạo Next Nobels';
 	$scope.language = window.localStorage.getItem('language') || 'en';
 	$scope.changeLanguage = function() {
@@ -12,14 +12,12 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 	$scope.translate = function(val) {
 		return $langMap[$scope.language][val] || val;
 	}
-	var u = new URL(location.href);
-	var categoryId = u.searchParams.get('category_id');
 	$scope.tests = [];
 	jQuery.ajax({
 		type: 'post',
-		url: FL_API_URL +'/common/getTestSets', 
+		url: FL_API_URL +'/common/getTests', 
 		data: {
-			categoryId: categoryId
+			categoryId: '354'
 		},
 		dataType: 'json',
 		success: function(resp) {
@@ -36,22 +34,9 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 	$scope.step = 'selectTest';
 	$scope.selectTest = function(test) {
 		$scope.step = 'selectTest';
+		$scope.testStep = 'selectTest';
+		$scope.showAnswersStep = 'selectTest';
 		$scope.selectedTest = test;
 	};
-	$scope.doTest = function() {
-		$scope.step = 'doTest';
-		jQuery.ajax({
-			type: 'post',
-			url: FL_API_URL +'/test/getQuestionsAnswers', 
-			data: {
-				test_id: $scope.selectedTest.id
-			},
-			dataType: 'json',
-			success: function(resp) {
-				$scope.questions = resp;
-				
-				$scope.$apply();
-			}
-		});
-	};
+
 }]);
