@@ -11,6 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 	<script>
 		FL_API_URL = '<?php echo FL_API_URL?>';
+		sessionUserId = '<?php echo $_SESSION['userId'] ?>';
+		sessionUsername = '<?php echo $_SESSION['username'] ?>';
 	</script>
 </head>
 <body>

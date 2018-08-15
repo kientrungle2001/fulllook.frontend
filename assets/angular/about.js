@@ -4,37 +4,49 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 	$scope.changeLanguage = function() {
 		window.localStorage.setItem('language', $scope.language);
 	}
+	$scope.order = {};
 	$scope.doOrder =function(){
+		if(!$scope.order.fullname|| !$scope.order.quantity || !$scope.order.phone || !$scope.order.address ){
+			return false;
+		}
 		jQuery.post(FL_API_URL+'/payment/orderCard', $scope.order, function(data) {
 			
 		  	if(data) {
-		  		$scope.resultOrder = 'Bạn đã dặt thẻ thành công, chúng tôi sẽ sớm liên hệ lại với bạn!';
+		  		$scope.order.success = 1;
+		  		$scope.order.message = 'Bạn đã dặt thẻ thành công, chúng tôi sẽ sớm liên hệ lại với bạn!';
 		  		$scope.$apply();
 		  	}
 		});
 		
 	}
-	$scope.payCardFl =function(userId, username){
-		if(parseInt(userId) == 0){
-			$scope.resultFalse ='Bạn phải đăng nhập mới được nạp thẻ';	
-			$scope.resultcheck = false;	
+	$scope.paycard = {};
+	$scope.payCardFl =function(url){
+		
+		if(parseInt(sessionUserId) == 0){
+			$scope.paycard.message ='Bạn phải đăng nhập mới được nạp thẻ';	
+			$scope.paycard.success = 0;	
 			$scope.$apply();		
 		}else{
-			$scope.paycard.userId = userId;	
-			$scope.paycard.username = username;			
+			
+			if(!$scope.paycard.pincard){
+				return false;
+			}
+			$scope.paycard.userId = sessionUserId;	
+			$scope.paycard.username = sessionUsername;
+
 			jQuery.post(FL_API_URL+'/payment/payCard', $scope.paycard, function(dataResult) {
 			  	if(dataResult) {
 			  		if(parseInt(dataResult.result)== 1){
-			  			jQuery.post('http://fulllooktdn.vn/update_paycard.php', dataResult, function(data) {
+			  			jQuery.post(url+'/update_paycard.php', dataResult, function(data) {
 							
 						});
-						$scope.resultTrue = dataResult.string;
-						$scope.resultcheck = true;
+						$scope.paycard.message = dataResult.string;
+						$scope.paycard.success = 1;
 						$scope.$apply();
 						
 			  		}else {
-			  			$scope.resultFalse = dataResult.string;	
-			  			$scope.resultcheck = false;	
+			  			$scope.paycard.message = dataResult.string;	
+			  			$scope.paycard.success = 0;	
 			  			$scope.$apply();		  		
 					}
 			  	}				

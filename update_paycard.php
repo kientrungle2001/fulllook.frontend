@@ -2,9 +2,7 @@
 	header('Content-Type: application/json');
 	session_start();
 	$dataResult = $_POST;
-	/*$dataUser =  base64_decode($user);
-	$dataUser= json_decode($dataUser,true);*/
-	//var_dump($dataUser);	
+	
 	$_SESSION["checkPayment"] = 1;
 	$_SESSION["paymentDate"] = $dataResult['paymentDate'];
 	$_SESSION["expiredDate"] = $dataResult['expiredDate'];

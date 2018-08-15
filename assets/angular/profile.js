@@ -96,7 +96,24 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		}
 	});
 	$scope.lessons = [];
-
+	
+	$scope.getSubject = function(){
+		var subjects= new Array();
+		subjects[51] = 'Mathematics';
+		subjects[52] = 'Science';
+		subjects[164] = 'English';
+		subjects[157] = 'Literature';
+		subjects[53] = 'History';
+		subjects[50] = 'Geography';
+		subjects[87] = 'Life Skills';
+		subjects[59] = 'Social Understanding';
+		subjects[88] = 'Observing Listening';
+		subjects[54] = 'Language And Communication';
+		$scope.subjects = new Array();
+		$scope.subjects = subjects;
+		
+	};
+	$scope.getSubject();
 	$scope.lessonPage = function(page){
 		$scope.lessonPageSelected = page;
 		jQuery.ajax({

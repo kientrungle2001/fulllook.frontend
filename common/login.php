@@ -14,8 +14,7 @@
 			<div class="col-lg-6">
 				<h2>Đăng nhập</h2>
 				<div class="card card-container">
-					<form class="form-signin form" action="<?php echo FL_API_URL ?>/login/userLogin" method="Post" onsubmit="return false;">
-						<input type="hidden" name="url" value="<?php echo FL_URL  ?>">
+					<form class="form-signin form" method="Post">					
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Tên đăng nhập" required autofocus name="username" ng-model="login.username">
 						</div>
@@ -30,11 +29,11 @@
 							</label>
 						</div>
 						</div>
-						<div class="form-group alert" ng-class="{'alert-danger': login.success==0, 'alert-success': login.success==1}" ng-show="login.message" ng-bind-html="login.message">
+						<div class="form-group alert " ng-class="{'alert-danger': login.success==0, 'alert-success': login.success==1}" ng-show="login.message" ng-bind-html="login.message">
 
 						</div>
 						<div class="form-group">
-							<button class="btn btn-lg btn-primary btn-block btn-signin" ng-click="doLogin('<?php echo FL_URL?>')">Đăng nhập</button>
+							<button type="button" class="btn btn-lg btn-primary btn-block btn-signin" ng-click="doLogin('<?php echo FL_URL?>')">Đăng nhập</button>
 						</div>
 					</form><!-- /form -->
 					<a href="#" class="forgot-password">

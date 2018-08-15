@@ -89,8 +89,10 @@
 					    <label for="txtaddress">Địa chỉ nhận thẻ:</label>
 					    <textarea class="form-control" id="txtaddress" name="txtaddress" placeholder="Địa chỉ nhận thẻ" cols="62" rows="3" ng-model="order.address" required></textarea>
 					</div>
+					<div class="form-group alert" ng-class="{'alert-danger': order.success==0, 'alert-success': order.success==1}" ng-show="order.message" ng-bind-html="order.message">
+					</div>
 		         	<input type="submit" id="ordercard_button" class="btn btn-success" ng-click="doOrder()" value=" ĐẶT MUA">			
-		         	<label ng-model ="resultOrder" ng-bind="resultOrder" class="text-success font-weight-bold"></label>  
+		         	
 		        </form> 
 		             
 		   </div>		   
@@ -108,21 +110,11 @@
 						    <label for="flcardId">Nhập mã kích hoạt:</label>
 						    <input type="text" ng-model="paycard.pincard" autocomplete="off" class="pm_paycard_input form-control" id="flcardId" required  name="flcardId" placeholder="Nhập mã kích hoạt">							
 						</div>
-			            <?php if(isset($_SESSION['userId'])){
-			            	$userId = $_SESSION['userId'];
-			            	$username = $_SESSION['username'];
-			            } else {
-			            	$userId = 0;
-			            	$username =0;
-			            }  ?>
-			            
-			             <h5>
-			             	<span ng-model="resultcheck" ng-init="resultcheck=false"></span>             	
-							  <label ng-model ="resultTrue" ng-bind="resultTrue" class="text-success font-weight-bold" ng-if="resultcheck"></label>
-							
-							<label  ng-model ="resultFalse" ng-bind="resultFalse" class="text-danger font-weight-bold" ng-hide="resultcheck"></label>
-						</h5>			      		
-			            <input type="submit" class="btn btn-danger" ng-click="payCardFl('<?php echo $userId ?>', '<?php echo $username ?>')" value=" NẠP THẺ">
+			           
+			            <div class="form-group alert " ng-class="{'alert-danger': paycard.success==0, 'alert-success': paycard.success==1}" ng-show="paycard.message" ng-bind-html="paycard.message">
+
+						</div>		      		
+			            <input type="submit" class="btn btn-danger" ng-click="payCardFl('<?php echo FL_URL ?>')" value=" NẠP THẺ">
 			      </form>				
 			</div>
 
@@ -166,7 +158,7 @@
 				</div>
 				<dl>
 					<dt>Công ty Cổ phần Giáo dục Phát triển Trí tuệ và Sáng tạo Next Nobels</dt>
-					<dd>Địa chỉ: Số 6 Ngõ 115 Nguyễn Khang, Phường Yên Hòa, Cầu Giấy Hà Nội</dd>
+					<dd>Địa chỉ: Số 6 Ngõ 115 Nguyễn Khang, Phường Yên Hòa, Cầu Giấy, Hà Nội</dd>
 					<dd>Số điện thoại: <strong>0936 73 89 86</strong> Hoặc <strong>0965 90 91 95</strong></dd>
 					<dd><i>Ghi chú: Trung tâm mở cửa tất cả các ngày trong tuần</i></dd>
 				</dl>  

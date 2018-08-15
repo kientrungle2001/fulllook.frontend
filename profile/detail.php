@@ -114,8 +114,9 @@
 						<div class="full bg-light" ng-show="editInfor" >
 							<form enctype="multipart/form-data">				
 								<div class="custom-file">
-								  <input type="file" ng-model="editAvatar.avatar" class="custom-file-input" id="customFile">
+								  <input type="file" ng-model="editAvatar.avatar" class="custom-file-input" id="customFile" accept="image" maxsize="5000" required base-sixty-four-input>>
 								  <label class="custom-file-label" for="customFile">Choose file</label>
+								   <span ng-show="form.files.$error.maxsize">Files must not exceed 5000 KB</span>
 								</div>
 								<button ng-click="editAvatar()" class="btn btn-primary">Cập nhật</button>
 								  <button type="button" class="btn btn-secondary">Hủy</button>
@@ -159,7 +160,7 @@
 					  <tbody>
 					    <tr ng-repeat="lesson in lessons">
 					      <th scope="row">{{$index +1}}</th>
-					      <td ng-bind="lesson.categoryId"></td>
+					      <td ng-bind="subjects[lesson.categoryId]"></td>
 					      <td ng-bind="lesson.topic.name"></td>
 					      <td><a href="/book.php?id={{lesson.id}}">Bài {{lesson.exercise_number}}</a></td>
 					      <td ng-bind="lesson.mark"></td>
