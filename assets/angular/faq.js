@@ -13,25 +13,21 @@ flApp.controller('FaqController', ['$scope', function($scope) {
 		return $langMap[$scope.language][val] || val;
 	}
 	$scope.questions = [];
-	$scope.totalQuestion = 0;
 	jQuery.ajax({
 		url: FL_API_URL +'/aqs/getQuestions',
 		type: 'post',
 		data: {pageNumber: 1}, 
 		success: function(resp) {
 			$scope.questions = resp;
-			$scope.totalQuestion = resp.length;
 			$scope.$apply();
 		}
 	});
-	$scope.addQuestion = function(e){
-		var userId = jQuery('#userId').val();
+	$scope.addQuestion = function(id){
 		if(!userId){
 			alert('Đăng nhập để gửi câu hỏi');
 			return false;
 			
 		}else{
-			var username = jQuery('#username').val();
 			var question = jQuery('#question').val();
 			if(question.length > 0){
 				jQuery.ajax({
@@ -44,10 +40,67 @@ flApp.controller('FaqController', ['$scope', function($scope) {
 				});
 			}else{
 				alert('Nhập nội dung câu hỏi!');
-				 jQuery('#question').focus();
+				jQuery('#question').focus();
 				return false;
 			}
 			
 		}
+	}
+	$scope.addAnswer = function(questionId){
+		var answer = jQuery('#answer'+questionId).val();
+		if(answer.length > 0){
+			jQuery.ajax({
+				url: FL_API_URL +'/aqs/createQuestionAnswers',
+				type: 'post',
+				data: {userId: userId, username: username, questionId: questionId, answer: answer}, 
+				success: function(resp) {
+					window.location.reload();
+				}
+			});
+		}else{
+			alert('Nhập nội dung câu trả lời!');
+			jQuery('#answer'+questionId).focus();
+			return false;
+		}
+	}
+	$scope.pageSize = 6;
+	$scope.curentPage = 1;
+	$scope.pages = [];
+	$scope.totalQuestion = 0;
+	$scope.getTotalQuestion = function(){
+		jQuery.ajax({
+			url: FL_API_URL +'/aqs/countQuestions',
+			type: 'post',
+			success: function(resp) {
+				$scope.totalQuestion = resp;
+				$scope.pagination($scope.pageSize, resp);
+				$scope.$apply();
+
+			}
+		});
+	}
+	$scope.getTotalQuestion();
+	$scope.pagination = function(pageSize, total){
+
+		if(total > pageSize){
+			var page = total / pageSize;
+			page = Math.ceil(page);
+			for(var i =1; i < page; i++){
+				$scope.pages.push(i);
+			}
+		}
+	}
+	$scope.pageAjax = function(that, page){
+		jQuery.ajax({
+			url: FL_API_URL +'/aqs/getQuestions',
+			type: 'post',
+			data: {pageNumber: page}, 
+			success: function(resp) {
+				$scope.questions = resp;
+				$scope.curentPage = page;
+				$scope.$apply();
+			}
+		});
+		return false;
 	}
 }]);

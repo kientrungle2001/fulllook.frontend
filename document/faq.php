@@ -7,6 +7,10 @@ if(isset($_SESSION['username'])){
 	$userName = $_SESSION['username'];
 }
 ?>
+<script type="text/javascript">
+	var userId = <?= $userId; ?>;
+	var username = '<?= $userName; ?>';
+</script>
 <style>
 	.fix-menu{margin-bottom: 15px;}
 </style>
@@ -54,16 +58,14 @@ if(isset($_SESSION['username'])){
 						        		<span class="badge badge-primary">{{answer.username}}</span>: {{answer.answer}}
 						        	</div>
 						        	
-									<form role="form" method="post" action="http://s1.nextnobels.com/aqs/answerPost">
-										<input type="hidden" name="id" value="">
+									<form role="form" method="post" >
 										<div class="form-group">
-											<input type="hidden" id="questionid" name="questionid" value="265">
 											<div class="clearfix">
 												<div style="float: left; width: 100%;">
-													<textarea type="text" class="form-control" id="answer" name="answer" placeholder="Trả lời"></textarea>
+													<textarea type="text" class="form-control" id="answer{{question.id}}" name="answer" placeholder="Trả lời"></textarea>
 												</div>
 												<div style="float:right;">
-													<button type="submit" class="btn-xs btn-primary comment-button" style="margin-top:5px;">Trả lời</button>
+													<button ng-click="addAnswer(question.id)" type="submit" class="btn-xs btn-primary comment-button" style="margin-top:5px;">Trả lời</button>
 												</div>
 											</div>
 										</div>
@@ -76,9 +78,7 @@ if(isset($_SESSION['username'])){
 						<nav aria-label="Page navigation example">
 						  <ul class="pagination">
 						    <li class="page-item"><a class="page-link" href="#">Trang</a></li>
-						    <li class="page-item"><a class="page-link" href="#">1</a></li>
-						    <li class="page-item"><a class="page-link" href="#">2</a></li>
-						    <li class="page-item"><a class="page-link" href="#">3</a></li>
+						    <li class="page-item" ng-repeat="page in pages" ng-class="{'active': page == curentPage}" ><a ng-click="pageAjax(this, page)" class="page-link" href="#">{{page}}</a></li>
 						  </ul>
 						</nav>
 
