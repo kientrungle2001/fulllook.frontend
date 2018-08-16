@@ -125,7 +125,8 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			},
 			dataType: 'json',
 			success: function(resp) {
-				$scope.lessons = resp;				
+				$scope.lessons = resp;
+				console.log(resp);				
 				$scope.$apply();			
 			}
 		});

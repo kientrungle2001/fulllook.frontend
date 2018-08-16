@@ -22,8 +22,7 @@
 								<li><strong>Địa chỉ:</strong> {{userDetail.address}}</li>
 								<li><strong>Trường:</strong>{{userDetail.schoolname}} </li>
 								<li><strong>Lớp:</strong> {{userDetail.classname}}</li>
-								<li><strong>Thành phố:</strong>{{userDetail.areacode}}</li>
-														
+																					
 								<li ng-if="<?php echo $_SESSION['checkPayment']; ?>"><strong>Thời hạn sản phẩm từ ( <?php echo $_SESSION['paymentDate']; ?> đến <?php echo $_SESSION['expiredDate']; ?> )</strong></li>
 								<button type="button" class="btn btn-primary" ng-click="editInforUser()">Sửa thông tin</button>
 							</ul>							
@@ -161,7 +160,7 @@
 					    <tr ng-repeat="lesson in lessons">
 					      <th scope="row">{{$index +1}}</th>
 					      <td ng-bind="subjects[lesson.categoryId]"></td>
-					      <td ng-bind="lesson.topic.name"></td>
+					      <td ng-bind="lesson.name"></td>
 					      <td><a href="/book.php?id={{lesson.id}}">Bài {{lesson.exercise_number}}</a></td>
 					      <td ng-bind="lesson.mark"></td>
 					      <td ng-bind="lesson.lang"></td>
@@ -201,7 +200,7 @@
 					  <tbody>
 					    <tr ng-repeat="test in tests">
 					      <th scope="row">{{$index +1}}</th>
-					      <td><a href="/book.php?id={{test.id}}">{{test.testId.name}}</a></td>
+					      <td><a href="/book.php?id={{test.id}}">{{test.name}}</a></td>
 					      <td ng-bind="test.mark"></td>
 					      <td ng-bind="test.lang"></td>
 					      <td ng-bind="test.duringTime"></td>
@@ -241,7 +240,7 @@
 					  <tbody>
 					    <tr ng-repeat="tdnTest in tdnTests">
 					      <th scope="row">{{$index +1}}</th>
-					      <td><a href="/book.php?id={{tdnTest.id}}">{{tdnTest.testId.name}}</a></td>
+					      <td><a href="/book.php?id={{tdnTest.id}}">{{tdnTest.name}}</a></td>
 					      <td ng-bind="tdnTest.mark"></td>
 					      <td ng-bind="tdnTest.lang"></td>
 					      <td ng-bind="tdnTest.duringTime"></td>
