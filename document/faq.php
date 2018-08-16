@@ -1,3 +1,12 @@
+<?php
+$userId = $userName = ''; 
+if(isset($_SESSION['userId'])){
+	$userId = $_SESSION['userId'];
+} 
+if(isset($_SESSION['username'])){
+	$userName = $_SESSION['username'];
+}
+?>
 <style>
 	.fix-menu{margin-bottom: 15px;}
 </style>
@@ -12,7 +21,68 @@
 				<div class="col-12 col-md-8">
 					
 					<div class="faq">
-						
+						<h4 class="text-center">Hỏi đáp Kinh Nghiệm Ôn thi vào trường Trần Đại Nghĩa</h4>
+						<form role="form" id="createQuestions" method="post" >
+							<input type="hidden" id="userId" name="userId" value="<?=$userId;?>">
+							<input type="hidden"  id="username" name="username" value="<?=$userName;?>">
+							<div class="form-group">
+								<textarea type="text" class="form-control" style="height:60px;" id="question" name="question" placeholder="Mời bạn đặt câu hỏi"></textarea>
+								<button ng-click="addQuestion()" type="button" class="btn btn-primary comment-button" style="margin-top:5px;">Gửi</button>
+							</div>
+						  
+						</form>
+
+
+						<div ng-repeat="question in questions" class="card p-3 mb-3 bg-light">
+						    <div class="card-heading" >
+						      <h4 class="card-title">
+								
+								<div style="font-size: 16px;" class="text-left">
+									<span style="font-size: 16px;" class="badge badge-primary">{{question.username}}</span> {{question.question}}
+						 		</div>
+								<a  role="button" data-toggle="collapse"  href="#answer-{{$index}}" aria-expanded="false" aria-controls="collapseExample" style="color:blue; font-size: 14px;" class="">
+									<button type="button" class="btn-xs btn-primary">Trả lời <span class="badge badge-light">{{question.ref_qusestion_answers.length}}</span></button>
+								</a>
+								 
+						        
+						      </h4>
+						    </div>
+						    <div id="answer-{{$index}}" class="collapse"  >
+						      <div class="card card-body">
+						        <blockquote>
+						        	<div ng-repeat="answer in question.ref_qusestion_answers" class="text-left mb-2">
+						        		<span class="badge badge-primary">{{answer.username}}</span>: {{answer.answer}}
+						        	</div>
+						        	
+									<form role="form" method="post" action="http://s1.nextnobels.com/aqs/answerPost">
+										<input type="hidden" name="id" value="">
+										<div class="form-group">
+											<input type="hidden" id="questionid" name="questionid" value="265">
+											<div class="clearfix">
+												<div style="float: left; width: 100%;">
+													<textarea type="text" class="form-control" id="answer" name="answer" placeholder="Trả lời"></textarea>
+												</div>
+												<div style="float:right;">
+													<button type="submit" class="btn-xs btn-primary comment-button" style="margin-top:5px;">Trả lời</button>
+												</div>
+											</div>
+										</div>
+									</form>
+								</blockquote>
+							  </div>
+						    </div>
+						</div>
+
+						<nav aria-label="Page navigation example">
+						  <ul class="pagination">
+						    <li class="page-item"><a class="page-link" href="#">Trang</a></li>
+						    <li class="page-item"><a class="page-link" href="#">1</a></li>
+						    <li class="page-item"><a class="page-link" href="#">2</a></li>
+						    <li class="page-item"><a class="page-link" href="#">3</a></li>
+						  </ul>
+						</nav>
+
+
 					</div>
 
 				</div>
