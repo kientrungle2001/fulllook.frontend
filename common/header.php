@@ -2,7 +2,7 @@
     <nav id="topNav" class="navbar p-3 fixed-to navbar-expand-md ">
         <a class="navbar-brand mx-auto" href="/"><img src="/assets/images/logo.png" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-           <span class="navbar-toggler-icon"></span>
+           <i class="fa fa-bars text-white" aria-hidden="true"></i>
         </button>
         <div class="container">
             <div class="navbar-collapse fs14 cl-green collapse">
@@ -60,7 +60,7 @@
 
     <nav class="navbar fix-menu navbar-expand-lg container main-menu mt-2 bg-white">
         <button class="navbar-toggler" data-target="#navigation" data-control="navigation" data-toggle="collapse">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fa fa-bars text-primary" aria-hidden="true"></i>
         </button>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="nav navbar-nav">
