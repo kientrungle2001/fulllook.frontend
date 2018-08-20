@@ -12,4 +12,5 @@ flApp.controller('TestController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
+	
 }]);

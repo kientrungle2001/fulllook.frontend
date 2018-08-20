@@ -14,9 +14,9 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 	}
 	$scope.register = {};
 	$scope.doRegister = function(url){
-		if(!$scope.register.username || !$scope.register.password || !$scope.register.name || !$scope.register.repassword || !$scope.register.email || !$scope.register.phone || !$scope.register.sex || !$scope.register.birthday || !$scope.register.areacode){
+		if(!$scope.register){
 			return false;
-		}
+		}		
 		$scope.register.url = url;
 		if($scope.register.password == $scope.register.repassword){
 			jQuery.post(FL_API_URL+'/register/userRegister',$scope.register, function(resp) {
@@ -37,7 +37,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 	}
 	$scope.login = {};
 	$scope.doLogin = function(url) {
-		if(!$scope.login.username || !$scope.login.password ){
+		if(!$scope.login){
 			return false;
 		}
 		$scope.login.url = url;

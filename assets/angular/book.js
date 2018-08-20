@@ -57,14 +57,10 @@ flApp.controller('UserBookController', ['$scope', function($scope) {
 					  return answer.status === 1;
 					})[0].id;
 					$scope.trueAnswers[item.id]= trueAnswer;
-				});	
-				console.log($scope.trueAnswers);								
+				});												
 				$scope.$apply();
 			}
 		});
 	};
-
-	$scope.checkAnswer = function(questionIds, ){
-
-	};
+	
 }]);

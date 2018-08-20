@@ -29,7 +29,11 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		return $langMap[$scope.language][val] || val;
 	};
 	// edit user
+	$scope.userDetail= {};
 	$scope.editUser = function(){
+		if(!$scope.userDetail){
+			return false;
+		}
 		$scope.userDetail.userId= sessionUserId;
 		jQuery.post(FL_API_URL+'/history/editUser', $scope.userDetail, function(resp) {
 			
@@ -40,7 +44,11 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		  	}
 		});		
 	};
+	$scope.editPassword = {};
 	$scope.changePassword = function(){
+		if(!$scope.editPassword.newPassword || !$scope.editPassword.reNewPassword || !$scope.editPassword.oldPassword){
+			return false;
+		}
 		if($scope.editPassword.newPassword != $scope.editPassword.reNewPassword){
 			$scope.editPassword.success = 0;
 		  	$scope.editPassword.message ='<strong> Nhập lại mật khẩu mới chưa đúng</strong>';
@@ -58,9 +66,52 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		}
 			
 	};
-	$scope.editAvatar = function(){
+	$scope.createObjectURL = function(object){
+	    return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object);
+	};
+	$scope.revokeObjectURL= function(url) {
+	    return (window.URL) ? window.URL.revokeObjectURL(url) : window.webkitURL.revokeObjectURL(url);
+	};
+	$scope.inputFile= 'Choose file';
+	$scope.editAvatar= {};
+	$scope.changeAvatar = function(){		
+	    var userAvatar = document.getElementById("avatar");
+		if(!userAvatar){
+			return false;
+		}		
+		if(userAvatar.files.length) {
+			if ('name' in userAvatar.files[0]) {
+                var txt = "name: " + userAvatar.files[0].name;
+                $scope.inputFile= txt;
+            }	       
+			var reader = new FileReader();
+			reader.onloadend = function() {
+			  	var base64_avatar = reader.result;
+			    //console.log(base64_avatar);
+			    jQuery.post('/upload.php', {avatar: base64_avatar, user_id: sessionUserId }, function(resp) {
+			    	//console.log(resp);
+			    	if(resp){
+			    		$scope.editAvatar.userId= sessionUserId;
+			    		$scope.editAvatar.urlAvatar= FL_URL +'/upload/' + resp ;
+			    		jQuery.post(FL_API_URL+'/history/editAvatar', $scope.editAvatar, function(resp) {				
+						  	if(resp) {		  		
+						  		$scope.editAvatar.success = resp.success;
+						  		$scope.editAvatar.message ='<strong>' +resp.message+ '</strong>';
+						  		$scope.$apply();
+						  	}
+						});
+			    	}
+			    });
+
+			}
+	  		reader.readAsDataURL(userAvatar.files[0]);
+
+	        
+	    }
+	    		
 		
 	};
+	
 
 	$scope.userDetail = [];
 	jQuery.ajax({
@@ -126,7 +177,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			dataType: 'json',
 			success: function(resp) {
 				$scope.lessons = resp;
-				console.log(resp);				
+						
 				$scope.$apply();			
 			}
 		});
