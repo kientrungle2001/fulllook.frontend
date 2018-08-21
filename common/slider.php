@@ -46,9 +46,11 @@
 <script type="text/javascript">
  
   var clearId = setInterval(function(){
-      var color = jQuery('#homeslider').find('.active').attr('rel');
+    if(typeof jQuery != 'undefined'){
+        var color = jQuery('#homeslider').find('.active').attr('rel');
     
-      jQuery('.header').css('background', color);
+        jQuery('.header').css('background', color);
+    }
   }, 100);
 
  

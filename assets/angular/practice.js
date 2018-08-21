@@ -152,7 +152,95 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		console.log($scope.user_question_answers);
 	};
 	
-	
+	$scope.gameEnables = {};
+	$scope.gameTypes = ['vdrag', 'vdt', 'vmt', 'sortword', 'vdragimg', 'dragToPart'];
+	$scope.setGameVocabulary = function(documentId){
+		$scope.gameVocabularys = [];
+		var gameTypes = $scope.gameTypes;
+		for(let i = 0; i < gameTypes.length; i++){
+			jQuery.ajax({
+				type: 'get',
+				url: FL_API_URL+'/games/?gamecode='+gameTypes[i]+'&documentId='+documentId+'&software=1&status=1&limit=1',
+				dataType: 'json',
+				success: function(rep){
+					if(rep[0] && rep[0].question != ''){
+						$scope.gameEnables[rep[0].gamecode] = true;
+						
+						$scope.$apply();
+					}else{
+						$scope.gameEnables[rep[0].gamecode] = false;
+						$scope.$apply();
+					}
+				}
+			});
+		}
+	}
+	//game
+	gameScoreByPage = [];
+	trueWordByPages = [];
+	$scope.gameScoreByPage = [];
+	$scope.trueWordByPages = [];
+	$scope.dataCells = [];
+	$scope.dataTopics = [];
+	$scope.gameWords = function (gameType) {
+			var documentId = $scope.selectedVocabulary.id;
+			var cateId = $scope.subject.id;
+			if(documentId && gameType) {
+				if(gameType == 'vdrag'){
+					if (typeof timer != 'undefined') {
+						timer.stopCount();
+					}
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							var wordByPage = question.split('*****');
+							var dataCells = [];
+							var dataTopics = [];
+							for(var i = 0; i < wordByPage.length; i++){
+								var words = wordByPage[i].split(/\r\n|\r|\n|\<br \/\>|\<br\/\>/);
+								var objcells = [];
+								var objTopics = []; 
+								for(var j=0; j < words.length; j++){
+									if(words[j] && words[j] != ''){
+										var ex_cell = words[j].split(':');
+										var cell = {type: ex_cell[0], name: ex_cell[1]};
+										var topic = {type: ex_cell[0], name: ex_cell[0]};
+										objcells.push(cell);
+										objTopics.push(topic);
+									}
+									
+								}
+								dataCells.push(objcells);
+								dataTopics.push(objTopics);
+							}
+							$scope.dataCells = dataCells;
+							$scope.dataTopics = dataTopics;
+
+							var page = 1;
+							
+							jQuery.ajax({
+								type: "Post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: $scope.dataCells[0], dataTopics: $scope.dataTopics[0], page: page},
+								url:'/document/game/vdrag.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+						}
+					});
+					
+				}
+				
+			}
+			
+
+		}
+	//select vocabulary
 	$scope.selectVocabulary = function(vocabulary) {
 		if(typeof $scope.practiceIntervalId !== 'undefined') {
 			clearInterval($scope.practiceIntervalId);
@@ -160,6 +248,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		$scope.action = 'vocabulary';
 		$scope.selectedVocabulary = vocabulary;
 		selectedVocabularyId = vocabulary.id;
+		$scope.setGameVocabulary(vocabulary.id);
 	};
 	$scope.finishPractice = function() {
 		if(typeof $scope.practiceIntervalId !== 'undefined') {
@@ -258,4 +347,5 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		}
 		return false;
 	};
+	
 }]);

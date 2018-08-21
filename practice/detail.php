@@ -229,59 +229,18 @@
 								
 									<div class="item text-center pt-2">
 										<input type="hidden" id="pageGame" name="pageGame" value="1">
-									
-										<button onclick="gameWords(selectedVocabularyId, 'vdrag', subjectId, this);" class="btn v_game btn-warning">Game 1</button>
 										
-										<button onclick="gameWords(selectedVocabularyId, 'vdt', subjectId, this);" class="btn v_game btn-success">Game 2</button>
-												
-										<button onclick="gameWords(selectedVocabularyId, 'vmt', subjectId, this);" class="btn v_game btn-info">Game 3</button>
-										<button onclick="gameWords(selectedVocabularyId, 'sortword', subjectId, this);" class="btn v_game btn-primary">Game 4</button>
-										<button style="opacity: 0.3;" onclick="gameWords(selectedVocabularyId, 'vdragimg', subjectId, this);" class="btn v_game btn-danger">Game 5</button>
-										<button style="opacity: 0.3;" onclick="gameWords(selectedVocabularyId, 'dragToPart', subjectId, this);" class="btn v_game btn-danger">Game 6</button>
+										<span ng-repeat="game in gameTypes">
+											<button  ng-click="gameWords(game);" ng-class="{'enabled': true===gameEnables[game], 'disabled': true!==gameEnables[game]}" ng-disabled="true!==gameEnables[game]" class="btn v_game btn-warning">Game {{$index +1}}</button>
+										</span>
+										
 										<div class="item" id="resGame">
 											<img class="item" src="http://s1.nextnobels.com/default/skin/nobel/test/themes/default/media/bg_game.jpg">
 										</div>
 									</div>
 
 									<script type="text/javascript">
-										var gameScoreByPage = [];
-										var trueWordByPages = [];
-										function gameWords(documentId, gameType, cateId, that) {
-											jQuery('#pageGame').val(1);
-											jQuery('.v_game').removeClass('active_v_game');
-											jQuery(that).addClass('active_v_game');
-											if(documentId && gameType) {
-												if(gameType == 'vdrag'){
-													if (typeof timer != 'undefined') {
-														timer.stopCount();
-													}
-													jQuery.ajax({
-														type: 'get',
-														url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
-														dataType: 'json',
-														success: function(data){
-															var page = 1;
-															var dataCells = [{"type":"Result","name":" K\u1ebft qu\u1ea3"},{"type":"Fraction","name":" Ph\u00e2n s\u1ed1"},{"type":"Divide","name":" Chia"},{"type":"Quotient","name":" Th\u01b0\u01a1ng"},{"type":"Natural number","name":" S\u1ed1 t\u1ef1 nhi\u00ean"},{"type":"Division","name":" Ph\u00e9p chia"}];
-															var dataTopics = [{"type":"Fraction","name":"Fraction"},{"type":"Result","name":"Result"},{"type":"Divide","name":"Divide"},{"type":"Division","name":"Division"},{"type":"Natural number","name":"Natural number"},{"type":"Quotient","name":"Quotient"}];
-															jQuery.ajax({
-																type: "Post",
-																data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells:dataCells, dataTopics:dataTopics, page: page},
-																url:'/document/game/vdrag.php',
-																success: function(data){
-
-																	jQuery('#resGame').html(data);
-																	
-																}
-															});
-														}
-													});
-													
-												}
-												
-											}
-											
-
-										}
+										
 									</script>
 
 								</div>
