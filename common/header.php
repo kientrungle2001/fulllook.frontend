@@ -71,7 +71,7 @@
                     <a href="/about.php" class="nav-link">Về phần mềm</a>
                 </li>
                 <li class="nav-item dropdown">
-					<a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link">Chọn Ngôn Ngữ</a>
+					<a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link">Chọn Ngôn Ngữ</a>
 					<ul class="dropdown-menu">
 						<li style="padding-left: 25px;" ng-click="language='en';selectLanguage('en')"><a href="#">Tiếng Anh</a></li>
 						<li><a href="#" ng-click="language='vn';selectLanguage('vn')">Tiếng Việt</a></li>
