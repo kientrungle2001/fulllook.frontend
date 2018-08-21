@@ -34,6 +34,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 			dataType: 'json',
 			success: function(resp) {
 				$scope.subject = resp;
+				subjectId = resp.id;
 				$scope.$apply();
 			}
 		});	
@@ -158,6 +159,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		}
 		$scope.action = 'vocabulary';
 		$scope.selectedVocabulary = vocabulary;
+		selectedVocabularyId = vocabulary.id;
 	};
 	$scope.finishPractice = function() {
 		if(typeof $scope.practiceIntervalId !== 'undefined') {

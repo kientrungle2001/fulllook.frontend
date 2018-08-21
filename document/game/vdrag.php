@@ -1,3 +1,7 @@
+<?php 
+	$dataCells = json_encode($_POST['dataCells']); 
+	$dataTopics = json_encode($_POST['dataTopics']);
+?>
 <script src="/assets/js/createjs-2015.05.21.min.js"></script>
 <script>
 		BASE_URL = "http://s1.nextnobels.com";
@@ -18,7 +22,12 @@
 			board: false,
 			topics: false,
 			page: false,
-			
+			dataCells: [],
+			dataTopics: [],
+			initGame: function(dataCells, dataTopics){
+				this.dataCells = dataCells;
+				this.dataTopics = dataTopics;
+			},
 			getPage: function() {
 				if(!this.page) {
 					this.page = new Page();
@@ -52,7 +61,7 @@
 			
 			getCells: function () {
 				if(!this.cells) {
-					dataWords = [{"type":"Result","name":" K\u1ebft qu\u1ea3"},{"type":"Fraction","name":" Ph\u00e2n s\u1ed1"},{"type":"Divide","name":" Chia"},{"type":"Quotient","name":" Th\u01b0\u01a1ng"},{"type":"Natural number","name":" S\u1ed1 t\u1ef1 nhi\u00ean"},{"type":"Division","name":" Ph\u00e9p chia"}]; 
+					dataWords = this.dataCells; 
 					
 					this.cells = [];
 					var h = 0;
@@ -68,7 +77,7 @@
 			},
 			getTopics: function () {
 				if(!this.topics) {
-					var dataTopics = [{"type":"Fraction","name":"Fraction"},{"type":"Result","name":"Result"},{"type":"Divide","name":"Divide"},{"type":"Division","name":"Division"},{"type":"Natural number","name":"Natural number"},{"type":"Quotient","name":"Quotient"}];
+					var dataTopics = this.dataTopics;
 					this.topics = [];
 					for(var i = 0; i<dataTopics.length; i++) {
 						var t = dataTopics[i];
@@ -860,26 +869,10 @@
 		};
 
 		jQuery(function() {
+			var dataCells =  <?=$dataCells;?>;
+			var dataTopics = <?=$dataTopics;?>;
+			Factorys.initGame(dataCells, dataTopics);
 			Factorys.getGame().start();
-			
-			//resize canvas
-			//resize canvas
-			/*var w = jQuery('#resGame').width();
-				if( w > 940) {
-					jQuery('#canvas').width(940);
-				}else {
-					jQuery('#canvas').width(w);
-				}	
-			
-			jQuery(window).resize(function() {
-				var w = jQuery('#resGame').width();
-				if( w > 940) {
-					jQuery('#canvas').width(940);
-				}else {
-					jQuery('#canvas').width(w);
-				}		
-				
-			});*/
 				
 		});	
     </script>
