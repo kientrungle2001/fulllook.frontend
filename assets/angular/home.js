@@ -67,11 +67,24 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 		type: 'post',
 		url: FL_API_URL +'/common/getTests', 
 		data: {
-			categoryId: '354'
+			categoryId: '1412'
 		},
 		dataType: 'json',
 		success: function(resp) {
 			$scope.tests = resp;
+			$scope.$apply();
+		}
+	});
+	$scope.testEnghlish = [];
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/common/getTests', 
+		data: {
+			categoryId: '1411'
+		},
+		dataType: 'json',
+		success: function(resp) {
+			$scope.testEnghlish = resp;
 			$scope.$apply();
 		}
 	});
@@ -80,7 +93,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 		type: 'post',
 		url: FL_API_URL +'/common/getTestSets', 
 		data: {
-			categoryId: '383'
+			categoryId: '1413'
 		},
 		dataType: 'json',
 		success: function(resp) {
@@ -93,7 +106,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 		type: 'post',
 		url: FL_API_URL +'/common/getTestSets', 
 		data: {
-			categoryId: '383'
+			categoryId: '1414'
 		},
 		dataType: 'json',
 		success: function(resp) {
