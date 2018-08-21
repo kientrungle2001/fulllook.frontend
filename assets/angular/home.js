@@ -14,7 +14,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 	}
 	$scope.register = {};
 	$scope.doRegister = function(url){
-		if(!$scope.register){
+		if(!$scope.register.username || !$scope.register.name || !$scope.register.password || !$scope.register.repassword || !$scope.register.phone || !$scope.register.email || !$scope.register.sex || !$scope.register.areacode){
 			return false;
 		}		
 		$scope.register.url = url;
@@ -31,13 +31,13 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 		}else{
 			$scope.register.success =0;
 			$scope.register.message ="Mật khẩu tài khoản nhập lại không chính xác";
-			$scope.$apply();
+			
 		}
 		
-	}
+	};
 	$scope.login = {};
 	$scope.doLogin = function(url) {
-		if(!$scope.login){
+		if(!$scope.login.username || !$scope.login.password){
 			return false;
 		}
 		$scope.login.url = url;
@@ -50,14 +50,13 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 			}
 			
 		});
-	}
+	};
 	// get AreaCode
 	$scope.areaCodes = [];
 	jQuery.ajax({url: FL_API_URL +'/register/getAreaCode', success: function(resp) {
 		$scope.areaCodes = resp;
 		$scope.$apply();
 	}});
-
 	$scope.subjects = [];
 	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
 		$scope.subjects = resp;
@@ -88,8 +87,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 			$scope.testSets = resp;
 			$scope.$apply();
 		}
-	});
-	
+	});	
 	$scope.realTestSets = [];
 	jQuery.ajax({
 		type: 'post',

@@ -6,7 +6,7 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 	}
 	$scope.register = {};
 	$scope.doRegister = function(url){
-		if(!$scope.register){
+		if(!$scope.register.username || !$scope.register.name || !$scope.register.password || !$scope.register.repassword || !$scope.register.phone || !$scope.register.email || !$scope.register.sex || !$scope.register.areacode){
 			return false;
 		}		
 		$scope.register.url = url;
@@ -23,13 +23,13 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 		}else{
 			$scope.register.success =0;
 			$scope.register.message ="Mật khẩu tài khoản nhập lại không chính xác";
-			$scope.$apply();
+			
 		}
 		
-	}
+	};
 	$scope.login = {};
 	$scope.doLogin = function(url) {
-		if(!$scope.login){
+		if(!$scope.login.username || !$scope.login.password){
 			return false;
 		}
 		$scope.login.url = url;
@@ -42,7 +42,7 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 			}
 			
 		});
-	}
+	};
 	// get AreaCode
 	$scope.areaCodes = [];
 	jQuery.ajax({url: FL_API_URL +'/register/getAreaCode', success: function(resp) {
@@ -67,10 +67,10 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 	$scope.paycard = {};
 	$scope.payCardFl =function(url){
 		
-		if(parseInt(sessionUserId) == 0){
+		if(parseInt(sessionUserId) == 0 || sessionUserId ==''){
 			$scope.paycard.message ='Bạn phải đăng nhập mới được nạp thẻ';	
 			$scope.paycard.success = 0;	
-			$scope.$apply();		
+					
 		}else{
 			
 			if(!$scope.paycard.pincard){

@@ -1,9 +1,6 @@
 <?php require('./bootstrap.php'); ?><!DOCTYPE html>
 <?php 
-	/*$_SESSION['userId'] = 7;
-	$_SESSION["checkPayment"] = 1;
-	$_SESSION["paymentDate"] = '2017-12-12';
-	$_SESSION["expiredDate"]  = '2018-12-12';*/
+	if(isset($_SESSION['userId'])){
  ?>
 <html ng-app="flApp" ng-controller="ProfileController">
 <head>
@@ -31,3 +28,4 @@
 	<script src="/assets/angular/profile.js"></script>
 </body>
 </html>
+<?php } ?>
