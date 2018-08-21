@@ -64,32 +64,41 @@
         </button>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="nav navbar-nav">
-				<li class="nav-item dropdown">
-					<a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link">Chọn Ngôn Ngữ</a>
+				<li class="nav-item">
+                    <a href="/" class="nav-link">Trang chủ</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/about.php" class="nav-link">Về phần mềm</a>
+                </li>
+                <li class="nav-item dropdown">
+					<a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link">Chọn Ngôn Ngữ</a>
 					<ul class="dropdown-menu">
 						<li style="padding-left: 25px;" ng-click="language='en';selectLanguage('en')"><a href="#">Tiếng Anh</a></li>
 						<li><a href="#" ng-click="language='vn';selectLanguage('vn')">Tiếng Việt</a></li>
 						<li><a href="#" ng-click="language='ev';selectLanguage('ev')">Song Ngữ</a></li>
 					</ul>
 				</li>
-                <li class="nav-item active">
-                    <a href="/about.php" class="nav-link">Về phần mềm</a>
+                
+                <li class="nav-item">
+                    <a href="/#practice" class="nav-link">Luyện các môn</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/#practice" class="nav-link">Luyện tập các môn</a>
+                    <a class="nav-link" href="/#tonghop">Luyện tiếng anh</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/#tonghop">Ôn luyện tổng hợp</a>
+                    <a class="nav-link" href="/#tonghop">Luyện tổng hợp</a>
                 </li>
                 <li class="nav-item">
                     <a href="/#thithu" class="nav-link">Thi thử Trần Đại Nghĩa</a>
                 </li>
+                <?php if(0): ?>
                 <li class="nav-item">
                     <a href="/document.php" class="nav-link">Kinh nghiệm</a>
                 </li>
                 <li class="nav-item">
                     <a href="/gift.php" class="nav-link">Giải trí</a>
                 </li>
+                <?php endif; ?>
                 
             </ul>
         </div>
