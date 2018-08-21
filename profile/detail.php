@@ -6,9 +6,9 @@
 				<h4 class="text-center t-weight">THÔNG TIN CÁ NHÂN</h4>				
 				<div class="row">
 					<div class="col-md-4">
-						<img src="<?php echo FL_API_URL?>{{userDetail.avatar}}" alt="avatar">
+						<img src="{{userDetail.avatar}}" alt="avatar" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
 						<br>
-						<button type="button" class="btn btn-primary">Đổi avatar</button>
+						
 					</div>
 					<div class="col-md-8" >
 						<!--show infor -->
@@ -35,15 +35,15 @@
 							  <div class="form-row">
 							    <div class="form-group col-md-4">
 							      <label for="name">Họ và Tên(*) :</label>
-							      <input type="text" class="form-control" ng-model="userDetail.name" placeholder="Họ và Tên">
+							      <input type="text" class="form-control" ng-model="userDetail.name" required placeholder="Họ và Tên">
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="phone">Điện thoại (*) :</label>
-							      <input type="text" class="form-control" ng-model="userDetail.phone" placeholder="Điện thoại">
+							      <input type="text" class="form-control" ng-model="userDetail.phone" required placeholder="Điện thoại">
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="inputState">Giới tính: </label>
-							      <select ng-model="userDetail.sex"  class="form-control" >
+							      <select ng-model="userDetail.sex" required  class="form-control" >
 							        <option value="1" ng-selected="userDetail.sex==1">Nam</option>
 							        <option value="0" ng-selected="userDetail.sex==0">Nữ</option>
 							      </select>
@@ -52,27 +52,27 @@
 							  <div class="form-row">
 							  	<div class="form-group col-md-4">
 									<label for="inputAddress2">Ngày sinh: </label>
-							    	<input type="date" class="form-control" ng-model="userDetail.birthday" placeholder="Ngày sinh" required >
+							    	<input type="date" class="form-control" ng-model="userDetail.birthday"  placeholder="Ngày sinh" required >
 								</div>
 							  	<div class="form-group col-md-6">
 								    <label for="inputAddress">Địa chỉ :</label>
-								    <input type="text" class="form-control" ng-model="userDetail.address" placeholder="Quận 1- TPHCM">
+								    <input type="text" class="form-control" ng-model="userDetail.address" required placeholder="Quận 1- TPHCM">
 								</div>
 								
 							  </div>
 							  <div class="form-row">
 							    <div class="form-group col-md-4">
 							      <label for="school">Trường :</label>
-							      <input type="text" class="form-control" ng-model="userDetail.schoolname" placeholder="Trường học">
+							      <input type="text" class="form-control" ng-model="userDetail.schoolname" required placeholder="Trường học">
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="class">Lớp :</label>
-							      <input type="text" class="form-control" ng-model="userDetail.classname" placeholder="Lớp học">
+							      <input type="text" class="form-control" ng-model="userDetail.classname" required placeholder="Lớp học">
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="input">Tỉnh(TP): </label>
 							      <select ng-model="userDetail.areacode"class="form-control">
-							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes" ng-selected="areaCode.id==userDetail.areacode">{{areaCode.name}}</option>						        
+							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes" required ng-selected="areaCode.id==userDetail.areacode">{{areaCode.name}}</option>						        
 							      </select>
 							    </div>
 							  </div>
@@ -88,18 +88,18 @@
 							  <div class="form-row">
 							    <div class="form-group col-md-4">
 							      <label for="name">Mật khẩu cũ(*) :</label>
-							      <input type="password" class="form-control" ng-model="editPassword.oldPassword"  placeholder="Mật khẩu cũ">
+							      <input type="password" class="form-control" ng-model="editPassword.oldPassword"  placeholder="Mật khẩu cũ" required>
 							    </div>
 							    
 							  </div>
 							  <div class="form-row">
 							  	<div class="form-group col-md-4">
 							      <label for="password">Mật khẩu mới (*) :</label>
-							      <input type="password" class="form-control" ng-model="editPassword.newPassword"  placeholder="Mật khẩu mới">
+							      <input type="password" class="form-control" ng-model="editPassword.newPassword"  placeholder="Mật khẩu mới" required>
 							    </div>
 							    <div class="form-group col-md-4">
 							      <label for="password">Nhập lại mật khẩu mới (*) :</label>
-							      <input type="password" class="form-control" ng-model="editPassword.reNewPassword" placeholder="Mật khẩu mới">
+							      <input type="password" class="form-control" ng-model="editPassword.reNewPassword" placeholder="Mật khẩu mới" required>
 							    </div>							    
 							  </div>
 							  <div class="form-group alert" ng-class="{'alert-danger': editPassword.success==0, 'alert-success': editPassword.success==1}" ng-show="editPassword.message" ng-bind-html="editPassword.message">
@@ -112,12 +112,20 @@
 						<!--edit avatar -->
 						<div class="full bg-light" ng-show="editInfor" >
 							<form enctype="multipart/form-data">				
+								<div class="clearfix">
+								  	<img src="" id="avatarPreview" alt="" class="rounded-circle" alt="Cinque Terre" width="304" height="304">
+								  </div>
 								<div class="custom-file">
-								  <input type="file" ng-model="editAvatar.avatar" class="custom-file-input" id="customFile" accept="image" maxsize="5000" required base-sixty-four-input>>
-								  <label class="custom-file-label" for="customFile">Choose file</label>
-								   <span ng-show="form.files.$error.maxsize">Files must not exceed 5000 KB</span>
+																	  
+								  <input type="file" id="avatar" class="custom-file-input" id="customFile" accept="image/*" ng-model="userAvatar" maxsize="50" required onchange="previewImg(this)" />
+								  <label class="custom-file-label" for="customFile">{{inputFile}}</label>
+								   <span ng-show="form.files.$error.maxsize">Files must not exceed 50 KB </span>
+								  
 								</div>
-								<button ng-click="editAvatar()" class="btn btn-primary">Cập nhật</button>
+								<div class="form-group alert" ng-class="{'alert-danger': editAvatar.success==0, 'alert-success': editAvatar.success==1}" ng-show="editAvatar.message" ng-bind-html="editAvatar.message">
+
+							 </div>
+								<button type="submit" ng-click="changeAvatar()" class="btn btn-primary">Cập nhật</button>
 								  <button type="button" class="btn btn-secondary">Hủy</button>
 							</form>
 						</div>
@@ -147,7 +155,7 @@
 					    <tr>
 					      <th scope="col">#</th>
 					      <th scope="col">Môn học</th>
-					      <th scope="col">Chủ đề</th>
+					      <th scope="col" style="width: 30%;">Chủ đề</th>
 					      <th scope="col">Bài</th>
 					      <th scope="col">Điểm</th>
 					      <th scope="col">Ngôn ngữ</th>
@@ -268,3 +276,15 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	function previewImg(userAvatar) {
+		var reader = new FileReader();
+		reader.onloadend = function() {
+		  	var base64_avatar = reader.result;
+		    jQuery('#avatarPreview').attr('src', base64_avatar);
+
+		}
+  		reader.readAsDataURL(userAvatar.files[0]);
+	}
+</script>
