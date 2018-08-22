@@ -1,6 +1,34 @@
-<?php 
-	$dataCells = json_encode($_POST['dataCells']); 
-	$dataTopics = json_encode($_POST['dataTopics']);
+<?php
+	$userId = 0;
+	if(isset($_SESSION['userId'])){
+		$userId = $_SESSION['userId'];
+	}
+	$curentPage = $_POST['page'];
+	if(is_string($_POST['dataCells'])){
+		$alDataCells = json_decode($_POST['dataCells']);
+	}else{
+		$alDataCells = $_POST['dataCells'];
+	}
+	if(is_string($_POST['dataTopics'])){
+		$alDataTopics = json_decode($_POST['dataTopics']);
+	} else{
+		$alDataTopics =$_POST['dataTopics'];
+	}
+	if(is_string($_POST['allTrueWord'])){
+		$allTrueWord = json_decode($_POST['allTrueWord']);
+	} else{
+		$allTrueWord = $_POST['allTrueWord'];
+	}
+	
+	$dataCells = $alDataCells[$curentPage-1];
+	shuffle($dataCells);
+	$dataCells = json_encode($dataCells);
+	$dataTopics = json_encode($alDataTopics[$curentPage-1]);
+	$countStage = count($alDataCells);
+	$documentId = $_POST['documentId'];
+	$gameCode = $_POST['gameType'];
+	$cateId = $_POST['cateId'];
+				
 ?>
 <script src="/assets/js/createjs-2015.05.21.min.js"></script>
 <script>
@@ -127,7 +155,7 @@
 				if(score == 6 ) {
 					var pageGame = jQuery('#pageGame').val();
 					
-					if(pageGame < 2){
+					if(pageGame < <?php echo $countStage; ?>){
 						board.boardAlertMes("Congratulations! You have won!", 380, 100);
 					}
 				
@@ -142,7 +170,7 @@
 					gameScoreByPage[pageGame-1] = score;
 					trueWordByPages[pageGame-1] = board.trueWords;
 					
-					if(pageGame == 2 && finish == false){
+					if(pageGame == <?php echo $countStage; ?> && finish == false){
 						this.saveData(board);
 					
 					}
@@ -153,7 +181,7 @@
 				}else if(live == 4) {
 					var pageGame = jQuery('#pageGame').val();
 					
-					if(pageGame < 2){
+					if(pageGame < <?php echo $countStage; ?>){
 						board.boardAlertMes("You have exceeded wrong word limit!", 380, 100);
 					}
 					board.removeCells();
@@ -167,7 +195,7 @@
 					gameScoreByPage[pageGame-1] = score;
 					trueWordByPages[pageGame-1] = board.trueWords;
 					
-					if(pageGame == 2 && finish == false){
+					if(pageGame == <?php echo $countStage; ?> && finish == false){
 						this.saveData(board);
 					
 					}
@@ -216,14 +244,32 @@
 			},
 			saveData: function(board) {
 				finish = true;
-				var documentId = "264";
-				var gameCode = "vdrag";
-				var totalWord = "12";
-				var cateId = "51";
+				var documentId = "<?php echo $documentId; ?>";
+				var gameCode = "<?php echo $gameCode; ?>";
+				var totalWord = "<?php echo $countStage*6; ?>";
+				var cateId = "<?php echo $cateId; ?>";
+				var tam = gameScoreByPage;
+				var score = 0;
+				var userId = <?= $userId; ?>;
+				if(gameScoreByPage.length == 1){
+					score = gameScoreByPage[0];
+				}else if(gameScoreByPage.length > 1){
+					for(var i = 0; i < gameScoreByPage.length; i++)
+					score = score + gameScoreByPage[i];
+				}
+				
+				var trueWords = [];
+				if(trueWordByPages.length == 1){
+					trueWords = trueWordByPages[0];
+				}else if(trueWordByPages.length > 1){
+					for(var i = 0; i < trueWordByPages.length; i++)
+					trueWords = trueWords.concat(trueWordByPages[i]);
+				}
+					
 				jQuery.ajax({
 					type: "Post",
-					data:{score:gameScoreByPage, totalWord: totalWord, cateId: cateId, trueWords: trueWordByPages, documentId:documentId, gameCode:gameCode},
-					url:'http://s1.nextnobels.com/game/saveGameVocabunary',
+					data:{score: score, userId: userId, totalWord: totalWord, cateId: cateId, trueWords: trueWords, documentId:documentId, gameCode:gameCode},
+					url: FL_API_URL+'/game/saveGameVocabunary',
 					dataType: 'json',
 					success: function(data){
 						
@@ -353,7 +399,7 @@
 			
 				totalWord = totalWord;
 				score = score;
-				var wrongWords = jQuery(["Fraction","Result","Divide","Division","Natural number","Quotient","Denominator","Numerator","Other","Multiply","Compare","Equivalent"]).not(JSON.parse(trueWords)).get();
+				var wrongWords = jQuery(<?php echo json_encode($allTrueWord); ?>).not(JSON.parse(trueWords)).get();
 				trueWords = JSON.parse(trueWords).toString();
 				this.addMess("Finish game", 450, 25);
 				this.addMess("Score: "+score+'/'+totalWord, 450, 60);
@@ -380,7 +426,7 @@
 				this.replayGame();
 				
 				var pageGame = jQuery('#pageGame').val();
-				if(pageGame < 2) {
+				if(pageGame < <?php echo $countStage; ?>) {
 					this.nextPage();
 				
 				}
@@ -443,14 +489,20 @@
 					var pageGame = jQuery('#pageGame').val();
 					pageGame ++;
 					jQuery('#pageGame').val(pageGame);
-					if(pageGame < 3){
-						var id = "264";
-						var type = "vdrag";
-						var cateId = "51";
+					if(pageGame < <?php echo $countStage+1; ?>){
+						if (typeof timer != 'undefined') {
+							timer.stopCount();
+						}
+						var documentId = <?= $documentId;?>;
+						var gameType = '<?= $gameCode;?>';
+						var cateId = <?= $cateId; ?>;
+						var dataCells = '<?php echo json_encode($alDataCells); ?>';
+						var dataTopics = '<?php echo json_encode($alDataTopics); ?>';
+						var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
 						jQuery.ajax({
 							type: "Post",
-							data:{page:pageGame, id:id, type:type, cateId:cateId},
-							url:'http://s1.nextnobels.com/game/pageVdrag',
+							data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: dataCells, dataTopics: dataTopics, allTrueWord: allTrueWord, page: pageGame},
+							url:'/document/game/vdrag.php',
 							success: function(data){
 								if(!trueWordByPages[pageGame-2]){
 									gameScoreByPage[pageGame-2] = 0;
@@ -481,14 +533,20 @@
 				button.addEventListener('click', function(event){
 					that = this;
 					var pageGame = jQuery('#pageGame').val();
-					if(pageGame < 3){
-						var id = "264";
-						var type = "vdrag";
-						var cateId = "51";
+					if(pageGame < <?php echo $countStage+1; ?>){
+						if (typeof timer != 'undefined') {
+							timer.stopCount();
+						}
+						var documentId = <?= $documentId;?>;
+						var gameType = '<?= $gameCode;?>';
+						var cateId = <?= $cateId; ?>;
+						var dataCells = '<?php echo json_encode($alDataCells); ?>';
+						var dataTopics = '<?php echo json_encode($alDataTopics); ?>';
+						var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
 						jQuery.ajax({
 							type: "Post",
-							data:{page:pageGame, id:id, type:type, cateId: cateId},
-							url:'http://s1.nextnobels.com/game/pageVdrag',
+							data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: dataCells, dataTopics: dataTopics, allTrueWord: allTrueWord, page: pageGame},
+							url:'/document/game/vdrag.php',
 							success: function(data){
 								jQuery("#resGame").html(data);
 							}
@@ -516,14 +574,19 @@
 					var pageGame = jQuery('#pageGame').val();
 					pageGame --;
 					jQuery('#pageGame').val(pageGame);
-					//page = pageGame;
-					var id = "264";
-					var type = "vdrag";
-					var cateId = "51";
+					if (typeof timer != 'undefined') {
+						timer.stopCount();
+					}
+					var documentId = <?= $documentId;?>;
+					var gameType = '<?= $gameCode;?>';
+					var cateId = <?= $cateId; ?>;
+					var dataCells = '<?php echo json_encode($alDataCells); ?>';
+					var dataTopics = '<?php echo json_encode($alDataTopics); ?>';
+					var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
 					jQuery.ajax({
-		              	type: "Post",
-			            data:{page:pageGame, id:id, type:type, cateId:cateId},
-			            url:'http://s1.nextnobels.com/game/pageVdrag',
+		              	type: "post",
+						data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: dataCells, dataTopics: dataTopics, allTrueWord: allTrueWord, page: pageGame},
+						url:'/document/game/vdrag.php',
 			            success: function(data){
 							
 			            	jQuery("#resGame").html(data);

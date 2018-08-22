@@ -152,29 +152,47 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		console.log($scope.user_question_answers);
 	};
 	
+	$scope.shuffle = function (array) {
+		let counter = array.length;
+		// While there are elements in the array
+		while (counter > 0) {
+			// Pick a random index
+			let index = Math.floor(Math.random() * counter);
+			// Decrease counter by 1
+			counter--;
+			// And swap the last element with it
+			let temp = array[counter];
+			array[counter] = array[index];
+			array[index] = temp;
+		}
+		return array;
+	} 
 	$scope.gameEnables = {};
 	$scope.gameTypes = ['vdrag', 'vdt', 'vmt', 'sortword', 'vdragimg', 'dragToPart'];
+	$scope.checkGame = function(gameType, documentId) {
+		jQuery.ajax({
+			type: 'get',
+			url: FL_API_URL+'/games/?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1',
+			dataType: 'json',
+			success: function(rep){
+				if(rep[0] && rep[0].question != ''){
+					$scope.gameEnables[gameType] = true;
+				}else{
+					$scope.gameEnables[gameType] = false;
+				}
+				$scope.$apply();
+			}
+		});
+	}
 	$scope.setGameVocabulary = function(documentId){
 		$scope.gameVocabularys = [];
 		var gameTypes = $scope.gameTypes;
 		for(let i = 0; i < gameTypes.length; i++){
-			jQuery.ajax({
-				type: 'get',
-				url: FL_API_URL+'/games/?gamecode='+gameTypes[i]+'&documentId='+documentId+'&software=1&status=1&limit=1',
-				dataType: 'json',
-				success: function(rep){
-					if(rep[0] && rep[0].question != ''){
-						$scope.gameEnables[rep[0].gamecode] = true;
-						
-						$scope.$apply();
-					}else{
-						$scope.gameEnables[rep[0].gamecode] = false;
-						$scope.$apply();
-					}
-				}
-			});
+			$scope.checkGame(gameTypes[i], documentId);
+			
 		}
 	}
+	
 	//game
 	gameScoreByPage = [];
 	trueWordByPages = [];
@@ -182,6 +200,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.trueWordByPages = [];
 	$scope.dataCells = [];
 	$scope.dataTopics = [];
+	$scope.gamePage = 1;
 	$scope.gameWords = function (gameType) {
 			var documentId = $scope.selectedVocabulary.id;
 			var cateId = $scope.subject.id;
@@ -199,6 +218,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 							var wordByPage = question.split('*****');
 							var dataCells = [];
 							var dataTopics = [];
+							var allTrueWord = [];
 							for(var i = 0; i < wordByPage.length; i++){
 								var words = wordByPage[i].split(/\r\n|\r|\n|\<br \/\>|\<br\/\>/);
 								var objcells = [];
@@ -210,6 +230,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 										var topic = {type: ex_cell[0], name: ex_cell[0]};
 										objcells.push(cell);
 										objTopics.push(topic);
+										allTrueWord.push(ex_cell[0]);
 									}
 									
 								}
@@ -218,12 +239,12 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 							}
 							$scope.dataCells = dataCells;
 							$scope.dataTopics = dataTopics;
+							//var passCells = $scope.shuffle(dataCells[$scope.gamePage -1]);
+							//var passTopics = $scope.shuffle(dataTopics[$scope.gamePage -1]);
 
-							var page = 1;
-							
 							jQuery.ajax({
 								type: "Post",
-								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: $scope.dataCells[0], dataTopics: $scope.dataTopics[0], page: page},
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: dataCells, dataTopics: dataTopics, allTrueWord: allTrueWord, page: $scope.gamePage},
 								url:'/document/game/vdrag.php',
 								success: function(data){
 
@@ -245,6 +266,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		if(typeof $scope.practiceIntervalId !== 'undefined') {
 			clearInterval($scope.practiceIntervalId);
 		}
+		jQuery("#resGame").html('');
 		$scope.action = 'vocabulary';
 		$scope.selectedVocabulary = vocabulary;
 		selectedVocabularyId = vocabulary.id;
