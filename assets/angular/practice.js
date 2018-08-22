@@ -192,6 +192,10 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 			
 		}
 	}
+	$scope.strip_tags = function (str) {
+		str = str.toString();
+		return str.replace(/<\/?[^>]+>/gi, '');
+	}
 	
 	//game
 	gameScoreByPage = [];
@@ -239,8 +243,6 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 							}
 							$scope.dataCells = dataCells;
 							$scope.dataTopics = dataTopics;
-							//var passCells = $scope.shuffle(dataCells[$scope.gamePage -1]);
-							//var passTopics = $scope.shuffle(dataTopics[$scope.gamePage -1]);
 
 							jQuery.ajax({
 								type: "Post",
@@ -255,6 +257,47 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 						}
 					});
 					
+				}else if(gameType == 'vmt'){
+					if (typeof timer != 'undefined') {
+						timer.stopCount();
+					}
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							var wordByPage = question.split('*****');
+							var dataWords = [];
+							for(var i = 0; i < wordByPage.length; i++){
+								var words = wordByPage[i].split('-----');
+								for(var j = 0; j < words.length; j++){
+									var trueWord = $scope.strip_tags(words[2]);
+									trueWord.trim();
+									var strWords = $scope.strip_tags(words[1]);
+									strWords.trim();
+									var allWords = strWords.split(',').map(function(item) {
+										return item.trim();
+									});;
+									var img = (/src=[\'"]([^\'"]*)[\'"]/gi).exec(words[0]);
+									var objWord = {allWords: allWords, trueWord: trueWord, img: img[1]};
+								}
+								dataWords.push(objWord);
+							}
+							//console.log(dataWords);
+
+							jQuery.ajax({
+								type: "Post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords, page: $scope.gamePage},
+								url:'/document/game/vmt.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+						}
+					});
 				}
 				
 			}
