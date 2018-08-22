@@ -30,10 +30,10 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-12 col-md-2" ng-repeat="test in testEnghlish">
-			<a href="/test.php?test_id={{test.id}}">
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
+			<div class="col-12 col-md-2" ng-repeat="testE in testEnghlish">
+			<a href="/test.php?test_id={{testE.id}}">
+				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{testE.name_en}}</div>
+				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{testE.name}}</div>
 			</a>
 			</div>
 		</div>
