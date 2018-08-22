@@ -183,14 +183,14 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		});
 	};
 	$scope.lessonPage(0);
-	// Tests
+	// On luyen tong hop
 	$scope.testQuantity = 0;
 	jQuery.ajax({
 		type: 'post',
 		url: FL_API_URL +'/history/countTests', 
 		data: {
 			userId: sessionUserId,
-			compability: 0
+			categoryId: 1412
 		},
 		dataType: 'json',
 		success: function(resp) {
@@ -211,7 +211,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			url: FL_API_URL +'/history/getTests', 
 			data: {
 				userId: sessionUserId,
-				compability: 0,
+				categoryId: 1412,
 				numberPage: page
 			},
 			dataType: 'json',
@@ -222,14 +222,53 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		});
 	};
 	$scope.testPage(0);
-	// Tests Tran Dai Nghia
+	// On luyen tieng Anh
+	$scope.testEQuantity = 0;
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/history/countTests', 
+		data: {
+			userId: sessionUserId,
+			categoryId: 1411
+		},
+		dataType: 'json',
+		success: function(resp) {
+			var quantity = Math.ceil(resp/20);
+		    var result= [];
+		    for(i =0; i< quantity; i++){
+		      result.push(i);
+		    }
+			$scope.testEQuantity = result;
+			$scope.$apply();
+		}
+	});
+	$scope.testEnglish = [];	
+	$scope.testEPage = function(page){
+		$scope.testEPageSelected = page;
+		jQuery.ajax({
+			type: 'post',
+			url: FL_API_URL +'/history/getTests', 
+			data: {
+				userId: sessionUserId,
+				categoryId: 1411,
+				numberPage: page
+			},
+			dataType: 'json',
+			success: function(resp) {
+				$scope.testEnglish = resp;
+				$scope.$apply();
+			}
+		});
+	};
+	$scope.testEPage(0);
+	// Thi thu Tran Dai Nghia
 	$scope.tdnTestQuantity = 0;
 	jQuery.ajax({
 		type: 'post',
 		url: FL_API_URL +'/history/countTests', 
 		data: {
 			userId: sessionUserId,
-			compability: 1
+			categoryId: 1413
 		},
 		dataType: 'json',
 		success: function(resp) {
@@ -250,7 +289,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			url: FL_API_URL +'/history/getTests', 
 			data: {
 				userId: sessionUserId,
-				compability: 1,
+				categoryId: 1413,
 				numberPage: page	
 			},
 			dataType: 'json',
@@ -261,4 +300,43 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		});
 	};
 	$scope.tdnTestPage(0);
+	// De thi chinh thuc cac nam
+	$scope.tdnRealTestQuantity = 0;
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/history/countTests', 
+		data: {
+			userId: sessionUserId,
+			categoryId: 1414
+		},
+		dataType: 'json',
+		success: function(resp) {
+			var quantity = Math.ceil(resp/20);
+		    var result= [];
+		    for(i =0; i< quantity; i++){
+		      result.push(i);
+		    }
+			$scope.tdnRealTestQuantity = result;
+			$scope.$apply();
+		}
+	});
+	$scope.tdnRealTests = [];	
+	$scope.tdnRealTestPage = function(page){
+		$scope.tdnRealTestPageSelected = page;
+		jQuery.ajax({
+			type: 'post',
+			url: FL_API_URL +'/history/getTests', 
+			data: {
+				userId: sessionUserId,
+				categoryId: 1414,
+				numberPage: page	
+			},
+			dataType: 'json',
+			success: function(resp) {
+				$scope.tdnRealTests = resp;
+				$scope.$apply();
+			}
+		});
+	};
+	$scope.tdnRealTestPage(0);
 }]);

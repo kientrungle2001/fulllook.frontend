@@ -136,13 +136,19 @@
 			<div class="full bg-light p-3 mb-3">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 				  <li class="nav-item">
-				    <a class="nav-link active" id="luyentap-tab" data-toggle="tab" href="#luyentap" role="tab" aria-controls="luyentap" aria-selected="true">Luyện tập</a>
+				    <a class="nav-link active" id="luyentap-tab" data-toggle="tab" href="#luyentap" role="tab" aria-controls="luyentap" aria-selected="true">Luyện tập các môn</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link  id="tienganh-tab" data-toggle="tab" href="#tienganh" role="tab" aria-controls="tienganh" aria-selected="true">Ôn luyện tiếng Anh </a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" id="deluyentap-tab" data-toggle="tab" href="#deluyentap" role="tab" aria-controls="deluyentap" aria-selected="false">Ôn luyện tổng hợp</a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" id="thithu-tab" data-toggle="tab" href="#thithu" role="tab" aria-controls="thithu" aria-selected="false">Thi thử Trần Đại Nghĩa</a>
+				  </li>	
+				  <li class="nav-item">
+				    <a class="nav-link" id="tdn-tab" data-toggle="tab" href="#tdn" role="tab" aria-controls="tdn" aria-selected="false">Đề thi Trần Đại Nghĩa các năm</a>
 				  </li>			  
 				</ul>
 			</div>
@@ -192,7 +198,7 @@
 					</nav>
 			  	</div>
 			  	<div class="tab-pane fade bg-light" id="deluyentap" role="tabpanel" aria-labelledby="deluyentap-tab">
-			  		Đề luyện tập tổng hợp
+			  		Ôn luyện tổng hợp
 			  		<table class="table table-bordered">
 					  <thead>
 					    <tr>
@@ -231,6 +237,48 @@
 					  </ul>
 					</nav>
 			  	</div>
+
+			  	<div class="tab-pane fade bg-light" id="tienganh" role="tabpanel" aria-labelledby="tienganh-tab">
+			  		Ôn luyện tiếng Anh
+			  		<table class="table table-bordered">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Đề thi</th>					      
+					      <th scope="col">Điểm</th>
+					      <th scope="col">Ngôn ngữ</th>
+					      <th scope="col">Thời gian làm bài</th>
+					      <th scope="col">Ngày</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr ng-repeat="testE in testEnglish">
+					      <th scope="row">{{$index +1}}</th>
+					      <td><a href="/book.php?id={{testE.id}}">{{testE.name}}</a></td>
+					      <td ng-bind="testE.mark"></td>
+					      <td ng-bind="testE.lang"></td>
+					      <td ng-bind="testE.duringTime"></td>
+					      <td >{{testE.startTime| date:'MM/dd/yyyy @ h:mma'}}</td>
+					      
+					    </tr>					    
+					    
+					  </tbody>
+					</table>
+					<nav aria-label="...">
+					  <ul class="pagination">
+					    <li class="page-item " ng-class="{'active': testEPageSelected === 0}">					      
+					      	<a class="page-link"  ng-click="testEPage(0)">Trang đầu</a>      
+					  	  
+					    </li>
+					    <li class="page-item"  ng-class="{'active': testEPageSelected === testEitem}" ng-repeat="testEitem in testEQuantity">
+					    	<a class="page-link"  ng-click="testEPage(testEitem)">{{testEitem+1}}</a>
+					    </li>
+					    
+					  </ul>
+					</nav>
+			  	</div>
+
 			  	<div class="tab-pane fade bg-light" id="thithu" role="tabpanel" aria-labelledby="thithu-tab" >
 			  		Đề thi thử
 			  		<table class="table table-bordered">
@@ -266,6 +314,47 @@
 					    </li>
 					    <li class="page-item" ng-class="{'active': tdnTestPageSelected === tdnTestitem}" ng-repeat="tdnTestitem in tdnTestQuantity">
 					    	<a class="page-link"   ng-click="tdnTestPage(tdnTestitem)">{{tdnTestitem +1}}</a>
+					    </li>					   
+					    
+					  </ul>
+					</nav>
+				</div>
+
+				<div class="tab-pane fade bg-light" id="tdn" role="tabpanel" aria-labelledby="tdn-tab" >
+			  		Đề thi chính thức các năm
+			  		<table class="table table-bordered">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Đề thi</th>					      
+					      <th scope="col">Điểm</th>
+					      <th scope="col">Ngôn ngữ</th>
+					      <th scope="col">Thời gian làm bài</th>
+					      <th scope="col">Ngày</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr ng-repeat="tdnRealTest in tdnRealTests">
+					      <th scope="row">{{$index +1}}</th>
+					      <td><a href="/book.php?id={{tdnRealTest.id}}">{{tdnRealTest.name}}</a></td>
+					      <td ng-bind="tdnRealTest.mark"></td>
+					      <td ng-bind="tdnRealTest.lang"></td>
+					      <td ng-bind="tdnRealTest.duringTime"></td>
+					      <td >{{tdnRealTest.startTime| date:'MM/dd/yyyy @ h:mma'}}</td>
+					      
+					    </tr>					    
+					    
+					  </tbody>
+					</table>
+					<nav aria-label="...">
+					  <ul class="pagination">
+					    <li class="page-item" ng-class="{'active': tdnRealTestPageSelected === 0}">					      
+					      	<a class="page-link"  ng-click="tdnRealTestPage(0)">Trang đầu</a>      
+					  	  
+					    </li>
+					    <li class="page-item" ng-class="{'active': tdnRealTestPageSelected === tdnRealTestitem}" ng-repeat="tdnRealTestitem in tdnRealTestQuantity">
+					    	<a class="page-link"   ng-click="tdnRealTestPage(tdnRealTestitem)">{{tdnRealTestitem +1}}</a>
 					    </li>					   
 					    
 					  </ul>
