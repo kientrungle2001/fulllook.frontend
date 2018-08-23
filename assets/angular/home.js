@@ -97,7 +97,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 		},
 		dataType: 'json',
 		success: function(resp) {
-			$scope.testSets = resp;
+			$scope.testSets = buildBottomTree(resp);
 			$scope.$apply();
 		}
 	});	
@@ -110,7 +110,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 		},
 		dataType: 'json',
 		success: function(resp) {
-			$scope.realTestSets = resp;
+			$scope.realTestSets = buildBottomTree(resp);
 			$scope.$apply();
 		}
 	});
