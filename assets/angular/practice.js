@@ -298,9 +298,25 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 						}
 					});
 				}else if(gameType =='vdragimg'){
-
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							console.log(question);
+						}
+					});	
 				}else if(gameType =='vdt'){
-
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							console.log(question);
+						}
+					});	
 				}else if(gameType == 'sortword'){
 					jQuery.ajax({
 						type: 'get',
@@ -336,7 +352,40 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 						}
 					});	
 				}else if(gameType == 'dragToPart'){
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							var dataWords = [];
+							var arrWords = question.split('-----');
+							for (var i= 0; i < arrWords.length; i++) {
+								if(arrWords[i].trim() == ''){
+									continue;
+								}
+								var parts = arrWords[i].split('===');
+								if(parts.length == 2) {
+									var words = parts[1].replace(/<br \/>/gi, '');
+									words = words.trim();
+									var img = (/src=[\'"]([^\'"]*)[\'"]/gi).exec(parts[0]);
+									var src = img[1];
+									var objWord = {words: words, src: src};
+									dataWords.push(objWord);
+								}
+							}
+							jQuery.ajax({
+								type: "Post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords},
+								url:'/document/game/dragtopart.php',
+								success: function(data){
 
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+						}
+					});	
 				}
 				
 			}

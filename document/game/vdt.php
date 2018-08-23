@@ -1,10 +1,14 @@
-<?php 
+<?php
+	$userId = 0;
+	if(isset($_SESSION['userId'])){
+		$userId = $_SESSION['userId'];
+	}
+	$documentId = $_POST['documentId'];
+	$gameCode = $_POST['gameType'];
+	$cateId = $_POST['cateId'];
+
 	$dataWords = $data->getDataWords();
 	
-	$documentId = $data->get('documentId');
-	$gameCode = $data->get('gameCode');
-	$cateId = $data->get('cateId');
-	//debug($dataWords);
 	if($dataWords != FALSE) {
 		$allWords = array();
 		foreach($dataWords as $val) {
@@ -16,6 +20,9 @@
 		$jsonDataWords = json_encode($dataWords);
 		
 ?>
+<script>
+	BASE_URL = 'http://s1.nextnobels.com/';
+</script>
 <style type="text/css">
 	.picture-board {
 		position: 	relative;
@@ -59,32 +66,11 @@
 		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	}
 </style>
-<?php 
-		$domain = $_SERVER['SERVER_NAME'];
-		if($domain == 's1.nextnobels.com'){
-			echo "<div class='alert alert-info mgb0'>";
-				echo "Listen to the speakers and write down words in the box.";
-			echo "</div>";
-		}else if($domain == 'fulllooksongngu.com') {
-			if(pzk_session('language') == 'en') {
-				echo "<div class='alert alert-info mgb0'>";
-					echo "Listen to the speakers and write down words in the box.";
-				echo "</div>";
-			}elseif(pzk_session('language') == 'vn'){
-				echo "<div class='alert alert-info mgb0'>";
-					echo "Nghe loa đọc và gõ từ vừa nghe được vào ô trống.";
-				echo "</div>";
-			}elseif(pzk_session('language') == 'ev') {
-				echo "<div class='alert alert-info mgb0'>";
-					echo "Listen to the speakers and write down words in the box.";
-				echo "</div>";
-			}else{
-				echo "<div class='alert alert-info mgb0'>";
-					echo " Nghe loa đọc và gõ từ vừa nghe được vào ô trống.";
-				echo "</div>";
-			}
-		}
-	?>
+
+<div class='alert alert-info mgb0'>
+	Listen to the speakers and write down words in the box.
+</div>
+	
 	<style>
 		#fillWord {
 			background: url('<?php echo BASE_URL.'/Default/skin/test/game/images/game5.png'; ?>');
@@ -210,7 +196,7 @@
 				if(userInput == trueWord) {
 					$(that).prop('disabled', true);
 					//load audio true
-					sound = new Audio('/Default/skin/nobel/test/themes/default/media/audio/Game-Spawn.mp3');
+					sound = new Audio('/assets/audio/Game-Spawn.mp3');
 					sound.loop = false;	
 					sound.play();
 					if(typeof this.question_audios[url] != 'undefined') {
@@ -233,7 +219,7 @@
 					}, 2000);
 					
 				}else {
-					sound = new Audio('/Default/skin/nobel/test/themes/default/media/audio/Game-Break.mp3');
+					sound = new Audio('/assets/audio/Game-Break.mp3');
 					sound.loop = false;	
 					sound.play();
 					if(typeof this.question_audios[url] != 'undefined') {

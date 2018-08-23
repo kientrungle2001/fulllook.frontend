@@ -44,7 +44,7 @@
         BASE_URL = "http://s1.nextnobels.com";
 		var finish = false;
 		function playSound() {
-				createjs.Sound.registerSound({src:BASE_URL+"/Default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
+				createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
 				createjs.Sound.play("sound");
 			}	
 		Factorys = {
@@ -428,19 +428,19 @@
 			//sound
 			soundFalse: function () {
 				createjs.Sound.alternateExtensions = ["mp3"];
-				createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/Game-Break.ogg", "sound2");
+				createjs.Sound.registerSound("/assets/audio/Game-Break.ogg", "sound2");
 
 			},
 			//sound
 			soundTrue: function () {
 				createjs.Sound.alternateExtensions = ["mp3"];
-				createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/Game-Spawn.ogg", "sound1");
+				createjs.Sound.registerSound("/assets/audio/Game-Spawn.ogg", "sound1");
 
 			},
 			soundBg: function() {
 				that = this;
 				createjs.Sound.addEventListener("fileload", function() {
-					that.soundBd = createjs.Sound.registerSound({src:BASE_URL+"/Default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
+					that.soundBd = createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
 					createjs.Sound.play("sound");
 			
 				});
@@ -933,7 +933,7 @@
 		});	
     </script>
 	<style>
-		.bggame{background: #f5f5f5; border-radius: 5px; background: url('<?=BASE_URL."/Default/skin/test/game/images/test_bg3.jpg"?>');background-size: cover;}
+		.bggame{background: #f5f5f5; border-radius: 5px; background: url('<?="http://s1.nextnobels.com/Default/skin/test/game/images/test_bg3.jpg"?>');background-size: cover;}
 		.bdrd5{border-radius: 5px;}
 		
 
@@ -950,8 +950,8 @@
 
 <?php } else { ?>
 	Chưa có dữ liệu
-	<img class='item' src="<?php echo BASE_URL; ?>/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
+	<img class='item' src="http://s1.nextnobels.com/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
 	<?php } } else { ?>
 	Chưa có dữ liệu
-	<img class='item' src="<?php echo BASE_URL; ?>/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
+	<img class='item' src="http://s1.nextnobels.com/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
 <?php } ?>
