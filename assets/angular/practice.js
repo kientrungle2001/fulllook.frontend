@@ -205,14 +205,16 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.dataCells = [];
 	$scope.dataTopics = [];
 	$scope.gamePage = 1;
+	$scope.gameType = '';
 	$scope.gameWords = function (gameType) {
 			var documentId = $scope.selectedVocabulary.id;
 			var cateId = $scope.subject.id;
+			$scope.gameType = gameType;
 			if(documentId && gameType) {
+				if (typeof timer != 'undefined') {
+					timer.stopCount();
+				}
 				if(gameType == 'vdrag'){
-					if (typeof timer != 'undefined') {
-						timer.stopCount();
-					}
 					jQuery.ajax({
 						type: 'get',
 						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
@@ -258,9 +260,6 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 					});
 					
 				}else if(gameType == 'vmt'){
-					if (typeof timer != 'undefined') {
-						timer.stopCount();
-					}
 					jQuery.ajax({
 						type: 'get',
 						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
@@ -298,6 +297,46 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 							});
 						}
 					});
+				}else if(gameType =='vdragimg'){
+
+				}else if(gameType =='vdt'){
+
+				}else if(gameType == 'sortword'){
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							var arrWrods = question.split('-----');
+							var dataWords = [];
+							for(var i=0; i < arrWrods.length; i++){
+								dataWord = [];
+								arrWord = arrWrods[i].split('===');
+								for(var j=0; j < arrWord.length; j++){
+									var img = arrWord[0].replace(/<br \/>/gi, '');
+									var word = $scope.strip_tags(arrWord[1])
+									word.trim();
+									dataWord.push(word);
+									dataWord.push(img);
+									
+								}
+								dataWords.push(dataWord);
+							}
+							jQuery.ajax({
+								type: "Post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords},
+								url:'/document/game/sortword.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+						}
+					});	
+				}else if(gameType == 'dragToPart'){
+
 				}
 				
 			}

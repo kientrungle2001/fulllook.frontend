@@ -1023,19 +1023,19 @@
 					//sound
 					soundFalse: function () {
 						createjs.Sound.alternateExtensions = ["mp3"];
-						createjs.Sound.registerSound(BASE_URL+"/default/skin/nobel/game/audio/Game-Break.ogg", "sound2");
+						createjs.Sound.registerSound("/assets/audio/Game-Break.ogg", "sound2");
 
 					},
 					//sound
 					soundTrue: function () {
 						createjs.Sound.alternateExtensions = ["mp3"];
-						createjs.Sound.registerSound(BASE_URL+"/default/skin/nobel/game/audio/Game-Spawn.ogg", "sound1");
+						createjs.Sound.registerSound("/assets/audio/Game-Spawn.ogg", "sound1");
 
 					},
 					soundBg: function() {
 						that = this;
 						createjs.Sound.addEventListener("fileload", function() {
-							that.soundBd = createjs.Sound.registerSound({src:BASE_URL+"/default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
+							that.soundBd = createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
 							createjs.Sound.play("sound");
 					
 						});

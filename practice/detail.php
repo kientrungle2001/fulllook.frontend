@@ -231,7 +231,7 @@
 										<input type="hidden" id="pageGame" name="pageGame" value="1">
 										
 										<span ng-repeat="game in gameTypes">
-											<button  ng-click="gameWords(game);" ng-class="{'enabled': true===gameEnables[game], 'disabled': true!==gameEnables[game]}" ng-disabled="true!==gameEnables[game]" class="btn v_game btn-warning">Game {{$index +1}}</button>
+											<button  ng-click="gameWords(game);" ng-class="{'active': gameType===game}" ng-disabled="true!==gameEnables[game]" class="btn v_game btn-warning">Game {{$index +1}}</button>
 										</span>
 										
 										<div class="item" id="resGame">

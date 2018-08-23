@@ -1,42 +1,50 @@
-<?php
-	$userId = 0;
-	if(isset($_SESSION['userId'])){
-		$userId = $_SESSION['userId'];
-	}
-	$curentPage = $_POST['page'];
-	if(is_string($_POST['dataCells'])){
-		$alDataCells = json_decode($_POST['dataCells']);
-	}else{
-		$alDataCells = $_POST['dataCells'];
-	}
-	if(is_string($_POST['dataTopics'])){
-		$alDataTopics = json_decode($_POST['dataTopics']);
-	} else{
-		$alDataTopics =$_POST['dataTopics'];
-	}
-	if(is_string($_POST['allTrueWord'])){
-		$allTrueWord = json_decode($_POST['allTrueWord']);
-	} else{
-		$allTrueWord = $_POST['allTrueWord'];
-	}
-	
-	$dataCells = $alDataCells[$curentPage-1];
-	shuffle($dataCells);
-	$dataCells = json_encode($dataCells);
-	$dataTopics = json_encode($alDataTopics[$curentPage-1]);
-	$countStage = count($alDataCells);
-	$documentId = $_POST['documentId'];
+ 
+ <?php
+    $userId = 0;
+    if(isset($_SESSION['userId'])){
+        $userId = $_SESSION['userId'];
+    }
+    $curentPage = $_POST['page'];
+    $documentId = $_POST['documentId'];
 	$gameCode = $_POST['gameType'];
 	$cateId = $_POST['cateId'];
-				
-?>
-<script src="/assets/js/createjs-2015.05.21.min.js"></script>
-<script>
-		BASE_URL = "http://s1.nextnobels.com";
-		var finish = false;
+	
+	$allwords = $data->getPairWords($documentId, $gameCode);
+	if($allwords) {
+		$arrWords = array();
+		foreach($allwords as $val){
+			$arrWords = array_merge($arrWords,$val);
+		}
 		
+		$allTrueWord = $data->getAllTopic($arrWords);
+		
+	//shuffle($allwords);
+	$mutilData = array();
+	foreach($allwords as $key => $item) {
+		$topics = $data->setTopics($item);
+		$words = $data->setWords($item);
+		shuffle($words);
+		$jsTopics = json_encode($topics);
+		$jsWords = json_encode($words);
+		
+		$mutilData[$key]['topic'] = $jsTopics;
+		$mutilData[$key]['word'] = $jsWords;
+	}
+	$countStage = count($mutilData);
+	$page = 0;
+	if($data->get('pageGame')) {
+		$page = $data->get('pageGame')- 1;
+	}
+	
+	if(isset($mutilData[$page]['topic']) && isset($mutilData[$page]['word'])) {
+?>
+   
+    <script src="/assets/js/createjs-2015.05.21.min.js"></script>
+    <script>
+        BASE_URL = "http://s1.nextnobels.com";
+		var finish = false;
 		function playSound() {
-				createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
+				createjs.Sound.registerSound({src:BASE_URL+"/Default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
 				createjs.Sound.play("sound");
 			}	
 		Factorys = {
@@ -50,12 +58,7 @@
 			board: false,
 			topics: false,
 			page: false,
-			dataCells: [],
-			dataTopics: [],
-			initGame: function(dataCells, dataTopics){
-				this.dataCells = dataCells;
-				this.dataTopics = dataTopics;
-			},
+			
 			getPage: function() {
 				if(!this.page) {
 					this.page = new Page();
@@ -89,7 +92,7 @@
 			
 			getCells: function () {
 				if(!this.cells) {
-					dataWords = this.dataCells; 
+					dataWords = <?php echo $mutilData[$page]['word']; ?>; 
 					
 					this.cells = [];
 					var h = 0;
@@ -105,7 +108,7 @@
 			},
 			getTopics: function () {
 				if(!this.topics) {
-					var dataTopics = this.dataTopics;
+					var dataTopics = <?php echo $mutilData[$page]['topic'];?>;
 					this.topics = [];
 					for(var i = 0; i<dataTopics.length; i++) {
 						var t = dataTopics[i];
@@ -133,18 +136,16 @@
 
 					timer.stopCount();
 				}
-		
-				
+			
 				var that = this;
 				Factorys.getBoard().init();
 				
 				Factorys.getBoard().display();
 				
-				
 				this.timeCheck = createjs.Ticker.on("tick", function () { that.checkEnd(); });
 			},
-			
 			checkEnd: function() {
+				//alert(1);
 				
 				var board = Factorys.getBoard();
 				var timer = Factorys.getTime();
@@ -154,49 +155,51 @@
 				
 				if(score == 6 ) {
 					var pageGame = jQuery('#pageGame').val();
-					
 					if(pageGame < <?php echo $countStage; ?>){
 						board.boardAlertMes("Congratulations! You have won!", 380, 100);
 					}
-				
-					board.removeCells();
 					
+					board.removeCells();
 					board.clearTime();
+					
 					var score = board.score;
 					var time = timer.value;
 					this.endTime = parseInt(this.startTime) + parseInt(time);
 					timer.stopCount();
-					
+				
 					gameScoreByPage[pageGame-1] = score;
 					trueWordByPages[pageGame-1] = board.trueWords;
 					
 					if(pageGame == <?php echo $countStage; ?> && finish == false){
-						this.saveData(board);
+						this.saveData();
 					
 					}
 					
 					this.clearCheckTime();
 					board.clearAllEvent();
-				
+					
+					
 				}else if(live == 4) {
 					var pageGame = jQuery('#pageGame').val();
 					
 					if(pageGame < <?php echo $countStage; ?>){
 						board.boardAlertMes("You have exceeded wrong word limit!", 380, 100);
 					}
-					board.removeCells();
-					board.clearTime();
-					var score = board.score;
 					
+					board.removeCells();
+					
+					board.clearTime();
+					
+					var score = board.score;
 					var time = timer.value;
 					this.endTime = parseInt(this.startTime) + parseInt(time);
 					timer.stopCount();
-					
+				
 					gameScoreByPage[pageGame-1] = score;
 					trueWordByPages[pageGame-1] = board.trueWords;
 					
 					if(pageGame == <?php echo $countStage; ?> && finish == false){
-						this.saveData(board);
+						this.saveData();
 					
 					}
 					//stop tick
@@ -209,18 +212,18 @@
 			},
 			endGame: function() {
 				var pageGame = jQuery('#pageGame').val();
-				var board = Factorys.getBoard();
 				
 				this.destroy = true;
-				//this.endTime = '1534148498';
+				//this.endTime = '<?=$_SERVER['REQUEST_TIME'];?>';
+				var board = Factorys.getBoard();
 				
-				
-				if(pageGame < 2){
+				if(pageGame < <?php echo $countStage; ?>){
 					board.boardAlertMes("Time's up! ", 380, 100);
 				}
-				board.removeCells();
 				
+				board.removeCells();
 				board.clearTime();
+				
 				var score = board.score;
 				//var time = timer.value;
 				//this.endTime = parseInt(this.startTime) + parseInt(time);
@@ -230,46 +233,28 @@
 				gameScoreByPage[pageGame-1] = score;
 				trueWordByPages[pageGame-1] = board.trueWords;
 				
-				if(pageGame == 2 && finish == false){
-					this.saveData(board);
+				if(pageGame == <?php echo $countStage; ?> && finish == false){
+					this.saveData();
 				
 				}
 				
 				this.clearCheckTime();
 				board.clearAllEvent();
-				
 			},
 			clearCheckTime: function() {
 				createjs.Ticker.off('tick', this.timeCheck);
 			},
-			saveData: function(board) {
+			saveData: function() {
+				var board = Factorys.getBoard();
 				finish = true;
 				var documentId = "<?php echo $documentId; ?>";
 				var gameCode = "<?php echo $gameCode; ?>";
 				var totalWord = "<?php echo $countStage*6; ?>";
 				var cateId = "<?php echo $cateId; ?>";
-				var tam = gameScoreByPage;
-				var score = 0;
-				var userId = <?= $userId; ?>;
-				if(gameScoreByPage.length == 1){
-					score = gameScoreByPage[0];
-				}else if(gameScoreByPage.length > 1){
-					for(var i = 0; i < gameScoreByPage.length; i++)
-					score = score + gameScoreByPage[i];
-				}
-				
-				var trueWords = [];
-				if(trueWordByPages.length == 1){
-					trueWords = trueWordByPages[0];
-				}else if(trueWordByPages.length > 1){
-					for(var i = 0; i < trueWordByPages.length; i++)
-					trueWords = trueWords.concat(trueWordByPages[i]);
-				}
-					
 				jQuery.ajax({
 					type: "Post",
-					data:{score: score, userId: userId, totalWord: totalWord, cateId: cateId, trueWords: trueWords, documentId:documentId, gameCode:gameCode},
-					url: FL_API_URL+'/game/saveGameVocabunary',
+					data:{score:gameScoreByPage, totalWord: totalWord, cateId:cateId, trueWords: trueWordByPages, documentId:documentId, gameCode:gameCode},
+					url:'<?=BASE_REQUEST?>/Game/saveGameVocabunary',
 					dataType: 'json',
 					success: function(data){
 						
@@ -277,7 +262,6 @@
 						
 					}
 				});
-				
 			},
 			resetGame: function() {
 				var board = Factorys.getBoard();
@@ -306,11 +290,12 @@
 			timePlay: false,
 			txtTime: null,
 			page: 0,
+			
 			init: function() {
 				this.canvas = document.getElementById('canvas');
                 this.stage = new createjs.Stage(this.canvas);
 				
-				bitmap2 = new createjs.Bitmap(BASE_URL+"/default/skin/test/game/images/cay2.png");
+				bitmap2 = new createjs.Bitmap(BASE_URL+"/Default/skin/test/game/images/cay2.png");
                         bitmap2.x = 630;
                         bitmap2.y = 50;
                         this.stage.addChild(bitmap2);
@@ -331,7 +316,10 @@
 				
 				var topics = Factorys.getTopics();
 				this.topics = topics;
-			
+				
+				
+				
+				//console.log(timer.value);	
 			},
 			falseSound: function() {
 				createjs.Sound.play("sound2");
@@ -401,6 +389,7 @@
 				score = score;
 				var wrongWords = jQuery(<?php echo json_encode($allTrueWord); ?>).not(JSON.parse(trueWords)).get();
 				trueWords = JSON.parse(trueWords).toString();
+
 				this.addMess("Finish game", 450, 25);
 				this.addMess("Score: "+score+'/'+totalWord, 450, 60);
 				this.addMess("True words: "+trueWords, 450, 90);
@@ -410,9 +399,11 @@
 				
 			},
 			removeAll: function() {
+				
 				this.clearTime();
 				this.stage.removeAllChildren();
 				this.clearAllEvent();
+				
 			},
 			display: function() {
 				//that = this;
@@ -424,7 +415,6 @@
 				this.displayLive();
 				this.displayTime();
 				this.replayGame();
-				
 				var pageGame = jQuery('#pageGame').val();
 				if(pageGame < <?php echo $countStage; ?>) {
 					this.nextPage();
@@ -438,19 +428,19 @@
 			//sound
 			soundFalse: function () {
 				createjs.Sound.alternateExtensions = ["mp3"];
-				createjs.Sound.registerSound("/assets/audio/Game-Break.ogg", "sound2");
+				createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/Game-Break.ogg", "sound2");
 
 			},
 			//sound
 			soundTrue: function () {
 				createjs.Sound.alternateExtensions = ["mp3"];
-				createjs.Sound.registerSound("/assets/audio/Game-Spawn.ogg", "sound1");
+				createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/Game-Spawn.ogg", "sound1");
 
 			},
 			soundBg: function() {
 				that = this;
 				createjs.Sound.addEventListener("fileload", function() {
-					that.soundBd = createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
+					that.soundBd = createjs.Sound.registerSound({src:BASE_URL+"/Default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
 					createjs.Sound.play("sound");
 			
 				});
@@ -458,7 +448,7 @@
 				
 			},
 			createLabel: function(text, x, y) {
-				var label = new createjs.Text(text, "bold 16px Open Sans", "#305958");
+				var label = new createjs.Text(text, "bold 14px Open Sans", "#305958");
 				label.name = "label";
 				label.textAlign = "center";
 				label.textBaseline = "middle";
@@ -484,31 +474,23 @@
 				button.page = 1;
 				button.addChild(background, label);
 				button.addEventListener('click', function(event){
-					
 					that = this;
 					var pageGame = jQuery('#pageGame').val();
 					pageGame ++;
 					jQuery('#pageGame').val(pageGame);
 					if(pageGame < <?php echo $countStage+1; ?>){
-						if (typeof timer != 'undefined') {
-							timer.stopCount();
-						}
-						var documentId = <?= $documentId;?>;
-						var gameType = '<?= $gameCode;?>';
-						var cateId = <?= $cateId; ?>;
-						var dataCells = '<?php echo json_encode($alDataCells); ?>';
-						var dataTopics = '<?php echo json_encode($alDataTopics); ?>';
-						var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
+						var id = "<?php echo $documentId; ?>";
+						var type = "<?php echo $gameCode; ?>";
+						var cateId = "<?php echo $cateId; ?>";
 						jQuery.ajax({
 							type: "Post",
-							data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: dataCells, dataTopics: dataTopics, allTrueWord: allTrueWord, page: pageGame},
-							url:'/document/game/vdrag.php',
+							data:{page:pageGame, id:id, type:type, cateId:cateId},
+							url:'<?=BASE_REQUEST?>/Game/pageVdragimg',
 							success: function(data){
 								if(!trueWordByPages[pageGame-2]){
 									gameScoreByPage[pageGame-2] = 0;
 									trueWordByPages[pageGame-2] = [];
 								}
-								
 								jQuery("#resGame").html(data);
 							}
 						});
@@ -521,6 +503,7 @@
 				this.stage.addChild(button);
 			},
 			replayGame: function() {
+				
 				var background = this.createButton("#c6dfe9", 80, 32, 10, "background");
 				var label = this.createLabel("Replay", 40, 16);
 
@@ -534,19 +517,13 @@
 					that = this;
 					var pageGame = jQuery('#pageGame').val();
 					if(pageGame < <?php echo $countStage+1; ?>){
-						if (typeof timer != 'undefined') {
-							timer.stopCount();
-						}
-						var documentId = <?= $documentId;?>;
-						var gameType = '<?= $gameCode;?>';
-						var cateId = <?= $cateId; ?>;
-						var dataCells = '<?php echo json_encode($alDataCells); ?>';
-						var dataTopics = '<?php echo json_encode($alDataTopics); ?>';
-						var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
+						var id = "<?php echo $documentId; ?>";
+						var type = "<?php echo $gameCode; ?>";
+						var cateId = "<?php echo $cateId; ?>";
 						jQuery.ajax({
 							type: "Post",
-							data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: dataCells, dataTopics: dataTopics, allTrueWord: allTrueWord, page: pageGame},
-							url:'/document/game/vdrag.php',
+							data:{page:pageGame, id:id, type:type, cateId:cateId},
+							url:'<?=BASE_REQUEST?>/Game/pageVdragimg',
 							success: function(data){
 								jQuery("#resGame").html(data);
 							}
@@ -560,7 +537,7 @@
 				this.stage.addChild(button);
 			},
 			previewPage: function() {
-				
+
 				var background = this.createButton("#c6dfe9", 80, 32, 10, "background");
 				var label = this.createLabel("Prev", 40, 16);
 
@@ -574,19 +551,14 @@
 					var pageGame = jQuery('#pageGame').val();
 					pageGame --;
 					jQuery('#pageGame').val(pageGame);
-					if (typeof timer != 'undefined') {
-						timer.stopCount();
-					}
-					var documentId = <?= $documentId;?>;
-					var gameType = '<?= $gameCode;?>';
-					var cateId = <?= $cateId; ?>;
-					var dataCells = '<?php echo json_encode($alDataCells); ?>';
-					var dataTopics = '<?php echo json_encode($alDataTopics); ?>';
-					var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
+					//page = pageGame;
+					var id = "<?php echo $documentId; ?>";
+					var type = "<?php echo $gameCode; ?>";
+					var cateId = "<?php echo $cateId; ?>";
 					jQuery.ajax({
-		              	type: "post",
-						data: {documentId:documentId, gameType:gameType, cateId:cateId, dataCells: dataCells, dataTopics: dataTopics, allTrueWord: allTrueWord, page: pageGame},
-						url:'/document/game/vdrag.php',
+		              	type: "Post",
+			            data:{page:pageGame, id:id, type:type, cateId:cateId},
+			            url:'<?=BASE_REQUEST?>/Game/pageVdragimg',
 			            success: function(data){
 							
 			            	jQuery("#resGame").html(data);
@@ -613,25 +585,25 @@
 				
 			},
 			displayGreenApple:function() {
-				apple1 = new createjs.Bitmap(BASE_URL+"/default/skin/test/game/images/green-apple1.png");
+				apple1 = new createjs.Bitmap(BASE_URL+"/Default/skin/test/game/images/green-apple1.png");
 				apple1.x = 755;
 				apple1.y = 185;
 				this.stage.addChild(apple1);
 				this.appleFalse.push(apple1);
 				
-				apple2 = new createjs.Bitmap(BASE_URL+"/default/skin/test/game/images/green-apple1.png");	
+				apple2 = new createjs.Bitmap(BASE_URL+"/Default/skin/test/game/images/green-apple1.png");	
 				apple2.x = 785;
 				apple2.y = 185;
 				this.stage.addChild(apple2);
 				this.appleFalse.push(apple2);
 				
-				apple3 = new createjs.Bitmap(BASE_URL+"/default/skin/test/game/images/green-apple1.png");	
+				apple3 = new createjs.Bitmap(BASE_URL+"/Default/skin/test/game/images/green-apple1.png");	
 				apple3.x = 815;
 				apple3.y = 185;
 				this.stage.addChild(apple3);
 				this.appleFalse.push(apple3);
 				
-				apple4 = new createjs.Bitmap(BASE_URL+"/default/skin/test/game/images/green-apple1.png");	
+				apple4 = new createjs.Bitmap(BASE_URL+"/Default/skin/test/game/images/green-apple1.png");	
 				apple4.x = 845;
 				apple4.y = 185;
 				this.stage.addChild(apple4);
@@ -687,7 +659,7 @@
 		};
 		//class cell
 		Cell = function(txt, type, width, height) {
-			var label = new createjs.Text(txt, "bold 22px Lato", "orange");
+			var label = new createjs.Text(txt, "22px Lato", "orange");
 			label.textAlign="center";
 			label.x += 100;
 			label.y += 15;
@@ -725,7 +697,7 @@
 				
 				//khi nguoi dung bo drag
 				this.shapes[i].on("pressup", function (evt) {
-			
+				
 					var board = Factorys.getBoard();
 					
 					var type = this.type; 
@@ -741,16 +713,16 @@
 					}
 					if(objtopic) {
 						if (that.check(this, objtopic)) {
+							board.trueWords.push(this.name);
 							board.trueSound();
 							this.off("pressmove", this);
-							//dragger.removeEventListener("pressmove");
+			
 							board.stage.removeChild(this);
 							board.stage.removeChild(objtopic);
-							board.trueWords.push(this.type);
 							
 							var score = Factorys.getScore();
 							score.addApple();
-							apple = new createjs.Bitmap(BASE_URL+"/default/skin/test/game/images/images.png");						
+							apple = new createjs.Bitmap(BASE_URL+"/Default/skin/test/game/images/images.png");						
 							
 							var items = [
 										[730,75],[755,100],[780,75], [805,100], [830,75], [855,100], [880,75],
@@ -765,10 +737,11 @@
 							apple.y = items[j][1];
 							
 							board.stage.addChild(apple);
-						
+							
 							score.addScore();
 							
 							board.boardAlertScore(score.score, 100, 15);
+							
 							
 						}else {
 							if(this.x > 250){
@@ -776,7 +749,6 @@
 									
 								var score = Factorys.getScore();
 								
-								var nscore = score.score;
 								board.boardAlertScore(score.score, 100, 15);
 								
 								apple = board.appleFalse[0];
@@ -785,7 +757,7 @@
 								board.stage.removeChild(apple);
 								
 								board.appleFalse.shift();
-							
+								
 								board.boardAlertLive(board.live, 650, 15);
 								board.falseSound();
 							}
@@ -795,7 +767,6 @@
 						}
 					
 					}else {
-						
 						if(this.x > 250){
 							board.live = board.live + 1;
 						
@@ -807,12 +778,12 @@
 							board.stage.removeChild(apple);
 							board.appleFalse.shift();
 						
-						
 							board.boardAlertLive(board.live, 650, 15);
 							board.falseSound();
 						}
 						this.x = this.homeX;
 						this.y = this.homeY;
+						
 					}
 					
 				});
@@ -835,14 +806,20 @@
 		};
 		
 		//class topic
-		Topic = function (txt, type, i) {
-				var label2 = new createjs.Text(txt, "bold 22px Lato", "orange");
-				label2.textAlign = "center";
-				label2.x += 100;
-				label2.y += 15;
-
+		Topic = function (src, type, i) {
+				
+				img = new createjs.Bitmap(src);
+				
+				var targetWidth = 160; 
+				var targetHeight = 55; 
+				img.scaleX = targetWidth / img.image.width; 
+				img.scaleY = targetHeight / img.image.height; 
+				
+				img.x = 0;
+				img.y = 0;
+				
 				var box = new createjs.Shape();
-				box.graphics.setStrokeStyle(2).beginStroke("orange").rect(0, 0, 200, 50);
+				box.graphics.setStrokeStyle(2).beginStroke("orange").rect(0, 0, 160, 55);
 				var topic = new createjs.Container();
 				
 				var topics = [
@@ -855,7 +832,7 @@
 				topic.x = topics[i][0];
 				topic.y = topics[i][1];
 						
-				topic.addChild(box, label2);
+				topic.addChild(box, img);
 				this.topic = topic;
 				this.type = type;
 		};
@@ -932,21 +909,49 @@
 		};
 
 		jQuery(function() {
-			var dataCells =  <?=$dataCells;?>;
-			var dataTopics = <?=$dataTopics;?>;
-			Factorys.initGame(dataCells, dataTopics);
+			//resize
+			/*var w = jQuery('#resGame').innerWidth();
+				if( w > 940) {
+					jQuery('#canvas').innerWidth(940);
+				}else {
+					jQuery('#canvas').innerWidth(w);
+				}	
+			
+			jQuery(window).resize(function() {
+				var w = jQuery('#resGame').innerWidth();
+				if( w > 940) {
+					jQuery('#canvas').innerWidth(940);
+				}else {
+					jQuery('#canvas').innerWidth(w);
+				}		
+				
+			});*/
+			
 			Factorys.getGame().start();
+			
 				
 		});	
     </script>
 	<style>
-		.bggame{background: #f5f5f5; border-radius: 5px; background: url('http://s1.nextnobels.com/default/skin/test/game/images/test_bg3.jpg');background-size: cover;}
+		.bggame{background: #f5f5f5; border-radius: 5px; background: url('<?=BASE_URL."/Default/skin/test/game/images/test_bg3.jpg"?>');background-size: cover;}
 		.bdrd5{border-radius: 5px;}
 		
 
 	</style>
-	<div class='alert alert-info mgb0'>Drag Vietnamese words into corresponding English words.</div>	<div id='resultLesson' class='item bggame mgb15'>	
+
+	<div class='alert alert-info mgb0'>
+		Drag Vietnamese words into corresponding photos.
+	</div>
+
+	<div id='resultLesson' class='item bggame mgb15'>	
 		<canvas style='width: 100% !important;'  id="canvas" width="940" height="500"></canvas> 
 	</div>
 	
 
+<?php } else { ?>
+	Chưa có dữ liệu
+	<img class='item' src="<?php echo BASE_URL; ?>/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
+	<?php } } else { ?>
+	Chưa có dữ liệu
+	<img class='item' src="<?php echo BASE_URL; ?>/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
+<?php } ?>
