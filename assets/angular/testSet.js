@@ -37,6 +37,11 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 				var u = new URL(location.href);
 				if (testSet.id == parseInt(u.searchParams.get('test_set_id'))) {
 					$scope.selectTestSet(testSet);
+					testSet.children.forEach(function(test){
+						if (test.id == parseInt(u.searchParams.get('test_id'))) {
+							$scope.selectTest(testSet, test);
+						}
+					});
 				}
 			});
 			$scope.$apply();
