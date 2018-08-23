@@ -346,7 +346,34 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 						dataType: 'json',
 						success: function(data){
 							var question = data[0].question;
-							console.log(question);
+							var dataWords = [];
+							var arrWords = question.split('*****');
+							for(var i = 0; i < arrWords.length; i++){
+								if(arrWords[i].trim() == ''){
+									continue;
+								}
+								var parts = arrWords[i].split('-----');
+								console.log(arrWords[i]);
+								if(parts.length == 2) {
+									var words = parts[1].replace(/<br \/>/gi, '');
+									words = words.trim();
+									var img = (/href=[\'"]([^\'"]*)[\'"]/gi).exec(parts[0]);
+									var href = img[1].trim();
+									var objWord = {trueWord: words, hreffix: href, href: href};
+									dataWords.push(objWord);
+								}
+							}
+							jQuery.ajax({
+								type: "post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords},
+								url:'/document/game/vdt.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+
 						}
 					});	
 				}else if(gameType == 'sortword'){

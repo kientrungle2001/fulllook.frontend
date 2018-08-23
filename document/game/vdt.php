@@ -7,7 +7,7 @@
 	$gameCode = $_POST['gameType'];
 	$cateId = $_POST['cateId'];
 
-	$dataWords = $data->getDataWords();
+	$dataWords = $_POST['dataWords'];
 	
 	if($dataWords != FALSE) {
 		$allWords = array();
@@ -73,7 +73,7 @@
 	
 	<style>
 		#fillWord {
-			background: url('<?php echo BASE_URL.'/Default/skin/test/game/images/game5.png'; ?>');
+			background: url('http://s1.nextnobels.com/default/skin/test/game/images/game5.png');
 			height: 600px;
 		}
 	</style>
@@ -104,15 +104,15 @@
 					current_sound.onended();
 					current_sound.currentTime = 0;
 				}
-				$.ajax({
+				jQuery.ajax({
 					method: "post",
 					url: "/game/saveGameVocabunary",
 					data: { score: that.score, trueWords: that.trueWords, cateId:<?php echo $cateId; ?>, documentId: <?php echo $documentId; ?>, totalWord: <?php echo $allStage; ?>, gameCode:'<?php echo $gameCode;?>'},
 					
 				});
-				var wrongWords = $(<?php echo $allWords; ?>).not(this.trueWords).get();
-				$('#fillWord').empty();
-				$('#fillWord').append('<br><div class="alert alert-success"><b>Finish game!</b><br>Correct answers:<b> '+this.score+' / '+ this.maxStage+'</b></br><p>Correct words: '+this.trueWords.join(', ')+'</p><p>Wrong words: '+wrongWords.join(', ')+'</p></div>');
+				var wrongWords = jQuery(<?php echo $allWords; ?>).not(this.trueWords).get();
+				jQuery('#fillWord').empty();
+				jQuery('#fillWord').append('<br><div class="alert alert-success"><b>Finish game!</b><br>Correct answers:<b> '+this.score+' / '+ this.maxStage+'</b></br><p>Correct words: '+this.trueWords.join(', ')+'</p><p>Wrong words: '+wrongWords.join(', ')+'</p></div>');
 				
 				
 			}else{
@@ -120,15 +120,15 @@
 				hreffix = this.dataWords[this.stage].hreffix;
 				trueWord = this.dataWords[this.stage].trueWord;
 				this.buildGame(href, trueWord);
-				$thisspan = $('#fillWord span');
+				$thisspan = jQuery('#fillWord span');
 				this.read_question($thisspan, href);
 				//this.prevGame(href);
 				this.nextGame(href);
 			}	
 		},
 		buildGame: function(href, trueWord) {
-			$('#fillWord').append('<span class="btn btn-default glyphicon glyphicon-volume-up" onclick="FillWord.read_question(this, '+hreffix+');return false;"></span></br>');
-			$('#fillWord').append('<input class="inputvdt" rel='+escape(trueWord)+' onblur="return FillWord.checkFillWord(this, '+hreffix+'); return false;" type="text" /></br> <p class="alertVdt " style="display:none;"></p>');
+			jQuery('#fillWord').append('<span class="btn btn-primary fa fa-volume-up" onclick="FillWord.read_question(this, \''+hreffix+'\');return false;"></span></br>');
+			jQuery('#fillWord').append('<input class="inputvdt" rel='+escape(trueWord)+' onblur="return FillWord.checkFillWord(this, \''+hreffix+'\'); return false;" type="text" /></br> <p class="alertVdt " style="display:none;"></p>');
 			
 		},
 		
@@ -139,24 +139,24 @@
 				this.current_sound.onended();
 			}
 			if(this.current_sound_url == url) {
-				$(elem).removeClass('glyphicon-volume-up').addClass('glyphicon-volume-off');
+				jQuery(elem).removeClass('fa-volume-up').addClass('fa-volume-off');
 				this.current_sound_url = null;
 				sound = this.question_audios[url]; 
 				sound.play();
 				sound.onended = function() {
-					$(elem).removeClass('glyphicon-volume-off').addClass('glyphicon-volume-up');
+					jQuery(elem).removeClass('fa-volume-off').addClass('fa-volume-up');
 				};
 				return ;
 			} else {
 				this.current_sound_url = url;
 			}
-			$(elem).removeClass('glyphicon-volume-up').addClass('glyphicon-volume-off');
+			jQuery(elem).removeClass('fa-volume-up').addClass('fa-volume-off');
 			if(typeof this.question_audios[url] == 'undefined') {
 				sound = new Audio(url);
 				sound.loop = false;	
 				this.question_audios[url] = sound;
 				sound.onended = function() {
-					$(elem).removeClass('glyphicon-volume-off').addClass('glyphicon-volume-up');
+					jQuery(elem).removeClass('fa-volume-off').addClass('fa-volume-up');
 				};
 			}
 			this.current_sound = this.question_audios[url];
@@ -165,10 +165,10 @@
 		
 		
 		nextGame: function() {
-			$('#fillWord').append('<button class="btn btn-success">Submit</button> <button class="btn btn-warning" onclick="FillWord.nextStage()">Skip</button>');
+			jQuery('#fillWord').append('<button class="btn btn-success">Submit</button> <button class="btn btn-warning" onclick="FillWord.nextStage()">Skip</button>');
 		},
 		prevGame: function() {
-			$('#fillWord').append('<button onclick="FillWord.prevStage()">Prev</button>');
+			jQuery('#fillWord').append('<button onclick="FillWord.prevStage()">Prev</button>');
 		},
 		setNextStage: function() {
 			this.stage = this.stage +1;
@@ -177,7 +177,7 @@
 			this.stage = this.stage -1;
 		},
 		clearBoad: function() {
-			$('#fillWord').empty();
+			jQuery('#fillWord').empty();
 		},
 		setScore: function() {
 			this.score = this.score + 1;
@@ -188,13 +188,13 @@
 		checkFillWord: function (that, url){
 			that2 = this;
 			
-			userInput = $(that).val();
+			userInput = jQuery(that).val();
 			if(userInput != '') {
 				userInput = userInput.toLowerCase();
 				userInput = escape(userInput);
-				trueWord = $(that).attr('rel');
+				trueWord = jQuery(that).attr('rel');
 				if(userInput == trueWord) {
-					$(that).prop('disabled', true);
+					jQuery(that).prop('disabled', true);
 					//load audio true
 					sound = new Audio('/assets/audio/Game-Spawn.mp3');
 					sound.loop = false;	
@@ -205,12 +205,12 @@
 						current_sound.onended();
 						current_sound.currentTime = 0;
 					}
-					$('input.inputvdt').css('border', 'solid 1px blue');
-					$('p.alertVdt').css('background-color', '#dff0d8');
-					$('p.alertVdt').html('Correct!');
-					$('p.alertVdt').show();
+					jQuery('input.inputvdt').css('border', 'solid 1px blue');
+					jQuery('p.alertVdt').css('background-color', '#dff0d8');
+					jQuery('p.alertVdt').html('Correct!');
+					jQuery('p.alertVdt').show();
 					setTimeout(function(){ 
-						$('p.alertVdt').hide();
+						jQuery('p.alertVdt').hide();
 						that2.setNextStage();
 						that2.setScore();
 						that2.setTrueWords(unescape(userInput));
@@ -229,12 +229,12 @@
 						current_sound.currentTime = 0;
 					}
 					
-					$('input.inputvdt').css('border', 'solid 1px red');
-					$('p.alertVdt').css('background-color', '#ec971f');
-					$('p.alertVdt').html('Wrong! Try again!');
-					$('p.alertVdt').show();
+					jQuery('input.inputvdt').css('border', 'solid 1px red');
+					jQuery('p.alertVdt').css('background-color', '#ec971f');
+					jQuery('p.alertVdt').html('Wrong! Try again!');
+					jQuery('p.alertVdt').show();
 					setTimeout(function(){ 
-						$('p.alertVdt').hide();
+						jQuery('p.alertVdt').hide();
 					}, 2000);
 				}
 			}
@@ -267,7 +267,7 @@
 		
 	};
 	
-	$(function() {
+	jQuery(function() {
 		FillWord.startGame();
 
 	});
@@ -275,5 +275,5 @@
 	</script>
 	<?php } else { ?>
 		Chưa có dữ liệu
-	<img class='item' src="<?php echo BASE_URL; ?>/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
+	<img class='item' src="http://s1.nextnobels.com/default/skin/nobel/test/themes/default/media/bg_game.jpg" />
 	<?php } ?>
