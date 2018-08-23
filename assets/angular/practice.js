@@ -304,7 +304,39 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 						dataType: 'json',
 						success: function(data){
 							var question = data[0].question;
-							console.log(question);
+							var dataWords = [];
+							var allTrueWord = [];
+							var wordByPage = question.split('*****');
+							for(var i = 0; i < wordByPage.length; i++){
+								var words = wordByPage[i].split(/\r\n|\r|\n|\<br \/\>|\<br\/\>/);
+								var objcells = [];
+								var objTopics = [];
+								for(var j = 0; j < words.length; j++){
+									if(words[j] && words[j] != ''){
+										var ex_cell = words[j].split('*');
+										var img = (/src=[\'"]([^\'"]*)[\'"]/gi).exec(ex_cell[0]);
+										var word = ex_cell[1].trim();
+										var cell = {type: img[1], name: word};
+										var topic = {type: img[1], name: img[1]};
+										objcells.push(cell);
+										objTopics.push(topic);
+										allTrueWord.push(word);
+									}
+								}
+								dataWords.push({topic: objTopics, word: objcells});	
+							}
+
+							jQuery.ajax({
+								type: "Post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords, allTrueWord: allTrueWord, page: $scope.gamePage},
+								url:'/document/game/vdragimg.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+
 						}
 					});	
 				}else if(gameType =='vdt'){
