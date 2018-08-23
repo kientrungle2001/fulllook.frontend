@@ -12,6 +12,7 @@
 	
 	<script>
 		FL_API_URL = '<?php echo FL_API_URL?>';
+		serverTime = <?php echo time();?>
 	</script>
 </head>
 <body>
