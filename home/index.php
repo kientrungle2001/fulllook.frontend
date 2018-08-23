@@ -100,15 +100,9 @@
 			<div class="box-tdn bg-white full-xs" ng-repeat="testSet in realTestSets">
 				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=1414&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
-					<div class="link-box text-center">
+					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
 						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
+							{{test.name}} 
 						</a>
 					</div>
 												
