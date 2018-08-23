@@ -31,7 +31,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-2" ng-repeat="testE in testEnghlish">
-			<a href="/test.php?test_id={{testE.id}}">
+			<a href="/test.php?test_id={{testE.id}}&category_id=1411">
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{testE.name_en}}</div>
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{testE.name}}</div>
 			</a>
@@ -52,7 +52,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-2" ng-repeat="test in tests">
-			<a href="/test.php?test_id={{test.id}}">
+			<a href="/test.php?test_id={{test.id}}&category_id=1412">
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
 			</a>
@@ -74,18 +74,13 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets">
-				<h3 class="text-center head-box"><a href="/testSet.php?category_id=383&test_id={{testSet.id}}">{{testSet.name}}</a></h3>
+			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'">
+				<h3 class="text-center head-box"><a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
+
+					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
+							{{test.name}} 
 						</a>
 					</div>
 												
@@ -103,17 +98,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="box-tdn bg-white full-xs" ng-repeat="testSet in realTestSets">
-				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=383&test_id={{testSet.id}}">{{testSet.name}}</a></h3>
+				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=1414&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần trắc nghiệm 
-						</a>
-					</div>
-												
-					<div class="link-box text-center">
-						<a href="" class="text-color">
-							Phần tự luận					
+					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
+							{{test.name}} 
 						</a>
 					</div>
 												

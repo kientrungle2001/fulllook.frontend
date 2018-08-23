@@ -6,39 +6,53 @@
 				<div class="main-shadow full">
 					<div class="full">
 						<div style="border-radius: 5px 0px 0px 0px;" class="nav-link text-center title-pr text-white bg-primary">
-						Ôn luyện tổng hợp</div>
+						{{category.name}}</div>
 					</div>
 					
 				  	<ul class="list-group full vocabulary">
-					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='vn'" ng-class="{'active': test==selectedTest}"><a href="#" ng-click="selectTest(test)">{{test.name}}</a></li>
-					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='en'" ng-class="{'active': test==selectedTest}"><a href="#" ng-click="selectTest(test)">{{test.name_en}}</a></li>
-					</ul>
+					  <li class="list-group-item list-group-test-set-item" ng-repeat="testSet in testSets" ng-class="{'active': testSet==selectedTestSet}" style="padding: 0">
 					  
-					 
-					
+					  <a href="#" ng-click="selectTestSet(testSet)" style="padding: 15px; display: inline-block;" onclick="return false;">{{testSet.name}}</a>
+
+
+					  <ul class="list-group" style="margin: 0;">
+					  	<li class="list-group-item" ng-repeat="test in testSet.children" style="border: none !important;" ng-class="{'active sub-active': selectedTest === test}">
+						  <a href="#" ng-click="selectTest(testSet, test)" style="border: none;" onclick="return false;">&nbsp;&nbsp;&nbsp;&nbsp; {{test.name}}</a>
+						</li>
+					  </ul>
+					  </li>
+					</ul>
 				</div>
 				
 			</div>
 			<div class="col-12 col-md-9">
 				<div class="main-shadow full">
-					<h2 class="text-center title" ng-show="selectedTest">{{selectedTest.name}}</h2>
-					<h2 class="text-center title" ng-hide="selectedTest">Hãy chọn một đề</h2>
+					<h2 class="text-center title" ng-show="selectedTestSet && selectedTest">{{selectedTestSet.name}} - {{selectedTest.name}}</h2>
+					<h2 class="text-center title" ng-hide="selectedTest">Hãy chọn một đề trong {{selectedTestSet.name}}</h2>
 					<div class="row">
 						<div class="col-md-12 text-center pt-5">
-							<h2>Chọn một phần để bắt đầu làm</h2>
-							<button class="btn btn-lg" ng-class="{'btn-primary': type=='choice', 'btn-success': type != 'choice'}" ng-click="type='choice'">Phần Trắc nghiệm</button>
-							<button class="btn btn-lg" ng-class="{'btn-primary': type=='writting', 'btn-success': type != 'writting'}" ng-click="type='writting'">Phần Tự luận</button>
+							<div ng-show="selectedTestSet && !selectedTest">
+								<h2>Chọn một phần để bắt đầu làm</h2>
+								<button class="btn btn-primary" ng-repeat="test in selectedTestSet.children" style="margin-right: 15px;" ng-click="selectTest(selectedTestSet, test)">{{test.name}}</button>
+							</div>
+							
 						</div>
 					</div>
 					<div class="practice-content p-3 full">
 						<div class="do-practice full" ng-show="step=='selectTest'" style="text-align: center; padding-top: 50px;">
+							<h2>{{selectedTestSet.name}} - {{selectedTest.name}}</h2>
+							<p><strong>Số lượng câu hỏi</strong>: {{selectedTest.quantity || 24}}</p>
+							<p><strong>Thời gian làm bài</strong>: {{selectedTest.time || 45}} phút</p>
 							<button ng-click="doTest()" class="btn btn-primary btn-lg">Bắt đầu làm</button>
 						</div>
 						<div class="do-practice full" ng-show="step=='doTest'">
 							<div class="text-center">
+								<h2>{{selectedTestSet.name}} - {{selectedTest.name}}</h2>
+								<p><strong>Số lượng câu hỏi</strong>: {{total_question || 24}}</p>
+								<p><strong>Thời gian làm bài</strong>: {{total_time || 45}} phút</p>
 								<div  class="time">
 									<img src="http://fulllook.com.vn/Themes/Songngu3/skin/images/watch.png">
-									<div id="countdown" class="num-time robotofont" style="color: rgb(255, 0, 0);">00:00</div>
+									<div id="countdown" class="num-time robotofont" style="color: rgb(255, 0, 0);">{{remaining.minutes || 45}}:{{remaining.seconds || 0}}</div>
 								</div>
 							</div>
 							
@@ -66,19 +80,19 @@
 											</tbody>
 										</table>
 								
-										<a href="#mobile-explan-474" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse">Xem lý giải
+										<a href="#mobile-explan-{{question.id}}" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse" ng-show="showAnswerStep=='showAnswerStep'">Xem lý giải
 										</a>
 								
-										<div id="mobile-explan-474" class="collapse lygiai top10 item">
+										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" ng-show="showAnswerStep=='showAnswerStep'">
 											<div class="item mb-2" ng-bind-html="question.explaination">
 											</div>
 									
 											<div class="item">
-												<div class="btn btn-danger" data-toggle="modal" data-target="#report474">
+												<div class="btn btn-danger" data-toggle="modal" data-target="#report{{question.id}}">
 													Báo lỗi			
 												</div>
 										
-												<div class="modal fade" id="report474" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												<div class="modal fade" id="report{{question.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 												  <div class="modal-dialog" role="document">
 													<div class="modal-content">
 													  <div class="modal-header">
@@ -89,7 +103,7 @@
 													  <div class="modal-body">
 														 <div class="w100p">
 															<label for="exampleInputEmail1">Nội dung:</label>
-															<textarea style="height: 150px !important;" id="contentError474" name="contentError" class="form-control" ng-model="report[question.id]"></textarea>
+															<textarea style="height: 150px !important;" id="contentError{{question.id}}" name="contentError" class="form-control" ng-model="report[question.id]"></textarea>
 														  </div>
 											 
 													  </div>
@@ -115,25 +129,22 @@
 							</div>
 
 							<div class="text-center full mb-3 relative">				
-								<button id="finish-choice" class="btn btn-primary btt-practice " name="finish-choice" onclick="finish_choice();"><span class="fa fa-check"></span>
-									Hoàn thành					
+								<button id="finish-choice" class="btn btn-primary btt-practice " name="finish-choice" ng-click="finishTest()" ng-disabled="finishStep == 'finishStep'"><span class="fa fa-check"></span>
+									Hoàn thành
 								</button>
-								<button id="view-result" class="btn btt-practice btn-success" data-toggle="modal" data-target="#exampleModal" name="view-result" style=""><span class="fa fa-list-alt"></span>
+								<button id="view-result" class="btn btt-practice btn-success" data-toggle="modal" data-target="#resultModal" name="view-result"  ng-show="finishStep == 'finishStep'"><span class="fa fa-list-alt"></span>
 									Xem kết quả					
 								</button>
-								<button id="show-answers" class="btn btt-practice btn-danger " name="show-answers" onclick="show_answers();"  ><span class="fa fa-check"></span>
+								<button id="show-answers" class="btn btt-practice btn-danger " name="show-answers"  ng-show="finishStep == 'finishStep'" ng-disabled="showAnswerStep=='showAnswerStep'" ng-click="showAnswer()"><span class="fa fa-check"></span>
 								Xem đáp án					
 								</button>
 							</div>
-
-							
-
 						</div>			
 
 					</div>
 
 					<!--show result-->
-					<div class="modal" role="dialog" id="exampleModal" aria-labelledby="gridSystemModalLabel" aria-hidden="false">
+					<div class="modal" role="dialog" id="resultModal" aria-labelledby="gridSystemModalLabel" aria-hidden="false">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -157,16 +168,12 @@
 								</div>
 								<div class="modal-footer">
 									<div class=" full text-center">
-										<button class="btn btn-sm btn-danger top10" onclick="window.location='/?class=5'"> 
-											<span >Chọn môn khác</span> 
-											<span class="glyphicon glyphicon-arrow-left"></span>
-										</button>
-										<button id="show-answers-on-dialog" class="btn btn-sm btn-danger top10 " name="show-answers" onclick="show_answers(); $('#exampleModal').modal('hide');" type="button">
+										<button id="show-answers-on-dialog" class="btn btn-sm btn-danger top10 " name="show-answers" ng-disabled="showAnswerStep=='showAnswerStep'" ng-click="showAnswer()" data-dismiss="modal" onclick="jQuery('#resultModal').modal('hide'); return false;" type="button">
 											<span class="glyphicon glyphicon-check"></span>
-											Xem đáp án							
+											Xem đáp án
 										</button>
-										<button type="button" class="btn btn-sm btn-success top10" onclick="window.location = '/practice/detail/51?class=5&amp;de=1'">
-											<span class="glyphicon glyphicon-arrow-right hidden-xs"></span> Làm bài khác
+										<button type="button" class="btn btn-sm btn-success top10" onclick="jQuery('#resultModal').modal('hide'); jQuery(window).scrollTop(0);">
+											<span class="glyphicon glyphicon-arrow-right hidden-xs"></span> Làm đề khác
 										</button>
 										
 									</div>
@@ -185,3 +192,9 @@
 		</div>
 	</div>
 </div>
+<style>
+.list-group-test-set-item {background-color: #bbb;}
+.list-group-test-set-item.active {background-color: #fbd65b;}
+.list-group-item.sub-active {background-color: #ffe693;}
+.list-group-item.sub-active > a {color: #333;}
+</style>

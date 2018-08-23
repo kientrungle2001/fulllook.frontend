@@ -14,6 +14,15 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 	}
 	var u = new URL(location.href);
 	var categoryId = u.searchParams.get('category_id');
+	$scope.category = {};
+	jQuery.ajax({
+		type: 'get',
+		url: FL_API_URL + '/corecategories/' + categoryId, 
+		dataType: 'json',
+		success: function(resp) {
+			$scope.category = resp;
+		}
+	});
 	$scope.tests = [];
 	jQuery.ajax({
 		type: 'post',
@@ -23,19 +32,30 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		},
 		dataType: 'json',
 		success: function(resp) {
-			$scope.tests = resp;
-			resp.forEach(function(test) {
+			$scope.testSets = buildBottomTree(resp);
+			$scope.testSets.forEach(function(testSet) {
 				var u = new URL(location.href);
-				if(test.id == parseInt(u.searchParams.get('test_id'))) {
-					$scope.selectTest(test);
+				if (testSet.id == parseInt(u.searchParams.get('test_set_id'))) {
+					$scope.selectTestSet(testSet);
+					testSet.children.forEach(function(test){
+						if (test.id == parseInt(u.searchParams.get('test_id'))) {
+							$scope.selectTest(testSet, test);
+						}
+					});
 				}
 			});
 			$scope.$apply();
 		}
 	});
-	$scope.step = 'selectTest';
-	$scope.selectTest = function(test) {
+	$scope.step = 'selectTestSet';
+	$scope.selectTestSet = function(testSet) {
+		$scope.step = 'selectTestSet';
+		$scope.selectedTestSet = testSet;
+		$scope.selectedTest = null;
+	};
+	$scope.selectTest = function (testSet, test) {
 		$scope.step = 'selectTest';
+		$scope.selectedTestSet = testSet;
 		$scope.selectedTest = test;
 	};
 	$scope.doTest = function() {
@@ -49,9 +69,33 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 			dataType: 'json',
 			success: function(resp) {
 				$scope.questions = resp;
-				
+				$scope.remaining = {
+					minutes: $scope.selectedTest.time,
+					seconds: 0
+				};
+				$scope.startTime = serverTime;
+				$scope.duringTime = 0;
+				$scope.countdownIntervalId = setInterval(function() {
+					$scope.duringTime++;
+					if ($scope.remaining.minutes == 0 && $scope.remaining.seconds == 0) {
+						$scope.finishTest();
+					} else if($scope.remaining.seconds == 0) {
+						$scope.remaining.seconds = 59;
+						$scope.remaining.minutes--;
+					} else {
+						$scope.remaining.seconds--;
+					}
+					$scope.$apply();
+				}, 1000);
 				$scope.$apply();
 			}
 		});
+	};
+	$scope.finishTest = function() {
+		$scope.finishStep = 'finishStep';
+		clearInterval($scope.countdownIntervalId);
+	};
+	$scope.showAnswer = function() {
+		$scope.showAnswerStep = 'showAnswerStep';
 	};
 }]);
