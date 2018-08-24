@@ -532,19 +532,19 @@
 		                //sound
 		                soundFalse: function () {
 		                    createjs.Sound.alternateExtensions = ["mp3"];
-		                    createjs.Sound.registerSound(BASE_URL+"/default/skin/nobel/"+"/game/audio/Game-Break.ogg", "sound2");
+		                    createjs.Sound.registerSound("/assets/audio/Game-Break.ogg", "sound2");
 
 		                },
 		                //sound
 		                soundTrue: function () {
 		                    createjs.Sound.alternateExtensions = ["mp3"];
-		                    createjs.Sound.registerSound(BASE_URL+"/default/skin/nobel/"+"/game/audio/Game-Spawn.ogg", "sound1");
+		                    createjs.Sound.registerSound("/assets/audio/Game-Spawn.ogg", "sound1");
 
 		                },
 		                insSoundBg: function() {
 		                    var that = this;
 		                    createjs.Sound.alternateExtensions = ["mp3"];	// add other extensions to try loading if the src file extension is not supported
-		                    createjs.Sound.registerSound(BASE_URL+"/default/skin/nobel/"+"/game/audio/soundBg.ogg", "sBg");  // register sound, which preloads by default
+		                    createjs.Sound.registerSound("/assets/audio/soundBg.ogg", "sBg");  // register sound, which preloads by default
 		                    //createjs.Sound.onLoadComplete = this.playSound();  // add a callback for when load is completed
 		                    createjs.Sound.addEventListener("fileload", function(){that.playSound();}); // add an event listener for when load is completed
 
@@ -766,7 +766,7 @@
 		    <script>
 				BASE_URL = 'http://s1.nextnobels.com';
 				function playSound() {
-						createjs.Sound.registerSound({src:BASE_URL+"/default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
+						createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
 						createjs.Sound.play("sound");
 					}
 				Factorys = {
@@ -1023,19 +1023,19 @@
 					//sound
 					soundFalse: function () {
 						createjs.Sound.alternateExtensions = ["mp3"];
-						createjs.Sound.registerSound(BASE_URL+"/default/skin/nobel/game/audio/Game-Break.ogg", "sound2");
+						createjs.Sound.registerSound("/assets/audio/Game-Break.ogg", "sound2");
 
 					},
 					//sound
 					soundTrue: function () {
 						createjs.Sound.alternateExtensions = ["mp3"];
-						createjs.Sound.registerSound(BASE_URL+"/default/skin/nobel/game/audio/Game-Spawn.ogg", "sound1");
+						createjs.Sound.registerSound("/assets/audio/Game-Spawn.ogg", "sound1");
 
 					},
 					soundBg: function() {
 						that = this;
 						createjs.Sound.addEventListener("fileload", function() {
-							that.soundBd = createjs.Sound.registerSound({src:BASE_URL+"/default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
+							that.soundBd = createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
 							createjs.Sound.play("sound");
 					
 						});

@@ -16,6 +16,7 @@
                             <option value="" ng-selected="language==''" disabled="disabled">{{translate('Select language')}}</option>
 							<option value="en" ng-selected="language=='en'">English</option>
 							<option value="vn" ng-selected="language=='vn'">Tiếng Việt</option>
+                            <option value="ev" ng-selected="language=='ev'">Song ngữ</option>
                         </select>
                     </li>
                     <li class="nav-item">
@@ -44,11 +45,14 @@
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#loginRegisterModal"><img src="/assets/images/dk.png"/> Đăng kí</a>
                     </li>
                 <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" >Xin chào <?php echo $_SESSION['name'] ?></a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/logout.php" >Đăng xuất</a>
+                    <li class="nav-item dropdown">
+                        <span class="navbar-text">Xin chào </span> <a class="btn btn-primary text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['name'] ?></span> </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="/profile.php" class="dropdown-item">Trang cá nhân</a>
+                            <a href="#" class="dropdown-item">Lịch sử học tập</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/logout.php" class="dropdown-item">Đăng xuất</a>
+                        </div>
                     </li>
                 <?php endif ?>
                 </ul>
@@ -67,8 +71,13 @@
 				<li class="nav-item">
                     <a href="/" class="nav-link">Trang chủ</a>
                 </li>
-                <li class="nav-item active">
-                    <a href="/about.php" class="nav-link">Về phần mềm</a>
+                <li class="nav-item dropdown">
+                    <a href="/about.php" data-toggle="dropdown" class="nav-link dropdown-toggle">Về phần mềm</a>
+                    <ul class="dropdown-menu">
+						<li style="padding-left: 25px;"><a href="/about.php">Giới thiệu</a></li>
+						<li><a href="/about.php#guide">Hướng dẫn mua</a></li>
+						<li><a href="/news_list.php?id=147">Hướng dẫn sử dụng</a></li>
+					</ul>
                 </li>
                 <li class="nav-item dropdown">
 					<a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link">Chọn Ngôn Ngữ</a>

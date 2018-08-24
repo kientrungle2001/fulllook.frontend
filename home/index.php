@@ -1,3 +1,14 @@
+<div class="full pb-2 bg-cloud text-center">
+	<a href="/news_list.php?id=147" class="btn btn-info">Hướng dẫn sử dụng</a>
+	<a href="/about.php#guide" class="btn btn-danger">Hướng dẫn mua</a>
+	<a href="/document.php" class="btn btn-primary">Kinh nghiệm ôn thi</a>
+	<a href="/gift.php" class="btn btn-success">Giả trí</a>
+	<?php if(isset($_SESSION['userId'])){ ?>
+	<a href="/profile.php" class="btn btn-warning">Lịch sử học tập</a>
+	<?php } else {
+		echo '<button onclick="return alert(\'Đăng nhập để xem lịch sử\');" class="btn btn-warning">Lịch sử học tập</button>';	
+	} ?>
+</div>
 <div id="practice" class="full">
 	<div class="container">
 		<div style="margin-bottom: 15px;" class="text-center fs40 heading">
@@ -29,12 +40,24 @@
 		</div>
 	</div>
 	<div class="container">
+		<div class="row" ng-init="selectedEnglishTestPage = 0">
+			<div class="col-12 col-md-2" ng-repeat="test in englishTests" ng-show="inPage($index, selectedEnglishTestPage, 12)">
+				<a href="/test.php?test_id={{test.id}}&category_id=1411">
+					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
+					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
+				</a>
+			</div>
+		</div>
 		<div class="row">
-			<div class="col-12 col-md-2" ng-repeat="testE in testEnghlish">
-			<a href="/test.php?test_id={{testE.id}}&category_id=1411">
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{testE.name_en}}</div>
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{testE.name}}</div>
-			</a>
+			<div class="col-12 text-center">
+				<nav aria-label="Navigation">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" ng-repeat="page in range(1, totalPage(englishTests.length, 12), 1)" 
+						ng-click="selectEnglishTestPage(page-1)"
+						ng-class="{'active': selectedEnglishTestPage == page-1}"
+						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>
@@ -50,12 +73,24 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-12 col-md-2" ng-repeat="test in tests">
+		<div class="row" ng-init="selectedTestPage = 0">
+			<div class="col-12 col-md-2" ng-repeat="test in tests" ng-show="inPage($index, selectedTestPage, 12)">
 			<a href="/test.php?test_id={{test.id}}&category_id=1412">
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
 			</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 text-center">
+				<nav aria-label="Navigation">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" ng-repeat="page in range(1, totalPage(tests.length, 12), 1)" 
+						ng-click="selectTestPage(page-1)"
+						ng-class="{'active': selectedTestPage == page-1}"
+						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>
@@ -73,21 +108,31 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row">
-			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'">
+		<div class="row" ng-init="selectedTestSetPage = 0">
+			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'" ng-show="inPage($index, selectedTestSetPage, 10)">
 				<h3 class="text-center head-box"><a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
 
 					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
-						<a href="" class="text-color">
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
 							{{test.name}} 
 						</a>
 					</div>
-												
-				</div>	
+				</div>
 			</div>
 		</div>
-		
+		<div class="row">
+			<div class="col-12 text-center">
+				<nav aria-label="Navigation">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" ng-repeat="page in range(1, totalPage(testSets.length, 10), 1)" 
+						ng-click="selectTestSetPage(page-1)"
+						ng-class="{'active': selectedTestSetPage == page-1}"
+						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
 	</div>
 </div>
 <!--end thithu -->	
@@ -101,7 +146,7 @@
 				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=1414&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
 					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
-						<a href="" class="text-color">
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
 							{{test.name}} 
 						</a>
 					</div>
@@ -109,7 +154,7 @@
 				</div>	
 			</div>
 		</div>
-	</div>		
+	</div>
 </div>
 <!--end-->
 <img src="/assets/images/lydo.png" alt="" class="full" />

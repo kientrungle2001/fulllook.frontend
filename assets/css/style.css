@@ -309,6 +309,14 @@ input[type=radio], input[type=checkbox]{
 .right-img{width: 51px;}
 .menu-git{cursor: pointer;}
 .menu-git:hover{background: #ffc107 !important;}
+.timhieu{top: 65%; right: 30%;}
+.timhieu2{top: 70%; right: 25%;}
+.btmn{top: 28%; right: 45%;}
+.btmn2{top: 28%; right: 40%;}
+.btdk{bottom: 20%; right: 25.5%;}
+.btdk2{bottom: 15%; right: 10%;}
+.bg-cloud{    background: #e0fcf5;}
+
 @media (min-width: 768px) {
 	.navbar-brand{
         position: absolute;

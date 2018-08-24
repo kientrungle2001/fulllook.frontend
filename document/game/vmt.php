@@ -562,19 +562,19 @@
                 //sound
                 soundFalse: function () {
                     createjs.Sound.alternateExtensions = ["mp3"];
-                    createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/Game-Break.ogg", "sound2");
+                    createjs.Sound.registerSound("/assets/audio/Game-Break.ogg", "sound2");
 
                 },
                 //sound
                 soundTrue: function () {
                     createjs.Sound.alternateExtensions = ["mp3"];
-                    createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/Game-Spawn.ogg", "sound1");
+                    createjs.Sound.registerSound("/assets/audio/Game-Spawn.ogg", "sound1");
 
                 },
                 insSoundBg: function() {
                     var that = this;
                     createjs.Sound.alternateExtensions = ["mp3"];	
-                    createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/soundBg.ogg", "sBg");  
+                    createjs.Sound.registerSound("/assets/audio/soundBg.ogg", "sBg");  
                     createjs.Sound.addEventListener("fileload", function(){that.playSound();});
                 },
                 playSound: function () {

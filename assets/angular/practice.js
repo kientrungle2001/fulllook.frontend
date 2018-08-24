@@ -205,14 +205,16 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.dataCells = [];
 	$scope.dataTopics = [];
 	$scope.gamePage = 1;
+	$scope.gameType = '';
 	$scope.gameWords = function (gameType) {
 			var documentId = $scope.selectedVocabulary.id;
 			var cateId = $scope.subject.id;
+			$scope.gameType = gameType;
 			if(documentId && gameType) {
+				if (typeof timer != 'undefined') {
+					timer.stopCount();
+				}
 				if(gameType == 'vdrag'){
-					if (typeof timer != 'undefined') {
-						timer.stopCount();
-					}
 					jQuery.ajax({
 						type: 'get',
 						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
@@ -258,9 +260,6 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 					});
 					
 				}else if(gameType == 'vmt'){
-					if (typeof timer != 'undefined') {
-						timer.stopCount();
-					}
 					jQuery.ajax({
 						type: 'get',
 						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
@@ -298,6 +297,154 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 							});
 						}
 					});
+				}else if(gameType =='vdragimg'){
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							var dataWords = [];
+							var allTrueWord = [];
+							var wordByPage = question.split('*****');
+							for(var i = 0; i < wordByPage.length; i++){
+								var words = wordByPage[i].split(/\r\n|\r|\n|\<br \/\>|\<br\/\>/);
+								var objcells = [];
+								var objTopics = [];
+								for(var j = 0; j < words.length; j++){
+									if(words[j] && words[j] != ''){
+										var ex_cell = words[j].split('*');
+										var img = (/src=[\'"]([^\'"]*)[\'"]/gi).exec(ex_cell[0]);
+										var word = ex_cell[1].trim();
+										var cell = {type: img[1], name: word};
+										var topic = {type: img[1], name: img[1]};
+										objcells.push(cell);
+										objTopics.push(topic);
+										allTrueWord.push(word);
+									}
+								}
+								dataWords.push({topic: objTopics, word: objcells});	
+							}
+
+							jQuery.ajax({
+								type: "Post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords, allTrueWord: allTrueWord, page: $scope.gamePage},
+								url:'/document/game/vdragimg.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+
+						}
+					});	
+				}else if(gameType =='vdt'){
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							var dataWords = [];
+							var arrWords = question.split('*****');
+							for(var i = 0; i < arrWords.length; i++){
+								if(arrWords[i].trim() == ''){
+									continue;
+								}
+								var parts = arrWords[i].split('-----');
+								console.log(arrWords[i]);
+								if(parts.length == 2) {
+									var words = parts[1].replace(/<br \/>/gi, '');
+									words = words.trim();
+									var img = (/href=[\'"]([^\'"]*)[\'"]/gi).exec(parts[0]);
+									var href = img[1].trim();
+									var objWord = {trueWord: words, hreffix: href, href: href};
+									dataWords.push(objWord);
+								}
+							}
+							jQuery.ajax({
+								type: "post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords},
+								url:'/document/game/vdt.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+
+						}
+					});	
+				}else if(gameType == 'sortword'){
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							var arrWrods = question.split('-----');
+							var dataWords = [];
+							for(var i=0; i < arrWrods.length; i++){
+								dataWord = [];
+								arrWord = arrWrods[i].split('===');
+								for(var j=0; j < arrWord.length; j++){
+									var img = arrWord[0].replace(/<br \/>/gi, '');
+									var word = $scope.strip_tags(arrWord[1])
+									word.trim();
+									dataWord.push(word);
+									dataWord.push(img);
+									
+								}
+								dataWords.push(dataWord);
+							}
+							jQuery.ajax({
+								type: "Post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords},
+								url:'/document/game/sortword.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+						}
+					});	
+				}else if(gameType == 'dragToPart'){
+					jQuery.ajax({
+						type: 'get',
+						url: FL_API_URL +'/games?gamecode='+gameType+'&documentId='+documentId+'&software=1&status=1&limit=1', 
+						dataType: 'json',
+						success: function(data){
+							var question = data[0].question;
+							var dataWords = [];
+							var arrWords = question.split('-----');
+							for (var i= 0; i < arrWords.length; i++) {
+								if(arrWords[i].trim() == ''){
+									continue;
+								}
+								var parts = arrWords[i].split('===');
+								if(parts.length == 2) {
+									var words = parts[1].replace(/<br \/>/gi, '');
+									words = words.trim();
+									var img = (/src=[\'"]([^\'"]*)[\'"]/gi).exec(parts[0]);
+									var src = img[1];
+									var objWord = {words: words, src: src};
+									dataWords.push(objWord);
+								}
+							}
+							jQuery.ajax({
+								type: "Post",
+								data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords},
+								url:'/document/game/dragtopart.php',
+								success: function(data){
+
+									jQuery('#resGame').html(data);
+									
+								}
+							});
+						}
+					});	
 				}
 				
 			}
