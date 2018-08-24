@@ -3,6 +3,10 @@
 	if(isset($_SESSION['userId'])){
 		$userId = $_SESSION['userId'];
 	}
+	$documentId = $_POST['documentId'];
+	$gameCode = $_POST['gameType'];
+	$cateId = $_POST['cateId'];
+	
 	$curentPage = $_POST['page'];
 	if(is_string($_POST['dataCells'])){
 		$alDataCells = json_decode($_POST['dataCells']);
@@ -25,9 +29,7 @@
 	$dataCells = json_encode($dataCells);
 	$dataTopics = json_encode($alDataTopics[$curentPage-1]);
 	$countStage = count($alDataCells);
-	$documentId = $_POST['documentId'];
-	$gameCode = $_POST['gameType'];
-	$cateId = $_POST['cateId'];
+	
 				
 ?>
 <script src="/assets/js/createjs-2015.05.21.min.js"></script>

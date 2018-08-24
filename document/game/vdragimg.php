@@ -8,35 +8,41 @@
     $documentId = $_POST['documentId'];
 	$gameCode = $_POST['gameType'];
 	$cateId = $_POST['cateId'];
-	
-	$allwords = $data->getPairWords($documentId, $gameCode);
-	if($allwords) {
-		$arrWords = array();
-		foreach($allwords as $val){
-			$arrWords = array_merge($arrWords,$val);
-		}
-		
-		$allTrueWord = $data->getAllTopic($arrWords);
-		
-	//shuffle($allwords);
-	$mutilData = array();
-	foreach($allwords as $key => $item) {
-		$topics = $data->setTopics($item);
-		$words = $data->setWords($item);
-		shuffle($words);
-		$jsTopics = json_encode($topics);
-		$jsWords = json_encode($words);
-		
-		$mutilData[$key]['topic'] = $jsTopics;
-		$mutilData[$key]['word'] = $jsWords;
+    $curentPage = $_POST['page'];
+    
+
+    if(is_string($_POST['dataWords'])){
+		$mutilData = json_decode($_POST['dataWords']);
+	}else{
+		$mutilData = $_POST['dataWords'];
 	}
-	$countStage = count($mutilData);
-	$page = 0;
-	if($data->get('pageGame')) {
-		$page = $data->get('pageGame')- 1;
-	}
+
+	if($mutilData) {
+        
+        if(is_string($_POST['allTrueWord'])){
+            $allTrueWord = json_decode($_POST['allTrueWord']);
+        }else{
+            $allTrueWord = $_POST['allTrueWord'];
+        }
+		
+       
+        $countStage = count($mutilData);
+        $page = $curentPage-1;
+        
 	
-	if(isset($mutilData[$page]['topic']) && isset($mutilData[$page]['word'])) {
+	if(isset($mutilData[$page]) && isset($mutilData[$page])) {
+        if(is_array($mutilData[$page])){
+            $topics = $mutilData[$page]['topic'];
+        }else{
+            $topics = $mutilData[$page]->topic;
+        }
+
+        if(is_array($mutilData[$page])){
+            $words = $mutilData[$page]['word'];
+        }else{
+            $words = $mutilData[$page]->word;
+        }
+        shuffle($words);
 ?>
    
     <script src="/assets/js/createjs-2015.05.21.min.js"></script>
@@ -44,7 +50,7 @@
         BASE_URL = "http://s1.nextnobels.com";
 		var finish = false;
 		function playSound() {
-				createjs.Sound.registerSound({src:BASE_URL+"/Default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
+				createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
 				createjs.Sound.play("sound");
 			}	
 		Factorys = {
@@ -92,7 +98,7 @@
 			
 			getCells: function () {
 				if(!this.cells) {
-					dataWords = <?php echo $mutilData[$page]['word']; ?>; 
+					dataWords = <?php echo json_encode($words); ?>; 
 					
 					this.cells = [];
 					var h = 0;
@@ -108,7 +114,7 @@
 			},
 			getTopics: function () {
 				if(!this.topics) {
-					var dataTopics = <?php echo $mutilData[$page]['topic'];?>;
+					var dataTopics = <?php echo json_encode($topics);?>;
 					this.topics = [];
 					for(var i = 0; i<dataTopics.length; i++) {
 						var t = dataTopics[i];
@@ -247,14 +253,32 @@
 			saveData: function() {
 				var board = Factorys.getBoard();
 				finish = true;
-				var documentId = "<?php echo $documentId; ?>";
+				
+                var documentId = "<?php echo $documentId; ?>";
 				var gameCode = "<?php echo $gameCode; ?>";
 				var totalWord = "<?php echo $countStage*6; ?>";
-				var cateId = "<?php echo $cateId; ?>";
+                var cateId = "<?php echo $cateId; ?>";
+                var score = 0;
+				var userId = <?= $userId; ?>;
+				if(gameScoreByPage.length == 1){
+					score = gameScoreByPage[0];
+				}else if(gameScoreByPage.length > 1){
+					for(var i = 0; i < gameScoreByPage.length; i++)
+					score = score + gameScoreByPage[i];
+				}
+				
+				var trueWords = [];
+				if(trueWordByPages.length == 1){
+					trueWords = trueWordByPages[0];
+				}else if(trueWordByPages.length > 1){
+					for(var i = 0; i < trueWordByPages.length; i++)
+					trueWords = trueWords.concat(trueWordByPages[i]);
+                }
+                
 				jQuery.ajax({
 					type: "Post",
-					data:{score:gameScoreByPage, totalWord: totalWord, cateId:cateId, trueWords: trueWordByPages, documentId:documentId, gameCode:gameCode},
-					url:'<?=BASE_REQUEST?>/Game/saveGameVocabunary',
+					data:{score: score, userId: userId, totalWord: totalWord, cateId: cateId, trueWords: trueWords, documentId:documentId, gameCode:gameCode},
+					url: FL_API_URL+'/game/saveGameVocabunary',
 					dataType: 'json',
 					success: function(data){
 						
@@ -428,19 +452,19 @@
 			//sound
 			soundFalse: function () {
 				createjs.Sound.alternateExtensions = ["mp3"];
-				createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/Game-Break.ogg", "sound2");
+				createjs.Sound.registerSound("/assets/audio/Game-Break.ogg", "sound2");
 
 			},
 			//sound
 			soundTrue: function () {
 				createjs.Sound.alternateExtensions = ["mp3"];
-				createjs.Sound.registerSound(BASE_URL+"/Default/skin/nobel/game/audio/Game-Spawn.ogg", "sound1");
+				createjs.Sound.registerSound("/assets/audio/Game-Spawn.ogg", "sound1");
 
 			},
 			soundBg: function() {
 				that = this;
 				createjs.Sound.addEventListener("fileload", function() {
-					that.soundBd = createjs.Sound.registerSound({src:BASE_URL+"/Default/skin/nobel/game/audio/M-GameBG.ogg", id:"sound"});
+					that.soundBd = createjs.Sound.registerSound({src:"/assets/audio/M-GameBG.ogg", id:"sound"});
 					createjs.Sound.play("sound");
 			
 				});
@@ -479,13 +503,18 @@
 					pageGame ++;
 					jQuery('#pageGame').val(pageGame);
 					if(pageGame < <?php echo $countStage+1; ?>){
-						var id = "<?php echo $documentId; ?>";
-						var type = "<?php echo $gameCode; ?>";
-						var cateId = "<?php echo $cateId; ?>";
+                        if (typeof timer != 'undefined') {
+							timer.stopCount();
+						}
+						var documentId = "<?php echo $documentId; ?>";
+						var gameType = "<?php echo $gameCode; ?>";
+                        var cateId = "<?php echo $cateId; ?>";
+                        var dataWords = '<?php echo json_encode($mutilData); ?>';
+                        var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
 						jQuery.ajax({
 							type: "Post",
-							data:{page:pageGame, id:id, type:type, cateId:cateId},
-							url:'<?=BASE_REQUEST?>/Game/pageVdragimg',
+							data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords, allTrueWord: allTrueWord, page: pageGame},
+							url:'/document/game/vdragimg.php',
 							success: function(data){
 								if(!trueWordByPages[pageGame-2]){
 									gameScoreByPage[pageGame-2] = 0;
@@ -517,13 +546,19 @@
 					that = this;
 					var pageGame = jQuery('#pageGame').val();
 					if(pageGame < <?php echo $countStage+1; ?>){
-						var id = "<?php echo $documentId; ?>";
-						var type = "<?php echo $gameCode; ?>";
-						var cateId = "<?php echo $cateId; ?>";
+                        if (typeof timer != 'undefined') {
+							timer.stopCount();
+						}
+						var documentId = "<?php echo $documentId; ?>";
+						var gameType = "<?php echo $gameCode; ?>";
+                        var cateId = "<?php echo $cateId; ?>";
+                        var dataWords = '<?php echo json_encode($mutilData); ?>';
+                        var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
+
 						jQuery.ajax({
 							type: "Post",
-							data:{page:pageGame, id:id, type:type, cateId:cateId},
-							url:'<?=BASE_REQUEST?>/Game/pageVdragimg',
+							data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords, allTrueWord: allTrueWord, page: pageGame},
+							url:'/document/game/vdragimg.php',
 							success: function(data){
 								jQuery("#resGame").html(data);
 							}
@@ -552,13 +587,18 @@
 					pageGame --;
 					jQuery('#pageGame').val(pageGame);
 					//page = pageGame;
-					var id = "<?php echo $documentId; ?>";
-					var type = "<?php echo $gameCode; ?>";
-					var cateId = "<?php echo $cateId; ?>";
+					if (typeof timer != 'undefined') {
+                        timer.stopCount();
+                    }
+                    var documentId = "<?php echo $documentId; ?>";
+                    var gameType = "<?php echo $gameCode; ?>";
+                    var cateId = "<?php echo $cateId; ?>";
+                    var dataWords = '<?php echo json_encode($mutilData); ?>';
+                    var allTrueWord = '<?php echo json_encode($allTrueWord); ?>';
 					jQuery.ajax({
 		              	type: "Post",
-			            data:{page:pageGame, id:id, type:type, cateId:cateId},
-			            url:'<?=BASE_REQUEST?>/Game/pageVdragimg',
+                          data: {documentId:documentId, gameType:gameType, cateId:cateId, dataWords: dataWords, allTrueWord: allTrueWord, page: pageGame},
+							url:'/document/game/vdragimg.php',
 			            success: function(data){
 							
 			            	jQuery("#resGame").html(data);
@@ -933,7 +973,7 @@
 		});	
     </script>
 	<style>
-		.bggame{background: #f5f5f5; border-radius: 5px; background: url('<?=BASE_URL."/Default/skin/test/game/images/test_bg3.jpg"?>');background-size: cover;}
+		.bggame{background: #f5f5f5; border-radius: 5px; background: url('<?="http://s1.nextnobels.com/Default/skin/test/game/images/test_bg3.jpg"?>');background-size: cover;}
 		.bdrd5{border-radius: 5px;}
 		
 
@@ -950,8 +990,8 @@
 
 <?php } else { ?>
 	Chưa có dữ liệu
-	<img class='item' src="<?php echo BASE_URL; ?>/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
+	<img class='item' src="http://s1.nextnobels.com/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
 	<?php } } else { ?>
 	Chưa có dữ liệu
-	<img class='item' src="<?php echo BASE_URL; ?>/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
+	<img class='item' src="http://s1.nextnobels.com/Default/skin/nobel/test/themes/default/media/bg_game.jpg" />
 <?php } ?>
