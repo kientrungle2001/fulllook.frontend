@@ -1,8 +1,8 @@
-<div class="full pb-2 bg-cloud text-center">
+<div class="full pb-4 pt-2 bg-cloud text-center">
 	<a href="/news_list.php?id=147" class="btn btn-info">Hướng dẫn sử dụng</a>
 	<a href="/about.php#guide" class="btn btn-danger">Hướng dẫn mua</a>
 	<a href="/document.php" class="btn btn-primary">Kinh nghiệm ôn thi</a>
-	<a href="/gift.php" class="btn btn-success">Giả trí</a>
+	<a href="/gift.php" class="btn btn-success">Giải trí</a>
 	<?php if(isset($_SESSION['userId'])){ ?>
 	<a href="/profile.php" class="btn btn-warning">Lịch sử học tập</a>
 	<?php } else {
@@ -167,14 +167,14 @@
 				
 				<form method="post">
 					<div class="form-group mb-4">
-					    <input type="text" ng-model="advice.name" class="form-control" placeholder="Họ tên" required>
+					    <input type="text" ng-model="advice.name" class="form-control input" placeholder="Họ tên" required>
 					    
 					</div>
 					<div class="form-group mb-4">
-					    <input type="text" ng-model="advice.phone" class="form-control" placeholder="Số điện thoại" required>					    
+					    <input type="text" ng-model="advice.phone" class="form-control input" placeholder="Số điện thoại" required>					    
 					</div>
 					<div class="form-group mb-4">
-					    <input type="email" ng-model="advice.email" class="form-control" placeholder="Email" required>
+					    <input type="email" ng-model="advice.email" class="form-control input" placeholder="Email" required>
 					    
 					</div>
 					<div class="form-group alert" ng-class="{'alert-danger': advice.success == 0, 'alert-success': advice.success== 1}" ng-show="advice.success" ng-bind-html="advice.message">
@@ -192,11 +192,11 @@
 					<div class="hocphi full">
 						Học và ôn thi bằng tiếng Việt,<br>  
 						tiếng anh và song ngữ  <br> 
-						Chỉ <span class="fs29">600.00</span> VNĐ <br> 
+						Chỉ <span class="fs29">700.000</span> VNĐ <br> 
 						CHO<span class="fs29">1 năm</span> sử dụng<br> 
 					</div>
 					
-					<a href="/about.php#huongdanmua" class="buynow full">
+					<a href="/about.php#guide" class="buynow full">
 						Mua ngay
 					</a>
 				</div>
