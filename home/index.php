@@ -1,3 +1,14 @@
+<div class="full pb-2 bg-cloud text-center">
+	<a href="/news_list.php?id=147" class="btn btn-info">Hướng dẫn sử dụng</a>
+	<a href="/about.php#guide" class="btn btn-danger">Hướng dẫn mua</a>
+	<a href="/document.php" class="btn btn-primary">Kinh nghiệm ôn thi</a>
+	<a href="/gift.php" class="btn btn-success">Giả trí</a>
+	<?php if(isset($_SESSION['userId'])){ ?>
+	<a href="/profile.php" class="btn btn-warning">Lịch sử học tập</a>
+	<?php } else {
+		echo '<button onclick="return alert(\'Đăng nhập để xem lịch sử\');" class="btn btn-warning">Lịch sử học tập</button>';	
+	} ?>
+</div>
 <div id="practice" class="full">
 	<div class="container">
 		<div style="margin-bottom: 15px;" class="text-center fs40 heading">

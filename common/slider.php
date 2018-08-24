@@ -28,9 +28,9 @@
       </div>
       <div rel="#fcb7d5" class="carousel-item">
         <img class="d-block w-100" src="/assets/images/banner.png" alt="Second slide">
-        <div class="absolute btdk d-none d-sm-block"><a class="btn btn-warning" href="/about.php">Đăng kí ngay</a>
+        <div class="absolute btdk d-none d-sm-block"><a class="btn btn-warning" href="/about.php#guide">Đăng kí ngay</a>
         </div>
-        <div class="absolute btdk2 d-block d-sm-none"><a class="btn-xs btn-warning" href="/about.php">Đăng kí ngay</a>
+        <div class="absolute btdk2 d-block d-sm-none"><a class="btn-xs btn-warning" href="/about.php#guide">Đăng kí ngay</a>
         </div>
       </div>
       <div rel="#7bc646" class="carousel-item">
@@ -39,9 +39,9 @@
        <div rel="#73bee9" class="carousel-item relative">
         <img class="d-block w-100" src="/assets/images/slider2.png" alt="Four slide">
 
-        <div class="absolute btmn d-none d-sm-block"><a class="btn btn-danger" href="/about.php">Mua ngay</a>
+        <div class="absolute btmn d-none d-sm-block"><a class="btn btn-danger" href="/about.php#guide">Mua ngay</a>
         </div>
-        <div class="absolute btmn2 d-block d-sm-none"><a class="btn-xs btn-danger" href="/about.php">Mua ngay</a>
+        <div class="absolute btmn2 d-block d-sm-none"><a class="btn-xs btn-danger" href="/about.php#guide">Mua ngay</a>
         </div>
     </div>
     <a class="carousel-control-prev" href="#homeslider" role="button" data-slide="prev">

@@ -315,6 +315,7 @@ input[type=radio], input[type=checkbox]{
 .btmn2{top: 28%; right: 40%;}
 .btdk{bottom: 20%; right: 25.5%;}
 .btdk2{bottom: 15%; right: 10%;}
+.bg-cloud{    background: #e0fcf5;}
 
 @media (min-width: 768px) {
 	.navbar-brand{
