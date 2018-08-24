@@ -192,11 +192,11 @@
 					<div class="hocphi full">
 						Học và ôn thi bằng tiếng Việt,<br>  
 						tiếng anh và song ngữ  <br> 
-						Chỉ <span class="fs29">600.00</span> VNĐ <br> 
+						Chỉ <span class="fs29">700.000</span> VNĐ <br> 
 						CHO<span class="fs29">1 năm</span> sử dụng<br> 
 					</div>
 					
-					<a href="/about.php#huongdanmua" class="buynow full">
+					<a href="/about.php#guide" class="buynow full">
 						Mua ngay
 					</a>
 				</div>
