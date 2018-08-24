@@ -19,20 +19,20 @@
                             <option value="ev" ng-selected="language=='ev'">Song ngữ</option>
                         </select>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                          &nbsp;
                         <select class="select-top" ng-model="grade" ng-change="changeGrade()">
                             <option value="" disabled="disabled">{{translate('Select class')}}</option>
-							<option value="3" ng-selected="grade=='3'">{{translate('Class')}} 3</option>
-							<option value="4" ng-selected="grade=='4'">{{translate('Class')}} 4</option>
-							<option value="5" ng-selected="grade=='5'">{{translate('Class')}} 5</option>
+                                                <option value="3" ng-selected="grade=='3'">{{translate('Class')}} 3</option>
+                                                <option value="4" ng-selected="grade=='4'">{{translate('Class')}} 4</option>
+                                                <option value="5" ng-selected="grade=='5'">{{translate('Class')}} 5</option>
                         </select>
-                    </li>
+                    </li> -->
                     
                 </ul>
                 <ul class="navbar-nav menu-top2 ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/about.php#huongdanmua"><img src="/assets/images/cart.png"/> Mua ngay</a>
+                        <a class="nav-link" href="/about.php#guide"><img src="/assets/images/cart.png"/> Mua ngay</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/about.php#paycardfl"><img src="/assets/images/pay.png"/> Nạp thẻ</a>

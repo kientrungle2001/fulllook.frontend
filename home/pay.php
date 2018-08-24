@@ -40,11 +40,8 @@
 				</div>
 			</div>
 
-<<<<<<< HEAD
-			<div class="full bg-light p-3 mb-3" id="huongdanmua">
-=======
+
 			<div id="guide" class="full bg-light p-3 mb-3">
->>>>>>> f2e2691a114f525fd5b5e1bcaf09df437edc2821
 				<h4 class="text-center t-weight">Hướng dẫn mua sản phẩm Full Look</h4>
 				<h5 class="text-center t-weight">Phần mềm FullLook giá <span class="label label-danger ">600.000 đồng</span> cho 1 năm sử dụng </h5>
 
