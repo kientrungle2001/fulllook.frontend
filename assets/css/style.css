@@ -57,7 +57,7 @@ body{font-family: 'Roboto';}
 .lesson.active{background: #007bff !important; border: 1px solid #007bff !important;}
 .lesson:hover{box-shadow: none; background: #007bff;}
 .head-box{border-radius: 5px 5px 0px 0px; font-size: 18px; font-weight: bold; text-transform: uppercase; color: #2d2d2d; background: #ffdfa5; padding: 15px 3px;}
-.box-body{font-size: 16px; padding: 25px 0px;}
+.box-body{font-size: 16px; padding: 10px 0px;}
 .box-body a{color: #2d2d2d; display: block; margin-bottom: 15px; }
 .box-thithu{width: 100%; float: left; margin-bottom: 15px; border-radius: 5px; box-shadow: 0px 5px 0px #ca8f13;}
 .readall{font-size: 18px; font-weight: bold; text-transform: uppercase; padding: 20px 40px;}

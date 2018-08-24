@@ -32,10 +32,10 @@
                 </ul>
                 <ul class="navbar-nav menu-top2 ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/about.php"><img src="/assets/images/cart.png"/> Mua ngay</a>
+                        <a class="nav-link" href="/about.php#huongdanmua"><img src="/assets/images/cart.png"/> Mua ngay</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/about.php"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
+                        <a class="nav-link" href="/about.php#paycardfl"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
                     </li>
                     <?php if(!isset($_SESSION['userId'])) :?>
                      <li class="nav-item">
@@ -45,11 +45,14 @@
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#loginRegisterModal"><img src="/assets/images/dk.png"/> Đăng kí</a>
                     </li>
                 <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" >Xin chào <?php echo $_SESSION['name'] ?></a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/logout.php" >Đăng xuất</a>
+                    <li class="nav-item dropdown">
+                        <span class="navbar-text">Xin chào </span> <a class="btn btn-primary text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['name'] ?></span> </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="/profile.php" class="dropdown-item">Trang cá nhân</a>
+                            <a href="#" class="dropdown-item">Lịch sử học tập</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/logout.php" class="dropdown-item">Đăng xuất</a>
+                        </div>
                     </li>
                 <?php endif ?>
                 </ul>

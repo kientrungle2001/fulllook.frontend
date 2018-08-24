@@ -10,8 +10,8 @@
 					</div>
 					
 				  	<ul class="list-group full vocabulary">
-					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='vn'" ng-class="{'active': test==selectedTest}"><a href="#" ng-click="selectTest(test)">{{test.name}}</a></li>
-					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='en'" ng-class="{'active': test==selectedTest}"><a href="#" ng-click="selectTest(test)">{{test.name_en}}</a></li>
+					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='vn'" ng-class="{'active sub-active': test==selectedTest}"><a href="#" ng-click="selectTest(test)" onclick="return false;">{{test.name}}</a></li>
+					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='en'" ng-class="{'active sub-active': test==selectedTest}"><a href="#" ng-click="selectTest(test)" onclick="return false;">{{test.name_en}}</a></li>
 					</ul>
 				</div>
 				
@@ -190,4 +190,8 @@
 .text-white {
 	color: white !important;
 }
+.list-group-test-set-item {background-color: #bbb;}
+.list-group-test-set-item.active {background-color: #fbd65b;}
+.list-group-item.sub-active {background-color: #ffe693;}
+.list-group-item.sub-active > a {color: #333;}
 </style>

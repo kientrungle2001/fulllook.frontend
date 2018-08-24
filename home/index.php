@@ -40,12 +40,24 @@
 		</div>
 	</div>
 	<div class="container">
+		<div class="row" ng-init="selectedEnglishTestPage = 0">
+			<div class="col-12 col-md-2" ng-repeat="test in englishTests" ng-show="inPage($index, selectedEnglishTestPage, 30)">
+				<a href="/test.php?test_id={{test.id}}&category_id=1411">
+					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
+					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
+				</a>
+			</div>
+		</div>
 		<div class="row">
-			<div class="col-12 col-md-2" ng-repeat="testE in testEnghlish">
-			<a href="/test.php?test_id={{testE.id}}&category_id=1411">
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{testE.name_en}}</div>
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{testE.name}}</div>
-			</a>
+			<div class="col-12 text-center">
+				<nav aria-label="Navigation">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" ng-repeat="page in range(1, totalPage(englishTests.length, 30), 1)" 
+						ng-click="selectEnglishTestPage(page-1)"
+						ng-class="{'active': selectedEnglishTestPage == page-1}"
+						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>
@@ -61,12 +73,24 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-12 col-md-2" ng-repeat="test in tests">
+		<div class="row" ng-init="selectedTestPage = 0">
+			<div class="col-12 col-md-2" ng-repeat="test in tests" ng-show="inPage($index, selectedTestPage, 30)">
 			<a href="/test.php?test_id={{test.id}}&category_id=1412">
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
 			</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 text-center">
+				<nav aria-label="Navigation">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" ng-repeat="page in range(1, totalPage(tests.length, 30), 1)" 
+						ng-click="selectTestPage(page-1)"
+						ng-class="{'active': selectedTestPage == page-1}"
+						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>
@@ -84,8 +108,8 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row">
-			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'">
+		<div class="row" ng-init="selectedTestSetPage = 0">
+			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'" ng-show="inPage($index, selectedTestSetPage, 15)">
 				<h3 class="text-center head-box"><a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
 
@@ -94,11 +118,21 @@
 							{{test.name}} 
 						</a>
 					</div>
-												
-				</div>	
+				</div>
 			</div>
 		</div>
-		
+		<div class="row">
+			<div class="col-12 text-center">
+				<nav aria-label="Navigation">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" ng-repeat="page in range(1, totalPage(testSets.length, 15), 1)" 
+						ng-click="selectTestSetPage(page-1)"
+						ng-class="{'active': selectedTestSetPage == page-1}"
+						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
 	</div>
 </div>
 <!--end thithu -->	
@@ -120,7 +154,7 @@
 				</div>	
 			</div>
 		</div>
-	</div>		
+	</div>
 </div>
 <!--end-->
 <img src="/assets/images/lydo.png" alt="" class="full" />
@@ -130,21 +164,27 @@
 		<div class="row">
 			<div class="col-12 col-md-6">
 				<h3 class="heading text-uppercase text-center mb-3 text-white">đăng ký tư vấn</h3>
-				<div class="form-group mb-4">
-				    <input type="text" ng-model="advice.name" class="form-control input" placeholder="Họ tên">
-				    
-				</div>
-				<div class="form-group mb-4">
-				    <input type="text" ng-model="advice.phone" class="form-control input" placeholder="Số điện thoại">
-				    
-				</div>
-				<div class="form-group mb-4">
-				    <input type="email" ng-model="advice.email" class="form-control input" placeholder="Email">
-				    
-				</div>
-				<div class="form-group text-center">
-					<div class="btn dangki" ng-click="registerForAdvice()">Đăng kí <img style="max-width: 25px; float: right;" src="/assets/images/button.png"/></div>
-				</div>
+				
+				<form method="post">
+					<div class="form-group mb-4">
+					    <input type="text" ng-model="advice.name" class="form-control input" placeholder="Họ tên" required>
+					    
+					</div>
+					<div class="form-group mb-4">
+					    <input type="text" ng-model="advice.phone" class="form-control input" placeholder="Số điện thoại" required>					    
+					</div>
+					<div class="form-group mb-4">
+					    <input type="email" ng-model="advice.email" class="form-control input" placeholder="Email" required>
+					    
+					</div>
+					<div class="form-group alert" ng-class="{'alert-danger': advice.success == 0, 'alert-success': advice.success== 1}" ng-show="advice.success" ng-bind-html="advice.message">
+						
+					</div>
+					<div class="form-group text-center">						
+						<input type="submit" class="btn dangki" ng-click="registerForAdvice()" value="ĐĂNG KÝ">
+						
+					</div>
+				</form>
 			</div>
 			<div class="col-12 col-md-6">
 				<h3 class="heading text-uppercase mb-3 text-center text-white">Học phí</h3>
@@ -156,7 +196,7 @@
 						CHO<span class="fs29">1 năm</span> sử dụng<br> 
 					</div>
 					
-					<a href="#" class="buynow full">
+					<a href="/about.php#huongdanmua" class="buynow full">
 						Mua ngay
 					</a>
 				</div>
@@ -256,44 +296,15 @@
 							
 						</div>
 						
-						<div class="col-12 col-md-6">
-							<div class="thumbnail relative">
-								
-		      
-								<p class="text-justify">Đây là chương trình được biên soạn tâm huyết, công phu. Các con có thể ôn tổng hợp kiến thức các môn bằng tiếng Việt, đồng thời được trau dồi, cải thiện tiếng Anh của mình ở hầu hết các môn học và một số lĩnh vực đời sống, xã hội. Đây là chương trình thực sự hữu ích, nhằm bổ trợ kiến thức và văn hoá bằng cả tiếng Việt và tiếng Anh, hỗ trợ người học rất nhiều trong quá trình học tập và giao tiếp.						</p>
-								<i class="fa absolute care white fa-sort-desc" aria-hidden="true"></i>
-							</div>
-							
-							<div class="media">
-							  <div class="media-left">
-								<a href="#">
-								  
-									<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-										<img class="media-object" src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/cong.png" alt="cong" style="width:80px;">
-									</div>
-								</a>
-							  </div>
-							  <div class="media-body white text-left">
-								<b>Anh Vũ Đức Công</b> <br>(Cán bộ cao cấp tại Đại sứ quán Úc, Hà Nội <br> PH bé Vũ Minh Hạnh, HS lớp 5B, Trường Tiểu học Quan Hoa, Hà Nội)					  </div>
-							</div>
-							
-						</div>
-						
-						</div>
-					</div>
-					
-					<div class="carousel-item">
-						<div class="row">
+						<!--2 -->
 						<div class="col-sm-5 offset-md-1 col-md-5 col-xs-12">
 						  <div class="thumbnail relative">
-							
-							<p class="text-justify">Đây là cách học Song ngữ cho mọi môn học lần đầu tiên ở Việt Nam. Với 3 chế độ hiển thị ngôn ngữ (Tiếng Anh, Tiếng Việt hoặc Song ngữ) tuỳ người dùng lựa chọn, tôi thấy đây là phần mềm có khả năng ứng dụng cao với nhiều đối tượng HS khác nhau trên toàn quốc. Nội dung các câu hỏi gần gũi thực tế, cập nhật và thiết thực, đặc biệt có sức khơi mở tư duy cho HS.					</p>
+						  	<p class="text-justify">Đây là cách học Song ngữ cho mọi môn học lần đầu tiên ở Việt Nam. Với 3 chế độ hiển thị ngôn ngữ (Tiếng Anh, Tiếng Việt hoặc Song ngữ) tuỳ người dùng lựa chọn, tôi thấy đây là phần mềm có khả năng ứng dụng cao với nhiều đối tượng HS khác nhau trên toàn quốc. Nội dung các câu hỏi gần gũi thực tế, cập nhật và thiết thực, đặc biệt có sức khơi mở tư duy cho HS.					</p>
 							<i class="fa absolute care white fa-sort-desc" aria-hidden="true"></i>
 						  </div>
-						  
 						  <div class="media">
 							  <div class="media-left">
-								<a href="#">
+							  	<a href="#">
 								  
 									<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
 										<img class="media-object" src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/chinga.png" alt="Sandy" style="width:80px;">
@@ -301,113 +312,15 @@
 								</a>
 							  </div>
 							  <div class="media-body white text-left">
-								<b>Chị Trần Việt Nga</b> <br> (Báo Giáo dục &amp; Thời đại)					  </div>
-							</div>
-						  
-						  
-						</div>
-						<div class="col-sm-5  col-md-5 col-xs-12">
-							<div class="thumbnail relative">
-								
-		      
-								<p class="text-justify"> Mình đã cho con dùng. Bạn ấy thích tiếng Anh, cho nên khi làm bài, vừa được ôn tập kiến thức các môn học khác lại được tích hợp với tiếng Anh, bạn ấy có động lực hẳn lên.<br>
-								
-								</p>
-								<i class="fa absolute care white fa-sort-desc" aria-hidden="true"></i>
-							</div>
-							
-							<div class="media">
-							  <div class="media-left">
-								<a href="#">
-								  
-									<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-										<img class="media-object" src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/chihuyen.jpg" alt="Sandy" style="width:80px;">
-									</div>
-								</a>
+								<b>Chị Trần Việt Nga</b> <br> (Báo Giáo dục &amp; Thời đại)
 							  </div>
-							  <div class="media-body white text-left">
-								<b>Chị Trần Thu Huyền</b><br>(Phụ huynh HS Lương Trần Ngọc Minh, Trường Tiểu học Vinschool, Hà Nội)					  </div>
-							</div>
-							
-							
-						</div>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<div class="row">
-						<div class="col-12 col-md-6">
-						  <div class="thumbnail relative">
-							
-							<p class="text-justify">Mỗi buổi tối mẹ giao cho con học 1 file từ vựng tiếng Anh trong phần mềm . Con học trong khoảng 10 - 15 phút trước khi đi ngủ. Hôm học Toán – Tiếng Anh, hôm học Khoa học – Tiếng Anh; Hôm học môn Văn…Tuy vậy, con vẫn chưa đủ tự tin để học các môn bằng chế độ tiếng Anh. Con thường xuyên ôn tập mọi môn học bằng chế độ Song ngữ (Câu hỏi các môn học được viết bằng tiếng Anh, dịch Tiếng Việt bên dưới)</p>
-							<i class="fa absolute care white fa-sort-desc" aria-hidden="true"></i>
 						  </div>
-						  
-						  <div class="media">
-							  <div class="media-left">
-								<a href="#">
-								  
-									<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-										<img class="media-object" src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/anh.png" alt="anh" style="width:80px;">
-									</div>
-								</a>
-							  </div>
-							  <div class="media-body white text-left">
-								<b>Nguyễn Nguyên Anh</b><br>(HS Trường Tiểu học Lý Tự Trọng, TP Thanh Hoá)					  </div>
-							</div>
-						  
+
+
 						</div>
 						
-						<div class="col-12 col-md-6">
-							<div class="thumbnail relative">
-								
-		      
-								<p class="text-justify"> Con thích nhất là học Toán, Khoa học và Hiểu biết xã hội trong chương trình này. Hiện tại con mới dùng được chế độ ngôn ngữ tiếng Việt nhưng con thường xuyên chọn học mục Từ vựng tiếng Anh của các môn này. Con hy vọng từ giờ đến hè con sẽ tích luỹ đủ vốn từ để có thể chuyển sang chế độ học các môn bằng Tiếng Anh						</p>
-								<i class="fa absolute care white fa-sort-desc" aria-hidden="true"></i>
-							</div>
-							
-							 <div class="media">
-							  <div class="media-left">
-								<a href="#">
-								  
-									<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-										<img class="media-object" src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/duc.png" alt="duc" style="width:80px;">
-									</div>
-								</a>
-							  </div>
-							  <div class="media-body white text-left">
-								<b>Nguyễn Minh Đức</b> <br>(HS lớp 5H, TH Dịch Vọng A, Hà Nội.)					  </div>
-							</div>
-							
-						</div>
 						</div>
 					</div>
-					<div class="carousel-item">
-						<div class="row">
-						<div class="col-md-6 col-12">
-						  <div class="thumbnail relative">
-							
-							<p class="text-justify">Nhờ có phần mềm Full Look Song ngữ mà Tết năm nay gia đình tôi có thể thoải mái du xuân, không cần mang theo sách vở cũng không lo con quên kiến thức. Ngoài việc giúp con ôn tập các bài học trên lớp, phần mềm còn giúp trẻ mở rộng vốn hiểu biết và những kĩ năng cần thiết trong cuộc sống. Tôi đặc biệt thích các đề luyện tập của phần mềm vì tính thiết thực của nó</p>
-							<i class="fa absolute care white fa-sort-desc" aria-hidden="true"></i>
-						  </div>
-						  
-						  <div class="media">
-							  <div class="media-left">
-								<a href="#">
-								  
-									<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-										<img class="media-object" src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/hang.png" alt="hang" style="width:80px;">
-									</div>
-								</a>
-							  </div>
-							  <div class="media-body white text-left">
-								<b>Chị Vũ Diễm Hằng</b><br> (Mẹ bé Trần Thanh Huyền - HS trườngTiểu học B Thị trấn Văn Điển;  Giải nhất thi IOE và giao lưu tiếng Anh cấp Huyện)					  </div>
-							</div>
-						  
-						</div>
-						</div>
-						
-					</div>
-				</div>
 				<!-- Left and right controls -->
 				   <a class="carousel-control-prev" href="#slidebootstrap" role="button" data-slide="prev">
 				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -487,68 +400,13 @@
 							</div>
 						
 					</div>
-					<div class="carousel-item">
-						
-							<div class="thumbnail">
-								<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-									<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/chihuyen.jpg" alt="Chị Huyền" style="width:80px;">
-								</div>
-								<p class="text-justify"><i class="fa fa-quote-left fa-2x"></i> Mình đã cho con dùng. Bạn ấy thích tiếng Anh, cho nên khi làm bài, vừa được ôn tập kiến thức các môn học khác lại được tích hợp với tiếng Anh, bạn ấy có động lực hẳn lên.<br>
-								<strong><b>Chị Trần Thu Huyền</b><br>(Phụ huynh HS Lương Trần Ngọc Minh, Trường Tiểu học Vinschool, Hà Nội)</strong><i class="fa fa-quote-right fa-2x"></i>
-								</p>
-							</div>
-						
-					</div>
 					
-					<div class="carousel-item">
-						
-							<div class="thumbnail">
-								<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-									<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/anh.png" alt="Anh" style="width:80px;">
-								</div>
-								<p class="text-justify"><i class="fa fa-quote-left fa-2x"></i> Mỗi buổi tối mẹ giao cho con học 1 file từ vựng tiếng Anh trong phần mềm . Con học trong khoảng 10 - 15 phút trước khi đi ngủ. Hôm học Toán – Tiếng Anh, hôm học Khoa học – Tiếng Anh; Hôm học môn Văn…Tuy vậy, con vẫn chưa đủ tự tin để học các môn bằng chế độ tiếng Anh. Con thường xuyên ôn tập mọi môn học bằng chế độ Song ngữ (Câu hỏi các môn học được viết bằng tiếng Anh, dịch Tiếng Việt bên dưới)<br>
-								<strong><b>Nguyễn Nguyên Anh</b><br>(HS Trường Tiểu học Lý Tự Trọng, TP Thanh Hoá)</strong><i class="fa fa-quote-right fa-2x"></i>
-								</p>
-							</div>
-						
-					</div>
-					<div class="carousel-item">
-						
-							<div class="thumbnail">
-								<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-									<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/duc.png" alt="Anh Đức" style="width:80px;">
-								</div>
-								<p class="text-justify"><i class="fa fa-quote-left fa-2x"></i> Con thích nhất là học Toán, Khoa học và Hiểu biết xã hội trong chương trình này. Hiện tại con mới dùng được chế độ ngôn ngữ tiếng Việt nhưng con thường xuyên chọn học mục Từ vựng tiếng Anh của các môn này. Con hy vọng từ giờ đến hè con sẽ tích luỹ đủ vốn từ để có thể chuyển sang chế độ học các môn bằng Tiếng Anh<br>
-								<strong><b>Nguyễn Minh Đức</b> <br>(HS lớp 5H, TH Dịch Vọng A, Hà Nội.)</strong><i class="fa fa-quote-right fa-2x"></i>
-								</p>
-							</div>
-						
-					</div>
 					
-					<div class="carousel-item">
-						
-							<div class="thumbnail">
-								<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-									<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/hang.png" alt="Chị Hằng" style="width:80px;">
-								</div>
-								<p class="text-justify"><i class="fa fa-quote-left fa-2x"></i> Nhờ có phần mềm Full Look Song ngữ mà Tết năm nay gia đình tôi có thể thoải mái du xuân, không cần mang theo sách vở cũng không lo con quên kiến thức. Ngoài việc giúp con ôn tập các bài học trên lớp, phần mềm còn giúp trẻ mở rộng vốn hiểu biết và những kĩ năng cần thiết trong cuộc sống. Tôi đặc biệt thích các đề luyện tập của phần mềm vì tính thiết thực của nó<br>
-								<strong><b>Chị Vũ Diễm Hằng</b><br> (Mẹ bé Trần Thanh Huyền - HS trườngTiểu học B Thị trấn Văn Điển;  Giải nhất thi IOE và giao lưu tiếng Anh cấp Huyện)</strong><i class="fa fa-quote-right fa-2x"></i>
-								</p>
-							</div>
-						
-					</div>
-					<div class="carousel-item">
-						
-							<div class="thumbnail">
-								<div class="img-circle" style="display: inline-block; width: 80px; height: 80px; overflow: hidden;">
-									<img src="http://www.fulllooksongngu.com/Default/skin/nobel/Themes/Story/media/cong.png" alt="Anh Công" style="width:80px;">
-								</div>
-								<p class="text-justify"><i class="fa fa-quote-left fa-2x"></i> Đây là chương trình được biên soạn tâm huyết, công phu. Các con có thể ôn tổng hợp kiến thức các môn bằng tiếng Việt, đồng thời được trau dồi, cải thiện tiếng Anh của mình ở hầu hết các môn học và một số lĩnh vực đời sống, xã hội. Đây là chương trình thực sự hữu ích, nhằm bổ trợ kiến thức và văn hoá bằng cả tiếng Việt và tiếng Anh, hỗ trợ người học rất nhiều trong quá trình học tập và giao tiếp.<br>
-								<strong><b>Anh Vũ Đức Công</b> <br>(Cán bộ cao cấp tại Đại sứ quán Úc, Hà Nội <br> PH bé Vũ Minh Hạnh, HS lớp 5B, Trường Tiểu học Quan Hoa, Hà Nội)</strong><i class="fa fa-quote-right fa-2x"></i>
-								</p>
-							</div>
-						
-					</div>
+					
+					
+					
+					
+					
 					
 					
 				</div>

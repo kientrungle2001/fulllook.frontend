@@ -79,7 +79,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
-	$scope.testEnghlish = [];
+	$scope.englishTests = [];
 	jQuery.ajax({
 		type: 'post',
 		url: FL_API_URL +'/common/getTests', 
@@ -88,7 +88,7 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 		},
 		dataType: 'json',
 		success: function(resp) {
-			$scope.testEnghlish = resp;
+			$scope.englishTests = resp;
 			$scope.$apply();
 		}
 	});
@@ -122,6 +122,42 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 	// advice
 	$scope.advice = {};
 	$scope.registerForAdvice = function() {
-		console.log($scope.advice);
+		if(!$scope.advice.name || !$scope.advice.phone || !$scope.advice.email){
+			return false;
+		} 
+		jQuery.post(FL_API_URL+'/common/createConsultant',$scope.advice, function(resp) {
+			if(resp){				
+				$scope.advice.success= resp.success;
+				$scope.advice.message = resp.message;
+				$scope.$apply();
+			}
+		});
+	};
+
+	$scope.inPage = function(index, page, pageSize) {
+		return (index >= page * pageSize) && (index < (page + 1) * pageSize);
+	};
+	$scope.totalPage = function(numberOfItem, pageSize) {
+		var rs = Math.ceil(numberOfItem / pageSize);
+		return rs;
+	};
+	$scope.range = function(min, max, step) {
+		var rs = [];
+		for(var i = min; i <= max; i+= step) {
+			rs.push(i);
+		}
+		return rs;
+	};
+	$scope.selectEnglishTestPage = function(page) {
+		$scope.selectedEnglishTestPage = page;
+		$scope.$apply();
+	};
+	$scope.selectTestPage = function (page) {
+		$scope.selectedTestPage = page;
+		$scope.$apply();
+	};
+	$scope.selectTestSetPage = function (page) {
+		$scope.selectedTestSetPage = page;
+		$scope.$apply();
 	};
 }]);

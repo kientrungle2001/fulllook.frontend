@@ -65,16 +65,27 @@
 									</div>
 
 									<div class="nobel-list-md choice">
-										<div class="ptnn-title full" ng-bind-html="question.name"> 
+										<div class="ptnn-title full" mathjax-bind="question.name"> 
 										</div>
 									
-										<table>
+										<table class="full">
 											<tbody>
-												<tr ng-repeat="answer in question.ref_question_answers">
-													<td>
-														<input type="radio" ng-model="answers[question.id]" class="float-left" value="{{answer.id}}" />
-														<span class="answers_474_38915 pl10" ng-bind-html="answer.content">
-														</span>
+												<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'bg-primary text-white': showAnswerStep=='showAnswerStep' && answer.status==1}">
+													<td style="padding: 10px;">
+														<input type="radio" class="float-left" name="question_answers_{{question.id}}" value="{{answer.id}}" ng-model="user_answers[question.id]" ng-disabled="finishStep=='finishStep'" ng-change="selectAnswer(question, answer)" />
+														<span class="answers_{{question.id}}_{{answer.id}}} pl10" mathjax-bind="answer.content"></span>
+	
+
+													</td>
+												</tr>
+												<tr class="bg-success text-white" ng-show="showAnswerStep=='showAnswerStep' && isRightAnswer(question)">
+													<td style="padding: 10px;">
+														Bạn đã trả lời đúng
+													</td>
+												</tr>
+												<tr class="bg-warning text-white" ng-show="showAnswerStep=='showAnswerStep' && !isRightAnswer(question)">
+													<td style="padding: 10px;">
+														Bạn đã trả lời sai
 													</td>
 												</tr>
 											</tbody>
@@ -84,7 +95,7 @@
 										</a>
 								
 										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" ng-show="showAnswerStep=='showAnswerStep'">
-											<div class="item mb-2" ng-bind-html="question.explaination">
+											<div class="item mb-2" mathjax-bind="question.explaination">
 											</div>
 									
 											<div class="item">
@@ -153,17 +164,31 @@
 								</div>
 								
 								<div class="modal-body">
+									
+									<div class="row">
+											<div class="col-md-8 question_true control-label">Thời gian làm bài </div> 
+											<div class="col-md-4 num_true title-blue">{{duringTime}} giây</div>
+									</div>	
+									
 									<div class="row">
 											<div class="col-md-8 question_true control-label">Số câu trả lời đúng </div> 
-											<div class="col-md-4 num_true title-blue">0</div>
+											<div class="col-md-4 num_true title-blue">{{totalRights}}</div>
 									</div>	
 									<div class="row">	
 										<div class="col-md-8 question_false control-label">Số câu trả lời sai </div> 
-										<div class="col-md-4 num_false title-red">5</div>
+										<div class="col-md-4 num_false title-red">{{totalWrongs}}</div>
 									</div>
 									<div class="row">
 										<div class="col-md-8 question_total control-label">Tổng số câu </div> 
-										<div class="col-md-4 num_total">5</div>
+										<div class="col-md-4 num_total">{{totalQuestions}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8 question_total control-label">Xếp hạng </div> 
+										<div class="col-md-4 num_total">{{rating}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8 question_total control-label">Trên tổng số </div> 
+										<div class="col-md-4 num_total">{{totalDoings}}</div>
 									</div>
 								</div>
 								<div class="modal-footer">
