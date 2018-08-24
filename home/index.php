@@ -167,14 +167,14 @@
 				
 				<form method="post">
 					<div class="form-group mb-4">
-					    <input type="text" ng-model="advice.name" class="form-control" placeholder="Họ tên" required>
+					    <input type="text" ng-model="advice.name" class="form-control input" placeholder="Họ tên" required>
 					    
 					</div>
 					<div class="form-group mb-4">
-					    <input type="text" ng-model="advice.phone" class="form-control" placeholder="Số điện thoại" required>					    
+					    <input type="text" ng-model="advice.phone" class="form-control input" placeholder="Số điện thoại" required>					    
 					</div>
 					<div class="form-group mb-4">
-					    <input type="email" ng-model="advice.email" class="form-control" placeholder="Email" required>
+					    <input type="email" ng-model="advice.email" class="form-control input" placeholder="Email" required>
 					    
 					</div>
 					<div class="form-group alert" ng-class="{'alert-danger': advice.success == 0, 'alert-success': advice.success== 1}" ng-show="advice.success" ng-bind-html="advice.message">
