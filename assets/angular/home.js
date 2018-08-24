@@ -118,6 +118,15 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 	// advice
 	$scope.advice = {};
 	$scope.registerForAdvice = function() {
-		console.log($scope.advice);
+		if(!$scope.advice.name || !$scope.advice.phone || !$scope.advice.email){
+			return false;
+		} 
+		jQuery.post(FL_API_URL+'/common/createConsultant',$scope.advice, function(resp) {
+			if(resp){				
+				$scope.advice.success= resp.success;
+				$scope.advice.message = resp.message;
+				$scope.$apply();
+			}
+		});
 	};
 }]);

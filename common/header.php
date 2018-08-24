@@ -31,10 +31,10 @@
                 </ul>
                 <ul class="navbar-nav menu-top2 ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/about.php"><img src="/assets/images/cart.png"/> Mua ngay</a>
+                        <a class="nav-link" href="/about.php#huongdanmua"><img src="/assets/images/cart.png"/> Mua ngay</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/about.php"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
+                        <a class="nav-link" href="/about.php#paycardfl"><img src="/assets/images/pay.png"/> Nạp thẻ</a>
                     </li>
                     <?php if(!isset($_SESSION['userId'])) :?>
                      <li class="nav-item">

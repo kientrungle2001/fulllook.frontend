@@ -40,19 +40,19 @@
 				</div>
 			</div>
 
-			<div class="full bg-light p-3 mb-3">
+			<div class="full bg-light p-3 mb-3" id="huongdanmua">
 				<h4 class="text-center t-weight">Hướng dẫn mua sản phẩm Full Look</h4>
 				<h5 class="text-center t-weight">Phần mềm FullLook giá <span class="label label-danger ">600.000 đồng</span> cho 1 năm sử dụng </h5>
 
-				<p><strong>Bước 1:</strong> Bạn đăng ký tài khoản của mình <a class="login_required" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Tại đây</a></p>
+				<p><strong>Bước 1:</strong> Bạn đăng ký tài khoản của mình <a class="font-weight-bold" href="#" data-toggle="modal" data-target="#loginRegisterModal">Tại đây</a></p>
 				<p><strong>Bước 2:</strong> Bạn có thể mua phần mềm theo hai cách</p>
 					<div class="row">
 						
 						<div class="col-md-11">
 							<ul>
-								<li>Cách 1: Đặt mua thẻ FullLook <a href="#ordercardfl">(tại đây)</a></li>
-								<li>Cách 2: Thanh toán bằng chuyển khoản ngân hàng <a href="#bankfl">(tại đây)</a></li>
-								<li>Cách 3: Thanh toán tại văn phòng công ty <a href="#officefl">(tại đây)</a></li>
+								<li>Cách 1: Đặt mua thẻ FullLook <a class="font-weight-bold" href="#ordercardfl"> Tại đây</a></li>
+								<li>Cách 2: Thanh toán bằng chuyển khoản ngân hàng <a class="font-weight-bold" href="#bankfl"> Tại đây</a></li>
+								<li>Cách 3: Thanh toán tại văn phòng công ty <a href="#officefl" class="font-weight-bold"> Tại đây</a></li>
 							</ul>
 							<p></p>
 						</div>
