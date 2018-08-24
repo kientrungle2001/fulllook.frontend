@@ -41,7 +41,7 @@
 	</div>
 	<div class="container">
 		<div class="row" ng-init="selectedEnglishTestPage = 0">
-			<div class="col-12 col-md-2" ng-repeat="test in englishTests" ng-show="inPage($index, selectedEnglishTestPage, 12)">
+			<div class="col-12 col-md-2" ng-repeat="test in englishTests" ng-show="inPage($index, selectedEnglishTestPage, 30)">
 				<a href="/test.php?test_id={{test.id}}&category_id=1411">
 					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
 					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
@@ -52,7 +52,7 @@
 			<div class="col-12 text-center">
 				<nav aria-label="Navigation">
 					<ul class="pagination justify-content-center">
-						<li class="page-item" ng-repeat="page in range(1, totalPage(englishTests.length, 12), 1)" 
+						<li class="page-item" ng-repeat="page in range(1, totalPage(englishTests.length, 30), 1)" 
 						ng-click="selectEnglishTestPage(page-1)"
 						ng-class="{'active': selectedEnglishTestPage == page-1}"
 						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
@@ -74,7 +74,7 @@
 	</div>
 	<div class="container">
 		<div class="row" ng-init="selectedTestPage = 0">
-			<div class="col-12 col-md-2" ng-repeat="test in tests" ng-show="inPage($index, selectedTestPage, 12)">
+			<div class="col-12 col-md-2" ng-repeat="test in tests" ng-show="inPage($index, selectedTestPage, 30)">
 			<a href="/test.php?test_id={{test.id}}&category_id=1412">
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}}</div>
 				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}}</div>
@@ -85,7 +85,7 @@
 			<div class="col-12 text-center">
 				<nav aria-label="Navigation">
 					<ul class="pagination justify-content-center">
-						<li class="page-item" ng-repeat="page in range(1, totalPage(tests.length, 12), 1)" 
+						<li class="page-item" ng-repeat="page in range(1, totalPage(tests.length, 30), 1)" 
 						ng-click="selectTestPage(page-1)"
 						ng-class="{'active': selectedTestPage == page-1}"
 						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
@@ -109,7 +109,7 @@
 	</div>
 	<div class="container">
 		<div class="row" ng-init="selectedTestSetPage = 0">
-			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'" ng-show="inPage($index, selectedTestSetPage, 10)">
+			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'" ng-show="inPage($index, selectedTestSetPage, 15)">
 				<h3 class="text-center head-box"><a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
 
@@ -125,7 +125,7 @@
 			<div class="col-12 text-center">
 				<nav aria-label="Navigation">
 					<ul class="pagination justify-content-center">
-						<li class="page-item" ng-repeat="page in range(1, totalPage(testSets.length, 10), 1)" 
+						<li class="page-item" ng-repeat="page in range(1, totalPage(testSets.length, 15), 1)" 
 						ng-click="selectTestSetPage(page-1)"
 						ng-class="{'active': selectedTestSetPage == page-1}"
 						><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
