@@ -59,6 +59,14 @@
 			jQuery('#homeslider').carousel({
 		      interval: 10000,
 		    });
+			jQuery(".nav-item.dropdown").hover(            
+				function() {
+					jQuery(".nav-item.dropdown").removeClass('show');
+					jQuery('ul.dropdown-menu').removeClass('show');
+					jQuery(this).addClass('show');
+					jQuery(this).find('ul.dropdown-menu').addClass('show');        
+				}
+			);
 		});
 	    
 
@@ -98,3 +106,4 @@
 		    }
 		}); 
 	</script>
+	
