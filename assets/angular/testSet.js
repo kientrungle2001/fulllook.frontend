@@ -95,6 +95,13 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 	$scope.finishTest = function() {
 		$scope.finishStep = 'finishStep';
 		$scope.clearCountDown();
+
+		if($scope.selectedTest.trytest == 2) {
+			$scope.showAnswer();
+			$scope.$apply();
+			return false;
+		}
+
 		$scope.totalQuestions = $scope.questions.length;
 		$scope.totalRights = 0;
 		$scope.questions.forEach(function (question) {
@@ -193,6 +200,12 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 			}
 		}
 		return false;
+	};
+
+	$scope.formatWritting = function(content) {
+		content = content.replace(/\[i[\d]+\]/ig, '..............................................................');
+		content = content.replace(/\[t[\d]+\]/ig, '<div style="word-wrap: break-word;">' + '..............................................................'.repeat(20) + '</div>');
+		return content;
 	};
 
 }]);

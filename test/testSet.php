@@ -41,6 +41,7 @@
 					<div class="practice-content p-3 full">
 						<div class="do-practice full" ng-show="step=='selectTest'" style="text-align: center; padding-top: 50px;">
 							<h2>{{selectedTestSet.name}} - {{selectedTest.name}}</h2>
+							<p><strong>Dạng đề</strong>: {{selectedTest.trytest === 2 ? 'Tự luận': 'Trắc nghiệm'}}</p>
 							<p><strong>Số lượng câu hỏi</strong>: {{selectedTest.quantity || 24}}</p>
 							<p><strong>Thời gian làm bài</strong>: {{selectedTest.time || 45}} phút</p>
 							<button ng-click="doTest()" class="btn btn-primary btn-lg">Bắt đầu làm</button>
@@ -65,7 +66,7 @@
 									</div>
 
 									<div class="nobel-list-md choice">
-										<div class="ptnn-title full" mathjax-bind="question.name"> 
+										<div class="ptnn-title full" mathjax-bind="selectedTest.trytest == 2 ? formatWritting(question.name): question.name"> 
 										</div>
 									
 										<table class="full">
@@ -78,12 +79,12 @@
 
 													</td>
 												</tr>
-												<tr class="bg-success text-white" ng-show="showAnswerStep=='showAnswerStep' && isRightAnswer(question)">
+												<tr class="bg-success text-white" ng-show="selectedTest.trytest !==2 && showAnswerStep=='showAnswerStep' && isRightAnswer(question)">
 													<td style="padding: 10px;">
 														Bạn đã trả lời đúng
 													</td>
 												</tr>
-												<tr class="bg-warning text-white" ng-show="showAnswerStep=='showAnswerStep' && !isRightAnswer(question)">
+												<tr class="bg-warning text-white" ng-show="selectedTest.trytest !==2 &&showAnswerStep=='showAnswerStep' && !isRightAnswer(question)">
 													<td style="padding: 10px;">
 														Bạn đã trả lời sai
 													</td>
@@ -139,7 +140,13 @@
 
 							</div>
 
-							<div class="text-center full mb-3 relative">				
+							<div class="text-center full mb-3 relative" ng-show="selectedTest.trytest==2">
+								<button id="finish-choice" class="btn btn-primary btt-practice " name="finish-choice" ng-click="finishTest()" ng-disabled="finishStep == 'finishStep'"><span class="fa fa-check"></span>
+									Xem đáp án
+								</button>
+							</div>
+
+							<div class="text-center full mb-3 relative" ng-show="selectedTest.trytest==1">				
 								<button id="finish-choice" class="btn btn-primary btt-practice " name="finish-choice" ng-click="finishTest()" ng-disabled="finishStep == 'finishStep'"><span class="fa fa-check"></span>
 									Hoàn thành
 								</button>
@@ -207,11 +214,7 @@
 						</div>
 					</div>
 
-					<div style="height: 103px;" class="relative item">
-						<img style="left: 0px; bottom: 0px; border-radius: 0px 0px 0px 5px;" class="absolute hidden-xs" src="/assets/images/bottom-left.png">
-						<img style="right: 0px; bottom: 0px; border-radius: 0px 0px 5px 0px;" class="absolute hidden-xs" src="/assets/images/bottom-right.png">
-						
-					</div>	
+					<img class="img-fluid full" src="/assets/images/bg-huongdan.png">
 				</div>
 			</div>
 		</div>

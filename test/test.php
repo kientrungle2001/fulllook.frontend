@@ -6,7 +6,7 @@
 				<div class="main-shadow full">
 					<div class="full">
 						<div style="border-radius: 5px 0px 0px 0px;" class="nav-link text-center title-pr text-white bg-primary">
-						Ôn luyện tổng hợp</div>
+						{{category.name}}</div>
 					</div>
 					
 				  	<ul class="list-group full vocabulary">
@@ -18,13 +18,22 @@
 			</div>
 			<div class="col-12 col-md-9">
 				<div class="main-shadow full">
-					<h2 class="text-center title" ng-show="selectedTest">{{selectedTest.name}}</h2>
-					<h2 class="text-center title" ng-hide="selectedTest">Hãy chọn một đề</h2>
+					<h2 class="text-center title">{{category.name}}</h2>
 					<div class="practice-content p-3 full">
 						<div class="do-practice full" ng-show="step=='selectTest'" style="text-align: center; padding-top: 50px;">
+							<h2>{{selectedTest.name}}</h2>
+							<p><strong>Dạng đề</strong>: {{selectedTest.trytest === 2 ? 'Tự luận': 'Trắc nghiệm'}}</p>
+							<p><strong>Số lượng câu hỏi</strong>: {{selectedTest.quantity || 24}}</p>
+							<p><strong>Thời gian làm bài</strong>: {{selectedTest.time || 45}} phút</p>
 							<button ng-click="doTest()" class="btn btn-primary btn-lg">Bắt đầu làm</button>
 						</div>
 						<div class="do-practice full" ng-show="step=='doTest'">
+							<div class="text-center">
+								<h2>{{selectedTest.name}}</h2>
+								<p><strong>Dạng đề</strong>: {{selectedTest.trytest === 2 ? 'Tự luận': 'Trắc nghiệm'}}</p>
+								<p><strong>Số lượng câu hỏi</strong>: {{selectedTest.quantity || 24}}</p>
+								<p><strong>Thời gian làm bài</strong>: {{selectedTest.time || 45}} phút</p>
+							</div>
 							<div class="text-center">
 								<div  class="time">
 									<img src="http://fulllook.com.vn/Themes/Songngu3/skin/images/watch.png">
@@ -176,10 +185,7 @@
 						</div>
 					</div>
 
-					<div style="height: 103px;" class="relative item">
-						<img style="left: 0px; bottom: 0px; border-radius: 0px 0px 0px 5px;" class="absolute hidden-xs" src="/assets/images/bottom-left.png" />
-						<img style="right: 0px; bottom: 0px; border-radius: 0px 0px 5px 0px;" class="absolute hidden-xs" src="/assets/images/bottom-right.png" />
-					</div>	
+					<img class="img-fluid full" src="/assets/images/bg-huongdan.png">
 				</div>
 			</div>
 		</div>

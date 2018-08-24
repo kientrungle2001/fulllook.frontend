@@ -12,18 +12,32 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	$scope.translate = function(val) {
 		return $langMap[$scope.language][val] || val;
 	}
+	var u = new URL(location.href);
+
+	$scope.category = {};
+
+	jQuery.ajax({
+		type: 'get',
+		url: FL_API_URL + '/corecategories/' + u.searchParams.get('category_id'), 
+		dataType: 'json',
+		success: function(resp) {
+			$scope.category = resp;
+			$scope.$apply();
+		}
+	});
+
 	$scope.tests = [];
 	jQuery.ajax({
 		type: 'post',
 		url: FL_API_URL +'/common/getTests', 
 		data: {
-			categoryId: '354'
+			categoryId: u.searchParams.get('category_id')
 		},
 		dataType: 'json',
 		success: function(resp) {
 			$scope.tests = resp;
 			resp.forEach(function(test) {
-				var u = new URL(location.href);
+				
 				if(test.id == parseInt(u.searchParams.get('test_id'))) {
 					$scope.selectTest(test);
 				}
