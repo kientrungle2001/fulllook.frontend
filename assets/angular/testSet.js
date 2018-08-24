@@ -34,7 +34,6 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		success: function(resp) {
 			$scope.testSets = buildBottomTree(resp);
 			$scope.testSets.forEach(function(testSet) {
-				var u = new URL(location.href);
 				if (testSet.id == parseInt(u.searchParams.get('test_set_id'))) {
 					$scope.selectTestSet(testSet);
 					testSet.children.forEach(function(test){
@@ -52,11 +51,13 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		$scope.step = 'selectTestSet';
 		$scope.selectedTestSet = testSet;
 		$scope.selectedTest = null;
+		$scope.resetTest();
 	};
 	$scope.selectTest = function (testSet, test) {
 		$scope.step = 'selectTest';
 		$scope.selectedTestSet = testSet;
 		$scope.selectedTest = test;
+		$scope.resetTest();
 	};
 	$scope.doTest = function() {
 		$scope.step = 'doTest';
@@ -93,9 +94,105 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 	};
 	$scope.finishTest = function() {
 		$scope.finishStep = 'finishStep';
-		clearInterval($scope.countdownIntervalId);
+		$scope.clearCountDown();
+		$scope.totalQuestions = $scope.questions.length;
+		$scope.totalRights = 0;
+		$scope.questions.forEach(function (question) {
+			if ($scope.isRightAnswer(question)) {
+				$scope.totalRights++;
+			}
+		});
+		$scope.totalWrongs = $scope.totalQuestions - $scope.totalRights;
+		
+		var userId = 8;
+		var startTime = $scope.startTime;
+		var duringTime = $scope.duringTime;
+		var stopTime = serverTime + duringTime;
+		var parentTest = $scope.selectedTestSet.id;
+		var questions = [];
+		$scope.questions.forEach(function (question) {
+			var answerId = 0;
+			if (typeof $scope.user_question_answers[question.id] !== 'undefined') {
+				answerId = $scope.user_question_answers[question.id];
+			}
+			questions.push({
+				questionId: question.id,
+				answerId: answerId,
+				status: $scope.isRightAnswer(question) ? 1 : 0
+			});
+		});
+		if(1) {
+			jQuery.ajax({
+				type: 'post',
+				url: FL_API_URL + '/test/updateUserBooks',
+				data: {
+					userId: userId,
+					categoryId: categoryId,
+					testId: $scope.selectedTest.id,
+					parentTest: parentTest,
+					exercise_number: 0,
+					questions: questions,
+					quantity_question: $scope.totalQuestions,
+					mark: $scope.totalRights,
+					startTime: startTime,
+					duringTime: duringTime,
+					stopTime: stopTime
+				},
+				success: function (resp) {
+					jQuery('#resultModal').modal('show');
+					jQuery.ajax({
+						type: 'post',
+						url: FL_API_URL + '/test/getRating',
+						data: {
+							mark: $scope.totalRights,
+							duringTime: duringTime,
+							testId: $scope.selectedTest.id
+						},
+						success: function(resp) {
+							$scope.totalDoings = resp.total;
+							$scope.rating = resp.rating;
+							$scope.$apply();
+						}
+					});
+				}
+			});
+		}
+	};
+	$scope.resetTest = function() {
+		$scope.clearCountDown();
+		$scope.showAnswerStep = false;
+		$scope.finishStep = false;
+		$scope.user_question_answers = {};
+	};
+	$scope.clearCountDown = function() {
+		
+		if (typeof $scope.countdownIntervalId !== 'undefined') {
+			clearInterval($scope.countdownIntervalId);
+			delete $scope.countdownIntervalId;
+		}
 	};
 	$scope.showAnswer = function() {
 		$scope.showAnswerStep = 'showAnswerStep';
 	};
+
+	$scope.user_question_answers = {};
+	$scope.selectAnswer = function (question, answer) {
+		$scope.user_question_answers[question.id] = answer.id;
+	};
+
+	$scope.isRightAnswer = function (question) {
+		var rightId = null;
+		question.ref_question_answers.forEach(function (answer) {
+			if (answer.status == 1 || answer.status == '1') {
+				rightId = answer.id;
+			}
+		});
+		if (typeof $scope.user_question_answers[question.id] != 'undefined') {
+			if (rightId == $scope.user_question_answers[question.id]) {
+				return true;
+			}
+		}
+		return false;
+	};
+
 }]);
