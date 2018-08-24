@@ -4,6 +4,10 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 	$scope.changeLanguage = function() {
 		window.localStorage.setItem('language', $scope.language);
 	}
+	$scope.clickLanguage = function(lang) {
+		$scope.language = lang;
+		window.localStorage.setItem('language', $scope.language);
+	}
 	
 	$scope.grade = window.localStorage.getItem('grade') || '5';
 	$scope.changeGrade = function() {

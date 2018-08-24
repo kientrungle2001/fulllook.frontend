@@ -16,6 +16,7 @@
                             <option value="" ng-selected="language==''" disabled="disabled">{{translate('Select language')}}</option>
 							<option value="en" ng-selected="language=='en'">English</option>
 							<option value="vn" ng-selected="language=='vn'">Tiếng Việt</option>
+                            <option value="ev" ng-selected="language=='ev'">Song ngữ</option>
                         </select>
                     </li>
                     <li class="nav-item">
@@ -67,8 +68,13 @@
 				<li class="nav-item">
                     <a href="/" class="nav-link">Trang chủ</a>
                 </li>
-                <li class="nav-item active">
-                    <a href="/about.php" class="nav-link">Về phần mềm</a>
+                <li class="nav-item dropdown">
+                    <a href="/about.php" data-toggle="dropdown" class="nav-link dropdown-toggle">Về phần mềm</a>
+                    <ul class="dropdown-menu">
+						<li style="padding-left: 25px;"><a href="/about.php">Giới thiệu</a></li>
+						<li><a href="/about.php">Hướng dẫn mua</a></li>
+						<li><a href="/news_list.php?id=147">Hướng dẫn sử dụng</a></li>
+					</ul>
                 </li>
                 <li class="nav-item dropdown">
 					<a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link">Chọn Ngôn Ngữ</a>
