@@ -12,6 +12,15 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	$scope.translate = function(val) {
 		return $langMap[$scope.language][val] || val;
 	}
+
+	$scope.checkIsLogedIn = function () {
+		return window.sessionUserId !== '';
+	};
+
+	$scope.checkIsPaid = function () {
+		return window.checkPayment === '1';
+	}
+
 	var u = new URL(location.href);
 
 	$scope.category = {};
@@ -60,6 +69,14 @@ flApp.controller('TestController', ['$scope', function($scope) {
 		};
 	};
 	$scope.doTest = function() {
+		if(!$scope.checkIsLogedIn()) {
+			alert('Bạn phải đăng nhập mới được làm bài');
+			return false;
+		}
+		if ($scope.selectedTest.trial == 0 && !$scope.checkIsPaid()) {
+			alert('Bạn phải mua phần mềm mới được làm bài');
+			return false;
+		}
 		$scope.step = 'doTest';
 		$scope.testStep = 'doTest';
 		$scope.showAnswersStep = 'doTest';

@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col-12 col-md-3">
 				<div class="main-shadow full" style="height: 600px; overflow-y: scroll;">
-					<ul  class="nav nav-pills" id="pills-tab" role="tablist">
+					<ul  class="nav nav-pills" id="pills-tab" role="tablist" style="background: #ddd;">
 					  <li class="nav-item w-50">
 					    <a style="border-radius: 5px 0px 0px 0px;" class="nav-link title-pr active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Luyện tập</a>
 					  </li>

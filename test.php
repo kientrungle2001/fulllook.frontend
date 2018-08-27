@@ -14,6 +14,12 @@
 		FL_API_URL = '<?php echo FL_API_URL?>';
 		test_id = '<?php echo intval($_GET['test_id']); ?>';
 		serverTime = <?php echo time() ?>;
+		
+		sessionUserId = '<?php if(isset($_SESSION['userId'])) echo $_SESSION['userId']  ?>';
+		checkPayment = '<?php if(isset($_SESSION['checkPayment'])) echo $_SESSION["checkPayment"] ?>';
+		paymentDate = '<?php if(isset($_SESSION['paymentDate'])) echo $_SESSION["paymentDate"] ?>';
+		expiredDate = '<?php if(isset($_SESSION['expiredDate'])) echo $_SESSION["expiredDate"] ?>';
+
 		setInterval(function() {
 			serverTime++;
 		}, 1000);

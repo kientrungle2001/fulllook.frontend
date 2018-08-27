@@ -510,7 +510,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		});
 		$scope.totalWrongs = $scope.totalQuestions - $scope.totalRights;
 		jQuery('#resultModal').modal('show');
-		var userId = 8;
+		var userId = window.sessionUserId;
 		var startTime = serverTime;
 		var duringTime = 15 * 60 - ($scope.remaining.minutes * 60 + $scope.remaining.seconds);
 		var stopTime = serverTime + duringTime;
