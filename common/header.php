@@ -8,7 +8,7 @@
             <div class="navbar-collapse fs14 cl-green collapse">
                 <ul class="navbar-nav menu-top1">
                     <li class="nav-item">
-                        <img src="/assets/images/hotline.png"/> Hotline: 0965 90 91 95
+                        <img src="/assets/images/hotline.png"/> Hotline: 0936 738 986
                     </li>
                     <li class="nav-item">
                         &nbsp;
