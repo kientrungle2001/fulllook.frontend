@@ -49,7 +49,7 @@
                         <span class="navbar-text">Xin chào </span> <a class="btn btn-primary text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['name'] ?></span> </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a href="/profile.php" class="dropdown-item">Trang cá nhân</a>
-                            <a href="#" class="dropdown-item">Lịch sử học tập</a>
+                            <a href="/profile.php#luyentap" class="dropdown-item">Lịch sử học tập</a>
                             <div class="dropdown-divider"></div>
                             <a href="/logout.php" class="dropdown-item">Đăng xuất</a>
                         </div>

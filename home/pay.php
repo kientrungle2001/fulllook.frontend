@@ -43,7 +43,7 @@
 
 			<div id="guide" class="full bg-light p-3 mb-3">
 				<h4 class="text-center t-weight">Hướng dẫn mua sản phẩm Full Look</h4>
-				<h5 class="text-center t-weight">Phần mềm FullLook giá <span class="label label-danger ">600.000 đồng</span> cho 1 năm sử dụng </h5>
+				<h5 class="text-center t-weight">Phần mềm FullLook giá <span class="label label-danger ">700.000 đồng</span> cho 1 năm sử dụng </h5>
 
 				<p><strong>Bước 1:</strong> Bạn đăng ký tài khoản của mình <a class="font-weight-bold" href="#" data-toggle="modal" data-target="#loginRegisterModal">Tại đây</a></p>
 				<p><strong>Bước 2:</strong> Bạn có thể mua phần mềm theo hai cách</p>

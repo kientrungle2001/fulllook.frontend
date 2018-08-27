@@ -91,7 +91,8 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			    jQuery.post('/upload.php', {avatar: base64_avatar, user_id: sessionUserId }, function(resp) {
 			    	//console.log(resp);
 			    	if(resp){
-			    		$scope.editAvatar.userId= sessionUserId;
+			    		console.log(resp);
+			    		/*$scope.editAvatar.userId= sessionUserId;
 			    		$scope.editAvatar.urlAvatar= FL_URL +'/upload/' + resp ;
 			    		jQuery.post(FL_API_URL+'/history/editAvatar', $scope.editAvatar, function(resp) {				
 						  	if(resp) {		  		
@@ -99,7 +100,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 						  		$scope.editAvatar.message ='<strong>' +resp.message+ '</strong>';
 						  		$scope.$apply();
 						  	}
-						});
+						});*/
 			    	}
 			    });
 
