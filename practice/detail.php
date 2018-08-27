@@ -31,8 +31,9 @@
 					<div class="tab-content" id="pills-tabContent">
 					  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 					  	<ul  class="list-group menu-practice">
-							<li class="list-group-item" ng-repeat="topic in topics"> <a href="#" ng-click="selectTopic(topic, topic)" style="position:relative;" onclick="return false;">{{topic.name}} </a>
+							<li class="list-group-item" ng-repeat="topic in topics"> <a href="#" style="position:relative;" onclick="return false;">{{topic.name}} </a>
 								<i class="float-right fa fa-caret-down" aria-hidden="true" ng-show="topic.children.length > 0" style="position: absolute; top: 15px; right: 5px;"></i>
+
 								<div ng-show="subject.level==4">
 									<ul class="list-group lv2" style="margin-left: -20px;margin-right: -20px;" ng-repeat="subTopic in topic.children">
 										<li class="list-group-item" ng-repeat="subTopic2 in subTopic.children" ng-class="{'active': selectedTopic===subTopic2}">

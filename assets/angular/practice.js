@@ -35,6 +35,27 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 			success: function(resp) {
 				$scope.subject = resp;
 				subjectId = resp.id;
+				if(resp.id == 51) {
+					$scope.subject.level = 3;
+				}
+				if(resp.id == 164) {
+					$scope.subject.level = 3;
+				}
+				if(resp.id == 157) {
+					$scope.subject.level = 3;
+				}
+				if(resp.id == 50) {
+					$scope.subject.level = 3;
+				}
+				if(resp.id == 59) {
+					$scope.subject.level = 3;
+				}
+				if(resp.id == 88) {
+					$scope.subject.level = 1;
+				}
+				if(resp.id == 54) {
+					$scope.subject.level = 3;
+				}
 				$scope.$apply();
 			}
 		});	

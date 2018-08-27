@@ -146,7 +146,7 @@
 								</button>
 							</div>
 
-							<div class="text-center full mb-3 relative" ng-show="selectedTest.trytest==1">				
+							<div class="text-center full mb-3 relative" ng-show="selectedTest.trytest !== 2">				
 								<button id="finish-choice" class="btn btn-primary btt-practice " name="finish-choice" ng-click="finishTest()" ng-disabled="finishStep == 'finishStep'"><span class="fa fa-check"></span>
 									Hoàn thành
 								</button>
