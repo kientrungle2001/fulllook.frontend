@@ -61,10 +61,17 @@
 		    });
 			jQuery(".nav-item.dropdown").hover(            
 				function() {
-					jQuery(".nav-item.dropdown").removeClass('show');
-					jQuery('ul.dropdown-menu').removeClass('show');
+					//jQuery(this).find('a.dropdown-toggle').trigger('click');
+					// jQuery(".nav-item.dropdown").removeClass('show');
+					// jQuery('ul.dropdown-menu').removeClass('show');
+					// jQuery(this).find('a.dropdown-toggle').attr('aria-expanded',"true");
 					jQuery(this).addClass('show');
+					jQuery(this).find('ul.dropdown-menu').css('top', '95%');
 					jQuery(this).find('ul.dropdown-menu').addClass('show');        
+				},
+				function(){
+					jQuery(this).removeClass('show');
+					jQuery(this).find('ul.dropdown-menu').removeClass('show'); 
 				}
 			);
 		});
