@@ -31,19 +31,19 @@
 					<div class="tab-content" id="pills-tabContent">
 					  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 					  	<ul  class="list-group menu-practice">
-							<li class="list-group-item" ng-repeat="topic in topics"> <a href="#" style="position:relative;" onclick="return false;">{{topic.name}} </a>
+							<li class="list-group-item list-group-topic-item" ng-repeat="topic in topics" style="padding-bottom: 0" ng-class="{'active': selectedParentTopic === topic}"> <a href="#" style="position:relative;" onclick="return false;" ng-click="selectTopic(topic, topic)">{{topic.name}}</a>
 								<i class="float-right fa fa-caret-down" aria-hidden="true" ng-show="topic.children.length > 0" style="position: absolute; top: 15px; right: 5px;"></i>
 
 								<div ng-show="subject.level==4">
 									<ul class="list-group lv2" style="margin-left: -20px;margin-right: -20px;" ng-repeat="subTopic in topic.children">
-										<li class="list-group-item" ng-repeat="subTopic2 in subTopic.children" ng-class="{'active': selectedTopic===subTopic2}">
+										<li class="list-group-item" ng-repeat="subTopic2 in subTopic.children" ng-class="{'active sub-active': selectedTopic===subTopic2}">
 											<a href="#" ng-click="selectTopic(subTopic2, topic)" onclick="return false;">{{subTopic2.name}}</a>
 										</li>
 									</ul>
 								</div>
 								<div ng-show="subject.level==3">
 									<ul class="list-group lv2" style="margin-left: -20px;margin-right: -20px;" ng-repeat="subTopic in topic.children">
-										<li class="list-group-item" ng-class="{'active': selectedTopic===subTopic}">
+										<li class="list-group-item" ng-class="{'active sub-active': selectedTopic===subTopic}">
 											<a href="#" ng-click="selectTopic(subTopic, topic)" onclick="return false;">{{subTopic.name}}</a>
 										</li>
 									</ul>
@@ -53,7 +53,7 @@
 					  </div>
 					  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 					  	<ul class="list-group vocabulary">
-						  <li class="list-group-item" ng-repeat="vocabulary in vocabularies" ng-class="{active: selectedVocabulary===vocabulary}"><a href="#" ng-click="selectVocabulary(vocabulary)" onclick="return false;">{{vocabulary.title}}</a></li>
+						  <li class="list-group-item" ng-repeat="vocabulary in vocabularies" ng-class="{'active sub-active': selectedVocabulary===vocabulary}"><a href="#" ng-click="selectVocabulary(vocabulary)" onclick="return false;">{{vocabulary.title_tdn || vocabulary.title}}</a></li>
 						</ul>
 					  </div>
 					 
@@ -62,14 +62,14 @@
 				
 			</div>
 			<div class="col-12 col-md-9">
-				<div class="main-shadow full">
+				<div class="main-shadow full" ng-show="checkIsLogedIn()">
 					<h2 class="text-center title">
 					<span ng-hide="selectedTopic">Các chuyên đề</span>
 					<span ng-show="selectedTopic">{{selectedParentTopic.name}} - {{selectedTopic.name}}</span>
 					
 					</h2>
 
-					<div class="text-center guide" ng-hide="action != 'practice' || selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
+					<div class="text-center guide" ng-show="action == 'practice' && !selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
 					<div class="text-center guide" ng-show="action=='practice' && selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn bài để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
 
 					<div class="practice-content p-3 full" ng-show="action=='practice'">
@@ -206,7 +206,7 @@
 					</div>
 					
 					<div class="practice-content p-3 full" ng-show="action=='vocabulary'">
-						<div class="do-practice full">
+						<div class="do-practice full" ng-show="selectedVocabulary.trial == 1 || checkIsPaid()">
 							<div class="name-detail text-center">
 							{{selectedVocabulary.title}}
 							</div>
@@ -250,8 +250,17 @@
 
 							
 						</div>
+						<div class="do-practice full" ng-hide="selectedVocabulary.trial == 1 || checkIsPaid()">
+							<h2 class="text-center guide">Bạn phải <a href="/about.php#guide">mua phần mềm</a> mới được xem bài học này</h2>
+						</div>
+
 					</div>
 					
+					<img class="img-fluid full" src="/assets/images/bg-huongdan.png" />
+				</div>
+
+				<div class="main-shadow full" ng-hide="checkIsLogedIn()">
+					<h2 class="text-center guide">Bạn phải <a href="#" onclick="return false" data-toggle="modal" data-target="#loginRegisterModal">đăng nhập</a> mới có thể học bài</h2>
 					<img class="img-fluid full" src="/assets/images/bg-huongdan.png" />
 				</div>
 			</div>
@@ -303,6 +312,11 @@
 
 
 <style>
+.list-group-topic-item {background-color: #fff !important;}
+.list-group-topic-item.active {background-color: #fbd65b !important;}
+.list-group-item.sub-active {background-color: #ffe693 !important;}
+.list-group-item.sub-active > a {color: #333 !important;}
+
 .adjust-table table {
 	width: 100%;
 	border-collapse: collapsed;

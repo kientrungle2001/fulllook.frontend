@@ -15,6 +15,12 @@
 		FL_URL = '<?php echo FL_URL?>';
 		subject_id = '<?php echo intval($_GET['subject_id']); ?>';
 		serverTime = <?php echo time() ?>;
+		
+		sessionUserId = '<?php if(isset($_SESSION['userId'])) echo $_SESSION['userId']  ?>';
+		checkPayment = '<?php if(isset($_SESSION['checkPayment'])) echo $_SESSION["checkPayment"] ?>';
+		paymentDate = '<?php if(isset($_SESSION['paymentDate'])) echo $_SESSION["paymentDate"] ?>';
+		expiredDate = '<?php if(isset($_SESSION['expiredDate'])) echo $_SESSION["expiredDate"] ?>';
+
 		setInterval(function() {
 			serverTime++;
 		}, 1000);

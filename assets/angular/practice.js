@@ -23,6 +23,14 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		};
 		return '';
 	};
+	$scope.action = 'practice';
+	$scope.checkIsLogedIn = function() {
+		return window.sessionUserId !== '';
+	};
+
+	$scope.checkIsPaid = function() {
+		return window.checkPayment === '1';
+	}
 	
 	$scope.topics = [];
 	$scope.subject = {};
@@ -71,6 +79,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 			dataType: 'json',
 			success: function(resp) {
 				$scope.topics = buildBottomTree(resp);
+				console.log($scope.topics);
 				$scope.$apply();
 			}
 		});	
@@ -134,7 +143,10 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		};
 	};
 	$scope.startPractice = function() {
-		
+		if($scope.selectedTopic.trial == 0 && window.checkPayment !== '1') {
+			alert('Bạn cần phải mua phần mềm mới có thể được học bài này');
+			return false;
+		}
 		jQuery.ajax({
 			type: 'post',
 			url: FL_API_URL +'/subject/getExerciseQuestions', 
