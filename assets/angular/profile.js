@@ -6,8 +6,10 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 	}
 	$scope.editInfor = 0;
 	$scope.editInforUser =function(){
-		$scope.editInfor = 1;
-		
+		$scope.editInfor = 1 - $scope.editInfor;
+	}
+	$scope.cancelEditUser = function() {
+		$scope.editInfor = 0;
 	}
 	$scope.areaCodes = [];
 	jQuery.ajax({
@@ -107,19 +109,20 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			reader.onloadend = function() {
 			  	var base64_avatar = reader.result;
 			    //console.log(base64_avatar);
-			    jQuery.post('/upload.php', {avatar: base64_avatar, user_id: sessionUserId }, function(resp) {
+			    jQuery.post('http://s1.nextnobels.com/upload.php', {avatar: base64_avatar, user_id: sessionUserId }, function(resp) {
 			    	//console.log(resp);
 			    	if(resp){
 			    		console.log(resp);
-			    		/*$scope.editAvatar.userId= sessionUserId;
-			    		$scope.editAvatar.urlAvatar= FL_URL +'/upload/' + resp ;
-			    		jQuery.post(FL_API_URL+'/history/editAvatar', $scope.editAvatar, function(resp) {				
+			    		$scope.editAvatar.userId= sessionUserId;
+			    		$scope.editAvatar.urlAvatar= 'http://s1.nextnobels.com/uploads/avatar/' + resp ;
+			    		jQuery.post(FL_API_URL+'/history/editAvatar', $scope.editAvatar, function(resp) {
 						  	if(resp) {		  		
 						  		$scope.editAvatar.success = resp.success;
 						  		$scope.editAvatar.message ='<strong>' +resp.message+ '</strong>';
-						  		$scope.$apply();
+								  $scope.$apply();
+								  window.location.reload();
 						  	}
-						});*/
+						});
 			    	}
 			    });
 

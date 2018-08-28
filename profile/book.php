@@ -7,19 +7,22 @@
 				<p class="text-center t-weight"><a href="/profile.php">Quay lại</a></p>
 			</div>
 			<!-- Hiển thị số lượng câu hỏi -->
-			<div class="full  p-3 mb-3">
-				<table class="table table-sm table-dark">
-					<tr class="bg-success">
+			<div class="full p-3 mb-3">
+				<div class="row">
+				<div class="col-md-4 offset-md-4">
+				<table class="table table-bordered">
+					<tr>
 				      <th scope="row">Số câu đúng</th>
 				      <th scope="row">{{lessons.mark}}</th>
 				      
 				    </tr>
-				    <tr class="bg-primary">
+				    <tr>
 				      <th scope="row">Tổng số câu</th>
-				      <th scope="row">{{lessons.quantity_question}}</th>
-				      
+				      <th scope="row">{{lessons.quantity_question}}</th>				      
 				    </tr>
 				</table>
+				</div>
+				</div>
 			</div>
 			<!-- chi tiết về bài làm của hs -->
 			<div class="full  p-3 mb-3">

@@ -6,7 +6,7 @@
 				<h4 class="text-center t-weight">THÔNG TIN CÁ NHÂN</h4>				
 				<div class="row">
 					<div class="col-md-4">
-						<img src="{{userDetail.avatar}}" alt="avatar" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
+						<img src="{{userDetail.avatar}}" alt="avatar" class="rounded-circle" alt="Cinque Terre" width="256" height="256">
 						<br>
 						
 					</div>
@@ -80,8 +80,10 @@
 							  <button ng-click="editUser()" class="btn btn-primary">Cập nhật</button>
 							  <button type="button" ng-click="cancelEditUser()" class="btn btn-secondary">Hủy</button>
 							</form>	
-						</div>
 
+							<hr />
+						</div>
+						
 						<!--edit password -->
 						<div class="full bg-light" ng-show="editInfor" >
 							<form>
@@ -106,9 +108,15 @@
 
 							 </div>
 							  <button ng-click="changePassword()" class="btn btn-primary">Cập nhật</button>
-							  <button type="button" class="btn btn-secondary">Hủy</button>
+							  <button type="button" class="btn btn-secondary" ng-click="cancelEditUser()">Hủy</button>
 							</form>
+
+							<hr />
+
 						</div>
+
+						
+
 						<!--edit avatar -->
 						<div class="full bg-light" ng-show="editInfor" >
 							<form enctype="multipart/form-data">				
@@ -126,7 +134,7 @@
 
 							 </div>
 								<button type="submit" ng-click="changeAvatar()" class="btn btn-primary">Cập nhật</button>
-								  <button type="button" class="btn btn-secondary">Hủy</button>
+								  <button type="button" class="btn btn-secondary" ng-click="cancelEditUser()">Hủy</button>
 							</form>
 						</div>
 						
