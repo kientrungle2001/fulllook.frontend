@@ -74,9 +74,9 @@ if(isset($_SESSION['username'])){
 							  </div>
 						    </div>
 						</div>
-
+						<style>.page-item{display: inline-block;} </style>
 						<nav aria-label="Page navigation example">
-						  <ul class="pagination">
+						  <ul style="display: block;" class="pagination">
 						    <li class="page-item"><a class="page-link" href="#">Trang</a></li>
 						    <li class="page-item" ng-repeat="page in pages" ng-class="{'active': page == curentPage}" ><a ng-click="pageAjax(this, page)" class="page-link" href="#">{{page}}</a></li>
 						  </ul>
