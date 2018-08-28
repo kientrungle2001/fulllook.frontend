@@ -12,12 +12,12 @@
 				  	<ul class="list-group full vocabulary">
 					  <li class="list-group-item list-group-test-set-item" ng-repeat="testSet in testSets" ng-class="{'active': testSet==selectedTestSet}" style="padding: 0">
 					  
-					  <a href="#" ng-click="selectTestSet(testSet)" style="padding: 15px; display: inline-block;" onclick="return false;">{{testSet.name}}</a>
+					  <a href="#" ng-click="selectTestSet(testSet)" style="padding: 15px; display: inline-block;" onclick="return false;">{{testSet.name}} {{testSet.trial ? ' - Free': ''}}</a>
 
 
 					  <ul class="list-group" style="margin: 0;">
 					  	<li class="list-group-item" ng-repeat="test in testSet.children" style="border: none !important;" ng-class="{'active sub-active': selectedTest === test}">
-						  <a href="#" ng-click="selectTest(testSet, test)" style="border: none;" onclick="return false;">&nbsp;&nbsp;&nbsp;&nbsp; {{test.name}}</a>
+						  <a href="#" ng-click="selectTest(testSet, test)" style="border: none;" onclick="return false;">&nbsp;&nbsp;&nbsp;&nbsp; {{test.name}} {{test.trial ? ' - Free': ''}}</a>
 						</li>
 					  </ul>
 					  </li>
