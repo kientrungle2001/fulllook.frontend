@@ -165,7 +165,7 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	};
 
 	$scope.saveToBook = function() {
-		var userId = 8;
+		var userId = window.sessionUserId;
 		var startTime = serverTime;
 		var duringTime = 15 * 60 - ($scope.remaining.minutes * 60 + $scope.remaining.seconds);
 		var stopTime = serverTime + duringTime;
@@ -186,7 +186,8 @@ flApp.controller('TestController', ['$scope', function($scope) {
 				testId: $scope.selectedTest.id,
 				parentTest: 0,
 				test_name: $scope.selectedTest.name,
-				test_name_sn: $scope.selectedTest.name_sn
+				test_name_sn: $scope.selectedTest.name_sn,
+				lang: $scope.language || 'en'
 			},
 			success: function(resp) {
 				
@@ -216,4 +217,39 @@ flApp.controller('TestController', ['$scope', function($scope) {
 		}
 		return false;
 	};
+
+	var question_audios = {};
+	var current_sound = null;
+	var current_sound_url = null;
+
+	$scope.read_question = function (questionId) {
+		var url = 'http://s1.nextnobels.com/3rdparty/Filemanager/source/practice/all/' + questionId + '.mp3';
+
+		if (current_sound) {
+			current_sound.pause();
+			current_sound.currentTime = 0;
+			current_sound.onended();
+		}
+		if (current_sound_url == url) {
+			current_sound_url = null;
+			return;
+		} else {
+			current_sound_url = url;
+		}
+		jQuery('#sound-' + questionId).removeClass('fa-volume-up').addClass('fa-volume-off');
+		if (1 || typeof question_audios[url] == 'undefined') {
+			sound = new Audio(url);
+			sound.loop = false;
+			question_audios[url] = sound;
+			sound.onended = function () {
+				jQuery('#sound-' + questionId).removeClass('fa-volume-off').addClass('fa-volume-up');
+			};
+		}
+		current_sound = question_audios[url];
+		fetch(url)
+			.then(function () {
+				question_audios[url].play();
+			});
+
+	}
 }]);

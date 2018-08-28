@@ -107,8 +107,8 @@
 								<div class="question full">
 									<div class="item cau">
 										<div class="stt">Câu:  {{$index+1}}</div>
-										<span class="btn volume fa fa-volume-up" onclick="read_question(this, '/3rdparty/Filemanager/source/practice/all/474.mp3');"
-										></span>
+										<span id="sound-{{question.id}}" class="btn volume fa fa-volume-up" ng-click="read_question( question.id );"
+										ng-show="question.hasAudio"></span>
 									</div>
 
 									<div class="nobel-list-md choice">
