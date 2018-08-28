@@ -10,7 +10,15 @@ flApp.controller('TestController', ['$scope', function($scope) {
 		window.localStorage.setItem('grade', $scope.grade);
 	}
 	$scope.translate = function(val) {
-		return $langMap[$scope.language][val] || val;
+		if(typeof val == 'string')
+			return $langMap[$scope.language][val] || val;
+		if(typeof val == 'object') {
+			if($scope.language == 'vn') {
+				return val.name_vn || val.name || val.name_en;
+			} else {
+				return val.name_en || val.name_vn || val.name;
+			}
+		}
 	}
 
 	$scope.checkIsLogedIn = function () {

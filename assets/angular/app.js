@@ -3,7 +3,9 @@ $langMap = {
 		'Class': 'Class'
 	},
 	vn: {
-		'Class': 'Lớp'
+		'Class': 'Lớp',
+		'Practice': 'Luyện tập',
+		'Vocabulary': 'Từ vựng'
 	}
 };
 flApp = angular.module('flApp', ["ngSanitize", "ngJaxBind"]);

@@ -2,15 +2,12 @@
 	<div class="container mt-4 mb-3">
 		<div class="row redirect">
 			&nbsp; &nbsp;
-			<a href="/#practice" ng-show="language=='en'">
-			Practice
-			</a>
-			<a href="/#practice" ng-show="language=='vn'">
-			Luyện tập 
+			<a href="/#practice">
+			{{translate('Practice')}}
 			</a>
 			
 			&nbsp; &nbsp; &gt; &nbsp; &nbsp;
-			<a href="/detail.php?subject_id={{subject.id}}" ng-show="language=='en'">{{subject.name}}</a>
+			<a href="/detail.php?subject_id={{subject.id}}" ng-show="language!=='vn'">{{subject.name}}</a>
 			<a href="/detail.php?subject_id={{subject.id}}" ng-show="language=='vn'">{{subject.name_vn}}</a>
 		</div>
 	</div>
@@ -21,30 +18,33 @@
 				<div class="main-shadow full" style="height: 600px; overflow-y: scroll;">
 					<ul  class="nav nav-pills" id="pills-tab" role="tablist" style="background: #ddd;">
 					  <li class="nav-item w-50">
-					    <a style="border-radius: 5px 0px 0px 0px;" class="nav-link title-pr active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Luyện tập</a>
+					    <a style="border-radius: 5px 0px 0px 0px;" class="nav-link title-pr active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">{{translate('Practice')}}</a>
 					  </li>
 					  <li class="nav-item w-50">
-					    <a style="border-radius: 0px 5px 0px 0px;" class="nav-link title-pr" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Từ vựng</a>
+					    <a style="border-radius: 0px 5px 0px 0px;" class="nav-link title-pr" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">{{translate('Vocabulary')}}</a>
 					  </li>
 					 
 					</ul>
 					<div class="tab-content" id="pills-tabContent">
 					  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 					  	<ul  class="list-group menu-practice">
-							<li class="list-group-item list-group-topic-item" ng-repeat="topic in topics" style="padding-bottom: 0" ng-class="{'active': selectedParentTopic === topic}"> <a href="#" style="position:relative;" onclick="return false;" ng-click="selectTopic(topic, topic)">{{topic.name}}</a>
+							<li class="list-group-item list-group-topic-item" ng-repeat="topic in topics | orderBy: 'ordering'" style="padding-bottom: 0" ng-class="{'active': selectedParentTopic === topic, 'no-top-bottom-padding': topic.displayAtSite==2}"> 
+							<div ng-hide="topic.displayAtSite==2">
+							<a href="#" style="position:relative;" onclick="return false;" ng-click="selectTopic(topic, topic)">{{translate(topic, 'category.name')}}</a>
 								<i class="float-right fa fa-caret-down" aria-hidden="true" ng-show="topic.children.length > 0" style="position: absolute; top: 15px; right: 5px;"></i>
+							</div>
 
 								<div ng-show="subject.level==4">
 									<ul class="list-group lv2" style="margin-left: -20px;margin-right: -20px;" ng-repeat="subTopic in topic.children">
 										<li class="list-group-item" ng-repeat="subTopic2 in subTopic.children" ng-class="{'active sub-active': selectedTopic===subTopic2}">
-											<a href="#" ng-click="selectTopic(subTopic2, topic)" onclick="return false;">{{subTopic2.name}}</a>
+											<a href="#" ng-click="selectTopic(subTopic2, topic)" onclick="return false;">{{translate(subTopic2, 'category.name')}}</a>
 										</li>
 									</ul>
 								</div>
 								<div ng-show="subject.level==3">
-									<ul class="list-group lv2" style="margin-left: -20px;margin-right: -20px;" ng-repeat="subTopic in topic.children">
-										<li class="list-group-item" ng-class="{'active sub-active': selectedTopic===subTopic}">
-											<a href="#" ng-click="selectTopic(subTopic, topic)" onclick="return false;">{{subTopic.name}}</a>
+									<ul class="list-group lv2" style="margin-left: -20px;margin-right: -20px;">
+										<li class="list-group-item" ng-class="{'active sub-active': selectedTopic===subTopic}" ng-repeat="subTopic in topic.children | orderBy: 'ordering'">
+											<a href="#" ng-click="selectTopic(subTopic, topic)" onclick="return false;">{{translate(subTopic, 'category.name')}}</a>
 										</li>
 									</ul>
 								</div>
@@ -112,15 +112,31 @@
 									</div>
 
 									<div class="nobel-list-md choice">
-										<div class="ptnn-title full" mathjax-bind="question.name"></div>
+										<div class="row">
+											<div class="col" ng-show="language != 'vn'">
+												<div class="ptnn-title full" mathjax-bind="question.name" ></div>
+											</div>
+											<div class="col" ng-show="language == 'vn' || language == 'ev'">
+												<div class="ptnn-title full" mathjax-bind="question.name_vn" ></div>
+											</div>
+										</div>
 									
 										<table class="full">
 											<tbody>
 												<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'bg-primary text-white': showAnswersStep=='showAnswers' && answer.status==1}">
 													<td style="padding: 10px;">
 														<input type="radio" class="float-left" name="question_answers_{{question.id}}" value="{{answer.id}}" ng-model="user_answers[question.id]" ng-disabled="practiceStep=='finishPractice'" ng-change="selectAnswer(question, answer)" />
-														<span class="answers_474_38915 pl10" mathjax-bind="answer.content"></span>
-	
+														<div class="row">
+														<div class="col" ng-show="language != 'vn'">
+														<span class="answers_{{question.id}}_{{answer.id}}} pl10" mathjax-bind="answer.content" ></span>
+														</div>
+														<div class="col" ng-show="language=='vn'">
+														<span class="answers_{{question.id}}_{{answer.id}}} pl10" mathjax-bind="answer.content_vn" ></span>
+														</div>
+														<div class="col" ng-show="language=='ev'">
+														<span class="answers_{{question.id}}_{{answer.id}}} pl10" mathjax-bind="answer.content_vn"></span>
+														</div>
+														</div>
 
 													</td>
 												</tr>
@@ -331,5 +347,12 @@
 }
 .text-white {
 	color: white !important;
+}
+.no-top-bottom-padding {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.ptnn-title img {
+	max-width: 100%;
 }
 </style>

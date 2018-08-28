@@ -43,8 +43,8 @@
 		<div class="row" ng-init="selectedEnglishTestPage = 0">
 			<div class="col-12 col-md-2" ng-repeat="test in englishTests" ng-show="inPage($index, selectedEnglishTestPage, 30)">
 				<a href="/test.php?test_id={{test.id}}&category_id=1411">
-					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}} {{test.trial? ' - Free': ''}}</div>
-					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}} {{test.trial? ' - Free': ''}}</div>
+					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en || test.name}} {{test.trial? ' - Free': ''}}</div>
+					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name || test.name_en}} {{test.trial? ' - Free': ''}}</div>
 				</a>
 			</div>
 		</div>
@@ -76,8 +76,8 @@
 		<div class="row" ng-init="selectedTestPage = 0">
 			<div class="col-12 col-md-2" ng-repeat="test in tests" ng-show="inPage($index, selectedTestPage, 30)">
 			<a href="/test.php?test_id={{test.id}}&category_id=1412">
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en}} {{test.trial? ' - Free': ''}}</div>
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name}} {{test.trial? ' - Free': ''}}</div>
+				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en' || language=='ev'">{{test.name_en || test.name}} {{test.trial? ' - Free': ''}}</div>
+				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name || test.name_en}} {{test.trial? ' - Free': ''}}</div>
 			</a>
 			</div>
 		</div>
@@ -114,8 +114,12 @@
 				<div class="box-body">
 
 					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
-						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
-							{{test.name}}  {{test.trial? ' - Free': ''}}
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color" ng-show="language=='en' || language=='ev'">
+							{{test.name_en || test.name}}  {{test.trial? ' - Free': ''}}
+						</a>
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color"
+						ng-show="language=='vn'">
+							{{test.name || test.name_en}}  {{test.trial? ' - Free': ''}}
 						</a>
 					</div>
 				</div>
@@ -146,8 +150,12 @@
 				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=1414&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
 				<div class="box-body">
 					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
-						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
-							{{test.name}}  {{test.trial? ' - Free': ''}}
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color" ng-show="language=='en' || language=='ev'">
+							{{test.name_en || test.name}}  {{test.trial? ' - Free': ''}}
+						</a>
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color"
+						ng-show="language=='vn'">
+							{{test.name || test.name_en}}  {{test.trial? ' - Free': ''}}
 						</a>
 					</div>
 												
