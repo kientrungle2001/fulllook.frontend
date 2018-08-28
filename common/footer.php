@@ -14,26 +14,26 @@
 				<div class="col-12 col-md-2">
 					<div class="link-footer">
 						<a class="text-uppercase" href="#">Về chúng tôi </a>
-						<a href="#">Hồ sơ công ty </a>
-						<a href="#">Tầm nhìn, sứ mệnh </a>
-						<a href="#">Người sáng lập</a>
+						<a href="http://nextnobels.com/ho-so-cong-ty">Hồ sơ công ty </a>
+						<a href="http://nextnobels.com/tam-nhin-su-menh-cong-ty">Tầm nhìn, sứ mệnh </a>
+						<a href="http://nextnobels.com/nguoi-sang-lap-cong-ty">Người sáng lập</a>
 					</div>
 					
 				</div>
 				<div class="col-12 col-md-2">
 					<div class="link-footer">
 						<a class="text-uppercase" href="#">Truyền thông </a>
-						<a href="#">Báo chí </a>
-						<a href="#">Truyền hình </a>
+						<a href="http://nextnobels.com/bao-chi">Báo chí </a>
+						<a href="http://nextnobels.com/fulllook-phan-mem-hoc-song-ngu-anh-viet">Truyền hình </a>
 						<a href="#">Full Look</a>
 					</div>	
 				</div>
 				<div class="col-12 col-md-2">
 					<div class="link-footer">
 						<a class="text-uppercase" href="#">Tin tức </a>
-						<a href="#">Tin công ty </a>
+						<a href="http://nextnobels.com/tin-cong-ty">Tin công ty </a>
 						<a href="#">Sự kiện nổi bật </a>
-						<a href="#">Thời sự học đường</a>
+						<a href="http://nextnobels.com/thoi-su-hoc-duong">Thời sự học đường</a>
 					</div>		
 				</div>
 			</div>
