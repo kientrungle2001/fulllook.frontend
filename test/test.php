@@ -6,12 +6,12 @@
 				<div class="main-shadow full">
 					<div class="full">
 						<div style="border-radius: 5px 0px 0px 0px;" class="nav-link text-center title-pr text-white bg-primary">
-						{{category.name}}</div>
+						{{translate(category, 'category.name')}}</div>
 					</div>
 					
 				  	<ul class="list-group full vocabulary">
-					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='vn'" ng-class="{'active sub-active': test==selectedTest}"><a href="#" ng-click="selectTest(test)" onclick="return false;">{{test.name}} {{test.trial? ' - Free': ''}}</a></li>
-					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='en'" ng-class="{'active sub-active': test==selectedTest}"><a href="#" ng-click="selectTest(test)" onclick="return false;">{{test.name_en}} {{test.trial? ' - Free': ''}}</a></li>
+					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language=='vn'" ng-class="{'active sub-active': test==selectedTest}"><a href="#" ng-click="selectTest(test)" onclick="return false;">{{test.name || test.name_en}} {{test.trial? ' - Free': ''}}</a></li>
+					  <li class="list-group-item" ng-repeat="test in tests" ng-show="language!='vn'" ng-class="{'active sub-active': test==selectedTest}"><a href="#" ng-click="selectTest(test)" onclick="return false;">{{test.name_en || test.name}} {{test.trial? ' - Free': ''}}</a></li>
 					</ul>
 				</div>
 				
@@ -50,10 +50,15 @@
 									</div>
 
 									<div class="nobel-list-md choice">
-										
-									
-										
-										<div class="ptnn-title full" mathjax-bind="question.name"> 
+										<div class="row">
+											<div class="col" ng-show="language!='vn'">
+												<div class="ptnn-title full" mathjax-bind="question.name"> 
+												</div>
+											</div>
+											<div class="col" ng-show="language=='vn' || language=='ev'">
+												<div class="ptnn-title full" mathjax-bind="question.name_vn"> 
+												</div>
+											</div>
 										</div>
 
 										<table class="table">
@@ -61,8 +66,16 @@
 												<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'bg-primary text-white': showAnswersStep=='showAnswers' && answer.status}">
 													<td style="padding: 10px;">
 														<input id="answer_question_{{question.id}}_{{answer.id}}" name="user_answers[{{question.id}}]" type="radio" ng-model="user_answers[question.id]" ng-change="selectAnswer(question, answer)" class="float-left" value="{{answer.id}}" />
-														<label class="pl-4" mathjax-bind="answer.content" for="answer_question_{{question.id}}_{{answer.id}}">
-														</label>
+														<div class="row">
+															<div class="col" ng-show="language!='vn'">
+																<label class="inline" mathjax-bind="answer.content" for="answer_question_{{question.id}}_{{answer.id}}">
+																</label>
+															</div>
+															<div class="col" ng-show="language=='vn' || language=='ev'">
+																<label class=" inline" mathjax-bind="answer.content_vn" for="answer_question_{{question.id}}_{{answer.id}}">
+																</label>
+															</div>
+														</div>
 													</td>
 												</tr>
 											</tbody>
@@ -200,4 +213,5 @@
 .list-group-test-set-item.active {background-color: #fbd65b;}
 .list-group-item.sub-active {background-color: #ffe693;}
 .list-group-item.sub-active > a {color: #333;}
+.inline {display: inline;}
 </style>

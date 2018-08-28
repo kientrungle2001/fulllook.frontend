@@ -44,6 +44,7 @@
 							<p><strong>Dạng đề</strong>: {{selectedTest.trytest === 2 ? 'Tự luận': 'Trắc nghiệm'}}</p>
 							<p><strong>Số lượng câu hỏi</strong>: {{selectedTest.quantity || 24}}</p>
 							<p><strong>Thời gian làm bài</strong>: {{selectedTest.time || 45}} phút</p>
+							<p ng-show="selectedTest.trytest === 2"><strong>Lưu ý: Đề tự luận học sinh chỉ được xem đề và đáp án, phần mềm không chấm bài làm của học sinh</strong></p>
 							<button ng-click="doTest()" class="btn btn-primary btn-lg">Bắt đầu làm</button>
 						</div>
 						<div class="do-practice full" ng-show="step=='doTest'">
@@ -66,7 +67,15 @@
 									</div>
 
 									<div class="nobel-list-md choice">
-										<div class="ptnn-title full" mathjax-bind="selectedTest.trytest == 2 ? formatWritting(question.name): question.name"> 
+										<div class="row">
+											<div class="col" ng-show="language!='vn'">
+												<div class="ptnn-title full" mathjax-bind="selectedTest.trytest == 2 ? formatWritting(question.name): question.name"> 
+												</div>
+											</div>
+											<div class="col" ng-show="language=='vn' || language=='ev'">
+												<div class="ptnn-title full" mathjax-bind="selectedTest.trytest == 2 ? formatWritting(question.name): question.name"> 
+												</div>
+											</div>
 										</div>
 									
 										<table class="full">
@@ -74,8 +83,15 @@
 												<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'bg-primary text-white': showAnswerStep=='showAnswerStep' && answer.status==1}">
 													<td style="padding: 10px;">
 														<input type="radio" class="float-left" name="question_answers_{{question.id}}" value="{{answer.id}}" ng-model="user_answers[question.id]" ng-disabled="finishStep=='finishStep'" ng-change="selectAnswer(question, answer)" />
-														<span class="answers_{{question.id}}_{{answer.id}}} pl10" mathjax-bind="answer.content"></span>
-	
+
+														<div class="row">
+															<div class="col" ng-show="language != 'vn'">
+																<span class="answers_{{question.id}}_{{answer.id}}} pl10" mathjax-bind="answer.content"></span>
+															</div>
+															<div class="col" ng-show="language == 'vn' || language == 'ev'">
+																<span class="answers_{{question.id}}_{{answer.id}}} pl10" mathjax-bind="answer.content_vn"></span>
+															</div>
+														</div>
 
 													</td>
 												</tr>
@@ -225,4 +241,5 @@
 .list-group-test-set-item.active {background-color: #fbd65b;}
 .list-group-item.sub-active {background-color: #ffe693;}
 .list-group-item.sub-active > a {color: #333;}
+.ptnn-title img {max-width: 100%}
 </style>

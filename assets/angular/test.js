@@ -9,14 +9,25 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	}
-	$scope.translate = function(val) {
-		if(typeof val == 'string')
-			return $langMap[$scope.language][val] || val;
-		if(typeof val == 'object') {
-			if($scope.language == 'vn') {
-				return val.name_vn || val.name || val.name_en;
+	$scope.translateOptions = {
+		'category.name': {
+			'en': 'name',
+			'vn': 'name_vn'
+		}
+	};
+	$scope.translate = function (val, opt) {
+		var language = $scope.language;
+		if (language != 'vn') {
+			language = 'en';
+		}
+		if (typeof val == 'string')
+			return $langMap[language][val] || val;
+		if (typeof val == 'object') {
+			var options = $scope.translateOptions[opt];
+			if (language == 'vn') {
+				return val[options.vn];
 			} else {
-				return val.name_en || val.name_vn || val.name;
+				return val[options.en];
 			}
 		}
 	}

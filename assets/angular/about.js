@@ -103,9 +103,28 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	};
-	$scope.translate = function(val) {
-		return $langMap[$scope.language][val] || val;
+	$scope.translateOptions = {
+		'category.name': {
+			'en': 'name',
+			'vn': 'name_vn'
+		}
 	};
+	$scope.translate = function (val, opt) {
+		var language = $scope.language;
+		if (language != 'vn') {
+			language = 'en';
+		}
+		if (typeof val == 'string')
+			return $langMap[language][val] || val;
+		if (typeof val == 'object') {
+			var options = $scope.translateOptions[opt];
+			if (language == 'vn') {
+				return val[options.vn];
+			} else {
+				return val[options.en];
+			}
+		}
+	}
 	
 	$scope.tabs = {
 		proposal: `- Ôn tập, mở rộng kiến thức và đánh giá năng lực toàn diện cho học sinh tiểu học qua các bài luyện tập và hệ thống đề thi thử bằng Tiếng Anh. <br>
