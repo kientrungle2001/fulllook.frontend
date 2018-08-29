@@ -56,7 +56,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			return false;
 		}
 		$scope.userDetail.userId= sessionUserId;
-		jQuery.post(FL_API_URL+'/history/editUser', $scope.userDetail, function(resp) {
+		jQuery.post(FL_API_URL+'/profile/editUser', $scope.userDetail, function(resp) {
 			
 		  	if(resp) {		  		
 		  		$scope.success = resp.success;
@@ -76,7 +76,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		  	$scope.$apply();
 		}else{
 			$scope.editPassword.userId= sessionUserId;
-			jQuery.post(FL_API_URL+'/history/editPassword', $scope.editPassword, function(resp) {
+			jQuery.post(FL_API_URL+'/profile/editPassword', $scope.editPassword, function(resp) {
 				
 			  	if(resp) {		  		
 			  		$scope.editPassword.success = resp.success;
@@ -115,7 +115,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			    		console.log(resp);
 			    		$scope.editAvatar.userId= sessionUserId;
 			    		$scope.editAvatar.urlAvatar= 'http://s1.nextnobels.com/uploads/avatar/' + resp ;
-			    		jQuery.post(FL_API_URL+'/history/editAvatar', $scope.editAvatar, function(resp) {
+			    		jQuery.post(FL_API_URL+'/profile/editAvatar', $scope.editAvatar, function(resp) {
 						  	if(resp) {		  		
 						  		$scope.editAvatar.success = resp.success;
 						  		$scope.editAvatar.message ='<strong>' +resp.message+ '</strong>';
@@ -139,7 +139,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 	$scope.userDetail = [];
 	jQuery.ajax({
 		type: 'post',
-		url: FL_API_URL +'/history/getUser', 
+		url: FL_API_URL +'/profile/getUser', 
 		data: {
 			userId: sessionUserId
 		},
