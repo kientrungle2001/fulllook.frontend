@@ -36,8 +36,8 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.parseTranslate = function(str) {
 		if(str) {
 			str = str.replace(/\[start\](.*)\[end\]/g, `<button class="btn btn-primary" data-toggle="collapse" onclick="jQuery(this).next().collapse('toggle')">Dịch</button><div class="collapse"><div class="card card-body">$1</div></div>`);
-			str = str.replace(/\[fix\](.*)\[endfix\]/g, `<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'http://s1.nextnobels.com/3rdparty/Filemanager/source/audiovocabulary/'+'$1'.toLowerCase()+'.mp3');"></span>`);
-			str = str.replace(/\[audio\](.*)\[endaudio\]/g, `$1<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'http://s1.nextnobels.com/3rdparty/Filemanager/source/audiovocabulary/'+'$1'.toLowerCase()+'.mp3');"></span>`);			
+			str = str.replace(/\[fix\](.*)\[endfix\]/g, `<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'http://s1.nextnobels.com/3rdparty/Filemanager/source/audiovocabulary/'+'$1'.toLowerCase().replace(/ /g, '_')+'.mp3');"></span>`);
+			str = str.replace(/\[audio\](.*)\[endaudio\]/g, `$1<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'http://s1.nextnobels.com/3rdparty/Filemanager/source/audiovocabulary/'+'$1'.toLowerCase().replace(/ /g, '_')+'.mp3');"></span>`);			
 			return str;
 		};
 		return '';
