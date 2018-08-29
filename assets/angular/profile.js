@@ -6,8 +6,10 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 	}
 	$scope.editInfor = 0;
 	$scope.editInforUser =function(){
-		$scope.editInfor = 1;
-		
+		$scope.editInfor = 1 - $scope.editInfor;
+	}
+	$scope.cancelEditUser = function() {
+		$scope.editInfor = 0;
 	}
 	$scope.areaCodes = [];
 	jQuery.ajax({
@@ -54,7 +56,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			return false;
 		}
 		$scope.userDetail.userId= sessionUserId;
-		jQuery.post(FL_API_URL+'/history/editUser', $scope.userDetail, function(resp) {
+		jQuery.post(FL_API_URL+'/profile/editUser', $scope.userDetail, function(resp) {
 			
 		  	if(resp) {		  		
 		  		$scope.success = resp.success;
@@ -74,7 +76,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		  	$scope.$apply();
 		}else{
 			$scope.editPassword.userId= sessionUserId;
-			jQuery.post(FL_API_URL+'/history/editPassword', $scope.editPassword, function(resp) {
+			jQuery.post(FL_API_URL+'/profile/editPassword', $scope.editPassword, function(resp) {
 				
 			  	if(resp) {		  		
 			  		$scope.editPassword.success = resp.success;
@@ -107,19 +109,20 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			reader.onloadend = function() {
 			  	var base64_avatar = reader.result;
 			    //console.log(base64_avatar);
-			    jQuery.post('/upload.php', {avatar: base64_avatar, user_id: sessionUserId }, function(resp) {
+			    jQuery.post('http://s1.nextnobels.com/upload.php', {avatar: base64_avatar, user_id: sessionUserId }, function(resp) {
 			    	//console.log(resp);
 			    	if(resp){
 			    		console.log(resp);
-			    		/*$scope.editAvatar.userId= sessionUserId;
-			    		$scope.editAvatar.urlAvatar= FL_URL +'/upload/' + resp ;
-			    		jQuery.post(FL_API_URL+'/history/editAvatar', $scope.editAvatar, function(resp) {				
+			    		$scope.editAvatar.userId= sessionUserId;
+			    		$scope.editAvatar.urlAvatar= 'http://s1.nextnobels.com/uploads/avatar/' + resp ;
+			    		jQuery.post(FL_API_URL+'/profile/editAvatar', $scope.editAvatar, function(resp) {
 						  	if(resp) {		  		
 						  		$scope.editAvatar.success = resp.success;
 						  		$scope.editAvatar.message ='<strong>' +resp.message+ '</strong>';
-						  		$scope.$apply();
+								  $scope.$apply();
+								  window.location.reload();
 						  	}
-						});*/
+						});
 			    	}
 			    });
 
@@ -136,7 +139,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 	$scope.userDetail = [];
 	jQuery.ajax({
 		type: 'post',
-		url: FL_API_URL +'/history/getUser', 
+		url: FL_API_URL +'/profile/getUser', 
 		data: {
 			userId: sessionUserId
 		},
@@ -359,4 +362,52 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		});
 	};
 	$scope.tdnRealTestPage(0);
+
+	$scope.register = {};
+	$scope.doRegister = function (url) {
+		if (!$scope.register.username || !$scope.register.name || !$scope.register.password || !$scope.register.repassword || !$scope.register.phone || !$scope.register.email || !$scope.register.sex || !$scope.register.areacode) {
+			return false;
+		}
+		$scope.register.url = url;
+		if ($scope.register.password == $scope.register.repassword) {
+			jQuery.post(FL_API_URL + '/register/userRegister', $scope.register, function (resp) {
+				$scope.register.success = resp.success;
+				$scope.register.message = resp.message;
+				$scope.$apply();
+				if (resp.success) {
+					window.location = resp.url;
+				}
+			});
+
+		} else {
+			$scope.register.success = 0;
+			$scope.register.message = "Mật khẩu tài khoản nhập lại không chính xác";
+
+		}
+
+	};
+	$scope.login = {};
+	$scope.doLogin = function (url) {
+		if (!$scope.login.username || !$scope.login.password) {
+			return false;
+		}
+		$scope.login.url = url;
+		jQuery.post(FL_API_URL + '/login/userLogin', $scope.login, function (resp) {
+			$scope.login.success = resp.success;
+			$scope.login.message = resp.message;
+			$scope.$apply();
+			if (resp.success) {
+				window.location = resp.url;
+			}
+
+		});
+	};
+	// get AreaCode
+	$scope.areaCodes = [];
+	jQuery.ajax({
+		url: FL_API_URL + '/register/getAreaCode', success: function (resp) {
+			$scope.areaCodes = resp;
+			$scope.$apply();
+		}
+	});
 }]);

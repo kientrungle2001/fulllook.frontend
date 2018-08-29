@@ -147,7 +147,7 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		});
 		$scope.totalWrongs = $scope.totalQuestions - $scope.totalRights;
 		
-		var userId = 8;
+		var userId = window.sessionUserId;
 		var startTime = $scope.startTime;
 		var duringTime = $scope.duringTime;
 		var stopTime = serverTime + duringTime;
@@ -179,7 +179,8 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 					mark: $scope.totalRights,
 					startTime: startTime,
 					duringTime: duringTime,
-					stopTime: stopTime
+					stopTime: stopTime,
+					lang: $scope.language || 'en'
 				},
 				success: function (resp) {
 					jQuery('#resultModal').modal('show');
@@ -243,5 +244,88 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		content = content.replace(/\[t[\d]+\]/ig, '<div style="word-wrap: break-word;">' + '..............................................................'.repeat(20) + '</div>');
 		return content;
 	};
+
+	var question_audios = {};
+	var current_sound = null;
+	var current_sound_url = null;
+
+	$scope.read_question = function (questionId) {
+		var url = 'http://s1.nextnobels.com/3rdparty/Filemanager/source/practice/all/' + questionId + '.mp3';
+
+		if (current_sound) {
+			current_sound.pause();
+			current_sound.currentTime = 0;
+			current_sound.onended();
+		}
+		if (current_sound_url == url) {
+			current_sound_url = null;
+			return;
+		} else {
+			current_sound_url = url;
+		}
+		jQuery('#sound-' + questionId).removeClass('fa-volume-up').addClass('fa-volume-off');
+		if (1 || typeof question_audios[url] == 'undefined') {
+			sound = new Audio(url);
+			sound.loop = false;
+			question_audios[url] = sound;
+			sound.onended = function () {
+				jQuery('#sound-' + questionId).removeClass('fa-volume-off').addClass('fa-volume-up');
+			};
+		}
+		current_sound = question_audios[url];
+		fetch(url)
+			.then(function () {
+				question_audios[url].play();
+			});
+
+	}
+
+	$scope.register = {};
+	$scope.doRegister = function (url) {
+		if (!$scope.register.username || !$scope.register.name || !$scope.register.password || !$scope.register.repassword || !$scope.register.phone || !$scope.register.email || !$scope.register.sex || !$scope.register.areacode) {
+			return false;
+		}
+		$scope.register.url = url;
+		if ($scope.register.password == $scope.register.repassword) {
+			jQuery.post(FL_API_URL + '/register/userRegister', $scope.register, function (resp) {
+				$scope.register.success = resp.success;
+				$scope.register.message = resp.message;
+				$scope.$apply();
+				if (resp.success) {
+					window.location = resp.url;
+				}
+			});
+
+		} else {
+			$scope.register.success = 0;
+			$scope.register.message = "Mật khẩu tài khoản nhập lại không chính xác";
+
+		}
+
+	};
+	$scope.login = {};
+	$scope.doLogin = function (url) {
+		if (!$scope.login.username || !$scope.login.password) {
+			return false;
+		}
+		$scope.login.url = url;
+		jQuery.post(FL_API_URL + '/login/userLogin', $scope.login, function (resp) {
+			$scope.login.success = resp.success;
+			$scope.login.message = resp.message;
+			$scope.$apply();
+			if (resp.success) {
+				window.location = resp.url;
+			}
+
+		});
+	};
+	// get AreaCode
+	$scope.areaCodes = [];
+	jQuery.ajax({
+		url: FL_API_URL + '/register/getAreaCode', success: function (resp) {
+			$scope.areaCodes = resp;
+			$scope.$apply();
+		}
+	});
 
 }]);

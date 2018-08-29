@@ -23,7 +23,7 @@
 					<div class="full">
 						<img ng-src="http://s1.nextnobels.com{{subject.img}}" alt="{{subject.name}}" class=" img-fluid center-block">
 					</div>
-					<div class="top20 text-center full absolute" ng-show="language=='en'">{{subject.name}}</div>
+					<div class="top20 text-center full absolute" ng-show="language!=='vn'">{{subject.name}}</div>
 					<div class="top20 text-center full absolute" ng-show="language=='vn'">{{subject.name_vn}}</div>
 				</div>
 			</a>

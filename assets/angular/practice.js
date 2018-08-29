@@ -1,6 +1,6 @@
 flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.title = 'Công ty cổ phần giáo dục và phát triển trí tuệ sáng tạo Next Nobels';
-	$scope.subject_id = subject_id;
+	$scope.subject_id = parseInt(subject_id);
 	$scope.language = window.localStorage.getItem('language') || 'en';
 	$scope.changeLanguage = function() {
 		window.localStorage.setItem('language', $scope.language);
@@ -36,8 +36,8 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.parseTranslate = function(str) {
 		if(str) {
 			str = str.replace(/\[start\](.*)\[end\]/g, `<button class="btn btn-primary" data-toggle="collapse" onclick="jQuery(this).next().collapse('toggle')">Dịch</button><div class="collapse"><div class="card card-body">$1</div></div>`);
-			str = str.replace(/\[fix\](.*)\[endfix\]/g, `<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'/3rdparty/Filemanager/source/audiovocabulary/$1.mp3');"></span>`);
-			str = str.replace(/\[audio\](.*)\[endaudio\]/g, `$1<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'/3rdparty/Filemanager/source/audiovocabulary/$1.mp3');"></span>`);			
+			str = str.replace(/\[fix\](.*)\[endfix\]/g, `<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'http://s1.nextnobels.com/3rdparty/Filemanager/source/audiovocabulary/'+'$1'.toLowerCase().replace(/ /g, '_')+'.mp3');"></span>`);
+			str = str.replace(/\[audio\](.*)\[endaudio\]/g, `$1<span class="btn btn-default fa fa-volume-up" onclick="read_question(this,'http://s1.nextnobels.com/3rdparty/Filemanager/source/audiovocabulary/'+'$1'.toLowerCase().replace(/ /g, '_')+'.mp3');"></span>`);			
 			return str;
 		};
 		return '';
@@ -144,6 +144,10 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 				$scope.exerciseNums = [];
 				for(var i = 0; i < resp; i++) {
 					$scope.exerciseNums.push(i);
+				}
+				
+				if(subject_id == 88) {
+					$scope.selectExercise(0);
 				}
 				$scope.$apply();
 			}
@@ -559,7 +563,8 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 				mark: $scope.totalRights,
 				startTime: startTime,
 				duringTime: duringTime,
-				stopTime: stopTime
+				stopTime: stopTime,
+				lang: $scope.language || 'en'
 			},
 			success: function(resp) {
 				
@@ -612,5 +617,87 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		}
 		return false;
 	};
+
+	var question_audios = {};
+	var current_sound = null;
+	var current_sound_url = null;
 	
+	$scope.read_question = function(questionId) {
+		var url = 'http://s1.nextnobels.com/3rdparty/Filemanager/source/practice/all/'+questionId+'.mp3';
+
+		if (current_sound) {
+			current_sound.pause();
+			current_sound.currentTime = 0;
+			current_sound.onended();
+		}
+		if (current_sound_url == url) {
+			current_sound_url = null;
+			return;
+		} else {
+			current_sound_url = url;
+		}
+		jQuery('#sound-' + questionId).removeClass('fa-volume-up').addClass('fa-volume-off');
+		if (1 || typeof question_audios[url] == 'undefined') {
+			sound = new Audio(url);
+			sound.loop = false;
+			question_audios[url] = sound;
+			sound.onended = function () {
+				jQuery('#sound-' + questionId).removeClass('fa-volume-off').addClass('fa-volume-up');
+			};
+		}
+		current_sound = question_audios[url];
+		fetch(url)
+			.then(function () {
+				question_audios[url].play();
+			});
+
+	}
+
+	$scope.register = {};
+	$scope.doRegister = function (url) {
+		if (!$scope.register.username || !$scope.register.name || !$scope.register.password || !$scope.register.repassword || !$scope.register.phone || !$scope.register.email || !$scope.register.sex || !$scope.register.areacode) {
+			return false;
+		}
+		$scope.register.url = url;
+		if ($scope.register.password == $scope.register.repassword) {
+			jQuery.post(FL_API_URL + '/register/userRegister', $scope.register, function (resp) {
+				$scope.register.success = resp.success;
+				$scope.register.message = resp.message;
+				$scope.$apply();
+				if (resp.success) {
+					window.location = resp.url;
+				}
+			});
+
+		} else {
+			$scope.register.success = 0;
+			$scope.register.message = "Mật khẩu tài khoản nhập lại không chính xác";
+
+		}
+
+	};
+	$scope.login = {};
+	$scope.doLogin = function (url) {
+		if (!$scope.login.username || !$scope.login.password) {
+			return false;
+		}
+		$scope.login.url = url;
+		jQuery.post(FL_API_URL + '/login/userLogin', $scope.login, function (resp) {
+			$scope.login.success = resp.success;
+			$scope.login.message = resp.message;
+			$scope.$apply();
+			if (resp.success) {
+				window.location = resp.url;
+			}
+
+		});
+	};
+	// get AreaCode
+	$scope.areaCodes = [];
+	jQuery.ajax({
+		url: FL_API_URL + '/register/getAreaCode', success: function (resp) {
+			$scope.areaCodes = resp;
+			$scope.$apply();
+		}
+	});
 }]);

@@ -70,10 +70,10 @@
 					</h2>
 
 					<div class="text-center guide" ng-show="action == 'practice' && !selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
-					<div class="text-center guide" ng-show="action=='practice' && selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn bài để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
+					<div class="text-center guide" ng-show="action=='practice' && selectedTopic && subject_id != 88"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn bài để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
 
 					<div class="practice-content p-3 full" ng-show="action=='practice'">
-						<div class="row">
+						<div class="row" ng-show="subject_id != 88">
 							<div class="col-12 col-md-2" ng-repeat="exerciseNum in exerciseNums" ng-click="selectExercise(exerciseNum)">
 								<div class="btn lesson full mb-3 btn-primary" ng-class="{'active': selectedExerciseNum === exerciseNum}">Bài {{exerciseNum+1}}</div>
 							</div>
@@ -83,10 +83,12 @@
 							
 							<div ng-show="selectedExerciseNum !== null">
 							
-							<div class="name-detail text-center">
+							<div class="name-detail text-center" ng-show="subject_id != 88">
 								Bài {{selectedExerciseNum+1}}	
 							</div>
-							
+							<div class="name-detail text-center" ng-show="subject_id == 88">
+								{{selectedTopic.name}}
+							</div>
 							
 							<div class="text-center">
 								<div  class="time">
@@ -107,8 +109,8 @@
 								<div class="question full">
 									<div class="item cau">
 										<div class="stt">Câu:  {{$index+1}}</div>
-										<span class="btn volume fa fa-volume-up" onclick="read_question(this, '/3rdparty/Filemanager/source/practice/all/474.mp3');"
-										></span>
+										<span id="sound-{{question.id}}" class="btn volume fa fa-volume-up" ng-click="read_question( question.id );"
+										ng-show="question.hasAudio"></span>
 									</div>
 
 									<div class="nobel-list-md choice">
@@ -356,3 +358,37 @@
 	max-width: 100%;
 }
 </style>
+
+<script>
+var question_audios = {};
+var current_sound = null;
+var current_sound_url = null;
+function read_question(elem, url) {
+	if(current_sound) {
+		current_sound.pause();
+		current_sound.currentTime = 0;
+		current_sound.onended();
+	}
+	if(current_sound_url == url) {
+		current_sound_url = null;
+		return ;
+	} else {
+		current_sound_url = url;
+	}
+	jQuery(elem).removeClass('fa-volume-up').addClass('fa-volume-off');
+	if(1 || typeof question_audios[url] == 'undefined') {
+		sound = new Audio(url);
+		sound.loop = false;	
+		question_audios[url] = sound;
+		sound.onended = function() {
+			jQuery(elem).removeClass('fa-volume-off').addClass('fa-volume-up');
+		};
+	}
+	current_sound = question_audios[url];
+	fetch(url)
+    .then(function() {
+      question_audios[url].play();
+    });
+	
+}
+</script>
