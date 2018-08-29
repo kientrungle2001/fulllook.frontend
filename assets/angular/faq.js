@@ -98,6 +98,12 @@ flApp.controller('FaqController', ['$scope', function($scope) {
 			}
 		});
 	}
+	$scope.subjects = [];
+	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
+		$scope.subjects = resp;
+		$scope.$apply();
+	}});
+	
 	$scope.getTotalQuestion();
 	$scope.pagination = function(pageSize, total){
 

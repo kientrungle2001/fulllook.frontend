@@ -50,6 +50,11 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.checkIsPaid = function() {
 		return window.checkPayment === '1';
 	}
+	$scope.subjects = [];
+	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
+		$scope.subjects = resp;
+		$scope.$apply();
+	}});
 	
 	$scope.topics = [];
 	$scope.subject = {};

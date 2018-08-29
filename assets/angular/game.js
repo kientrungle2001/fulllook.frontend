@@ -31,7 +31,11 @@ flApp.controller('GameController', ['$scope', function($scope) {
 			}
 		}
 	}
-
+	$scope.subjects = [];
+	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
+		$scope.subjects = resp;
+		$scope.$apply();
+	}});
 	$scope.loadGameTypes = function() {
 		jQuery.ajax({
 			type: 'post',

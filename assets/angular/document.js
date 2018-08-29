@@ -15,6 +15,11 @@ flApp.controller('DocumentController', ['$scope', function($scope) {
 			'vn': 'name_vn'
 		}
 	};
+	$scope.subjects = [];
+	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
+		$scope.subjects = resp;
+		$scope.$apply();
+	}});
 	$scope.translate = function (val, opt) {
 		var language = $scope.language;
 		if (language != 'vn') {

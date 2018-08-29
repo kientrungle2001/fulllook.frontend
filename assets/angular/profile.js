@@ -11,6 +11,11 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 	$scope.cancelEditUser = function() {
 		$scope.editInfor = 0;
 	}
+	$scope.subjects = [];
+	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
+		$scope.subjects = resp;
+		$scope.$apply();
+	}});
 	$scope.areaCodes = [];
 	jQuery.ajax({
 		type: 'post',

@@ -30,6 +30,11 @@ flApp.controller('UserBookController', ['$scope', function($scope) {
 			}
 		}
 	}
+	$scope.subjects = [];
+	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
+		$scope.subjects = resp;
+		$scope.$apply();
+	}});
 	$scope.lessons = [];
 	$scope.arrquestionIds = [];
 	$scope.userAnswers = new Array();

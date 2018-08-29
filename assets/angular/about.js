@@ -27,6 +27,11 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 		}
 		
 	};
+	$scope.subjects = [];
+	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
+		$scope.subjects = resp;
+		$scope.$apply();
+	}});
 	$scope.login = {};
 	$scope.doLogin = function(url) {
 		if(!$scope.login.username || !$scope.login.password){

@@ -9,6 +9,11 @@ flApp.controller('NewsController', ['$scope', function($scope) {
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	}
+	$scope.subjects = [];
+	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
+		$scope.subjects = resp;
+		$scope.$apply();
+	}});
 	$scope.translateOptions = {
 		'category.name': {
 			'en': 'name',
