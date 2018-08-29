@@ -88,8 +88,21 @@
 					</ul>
 				</li>
                 
-                <li class="nav-item">
-                    <a href="/#practice" class="nav-link">Luyện các môn</a>
+                <li class="nav-item dropdown">
+                    <a href="/#practice" class="nav-link dropdown-toggle">Luyện các môn</a>
+                    <div class="dropdown-menu mega pr-3">
+                        <div class="box-practice pr-0 text-center" ng-repeat="subject in subjects">
+                            <a href="/detail.php?subject_id={{subject.id}}" class="subjectclick" data-subject="{{subject.id}}" data-alias="{{subject.name}}" data-class="5">
+                                <div style="font-size: 16px;" class="white text-uppercase relative">
+                                    <div class="full">
+                                        <img ng-src="http://s1.nextnobels.com{{subject.img}}" alt="{{subject.name}}" class=" img-fluid center-block">
+                                    </div>
+                                    <div class="text-mega text-center full absolute" ng-show="language!=='vn'">{{subject.name}}</div>
+                                    <div class="text-mega text-center full absolute" ng-show="language=='vn'">{{subject.name_vn}}</div>
+                                </div>
+                            </a>
+                        </div>
+	                </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/#tonghop">Luyện tiếng anh</a>

@@ -64,12 +64,12 @@
 			jQuery(".nav-item.dropdown").hover(            
 				function() {
 					jQuery(this).addClass('show');
-					jQuery(this).find('ul.dropdown-menu').css('top', '95%');
-					jQuery(this).find('ul.dropdown-menu').addClass('show');        
+					jQuery(this).find('.dropdown-menu').css('top', '95%');
+					jQuery(this).find('.dropdown-menu').addClass('show');        
 				},
 				function(){
 					jQuery(this).removeClass('show');
-					jQuery(this).find('ul.dropdown-menu').removeClass('show'); 
+					jQuery(this).find('.dropdown-menu').removeClass('show'); 
 				}
 			);
 		});
