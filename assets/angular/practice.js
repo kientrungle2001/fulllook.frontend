@@ -259,6 +259,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.gamePage = 1;
 	$scope.gameType = '';
 	$scope.gameWords = function (gameType) {
+			jQuery('#pageGame').val(1);
 			var documentId = $scope.selectedVocabulary.id;
 			var cateId = $scope.subject.id;
 			$scope.gameType = gameType;
