@@ -1,6 +1,6 @@
 flApp.controller('PracticeController', ['$scope', function($scope) {
 	$scope.title = 'Công ty cổ phần giáo dục và phát triển trí tuệ sáng tạo Next Nobels';
-	$scope.subject_id = subject_id;
+	$scope.subject_id = parseInt(subject_id);
 	$scope.language = window.localStorage.getItem('language') || 'en';
 	$scope.changeLanguage = function() {
 		window.localStorage.setItem('language', $scope.language);
@@ -144,6 +144,10 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 				$scope.exerciseNums = [];
 				for(var i = 0; i < resp; i++) {
 					$scope.exerciseNums.push(i);
+				}
+				
+				if(subject_id == 88) {
+					$scope.selectExercise(0);
 				}
 				$scope.$apply();
 			}

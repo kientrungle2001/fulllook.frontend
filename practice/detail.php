@@ -70,10 +70,10 @@
 					</h2>
 
 					<div class="text-center guide" ng-show="action == 'practice' && !selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn chuyên đề để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
-					<div class="text-center guide" ng-show="action=='practice' && selectedTopic"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn bài để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
+					<div class="text-center guide" ng-show="action=='practice' && selectedTopic && subject_id != 88"><i class="fa fa-star" aria-hidden="true"></i> Hãy chọn bài để luyện tập <i class="fa fa-star" aria-hidden="true"></i></div>
 
 					<div class="practice-content p-3 full" ng-show="action=='practice'">
-						<div class="row">
+						<div class="row" ng-show="subject_id != 88">
 							<div class="col-12 col-md-2" ng-repeat="exerciseNum in exerciseNums" ng-click="selectExercise(exerciseNum)">
 								<div class="btn lesson full mb-3 btn-primary" ng-class="{'active': selectedExerciseNum === exerciseNum}">Bài {{exerciseNum+1}}</div>
 							</div>
@@ -83,10 +83,12 @@
 							
 							<div ng-show="selectedExerciseNum !== null">
 							
-							<div class="name-detail text-center">
+							<div class="name-detail text-center" ng-show="subject_id != 88">
 								Bài {{selectedExerciseNum+1}}	
 							</div>
-							
+							<div class="name-detail text-center" ng-show="subject_id == 88">
+								{{selectedTopic.name}}
+							</div>
 							
 							<div class="text-center">
 								<div  class="time">
