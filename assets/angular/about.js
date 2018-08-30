@@ -234,6 +234,11 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 15. Cô Trần Thị Oanh - giáo viên tiếng Anh - tốt nghiệp khoa Sư Phạm Tiếng Anh, Đại học Sư Phạm Hà Nội. <br>
 16. Cô Hà Thu Ngân - giáo viên tiếng Anh - tốt nghiệp khoa Sư Phạm Tiếng Anh, Đại học Sư Phạm Hà Nội. <br>
 17. Cô Nguyễn Thanh Vân - giáo viên tiếng Anh - tốt nghiệp khoa Sư Phạm Tiếng Anh, Đại học Sư Phạm Hà Nội. <br>
+18. Phùng Thị Tâm - giáo viên Văn - tốt nghiệp khoa Ngữ văn, Đại học Sư Phạm Hà Nội. <br>
+19. Nguyễn Thị Thu Hằng - giáo viên Văn - tốt nghiệp khoa Ngữ văn, Đại học Sư Phạm Hà Nội. <br>
+20. Nguyễn Thị Xuyến - giáo viên Văn - tốt nghiệp khoa Ngữ văn, Đại học Sư Phạm Hà Nội. <br>
+21. Thạc sĩ Nguyễn Thanh Xuân - giảng viên khoa Địa lí, Đại học Sư Phạm Hà Nội. <br>
+22. Đặng Thị Khuyên - giáo viên Địa lí - trường THCS Dương Nội, Hà Nội. <br>
 `,
 
 		structure: `<table class="table table-bordered table-sm table-striped">
@@ -255,7 +260,7 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 						<td><b>2.</b></td>
 						<td><b>Phần Ôn luyện tiếng Anh</b></td>
 						<td>
-						- <b> Gồm 50 đề ôn tập ngữ pháp tiếng Anh </b> tích hợp với các kiến thức hiểu biết xã hội
+						- <b> Gồm 80 đề ôn tập ngữ pháp tiếng Anh </b> tích hợp với các kiến thức hiểu biết xã hội
 						</td>
 					</tr>
 					
@@ -263,7 +268,7 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 						<td><b>3.</b></td>
 						<td><b>Phần Ôn luyện tổng hợp</b></td>
 						<td>
-						- <b>Là hệ thống gồm 34 đề </b> có cấu trúc giống đề thi trắc nghiệm, <b>tổng hợp kiến thức các môn học</b> trong phần Luyện tập, giúp học sinh làm quen với các dạng đề thi, ôn luyện kiến thức tổng hợp.	
+						- <b>Là hệ thống gồm 34 đề </b> ,<b>tổng hợp kiến thức các môn học</b>, giúp học sinh làm quen với các dạng đề thi, ôn luyện kiến thức tổng hợp.	
 						</td>
 					</tr>
 					<tr>

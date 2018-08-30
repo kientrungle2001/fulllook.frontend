@@ -12,15 +12,6 @@
 	</div>
 </a>
 
-<a target="_blank" href="http://nextnobels.com/THONG-TIN-VE-CAC-THAY-CO-LUYEN-THI-VAO-LOP-6-TRAN-DAI-NGHIA-NEXTNOBELS">
-	<div class="full mb-3 box-document p-1">
-		<img class="image-responsive" src="http://s1.nextnobels.com/default/skin/nobel/test/themes/default/media/trungtam.png">
-		<p class="text-center mt-1">
-			<strong>Các trung tâm luyện thi vào Trần Đại Nghĩa</strong>
-		</p>
-	</div>
-</a>
-
 <a href="/faq.php">
 	<div class="full mb-3 box-document p-1">
 		<img class="image-responsive" src="http://s1.nextnobels.com/default/skin/nobel/test/themes/default/media/hoidap.png">
