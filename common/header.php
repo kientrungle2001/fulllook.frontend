@@ -104,14 +104,78 @@
                         </div>
 	                </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/#tonghop">Luyện tiếng anh</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/#tonghop">Luyện tiếng anh</a>
+                    <div style="right: 0px !important; left: auto;" class="mega dropdown-menu  p-3">
+                        <div class="row pl-3" ng-init="selectedEnglishTestPage = 0">
+                            <div class="col-12 col-md-2 pl-0" ng-repeat="test in englishTests" ng-show="inPage($index, selectedEnglishTestPage, 30)">
+                                <a href="/test.php?test_id={{test.id}}&category_id=1411">
+                                    <div class="btn text-lta full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en || test.name}} {{test.trial? ' - Free': ''}}</div>
+                                    <div class="btn text-lta full mb-3 btn-primary" ng-show="language=='vn'">{{test.name || test.name_en}} {{test.trial? ' - Free': ''}}</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <nav aria-label="Navigation">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item" ng-repeat="page in range(1, totalPage(englishTests.length, 30), 1)" 
+                                        ng-click="selectEnglishTestPage(page-1)"
+                                        ng-class="{'active': selectedEnglishTestPage == page-1}"
+                                        ><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/#tonghop">Luyện tổng hợp</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/#tonghop">Luyện tổng hợp</a>
+                    <div style="right: 0px !important; left: auto;" class="mega dropdown-menu  p-3">
+                        <div class="row pl-3" ng-init="selectedTestPage = 0">
+                            <div class="col-12 pl-0 col-md-2" ng-repeat="test in tests" ng-show="inPage($index, selectedTestPage, 30)">
+                            <a href="/test.php?test_id={{test.id}}&category_id=1412">
+                                <div class="btn text-lta full mb-3 btn-primary" ng-show="language=='en' || language=='ev'">{{test.name_en || test.name}} {{test.trial? ' - Free': ''}}</div>
+                                <div class="btn text-lta full mb-3 btn-primary" ng-show="language=='vn'">{{test.name || test.name_en}} {{test.trial? ' - Free': ''}}</div>
+                            </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <nav aria-label="Navigation">
+                                    <ul class="pagination text-lta justify-content-center">
+                                        <li class="page-item" ng-repeat="page in range(1, totalPage(tests.length, 30), 1)" 
+                                        ng-click="selectTestPage(page-1)"
+                                        ng-class="{'active': selectedTestPage == page-1}"
+                                        ><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a href="/#thithu" class="nav-link">Thi thử Trần Đại Nghĩa</a>
+                <li class="nav-item dropdown">
+                    <a href="/#thithu" class="nav-link dropdown-toggle">Thi thử Trần Đại Nghĩa</a>
+                    <div style="right: 0px !important; left: auto;" class="mega dropdown-menu  p-3">
+                        <div class="row" ng-init="selectedTestSetPage = 0">
+                            <div class="w20p full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'" ng-show="inPage($index, selectedTestSetPage, 15)">
+                                <a class="full btn btn-primary mb-3 text-lta" href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{testSet.name}}</a>
+                               
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <nav aria-label="Navigation">
+                                    <ul class="pagination text-lta justify-content-center">
+                                        <li class="page-item" ng-repeat="page in range(1, totalPage(testSets.length, 15), 1)" 
+                                        ng-click="selectTestSetPage(page-1)"
+                                        ng-class="{'active': selectedTestSetPage == page-1}"
+                                        ><a href="#" class="page-link" onclick="return false;">{{page}}</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                 </li>
                 <?php if(0): ?>
                 <li class="nav-item">

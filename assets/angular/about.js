@@ -32,6 +32,84 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 		$scope.subjects = resp;
 		$scope.$apply();
 	}});
+	$scope.tests = [];
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/common/getTests', 
+		data: {
+			categoryId: '1412'
+		},
+		dataType: 'json',
+		success: function(resp) {
+			$scope.tests = resp;
+			$scope.$apply();
+		}
+	});
+	$scope.englishTests = [];
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/common/getTests', 
+		data: {
+			categoryId: '1411'
+		},
+		dataType: 'json',
+		success: function(resp) {
+			$scope.englishTests = resp;
+			$scope.$apply();
+		}
+	});
+	$scope.testSets = [];
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/common/getTestSets', 
+		data: {
+			categoryId: '1413'
+		},
+		dataType: 'json',
+		success: function(resp) {
+			$scope.testSets = buildBottomTree(resp);
+			$scope.$apply();
+		}
+	});	
+	$scope.realTestSets = [];
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/common/getTestSets', 
+		data: {
+			categoryId: '1414'
+		},
+		dataType: 'json',
+		success: function(resp) {
+			$scope.realTestSets = buildBottomTree(resp);
+			$scope.$apply();
+		}
+	});
+	$scope.inPage = function(index, page, pageSize) {
+		return (index >= page * pageSize) && (index < (page + 1) * pageSize);
+	};
+	$scope.totalPage = function(numberOfItem, pageSize) {
+		var rs = Math.ceil(numberOfItem / pageSize);
+		return rs;
+	};
+	$scope.range = function(min, max, step) {
+		var rs = [];
+		for(var i = min; i <= max; i+= step) {
+			rs.push(i);
+		}
+		return rs;
+	};
+	$scope.selectEnglishTestPage = function(page) {
+		$scope.selectedEnglishTestPage = page;
+		$scope.$apply();
+	};
+	$scope.selectTestPage = function (page) {
+		$scope.selectedTestPage = page;
+		$scope.$apply();
+	};
+	$scope.selectTestSetPage = function (page) {
+		$scope.selectedTestSetPage = page;
+		$scope.$apply();
+	};
 	$scope.login = {};
 	$scope.doLogin = function(url) {
 		if(!$scope.login.username || !$scope.login.password){
