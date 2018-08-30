@@ -9,12 +9,7 @@ flApp.controller('DocumentOnthiController', ['$scope', function($scope) {
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	}
-	$scope.translateOptions = {
-		'category.name': {
-			'en': 'name',
-			'vn': 'name_vn'
-		}
-	};
+	
 	$scope.subjects = [];
 	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
 		$scope.subjects = resp;
@@ -98,22 +93,7 @@ flApp.controller('DocumentOnthiController', ['$scope', function($scope) {
 		$scope.selectedTestSetPage = page;
 		$scope.$apply();
 	};
-	$scope.translate = function (val, opt) {
-		var language = $scope.language;
-		if (language != 'vn') {
-			language = 'en';
-		}
-		if (typeof val == 'string')
-			return $langMap[language][val] || val;
-		if (typeof val == 'object') {
-			var options = $scope.translateOptions[opt];
-			if (language == 'vn') {
-				return val[options.vn];
-			} else {
-				return val[options.en];
-			}
-		}
-	}
+	
 	var u = new URL(location.href);
 	var subject_id = u.searchParams.get('subject_id');
 	$scope.subject = {};
@@ -177,4 +157,32 @@ flApp.controller('DocumentOnthiController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
+
+	$scope.translateOptions = {
+		'category.name': {
+			'en': 'name',
+			'vn': 'name_vn'
+		},
+		'test.name': {
+			'vn': 'name',
+			'en': 'name_en'
+		}
+	};
+
+	$scope.translate = function (val, opt) {
+		var language = $scope.language;
+		if (language != 'en') {
+			language = 'vn';
+		}
+		if (typeof val == 'string')
+			return $langMap[language][val] || val;
+		if (typeof val == 'object') {
+			var options = $scope.translateOptions[opt];
+			if (language == 'vn') {
+				return val[options.vn];
+			} else {
+				return val[options.en];
+			}
+		}
+	};
 }]);

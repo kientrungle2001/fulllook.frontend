@@ -9,12 +9,7 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	}
-	$scope.translateOptions = {
-		'category.name': {
-			'en': 'name',
-			'vn': 'name_vn'
-		}
-	};
+	
 	$scope.subjects = [];
 	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
 		$scope.subjects = resp;
@@ -98,10 +93,22 @@ flApp.controller('TestController', ['$scope', function($scope) {
 		$scope.selectedTestSetPage = page;
 		$scope.$apply();
 	};
+
+	$scope.translateOptions = {
+		'category.name': {
+			'en': 'name',
+			'vn': 'name_vn'
+		},
+		'test.name': {
+			'vn': 'name',
+			'en': 'name_en'
+		}
+	};
+	
 	$scope.translate = function (val, opt) {
 		var language = $scope.language;
-		if (language != 'vn') {
-			language = 'en';
+		if (language != 'en') {
+			language = 'vn';
 		}
 		if (typeof val == 'string')
 			return $langMap[language][val] || val;
@@ -166,7 +173,7 @@ flApp.controller('TestController', ['$scope', function($scope) {
 			clearInterval($scope.testInterval);
 		}
 		$scope.remaining = {
-			minutes: 45,
+			minutes: $scope.selectedTest.time,
 			seconds: 0
 		};
 	};
@@ -250,14 +257,14 @@ flApp.controller('TestController', ['$scope', function($scope) {
 	$scope.saveToBook = function() {
 		var userId = window.sessionUserId;
 		var startTime = serverTime;
-		var duringTime = 15 * 60 - ($scope.remaining.minutes * 60 + $scope.remaining.seconds);
+		var duringTime = $scope.selectedTest.time * 60 - ($scope.remaining.minutes * 60 + $scope.remaining.seconds);
 		var stopTime = serverTime + duringTime;
 		jQuery.ajax({
 			type: 'post',
 			url: FL_API_URL + '/test/updateUserBooks',
 			data: {
 				userId:  userId,
-				subject_id: 0,
+				categoryId: u.searchParams.get('category_id'),
 				topic_id: $scope.selectedTest.categoryId,
 				exercise_number: 0,
 				questions: $scope.result_user_answers,

@@ -7,8 +7,8 @@
 			</a>
 			
 			&nbsp; &nbsp; &gt; &nbsp; &nbsp;
-			<a href="/detail.php?subject_id={{subject.id}}" ng-show="language!=='vn'">{{subject.name}}</a>
-			<a href="/detail.php?subject_id={{subject.id}}" ng-show="language=='vn'">{{subject.name_vn}}</a>
+			<a href="/detail.php?subject_id={{subject.id}}">{{translate(subject, 'category.name')}}</a>
+			
 		</div>
 	</div>
 
@@ -65,7 +65,7 @@
 				<div class="main-shadow full" ng-show="checkIsLogedIn()">
 					<h2 class="text-center title">
 					<span ng-hide="selectedTopic">Các chuyên đề</span>
-					<span ng-show="selectedTopic">{{selectedParentTopic.name}} - {{selectedTopic.name}}</span>
+					<span ng-show="selectedTopic">{{translate(selectedParentTopic, 'category.name')}} - {{translate(selectedTopic, 'category.name')}}</span>
 					
 					</h2>
 
@@ -87,7 +87,7 @@
 								Bài {{selectedExerciseNum+1}}	
 							</div>
 							<div class="name-detail text-center" ng-show="subject_id == 88">
-								{{selectedTopic.name}}
+								{{translate(selectedTopic, 'category.name')}}
 							</div>
 							
 							<div class="text-center">
@@ -241,7 +241,7 @@
 							</ul>
 							<div class="tab-content" id="tabDocumentContent">
 							  	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-									<div class="text-justify pt-2 adjust-table" mathjax-bind="parseTranslate(selectedVocabulary.content)">
+									<div class="text-justify pt-2 adjust-table table-responsive" mathjax-bind="parseTranslate(selectedVocabulary.content)">
 									</div>
 							  	</div>
 								<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -346,6 +346,7 @@
 .adjust-table table img {
 	width: 100%;
 	display: flex;
+	height: auto;
 }
 .text-white {
 	color: white !important;

@@ -9,12 +9,7 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	}
-	$scope.translateOptions = {
-		'category.name': {
-			'en': 'name',
-			'vn': 'name_vn'
-		}
-	};
+	
 	$scope.subjects = [];
 	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
 		$scope.subjects = resp;
@@ -98,10 +93,22 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		$scope.selectedTestSetPage = page;
 		$scope.$apply();
 	};
+
+	$scope.translateOptions = {
+		'category.name': {
+			'en': 'name',
+			'vn': 'name_vn'
+		},
+		'test.name': {
+			'vn': 'name',
+			'en': 'name_en'
+		}
+	};
+
 	$scope.translate = function (val, opt) {
 		var language = $scope.language;
-		if (language != 'vn') {
-			language = 'en';
+		if (language != 'en') {
+			language = 'vn';
 		}
 		if (typeof val == 'string')
 			return $langMap[language][val] || val;

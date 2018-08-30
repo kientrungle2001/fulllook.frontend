@@ -96,12 +96,17 @@ flApp.controller('NewsController', ['$scope', function($scope) {
 		'category.name': {
 			'en': 'name',
 			'vn': 'name_vn'
+		},
+		'test.name': {
+			'vn': 'name',
+			'en': 'name_en'
 		}
 	};
+
 	$scope.translate = function (val, opt) {
 		var language = $scope.language;
-		if (language != 'vn') {
-			language = 'en';
+		if (language != 'en') {
+			language = 'vn';
 		}
 		if (typeof val == 'string')
 			return $langMap[language][val] || val;
@@ -113,7 +118,8 @@ flApp.controller('NewsController', ['$scope', function($scope) {
 				return val[options.en];
 			}
 		}
-	}
+	};
+	
 	$scope.newsLists = [];
 	$scope.category = {};
 	$scope.getNews = function(categoryId){

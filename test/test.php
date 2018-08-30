@@ -18,10 +18,10 @@
 			</div>
 			<div class="col-12 col-md-9">
 				<div class="main-shadow full">
-					<h2 class="text-center title">{{category.name}}</h2>
+					<h2 class="text-center title">{{translate(category, 'category.name')}}</h2>
 					<div class="practice-content p-3 full">
 						<div class="do-practice full" ng-show="step=='selectTest'" style="text-align: center; padding-top: 50px;">
-							<h2>{{selectedTest.name}}</h2>
+							<h2>{{translate(selectedTest, 'test.name')}}</h2>
 							<p><strong>Dạng đề</strong>: {{selectedTest.trytest === 2 ? 'Tự luận': 'Trắc nghiệm'}}</p>
 							<p><strong>Số lượng câu hỏi</strong>: {{selectedTest.quantity || 24}}</p>
 							<p><strong>Thời gian làm bài</strong>: {{selectedTest.time || 45}} phút</p>
@@ -29,7 +29,7 @@
 						</div>
 						<div class="do-practice full" ng-show="step=='doTest'">
 							<div class="text-center">
-								<h2>{{selectedTest.name}}</h2>
+								<h2>{{translate(selectedTest, 'test.name')}}</h2>
 								<p><strong>Dạng đề</strong>: {{selectedTest.trytest === 2 ? 'Tự luận': 'Trắc nghiệm'}}</p>
 								<p><strong>Số lượng câu hỏi</strong>: {{selectedTest.quantity || 24}}</p>
 								<p><strong>Thời gian làm bài</strong>: {{selectedTest.time || 45}} phút</p>
@@ -206,9 +206,7 @@
 </div>
 
 <style>
-.text-white {
-	color: white !important;
-}
+.text-white {color: white !important;}
 .list-group-test-set-item {background-color: #bbb;}
 .list-group-test-set-item.active {background-color: #fbd65b;}
 .list-group-item.sub-active {background-color: #ffe693;}
