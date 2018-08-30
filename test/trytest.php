@@ -110,7 +110,7 @@
 											</tbody>
 										</table>
 								
-										<a href="#mobile-explan-474" class="explanation top10 hidden btn btn-success btn-show-exp" data-toggle="collapse">Xem lý giải
+										<a href="#mobile-explan-474" class="explanation top10 hidden btn btn-success btn-show-exp" data-toggle="collapse">Xem lí giải
 										</a>
 								
 										<div id="mobile-explan-474" class="collapse lygiai top10 item">
@@ -150,7 +150,7 @@
 											<!--end report-->
 									
 										</div>
-										<!--Lý giải -->
+										<!--lí giải -->
 									</div>
 								</div>
 								<div class="line-question">
@@ -208,7 +208,7 @@
 											</tbody>
 										</table>
 								
-										<a href="#mobile-explan-474" class="explanation top10 hidden btn btn-success btn-show-exp" data-toggle="collapse">Xem lý giải
+										<a href="#mobile-explan-474" class="explanation top10 hidden btn btn-success btn-show-exp" data-toggle="collapse">Xem lí giải
 										</a>
 								
 										<div id="mobile-explan-474" class="collapse lygiai top10 item">
@@ -248,7 +248,7 @@
 											<!--end report-->
 									
 										</div>
-										<!--Lý giải -->
+										<!--lí giải -->
 									</div>
 								</div>
 								<div class="line-question">

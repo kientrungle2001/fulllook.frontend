@@ -155,7 +155,7 @@
 											</tbody>
 										</table>
 								
-										<a href="#mobile-explan-{{question.id}}" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse" ng-show="showAnswersStep=='showAnswers'">Xem lý giải
+										<a href="#mobile-explan-{{question.id}}" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse" ng-show="showAnswersStep=='showAnswers'">Xem lí giải
 										</a>
 								
 										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" ng-show="showAnswersStep=='showAnswers'">
@@ -193,7 +193,7 @@
 											<!--end report-->
 									
 										</div>
-										<!--Lý giải -->
+										<!--lí giải -->
 									</div>
 								</div>
 								<div class="line-question">

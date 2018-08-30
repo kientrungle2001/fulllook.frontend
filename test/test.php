@@ -86,7 +86,7 @@
 										<div class="clearfix text-white p-1" ng-show="showAnswersStep=='showAnswers' && !isRightAnswer(question)" ng-class="{'bg-warning': !isRightAnswer(question)}">Bạn đã làm sai câu này</div>
 								
 										<a href="#mobile-explan-{{question.id}}" class="explanation top10 btn btn-success btn-show-exp" 
-												data-toggle="collapse" ng-show="showAnswersStep=='showAnswers'">Xem lý giải
+												data-toggle="collapse" ng-show="showAnswersStep=='showAnswers'">Xem lí giải
 										</a>
 								
 										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" 
@@ -126,7 +126,7 @@
 											<!--end report-->
 									
 										</div>
-										<!--Lý giải -->
+										<!--lí giải -->
 									</div>
 								</div>
 								<div class="line-question">
