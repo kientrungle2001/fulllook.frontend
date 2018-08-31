@@ -162,12 +162,10 @@
 					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
 						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color" ng-show="language=='en' || language=='ev'">
 							{{test.name_en || test.name}} 
-							<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
 						</a>
 						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color"
 						ng-show="language=='vn'">
 							{{test.name || test.name_en}} 
-							<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
 						</a>
 					</div>
 												

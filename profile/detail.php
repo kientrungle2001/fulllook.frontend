@@ -220,7 +220,7 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr ng-repeat="test in tests">
+					    <tr ng-repeat="test in historyTests">
 					      <th scope="row">{{$index +1}}</th>
 					      <td><a href="/book.php?id={{test.id}}">{{test.name}}</a></td>
 					      <td ng-bind="test.mark"></td>

@@ -309,7 +309,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
-	$scope.tests = [];	
+	$scope.historyTests = [];	
 	$scope.testPage = function(page){
 		$scope.testPageSelected = page;
 		jQuery.ajax({
@@ -322,7 +322,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			},
 			dataType: 'json',
 			success: function(resp) {
-				$scope.tests = resp;
+				$scope.historyTests = resp;
 				$scope.$apply();
 			}
 		});
