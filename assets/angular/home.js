@@ -13,16 +13,22 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	}
+	
 	$scope.translateOptions = {
 		'category.name': {
 			'en': 'name',
 			'vn': 'name_vn'
+		},
+		'test.name': {
+			'vn': 'name',
+			'en': 'name_en'
 		}
 	};
+
 	$scope.translate = function (val, opt) {
 		var language = $scope.language;
-		if (language != 'vn') {
-			language = 'en';
+		if (language != 'en') {
+			language = 'vn';
 		}
 		if (typeof val == 'string')
 			return $langMap[language][val] || val;
@@ -34,7 +40,8 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 				return val[options.en];
 			}
 		}
-	}
+	};
+
 	$scope.register = {};
 	$scope.doRegister = function(url){
 		if(!$scope.register.username || !$scope.register.name || !$scope.register.password || !$scope.register.repassword || !$scope.register.phone || !$scope.register.email || !$scope.register.sex || !$scope.register.areacode){

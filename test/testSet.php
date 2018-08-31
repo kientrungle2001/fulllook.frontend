@@ -6,18 +6,18 @@
 				<div class="main-shadow full">
 					<div class="full">
 						<div style="border-radius: 5px 0px 0px 0px;" class="nav-link text-center title-pr text-white bg-primary">
-						{{category.name}}</div>
+						{{translate(category, 'category.name')}}</div>
 					</div>
 					
 				  	<ul class="list-group full vocabulary">
 					  <li class="list-group-item list-group-test-set-item" ng-repeat="testSet in testSets" ng-class="{'active': testSet==selectedTestSet}" style="padding: 0">
 					  
-					  <a href="#" ng-click="selectTestSet(testSet)" style="padding: 15px; display: inline-block;" onclick="return false;">{{testSet.name}} {{testSet.trial ? ' - Free': ''}}</a>
+					  <a href="#" ng-click="selectTestSet(testSet)" style="padding: 15px; display: inline-block;" onclick="return false;">{{translate(testSet, 'test.name')}} {{testSet.trial ? ' - Free': ''}}</a>
 
 
 					  <ul class="list-group" style="margin: 0;">
 					  	<li class="list-group-item" ng-repeat="test in testSet.children" style="border: none !important;" ng-class="{'active sub-active': selectedTest === test}">
-						  <a href="#" ng-click="selectTest(testSet, test)" style="border: none;" onclick="return false;">&nbsp;&nbsp;&nbsp;&nbsp; {{test.name}} {{test.trial ? ' - Free': ''}}</a>
+						  <a href="#" ng-click="selectTest(testSet, test)" style="border: none;" onclick="return false;">&nbsp;&nbsp;&nbsp;&nbsp; {{translate(test, 'test.name')}} {{test.trial ? ' - Free': ''}}</a>
 						</li>
 					  </ul>
 					  </li>
@@ -27,20 +27,20 @@
 			</div>
 			<div class="col-12 col-md-9">
 				<div class="main-shadow full">
-					<h2 class="text-center title" ng-show="selectedTestSet && selectedTest">{{selectedTestSet.name}} - {{selectedTest.name}}</h2>
-					<h2 class="text-center title" ng-hide="selectedTest">Hãy chọn một đề trong {{selectedTestSet.name}}</h2>
+					<h2 class="text-center title" ng-show="selectedTestSet && selectedTest">{{translate(selectedTestSet, 'test.name')}} - {{translate(selectedTest, 'test.name')}}</h2>
+					<h2 class="text-center title" ng-hide="selectedTest">Hãy chọn một đề trong {{translate(selectedTestSet, 'test.name')}}</h2>
 					<div class="row">
 						<div class="col-md-12 text-center pt-5">
 							<div ng-show="selectedTestSet && !selectedTest">
 								<h2>Chọn một phần để bắt đầu làm</h2>
-								<button class="btn btn-primary" ng-repeat="test in selectedTestSet.children" style="margin-right: 15px;" ng-click="selectTest(selectedTestSet, test)">{{test.name}}</button>
+								<button class="btn btn-primary" ng-repeat="test in selectedTestSet.children" style="margin-right: 15px;" ng-click="selectTest(selectedTestSet, test)">{{translate(test, 'test.name')}}</button>
 							</div>
 							
 						</div>
 					</div>
 					<div class="practice-content p-3 full">
 						<div class="do-practice full" ng-show="step=='selectTest'" style="text-align: center; padding-top: 50px;">
-							<h2>{{selectedTestSet.name}} - {{selectedTest.name}}</h2>
+							<h2>{{translate(selectedTestSet, 'test.name')}} - {{translate(selectedTest, 'test.name')}}</h2>
 							<p><strong>Dạng đề</strong>: {{selectedTest.trytest === 2 ? 'Tự luận': 'Trắc nghiệm'}}</p>
 							<p><strong>Số lượng câu hỏi</strong>: {{selectedTest.quantity || 24}}</p>
 							<p><strong>Thời gian làm bài</strong>: {{selectedTest.time || 45}} phút</p>
@@ -49,7 +49,7 @@
 						</div>
 						<div class="do-practice full" ng-show="step=='doTest'">
 							<div class="text-center">
-								<h2>{{selectedTestSet.name}} - {{selectedTest.name}}</h2>
+								<h2>{{translate(selectedTestSet, 'test.name')}} - {{translate(selectedTest, 'test.name')}}</h2>
 								<p><strong>Số lượng câu hỏi</strong>: {{total_question || 24}}</p>
 								<p><strong>Thời gian làm bài</strong>: {{total_time || 45}} phút</p>
 								<div  class="time">
@@ -108,7 +108,7 @@
 											</tbody>
 										</table>
 								
-										<a href="#mobile-explan-{{question.id}}" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse" ng-show="showAnswerStep=='showAnswerStep'">Xem lý giải
+										<a href="#mobile-explan-{{question.id}}" class="explanation top10 btn btn-success btn-show-exp" data-toggle="collapse" ng-show="showAnswerStep=='showAnswerStep'">Xem lí giải
 										</a>
 								
 										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" ng-show="showAnswerStep=='showAnswerStep'">
@@ -147,7 +147,7 @@
 											<!--end report-->
 									
 										</div>
-										<!--Lý giải -->
+										<!--lí giải -->
 									</div>
 								</div>
 								<div class="line-question">

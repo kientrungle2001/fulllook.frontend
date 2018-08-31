@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Đăng nhập - Đăng ký</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Đăng nhập - Đăng kí</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -44,7 +44,7 @@
 			
 			</div>
 			<div class="col-lg-6">
-				<h2>Đăng ký</h2>
+				<h2>Đăng kí</h2>
 				<div class="card card-container">
 					<form class="form-signin form">
 						
@@ -107,10 +107,10 @@
 
 						</div>
 						<div class="form-group">
-							<button class="btn btn-lg btn-primary btn-block btn-signin" ng-click="doRegister('<?php echo FL_URL?>')">Đăng ký</button>
+							<button class="btn btn-lg btn-primary btn-block btn-signin" ng-click="doRegister('<?php echo FL_URL?>')">Đăng kí</button>
 						</div>
 						<div class="form-group">
-						Bằng việc đăng ký, bạn đã đồng ý với điều khoản sử dụng và chính sách bảo mật của Next Nobels
+						Bằng việc đăng kí, bạn đã đồng ý với điều khoản sử dụng và chính sách bảo mật của Next Nobels
 						</div>
 						
 					</form><!-- /form -->

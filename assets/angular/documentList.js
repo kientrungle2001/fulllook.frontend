@@ -96,12 +96,17 @@ flApp.controller('DocumentListController', ['$scope', function($scope) {
 		'category.name': {
 			'en': 'name',
 			'vn': 'name_vn'
+		},
+		'test.name': {
+			'vn': 'name',
+			'en': 'name_en'
 		}
 	};
+
 	$scope.translate = function (val, opt) {
 		var language = $scope.language;
-		if (language != 'vn') {
-			language = 'en';
+		if (language != 'en') {
+			language = 'vn';
 		}
 		if (typeof val == 'string')
 			return $langMap[language][val] || val;
@@ -113,7 +118,8 @@ flApp.controller('DocumentListController', ['$scope', function($scope) {
 				return val[options.en];
 			}
 		}
-	}
+	};
+	
 	var u = new URL(location.href);
 	var subject_id = u.searchParams.get('subject_id');
 	$scope.subject = {};

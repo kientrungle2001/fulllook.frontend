@@ -18,13 +18,13 @@
 
 	<div class="practice-section container">
 		<div class="box-practice text-center" ng-repeat="subject in subjects">
-			<a href="/detail.php?subject_id={{subject.id}}" class="subjectclick" data-subject="{{subject.id}}" data-alias="{{subject.name}}" data-class="5">
+			<a href="/detail.php?subject_id={{subject.id}}" class="subjectclick" data-subject="{{subject.id}}" data-alias="{{subject.alias}}" data-class="5">
 				<div class="white text-uppercase relative">
 					<div class="full">
-						<img ng-src="http://s1.nextnobels.com{{subject.img}}" alt="{{subject.name}}" class=" img-fluid center-block">
+						<img ng-src="http://s1.nextnobels.com{{subject.img}}" alt="{{translate(subject, 'category.name')}}" class=" img-fluid center-block">
 					</div>
-					<div class="top20 text-center full absolute" ng-show="language!=='vn'">{{subject.name}}</div>
-					<div class="top20 text-center full absolute" ng-show="language=='vn'">{{subject.name_vn}}</div>
+					<div class="top20 text-center full absolute">{{translate(subject, 'category.name')}}</div>
+					
 				</div>
 			</a>
 		</div>
@@ -43,12 +43,10 @@
 		<div class="row" ng-init="selectedEnglishTestPage = 0">
 			<div class="col-12 col-md-2" ng-repeat="test in englishTests" ng-show="inPage($index, selectedEnglishTestPage, 30)">
 				<a href="/test.php?test_id={{test.id}}&category_id=1411">
-					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en || test.name}} 
+					<div class="btn ltth full mb-3 btn-primary">{{translate(test, 'test.name')}} 
 					<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
 					</div>
-					<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name || test.name_en}} 
-					<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
-					</div>
+					
 				</a>
 			</div>
 		</div>
@@ -80,12 +78,10 @@
 		<div class="row" ng-init="selectedTestPage = 0">
 			<div class="col-12 col-md-2" ng-repeat="test in tests" ng-show="inPage($index, selectedTestPage, 30)">
 			<a href="/test.php?test_id={{test.id}}&category_id=1412">
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='en' || language=='ev'">{{test.name_en || test.name}} 
+				<div class="btn ltth full mb-3 btn-primary">{{translate(test, 'test.name')}}
 				<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
 				</div>
-				<div class="btn ltth full mb-3 btn-primary" ng-show="language=='vn'">{{test.name || test.name_en}}
-				<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
-				</div>
+				
 			</a>
 			</div>
 		</div>
@@ -118,17 +114,12 @@
 	<div class="container">
 		<div class="row" ng-init="selectedTestSetPage = 0">
 			<div class="box-thithu bg-white full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'" ng-show="inPage($index, selectedTestSetPage, 15)">
-				<h3 class="text-center head-box"><a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
+				<h3 class="text-center head-box"><a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{translate(testSet, 'test.name')}}</a></h3>
 				<div class="box-body">
 
 					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
-						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color" ng-show="language=='en' || language=='ev'">
-							{{test.name_en || test.name}}  
-							<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
-						</a>
-						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color"
-						ng-show="language=='vn'">
-							{{test.name || test.name_en}}  
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
+							{{translate(test, 'test.name')}}  
 							<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
 						</a>
 					</div>
@@ -157,16 +148,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="box-tdn bg-white full-xs" ng-repeat="testSet in realTestSets">
-				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=1414&test_set_id={{testSet.id}}">{{testSet.name}}</a></h3>
+				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=1414&test_set_id={{testSet.id}}">{{translate(testSet, 'test.name')}}</a></h3>
 				<div class="box-body">
 					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
-						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color" ng-show="language=='en' || language=='ev'">
-							{{test.name_en || test.name}} 
+						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
+							{{translate(test, 'test.name')}}
+							<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
 						</a>
-						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color"
-						ng-show="language=='vn'">
-							{{test.name || test.name_en}} 
-						</a>
+						
 					</div>
 												
 				</div>	
@@ -416,22 +405,12 @@
 								<strong><b>Chị Trần Việt Nga</b> <br> (Báo Giáo dục &amp; Thời đại)</strong><i class="fa fa-quote-right fa-2x"></i>
 								</p>
 							</div>
-						
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class=" text-center heading mt-5 mb-3 full text-white">
+	<div class="text-center heading mt-5 mb-3 full text-white">
 		THỐNG KÊ
 	</div>
 	<div class="full mb-5">
@@ -448,14 +427,12 @@
 					<b class="fff223 fs28">4</b> <span class="fs16 white">
 					Người đang học trực tuyến		
 			 		</span>	
-			 	</div>		
+			 	</div>
 				<div class="col-md-3 col-12"> 
 					<span class="fs16 white">
 					Thành viên mới nhất: </span><b class="white">kiennguyenmai</b>
 				</div>
 			</div>
-			
 		</div>
-	</div>	
-	
+	</div>
 </div>
