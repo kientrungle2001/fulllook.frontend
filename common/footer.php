@@ -65,6 +65,75 @@
     </div>
   </div>
 </div>
+<style>
+#hotnew {
+    display: none;
+    position: fixed;
+    right: 5px !important;
+    margin: 0px !important;
+    bottom: -2px !important;
+    padding: 10px !important;
+    webkit-box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.75);
+    background-color: #fff;
+    background-position: bottom right;
+    border-radius: 3px;
+    webkit-border-radius: 3px;
+    cursor: pointer;
+	font-weight: bold;
+
+}
+.newbox {
+    position: fixed;
+    right: 5px;
+    bottom: 10px;
+    width: 250px;
+    height: 260px;
+    margin: 0px !important;
+    z-index: 9999;
+    background: url(/assets/images/img.png) no-repeat;
+    background-size: 50%;
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.75);
+    background-color: #fff;
+    background-position: bottom right;
+}
+.tinmoi {
+    display: block;
+    text-align: center;
+    color: #164cfb;
+    margin: 0px 0px 4px 0px;
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    color: red;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    color: red;
+  }
+}
+
+</style>
+<div onclick="return opentb();" id="hotnew" class="tinmoi hidden-xs" style="display: block;">Xem tin mới</div>
+
+<div id="newbox" style="width: 320px; height: 270px; display: none;" class="alert alerttb newbox alert-dismissible hidden-xs">
+  <button onclick="return closetb();" type="button" class="close"><span aria-hidden="true">×</span></button>
+  	<div class="tinmoi">
+		&nbsp;&nbsp;--------------- <b class="f16">Mới</b> ------------<br>
+		<img src="http://fulllook.com.vn/Default/skin/nobel/test/Themes/Default/media/star.png">
+  	</div>
+  	<div class="w100p">
+		<a href="/news_detail.php?id=197" target="_blank">
+		FULL LOOK TRẦN ĐẠI NGHĨA RA MẮT PHIÊN BẢN MỚI
+		</a>
+	</div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script>
@@ -86,6 +155,14 @@
 
 
 	<script>
+		function opentb(){
+			jQuery(this).hide();
+			jQuery('#newbox').show();
+		}
+		function closetb(){
+			jQuery('#hotnew').show();
+			jQuery('#newbox').hide();
+		}
 		jQuery(function(){
 			jQuery('#homeslider').carousel({
 		      interval: 10000,
