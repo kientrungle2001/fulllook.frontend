@@ -157,9 +157,6 @@
 				  </li>	
 				  <li class="nav-item">
 				    <a class="nav-link" id="tdn-tab" data-toggle="tab" href="#tdn" role="tab" aria-controls="tdn" aria-selected="false">Đề thi Trần Đại Nghĩa các năm</a>
-				  </li>	
-				  <li class="nav-item">
-				    <a class="nav-link" id="testAll-tab" data-toggle="tab" href="#testAll" role="tab" aria-controls="tdn" aria-selected="false">Tất cả</a>
 				  </li>			  
 				</ul>
 			</div>
@@ -202,8 +199,9 @@
 					    </li>
 					    <li class="page-item" ng-repeat="lessonItem in lessonQuantity" ng-class="{'active': lessonPageSelected == lessonItem}">
 					    	<a class="page-link" ng-click="lessonPage(lessonItem)">{{lessonItem+1}}</a>
+
 					    </li>
-					    			    
+					    <li><a class="page-link" ng-click="changePage(groupPage)">Xem thêm</a></li>			    
 					    
 					  </ul>
 					</nav>
@@ -223,7 +221,7 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr ng-repeat="test in historyTests">
+					    <tr ng-repeat="test in tests">
 					      <th scope="row">{{$index +1}}</th>
 					      <td><a href="/book.php?id={{test.id}}">{{test.name}}</a></td>
 					      <td ng-bind="test.mark"></td>
@@ -366,47 +364,6 @@
 					    </li>
 					    <li class="page-item" ng-class="{'active': tdnRealTestPageSelected === tdnRealTestitem}" ng-repeat="tdnRealTestitem in tdnRealTestQuantity">
 					    	<a class="page-link"   ng-click="tdnRealTestPage(tdnRealTestitem)">{{tdnRealTestitem +1}}</a>
-					    </li>					   
-					    
-					  </ul>
-					</nav>
-				</div>
-
-				<div class="tab-pane fade bg-light" id="testAll" role="tabpanel" aria-labelledby="testAll-tab" >
-			  		Tổng hợp các bài thi
-			  		<table class="table table-bordered">
-					  <thead>
-					    <tr>
-					      <th scope="col">#</th>
-					      <th scope="col">Đề thi</th>					      
-					      <th scope="col">Điểm</th>
-					      <th scope="col">Ngôn ngữ</th>
-					      <th scope="col">Thời gian làm bài</th>
-					      <th scope="col">Ngày</th>
-					      
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr ng-repeat="testAll in testAlls">
-					      <th scope="row">{{$index +1}}</th>
-					      <td><a href="/book.php?id={{testAll.id}}">{{testAll.name}}</a></td>
-					      <td ng-bind="testAll.mark"></td>
-					      <td ng-bind="testAll.lang"></td>
-					      <td ng-bind="testAll.duringTime"></td>
-					      <td >{{testAll.startTime| date:'MM/dd/yyyy @ h:mma'}}</td>
-					      
-					    </tr>					    
-					    
-					  </tbody>
-					</table>
-					<nav aria-label="...">
-					  <ul class="pagination">
-					    <li class="page-item" ng-class="{'active': testAllPageSelected === 0}">					      
-					      	<a class="page-link"  ng-click="testAllPage(0)">Trang đầu</a>      
-					  	  
-					    </li>
-					    <li class="page-item" ng-class="{'active': testAllPageSelected === testAllitem}" ng-repeat="testAllitem in testAllQuantity">
-					    	<a class="page-link"   ng-click="testAllPage(testAllitem)">{{testAllitem +1}}</a>
 					    </li>					   
 					    
 					  </ul>

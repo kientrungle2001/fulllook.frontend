@@ -11,89 +11,6 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 	$scope.cancelEditUser = function() {
 		$scope.editInfor = 0;
 	}
-	$scope.subjects = [];
-	jQuery.ajax({url: FL_API_URL +'/common/getSubjects', success: function(resp) {
-		$scope.subjects = resp;
-		$scope.$apply();
-	}});
-	$scope.tests = [];
-	jQuery.ajax({
-		type: 'post',
-		url: FL_API_URL +'/common/getTests', 
-		data: {
-			categoryId: '1412'
-		},
-		dataType: 'json',
-		success: function(resp) {
-			$scope.tests = resp;
-			$scope.$apply();
-		}
-	});
-	$scope.englishTests = [];
-	jQuery.ajax({
-		type: 'post',
-		url: FL_API_URL +'/common/getTests', 
-		data: {
-			categoryId: '1411'
-		},
-		dataType: 'json',
-		success: function(resp) {
-			$scope.englishTests = resp;
-			$scope.$apply();
-		}
-	});
-	$scope.testSets = [];
-	jQuery.ajax({
-		type: 'post',
-		url: FL_API_URL +'/common/getTestSets', 
-		data: {
-			categoryId: '1413'
-		},
-		dataType: 'json',
-		success: function(resp) {
-			$scope.testSets = buildBottomTree(resp);
-			$scope.$apply();
-		}
-	});	
-	$scope.realTestSets = [];
-	jQuery.ajax({
-		type: 'post',
-		url: FL_API_URL +'/common/getTestSets', 
-		data: {
-			categoryId: '1414'
-		},
-		dataType: 'json',
-		success: function(resp) {
-			$scope.realTestSets = buildBottomTree(resp);
-			$scope.$apply();
-		}
-	});
-	$scope.inPage = function(index, page, pageSize) {
-		return (index >= page * pageSize) && (index < (page + 1) * pageSize);
-	};
-	$scope.totalPage = function(numberOfItem, pageSize) {
-		var rs = Math.ceil(numberOfItem / pageSize);
-		return rs;
-	};
-	$scope.range = function(min, max, step) {
-		var rs = [];
-		for(var i = min; i <= max; i+= step) {
-			rs.push(i);
-		}
-		return rs;
-	};
-	$scope.selectEnglishTestPage = function(page) {
-		$scope.selectedEnglishTestPage = page;
-		$scope.$apply();
-	};
-	$scope.selectTestPage = function (page) {
-		$scope.selectedTestPage = page;
-		$scope.$apply();
-	};
-	$scope.selectTestSetPage = function (page) {
-		$scope.selectedTestSetPage = page;
-		$scope.$apply();
-	};
 	$scope.areaCodes = [];
 	jQuery.ajax({
 		type: 'post',
@@ -110,22 +27,16 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 	$scope.changeGrade = function() {
 		window.localStorage.setItem('grade', $scope.grade);
 	};
-	
 	$scope.translateOptions = {
 		'category.name': {
 			'en': 'name',
 			'vn': 'name_vn'
-		},
-		'test.name': {
-			'vn': 'name',
-			'en': 'name_en'
 		}
 	};
-
 	$scope.translate = function (val, opt) {
 		var language = $scope.language;
-		if (language != 'en') {
-			language = 'vn';
+		if (language != 'vn') {
+			language = 'en';
 		}
 		if (typeof val == 'string')
 			return $langMap[language][val] || val;
@@ -137,8 +48,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 				return val[options.en];
 			}
 		}
-	};
-
+	}
 	// edit user
 	$scope.userDetail= {};
 	$scope.editUser = function(){
@@ -259,6 +169,12 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
+	$scope.changePage = function(groupPage){
+		var quantity = $scope.lessonQuantity;
+		if(quantity.length > 5){
+
+		}
+	};
 	$scope.lessons = [];
 	
 	$scope.getSubject = function(){
@@ -316,7 +232,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
-	$scope.historyTests = [];	
+	$scope.tests = [];	
 	$scope.testPage = function(page){
 		$scope.testPageSelected = page;
 		jQuery.ajax({
@@ -329,7 +245,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			},
 			dataType: 'json',
 			success: function(resp) {
-				$scope.historyTests = resp;
+				$scope.tests = resp;
 				$scope.$apply();
 			}
 		});
@@ -452,44 +368,6 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		});
 	};
 	$scope.tdnRealTestPage(0);
-
-	// Tong hop de thi
-	$scope.testAllQuantity = 0;
-	jQuery.ajax({
-		type: 'post',
-		url: FL_API_URL +'/history/countTestAlls', 
-		data: {
-			userId: sessionUserId			
-		},
-		dataType: 'json',
-		success: function(resp) {
-			var quantity = Math.ceil(resp/20);
-		    var result= [];
-		    for(i =0; i< quantity; i++){
-		      result.push(i);
-		    }
-			$scope.testAllQuantity = result;
-			$scope.$apply();
-		}
-	});
-	$scope.testAlls = [];	
-	$scope.testAllPage = function(page){
-		$scope.testAllPageSelected = page;
-		jQuery.ajax({
-			type: 'post',
-			url: FL_API_URL +'/history/getTestAlls', 
-			data: {
-				userId: sessionUserId,				
-				numberPage: page	
-			},
-			dataType: 'json',
-			success: function(resp) {
-				$scope.testAlls = resp;
-				$scope.$apply();
-			}
-		});
-	};
-	$scope.testAllPage(0);
 
 	$scope.register = {};
 	$scope.doRegister = function (url) {
