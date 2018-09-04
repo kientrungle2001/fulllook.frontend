@@ -45,6 +45,27 @@
 		Bản quyền thuộc về Công Ty Cổ Phần Giáo Dục Phát Triển Trí Tuệ 
 	</div-->
 </div>
+
+<div class="modal" id="bannerModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="text-uppercase text-center m-0" style=" font-size: 32px; width: 100%; color: #19c3c1;font-family: iCiel;">Next Nobels</h5>
+        <button onclick="closePopup();" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="relative">
+			<img src="/assets/images/uudai.png" class="img-fluid" alt="">
+			<a style="top: 75px; right: 75px;" class="btn btn-warning absolute" href="/news_detail.php?id=198">Xem chi tiết</a>
+		</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script>
 		$.noConflict();
@@ -75,7 +96,16 @@
 			);
 		});
 	    
-
+		jQuery(document).ready(function() {
+			if(sessionStorage.getItem('closePopup') != '1') {
+				if(window.location.pathname == '' || window.location.pathname == '/' )
+				jQuery('#bannerModal').modal('show');
+			}
+		});
+		function closePopup() {
+			jQuery('#bannerModal').modal('hide');
+			sessionStorage.setItem('closePopup', '1');
+		}
 	</script>
 
 	<script type="text/javascript">
