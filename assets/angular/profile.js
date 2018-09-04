@@ -260,24 +260,25 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		}
 	});
 	$scope.lessons = [];
-	
-	$scope.getSubject = function(){
-		var subjects= new Array();
-		subjects[51] = 'Mathematics';
-		subjects[52] = 'Science';
-		subjects[164] = 'English';
-		subjects[157] = 'Literature';
-		subjects[53] = 'History';
-		subjects[50] = 'Geography';
-		subjects[87] = 'Life Skills';
-		subjects[59] = 'Social Understanding';
-		subjects[88] = 'Observing Listening';
-		subjects[54] = 'Language And Communication';
-		$scope.subjects = new Array();
-		$scope.subjects = subjects;
-		
+	$scope.subjectNames = {};
+	$scope.getSubjects = function(){
+		var subjects= {};
+		subjects['s51'] = 'Mathematics';
+		subjects['s52'] = 'Science';
+		subjects['s164'] = 'English';
+		subjects['s157'] = 'Literature';
+		subjects['s53'] = 'History';
+		subjects['s50'] = 'Geography';
+		subjects['s87'] = 'Life Skills';
+		subjects['s59'] = 'Social Understanding';
+		subjects['s88'] = 'Observing Listening';
+		subjects['s54'] = 'Language And Communication';		
+		$scope.subjectNames = subjects;		
 	};
-	$scope.getSubject();
+	$scope.getSubjects();
+	$scope.getSubject= function(subjectId){		
+		return $scope.subjectNames['s' +subjectId];
+	};
 	$scope.lessonPage = function(page){
 		$scope.lessonPageSelected = page;
 		jQuery.ajax({

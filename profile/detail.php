@@ -184,7 +184,7 @@
 					  <tbody>
 					    <tr ng-repeat="lesson in lessons">
 					      <th scope="row">{{$index +1}}</th>
-					      <td ng-bind="subjects[lesson.categoryId]"></td>
+					      <td >{{getSubject(lesson.categoryId)}}</td>
 					      <td ng-bind="lesson.name"></td>
 					      <td><a href="/book.php?id={{lesson.id}}">Bài {{lesson.exercise_number}}</a></td>
 					      <td ng-bind="lesson.mark"></td>
