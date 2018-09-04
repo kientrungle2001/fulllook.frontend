@@ -77,6 +77,13 @@
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 	<script src="/assets/angular/app.js"></script>
+	<script language="JavaScript">
+		<!--
+		var dictionaries = "ev_ve";
+		// -->
+	</script>
+	<script language="JavaScript1.2" src="http://vndic.net/js/vndic.js" type='text/javascript'></script>
+
 
 	<script>
 		jQuery(function(){
