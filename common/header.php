@@ -97,8 +97,7 @@
                                     <div class="full">
                                         <img ng-src="http://s1.nextnobels.com{{subject.img}}" alt="{{subject.name}}" class=" img-fluid center-block">
                                     </div>
-                                    <div class="text-mega text-center full absolute" ng-show="language!=='vn'">{{subject.name}}</div>
-                                    <div class="text-mega text-center full absolute" ng-show="language=='vn'">{{subject.name_vn}}</div>
+                                    <div class="text-mega text-center full absolute">{{translate(subject, 'category.name')}}</div>
                                 </div>
                             </a>
                         </div>
@@ -110,8 +109,7 @@
                         <div class="row pl-3" ng-init="selectedEnglishTestPage = 0">
                             <div class="col-12 col-md-2 pl-0" ng-repeat="test in englishTests" ng-show="inPage($index, selectedEnglishTestPage, 30)">
                                 <a href="/test.php?test_id={{test.id}}&category_id=1411">
-                                    <div class="btn text-lta full mb-3 btn-primary" ng-show="language=='en'">{{test.name_en || test.name}} {{test.trial? ' - Free': ''}}</div>
-                                    <div class="btn text-lta full mb-3 btn-primary" ng-show="language=='vn'">{{test.name || test.name_en}} {{test.trial? ' - Free': ''}}</div>
+                                    <div class="btn text-lta full mb-3 btn-primary">{{translate(test,'test.name')}} {{test.trial? ' - Free': ''}}</div>
                                 </a>
                             </div>
                         </div>
@@ -135,8 +133,7 @@
                         <div class="row pl-3" ng-init="selectedTestPage = 0">
                             <div class="col-12 pl-0 col-md-2" ng-repeat="test in tests" ng-show="inPage($index, selectedTestPage, 30)">
                             <a href="/test.php?test_id={{test.id}}&category_id=1412">
-                                <div class="btn text-lta full mb-3 btn-primary" ng-show="language=='en' || language=='ev'">{{test.name_en || test.name}} {{test.trial? ' - Free': ''}}</div>
-                                <div class="btn text-lta full mb-3 btn-primary" ng-show="language=='vn'">{{test.name || test.name_en}} {{test.trial? ' - Free': ''}}</div>
+                                <div class="btn text-lta full mb-3 btn-primary">{{translate(test, 'test.name')}} {{test.trial? ' - Free': ''}}</div>
                             </a>
                             </div>
                         </div>
@@ -159,7 +156,7 @@
                     <div style="right: 0px !important; left: auto;" class="mega dropdown-menu  p-3">
                         <div class="row" ng-init="selectedTestSetPage = 0">
                             <div class="w20p full-xs" ng-repeat="testSet in testSets | orderBy: 'ordering'" ng-show="inPage($index, selectedTestSetPage, 15)">
-                                <a class="full btn btn-primary mb-3 text-lta" href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{testSet.name}}</a>
+                                <a class="full btn btn-primary mb-3 text-lta" href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}">{{translate(testSet, 'test.name')}}</a>
                                
                             </div>
                         </div>
