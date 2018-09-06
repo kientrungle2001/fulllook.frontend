@@ -156,14 +156,7 @@
 
 
 	<script>
-		if(typeof URL.prototype.searchParams == 'undefined') {
-			var get_inputs = <?php echo (!empty($_GET) ? json_encode($_GET): '{}');?>;
-			URL.prototype.searchParams = {
-				get: function(key) {
-					return get_inputs[key] || null;
-				}
-			};
-		}
+		
 		function opentb(){
 			jQuery(this).hide();
 			jQuery('#newbox').show();
@@ -198,6 +191,14 @@
 		function closePopup() {
 			jQuery('#bannerModal').modal('hide');
 			sessionStorage.setItem('closePopup', '1');
+		}
+		if(typeof URL.prototype.searchParams == 'undefined') {
+			var get_inputs = <?php echo (!empty($_GET) ? json_encode($_GET): '{}');?>;
+			URL.prototype.searchParams = {
+				get: function(key) {
+					return get_inputs[key] || null;
+				}
+			};
 		}
 	</script>
 
