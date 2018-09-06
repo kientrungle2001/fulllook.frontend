@@ -331,6 +331,7 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 
 	$scope.formatWritting = function(content) {
 		content = content.replace(/\[i[\d]+\]/ig, '..............................................................');
+		content = content.replace(/\[i[\d]+\[[\d]+\]\]/ig, '..............................................................');
 		content = content.replace(/\[t[\d]+\]/ig, '<div style="word-wrap: break-word;">' + '..............................................................'.repeat(20) + '</div>');
 		return content;
 	};
