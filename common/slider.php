@@ -27,7 +27,7 @@
         </div>
       </div>
       <div rel="#fcb7d5" class="carousel-item">
-        <img class="d-block w-100" src="/assets/images/slider4.png" alt="Second slide">
+        <img class="d-block w-100" src="/assets/images/sliderhong.png" alt="Second slide">
         <div class="absolute btdk d-none d-sm-block"><a class="btn btn-warning" href="/about.php#guide">Đăng kí ngay</a>
         </div>
         <div class="absolute btdk2 d-block d-sm-none"><a class="btn-xs btn-warning" href="/about.php#guide">Đăng kí ngay</a>
