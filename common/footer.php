@@ -142,9 +142,32 @@
 	<script src="/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js" integrity="sha256-ruP2+uorUblSeg7Tozk75u8TaSUKRCZVvNV0zRGxkRQ=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-sanitize.min.js" integrity="sha256-FnMl43xSx3jHmcs7t2LJ3htfsCeo99XORPvzOVQN/tw=" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+			(function(ng){
+				'use strict';
+				var app = angular.module('ngJaxBind', []);
+
+				app.directive("mathjaxBind", function() {
+					return {
+						restrict: "A",
+						controller: ["$scope", "$element", "$attrs",
+							function($scope, $element, $attrs) {
+								$scope.$watch($attrs.mathjaxBind, function(texExpression) {
+									$element.html(texExpression);
+									if(typeof MathJax != 'undefined'){
+										MathJax.Hub.Queue(["Typeset", MathJax.Hub, $element[0]]);
+									}
+								});
+							}]
+					};
+				});
+			}(angular));
+		</script>
+
+
 	<script src="/assets/array.js"></script>
 	<script src="/assets/js/locks.js"></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 	<script src="/assets/angular/app.js"></script>
 	<script language="JavaScript">
@@ -202,37 +225,21 @@
 		}
 	</script>
 
-	<script type="text/javascript">
-		(function(ng){
-	        'use strict';
-	        var app = angular.module('ngJaxBind', []);
-
-	        app.directive("mathjaxBind", function() {
-	            return {
-	                restrict: "A",
-	                controller: ["$scope", "$element", "$attrs",
-	                    function($scope, $element, $attrs) {
-	                        $scope.$watch($attrs.mathjaxBind, function(texExpression) {
-								$element.html(texExpression);
-								if(typeof MathJax != 'undefined'){
-									MathJax.Hub.Queue(["Typeset", MathJax.Hub, $element[0]]);
-								}
-	                        });
-	                    }]
-	            };
-	        });
-		}(angular));
-	</script>
-
-
-
 	
+
+
+
+	<!--script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script-->
+	
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<script type="text/x-mathjax-config"> 
 		MathJax.Hub.Config({
 			showMathMenu: false,
+			showProcessingMessages: false,
+			jax: ["input/TeX", "output/HTML-CSS"],
 			tex2jax: {
 		    	inlineMath: [['[\/','\/]'], ['\\(','\\)']],
-		    	processEscapes: false
+		    	preview: "none"
 		    }
 		}); 
 	</script>
