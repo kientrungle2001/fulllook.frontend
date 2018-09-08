@@ -71,8 +71,8 @@
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="input">Tỉnh(TP): </label>
-							      <select ng-model="userDetail.areacode"class="form-control">
-							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes" required ng-selected="areaCode.id==userDetail.areacode">{{areaCode.name}}</option>						        
+							      <select ng-model="userDetail.areacode" class="form-control">
+							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes" required ng-selected="areaCode.id == userDetail.areacode">{{areaCode.name}}</option>						        
 							      </select>
 							    </div>
 							  </div>
