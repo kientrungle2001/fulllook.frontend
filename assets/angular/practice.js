@@ -220,6 +220,9 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		if(typeof $scope.practiceIntervalId !== 'undefined') {
 			clearInterval($scope.practiceIntervalId);
 		}
+		jQuery('html, body').animate({
+			scrollTop: jQuery("#content").offset().top
+		}, 500);
 		$scope.action = 'practice';
 		$scope.step = 'selectTopic';
 		$scope.selectedExerciseNum = null;
@@ -606,6 +609,9 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		if(typeof $scope.practiceIntervalId !== 'undefined') {
 			clearInterval($scope.practiceIntervalId);
 		}
+		jQuery('html, body').animate({
+			scrollTop: jQuery("#content").offset().top
+		}, 500);
 		jQuery("#resGame").html('');
 		$scope.action = 'vocabulary';
 		$scope.selectedVocabulary = vocabulary;
