@@ -266,7 +266,7 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 						<td><b>2.</b></td>
 						<td><b>Phần Ôn luyện tiếng Anh</b></td>
 						<td>
-						- <b> Gồm 80 đề ôn tập ngữ pháp tiếng Anh </b> tích hợp với các kiến thức hiểu biết xã hội
+						- <b> Gồm 100 đề ôn tập ngữ pháp tiếng Anh </b> tích hợp với các kiến thức hiểu biết xã hội
 						</td>
 					</tr>
 					

@@ -788,4 +788,16 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
+
+	$scope.katex = function(str) {
+		var rs = str.replace(/\[\/[^\/]+\/\]/g, function(exp) {
+			console.log(exp);
+			exp = exp.replace('[/', '').replace('/]', '');
+			console.log(exp);
+			return katex.renderToString(exp, {
+				throwOnError: false
+			});
+		});
+		return rs;
+	};
 }]);

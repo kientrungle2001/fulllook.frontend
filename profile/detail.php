@@ -6,7 +6,7 @@
 				<h4 class="text-center t-weight">THÔNG TIN CÁ NHÂN</h4>				
 				<div class="row">
 					<div class="col-md-4">
-						<img src="{{userDetail.avatar}}" alt="avatar" class="rounded-circle" alt="Cinque Terre" width="256" height="256">
+						<img src="{{userDetail.avatar}}?t=<?php echo time();?>" alt="avatar" class="rounded-circle" alt="Cinque Terre" width="256" height="256">
 						<br>
 						
 					</div>

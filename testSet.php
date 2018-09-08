@@ -12,6 +12,9 @@
 	
 	<script>
 		FL_API_URL = '<?php echo FL_API_URL?>';
+		category_id = <?php echo intval(isset($_GET['category_id']) ? $_GET['category_id']: 0); ?>;
+		test_id = <?php echo intval(isset($_GET['test_id']) ? $_GET['test_id']: 0); ?>;
+		test_set_id = <?php echo intval(isset($_GET['test_set_id']) ? $_GET['test_set_id']: 0); ?>;
 		serverTime = <?php echo time();?>
 		
 		sessionUserId = '<?php if(isset($_SESSION['userId'])) echo $_SESSION['userId']  ?>';
