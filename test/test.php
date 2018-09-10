@@ -91,7 +91,7 @@
 								
 										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" 
 												ng-show="showAnswersStep=='showAnswers'">
-											<div class="item mb-2" mathjax-bind="question.explaination">
+											<div class="item mb-2" mathjax-bind="getExplaination(question)">
 											</div>
 									
 											<div class="item">

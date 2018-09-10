@@ -73,7 +73,7 @@
 												</div>
 											</div>
 											<div class="col" ng-show="language=='vn' || language=='ev'">
-												<div class="ptnn-title full" mathjax-bind="selectedTest.trytest == 2 ? formatWritting(question.name): question.name"> 
+												<div class="ptnn-title full" mathjax-bind="selectedTest.trytest == 2 ? formatWritting(question.name_vn): question.name_vn"> 
 												</div>
 											</div>
 										</div>
@@ -112,7 +112,7 @@
 										</a>
 								
 										<div id="mobile-explan-{{question.id}}" class="collapse lygiai top10 item" ng-show="showAnswerStep=='showAnswerStep'">
-											<div class="item mb-2" mathjax-bind="question.explaination">
+											<div class="item mb-2" mathjax-bind="getExplaination(question)">
 											</div>
 									
 											<div class="item">
