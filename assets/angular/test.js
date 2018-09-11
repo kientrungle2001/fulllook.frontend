@@ -390,4 +390,17 @@ flApp.controller('TestController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
+
+	$scope.getExplaination = function(question) {
+		var rs = question.explaination;
+		if(rs === '') {
+			question.ref_question_answers.forEach(function (answer) {
+				if (answer.status == 1 || answer.status == '1') {
+					rs = answer.recommend;
+					return false;
+				}
+			});
+		}
+		return rs;
+	};
 }]);

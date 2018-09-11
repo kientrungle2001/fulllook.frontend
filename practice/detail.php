@@ -62,7 +62,7 @@
 				
 			</div>
 			<div class="col-12 col-md-9">
-				<div class="main-shadow full" ng-show="checkIsLogedIn()">
+				<div id="content" class="main-shadow full" ng-show="checkIsLogedIn()">
 					<h2 class="text-center title">
 					<span ng-hide="selectedTopic">Các chuyên đề</span>
 					<span ng-show="selectedTopic">{{translate(selectedParentTopic, 'category.name')}} - {{translate(selectedTopic, 'category.name')}}</span>
