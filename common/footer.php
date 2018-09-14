@@ -167,7 +167,7 @@
 
 
 	<script src="/assets/array.js"></script>
-	<script src="/assets/js/locks.js"></script>
+	<!--script src="/assets/js/locks.js"></script-->
 
 	<script src="/assets/angular/app.js"></script>
 	<script language="JavaScript">
