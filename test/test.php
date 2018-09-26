@@ -110,7 +110,7 @@
 													  <div class="modal-body">
 														 <div class="w100p">
 															<label>Nội dung:</label>
-															<textarea style="height: 150px !important;" id="contentError{{question.id}}" name="contentError" class="form-control" ng-model="report[question.id]"></textarea>
+															<textarea style="height: 150px !important;" id="contentError{{question.id}}" name="contentError" class="form-control" ng-model="report.content"></textarea>
 														  </div>
 											 
 													  </div>
