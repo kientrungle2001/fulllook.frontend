@@ -17,6 +17,9 @@
 		serverTime = <?php echo time() ?>;
 		
 		sessionUserId = '<?php if(isset($_SESSION['userId'])) echo $_SESSION['userId']  ?>';
+		sessionUsername = '<?php if(isset($_SESSION['username'])) echo $_SESSION['username']  ?>';
+		sessionPhone = '<?php if(isset($_SESSION['phone'])) echo $_SESSION['phone']  ?>';
+		sessionEmail = '<?php if(isset($_SESSION['email'])) echo $_SESSION['email']  ?>';
 		checkPayment = '<?php if(isset($_SESSION['checkPayment'])) echo $_SESSION["checkPayment"] ?>';
 		paymentDate = '<?php if(isset($_SESSION['paymentDate'])) echo $_SESSION["paymentDate"] ?>';
 		expiredDate = '<?php if(isset($_SESSION['expiredDate'])) echo $_SESSION["expiredDate"] ?>';
