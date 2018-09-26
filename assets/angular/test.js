@@ -404,4 +404,23 @@ flApp.controller('TestController', ['$scope', function($scope) {
 		}
 		return rs;
 	};
+	$scope.report = {};
+	$scope.reportError = function(question) {
+		var content = $scope.report.content;
+		var questionId = question.id;
+		var userId = sessionUserId;
+		var username = sessionUsername;
+		var phone = sessionPhone;
+		var email = sessionEmail;
+		if(content.length > 0){
+			jQuery.ajax({
+				type: 'post',
+				url: FL_API_URL +'/questionerror?content='+content+'&questionId='+questionId+'&userId='+userId+'&username='+username+'&phone='+phone+'&email='+email, 
+				dataType: 'json',
+				success: function(resp) {
+					jQuery('#report'+questionId).modal('hide');
+				}
+			});
+		}
+	};
 }]);

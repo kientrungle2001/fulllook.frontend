@@ -95,11 +95,11 @@
 											</div>
 									
 											<div class="item">
-												<div class="btn btn-danger" data-toggle="modal" data-target="#report474">
+												<div class="btn btn-danger" data-toggle="modal" data-target="#report{{question.id}}">
 													Báo lỗi			
 												</div>
 										
-												<div class="modal fade" id="report474" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												<div class="modal fade" id="report{{question.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 												  <div class="modal-dialog" role="document">
 													<div class="modal-content">
 													  <div class="modal-header">
@@ -110,7 +110,7 @@
 													  <div class="modal-body">
 														 <div class="w100p">
 															<label>Nội dung:</label>
-															<textarea style="height: 150px !important;" id="contentError474" name="contentError" class="form-control" ng-model="report[question.id]"></textarea>
+															<textarea style="height: 150px !important;" id="contentError{{question.id}}" name="contentError" class="form-control" ng-model="report[question.id]"></textarea>
 														  </div>
 											 
 													  </div>
