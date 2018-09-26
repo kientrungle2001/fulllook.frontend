@@ -5,6 +5,8 @@
 	$dataUser =  base64_decode($user);
 	$dataUser= json_decode($dataUser,true);
 	$_SESSION["username"] = $dataUser['username'];
+	$_SESSION["phone"] = $dataUser['phone'];
+	$_SESSION["email"] = $dataUser['email'];
 	$_SESSION["name"] = $dataUser['name'];
 	$_SESSION["userId"] = $dataUser['userId'];
 	$_SESSION["checkPayment"] = $dataUser['checkPayment'];
