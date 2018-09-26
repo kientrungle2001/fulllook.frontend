@@ -1,4 +1,4 @@
-<div id="footer" class="full">
+<div-- id="footer" class="full">
 	<div class="footer-gradient">
 		<div class="footer-content container">
 			<div class="row">
@@ -46,7 +46,7 @@
 	</div-->
 </div>
 
-<div class="modal" id="bannerModal" tabindex="-1" role="dialog">
+<!--div class="modal" id="bannerModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -64,7 +64,7 @@
       
     </div>
   </div>
-</div>
+</div-->
 <style>
 #hotnew {
     display: none;
