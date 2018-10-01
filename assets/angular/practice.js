@@ -752,10 +752,11 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		var browser = $scope.browser();
 		var today = new Date();
 		var created = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		var userAgent = window.navigator.userAgent;
 		if(content.length > 0){
 			jQuery.ajax({
 				type: 'post',
-				url: FL_API_URL +'/questionerror?content='+content+'&questionId='+questionId+'&userId='+userId+'&username='+username+'&phone='+phone+'&email='+email+'&created='+created+'&browser='+browser+'&os='+os, 
+				url: FL_API_URL +'/questionerror?content='+content+'&questionId='+questionId+'&userId='+userId+'&username='+username+'&phone='+phone+'&email='+email+'&created='+created+'&browser='+browser+'&os='+os+'&userAgent='+userAgent, 
 				dataType: 'json',
 				success: function(resp) {
 					jQuery('#report'+questionId).modal('hide');
