@@ -22,7 +22,7 @@
 								<li><strong>Địa chỉ:</strong> {{userDetail.address}}</li>
 								<li><strong>Trường:</strong>{{userDetail.schoolname}} </li>
 								<li><strong>Lớp:</strong> {{userDetail.classname}}</li>
-																					
+								<li><strong>Tỉnh/TP:</strong> {{userDetail.areacode}}</li>													
 								<li ng-if="<?php echo $_SESSION['checkPayment']; ?>"><strong>Thời hạn sản phẩm từ ( <?php echo $_SESSION['paymentDate']; ?> đến <?php echo $_SESSION['expiredDate']; ?> )</strong></li>
 								<button type="button" class="btn btn-primary" ng-click="editInforUser()">Sửa thông tin</button>
 							</ul>							
@@ -40,7 +40,7 @@
 							    <div class="form-group col-md-3">
 							      <label for="phone">Điện thoại (*) :</label>
 							      <input type="text" class="form-control" ng-model="userDetail.phone" required placeholder="Điện thoại">
-							    </div>
+							    </div> 
 							    <div class="form-group col-md-3">
 							      <label for="inputState">Giới tính: </label>
 							      <select ng-model="userDetail.sex" required  class="form-control" >
@@ -71,10 +71,16 @@
 							    </div>
 							    <div class="form-group col-md-3">
 							      <label for="input">Tỉnh(TP): </label>
-							      <select ng-model="userDetail.areacode" class="form-control">
-							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes" required ng-selected="areaCode.id == userDetail.areacode">{{areaCode.name}}</option>						        
+							      <select ng-model="userDetail.areacode"  class="form-control" >							      		
+							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes">{{areaCode.name}}</option>						        
 							      </select>
 							    </div>
+							    <!-- <div class="form-group col-md-3">
+							      <label for="input">Tỉnh(TP): </label>
+							      <select ng-model="userDetail.areacode" class="form-control">
+							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes">{{areaCode.name}}</option>						        
+							      </select>
+							    </div> -->
 							  </div>
 							  <div class="form-group alert alert-success" ng-show="success" ng-bind-html="message"></div>
 							  <button ng-click="editUser()" class="btn btn-primary">Cập nhật</button>

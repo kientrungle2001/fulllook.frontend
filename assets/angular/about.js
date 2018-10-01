@@ -148,8 +148,7 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 		
 	}
 	$scope.paycard = {};
-	$scope.payCardFl =function(url){
-		
+	$scope.payCardFl =function(url){		
 		if(parseInt(sessionUserId) == 0 || sessionUserId ==''){
 			$scope.paycard.message ='Bạn phải đăng nhập mới được nạp thẻ';	
 			$scope.paycard.success = 0;	

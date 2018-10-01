@@ -142,7 +142,7 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 	// edit user
 	$scope.userDetail= {};
 	$scope.editUser = function(){
-		if(!$scope.userDetail){
+		if(!$scope.userDetail.name || !$scope.userDetail.phone || !$scope.userDetail.areacode || !$scope.userDetail.birthday || !$scope.userDetail.address){
 			return false;
 		}
 		$scope.userDetail.userId= sessionUserId;

@@ -81,6 +81,10 @@ flApp.controller('HomeController', ['$scope', function($scope) {
 			
 		});
 	};
+	$scope.doLoginFacebook = function(url) {
+		   window.location = url+'/login_facebook';
+			
+	};
 	// get AreaCode
 	$scope.areaCodes = [];
 	jQuery.ajax({url: FL_API_URL +'/register/getAreaCode', success: function(resp) {

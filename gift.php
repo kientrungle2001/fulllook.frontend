@@ -18,6 +18,6 @@
 	<?php include('common/header.php'); ?>
 	<?php include('gift/index.php'); ?>
 	<?php include('common/footer.php'); ?>
-	<script src="/assets/angular/gift.js"></script>
+	<script src="/assets/angular/gift.js?t=<?php echo time(); ?>"></script>
 </body>
 </html>
