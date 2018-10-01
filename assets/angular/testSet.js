@@ -329,12 +329,20 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		return false;
 	};
 
+	// $scope.formatWritting = function(content) {
+	// 	content = content.replace(/\[i[\d]+\]/ig, '..............................................................');
+	// 	content = content.replace(/\[i[\d]+\[[\d]+\]\]/ig, '..............................................................');
+	// 	content = content.replace(/\[t[\d]+\]/ig, '<div style="word-wrap: break-word;">' + '..............................................................'.repeat(20) + '</div>');
+	// 	return content;
+	// };
+
 	$scope.formatWritting = function(content) {
-		content = content.replace(/\[i[\d]+\]/ig, '..............................................................');
-		content = content.replace(/\[i[\d]+\[[\d]+\]\]/ig, '..............................................................');
-		content = content.replace(/\[t[\d]+\]/ig, '<div style="word-wrap: break-word;">' + '..............................................................'.repeat(20) + '</div>');
+		content = content.replace(/\[i[\d]+\]/ig, '<input />');
+		content = content.replace(/\[i[\d]+\[[\d]+\]\]/ig, '<input />');
+		content = content.replace(/\[t[\d]+\]/ig, '<textarea style="width: 100%;" rows="4" cols="50"></textarea>');
 		return content;
 	};
+
 
 	var question_audios = {};
 	var current_sound = null;
@@ -421,6 +429,7 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 
 	$scope.getExplaination = function (question) {
 		var rs = question.explaination;
+		console.log(rs);
 		if (rs === '') {
 			question.ref_question_answers.forEach(function (answer) {
 				if (answer.status == 1 || answer.status == '1') {
