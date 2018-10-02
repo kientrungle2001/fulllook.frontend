@@ -150,8 +150,8 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		},
 		dataType: 'json',
 		success: function(resp) {
-			$scope.testSets = buildBottomTree(resp);
-			$scope.testSets.forEach(function(testSet) {
+			$scope.leftTestSets = buildBottomTree(resp);
+			$scope.leftTestSets.forEach(function(testSet) {
 				if (testSet.id == parseInt(u.searchParams.get('test_set_id'))) {
 					$scope.selectTestSet(testSet);
 					testSet.children.forEach(function(test){

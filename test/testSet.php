@@ -10,7 +10,7 @@
 					</div>
 					
 				  	<ul class="list-group full vocabulary">
-					  <li class="list-group-item list-group-test-set-item" ng-repeat="testSet in testSets" ng-class="{'active': testSet==selectedTestSet}" style="padding: 0">
+					  <li class="list-group-item list-group-test-set-item" ng-repeat="testSet in leftTestSets" ng-class="{'active': testSet==selectedTestSet}" style="padding: 0">
 					  
 					  <a href="#" ng-click="selectTestSet(testSet)" style="padding: 15px; display: inline-block;" onclick="return false;">{{translate(testSet, 'test.name')}} {{testSet.trial ? ' - Free': ''}}</a>
 

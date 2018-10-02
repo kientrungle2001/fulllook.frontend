@@ -152,7 +152,7 @@
 				<h3 class="text-center head-tdn"><a href="/testSet.php?category_id=1414&test_set_id={{testSet.id}}">{{translate(testSet, 'test.name')}}</a></h3>
 				<div class="box-body">
 					<div class="link-box text-center" ng-repeat="test in testSet.children | orderBy: 'ordering'">
-						<a href="/testSet.php?category_id=1413&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
+						<a href="/testSet.php?category_id=1414&test_set_id={{testSet.id}}&test_id={{test.id}}" class="text-color">
 							{{translate(test, 'test.name')}}
 							<span ng-show="test.trial==1" class="badge badge-pill badge-danger">Free</span>
 						</a>

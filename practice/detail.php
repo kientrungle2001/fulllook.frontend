@@ -53,7 +53,7 @@
 					  </div>
 					  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 					  	<ul class="list-group vocabulary">
-						  <li class="list-group-item" ng-repeat="vocabulary in vocabularies" ng-class="{'active sub-active': selectedVocabulary===vocabulary}"><a href="#" ng-click="selectVocabulary(vocabulary)" onclick="return false;">{{vocabulary.title_tdn || vocabulary.title}}</a></li>
+						  <li class="list-group-item" ng-repeat="vocabulary in vocabularies" ng-class="{'active sub-active': selectedVocabulary===vocabulary}"><a href="#" ng-click="selectVocabulary(vocabulary)" onclick="return false;">{{vocabulary.tdn_title || vocabulary.title}}</a></li>
 						</ul>
 					  </div>
 					 
