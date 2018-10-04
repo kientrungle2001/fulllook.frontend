@@ -98,7 +98,7 @@
 							<input type="date" class="form-control" ng-model="register.birthday" required placeholder="Ngày sinh">
 						</div>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-6" ng-init="register.sex='1'">
 								<div class="form-group">						
 								      <select ng-model="register.sex" required class="form-control"  >
 								        <option value="1" selected>Nam</option>
@@ -106,12 +106,15 @@
 								      </select>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6" ng-init="register.areacode='2'">
 								<select ng-model="register.areacode" class="form-control" placeholder="tỉnh thành" required >
-							        <option ng-repeat="areaCode in areaCodes "  value="{{areaCode.id}}" ng-selected="areaCode.id==2">{{areaCode.name}}</option>
+							        <option ng-repeat="areaCode in areaCodes "  value="{{areaCode.id}}">{{areaCode.name}}</option>
 							        
 							      </select>
 							</div>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" ng-model="register.coupon" placeholder="Mã giảm giá (nếu có)">
 						</div>
 						<div class="form-group alert" ng-class="{'alert-danger': 	register.success==0, 'alert-success': register.success==1}" 	ng-show="register.message" ng-bind-html="register.message">
 
