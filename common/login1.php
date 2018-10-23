@@ -1,4 +1,3 @@
-
 <!-- Modal -->
 <div class="modal fade" id="loginRegisterModal" tabindex="-1" role="dialog" aria-labelledby="loginRegisterModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -9,7 +8,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">	  
+      <div class="modal-body">
+	  
 		<div class="row">
 			<div class="col-lg-6">
 				<h2>Đăng nhập</h2>
@@ -35,16 +35,6 @@
 						<div class="form-group">
 							<button class="btn btn-lg btn-primary btn-block btn-signin" ng-click="doLogin('<?php echo FL_URL?>')">Đăng nhập</button>
 						</div>
-						<div class="form-group">
-							<a href="https://tdn.nextnobels.com/login_facebook.php" class="btn btn-block btn-primary">
-          						<i class="fa fa-facebook mr-2"></i> Đăng nhập bằng Facebook
-        					</a>
-						</div>
-						<!-- <div class="form-group">
-							<a href="/login_google.php" class="btn btn-block btn-primary">
-						          						 Đăng nhập bằng Google
-						        					</a>
-						</div> -->
 					</form><!-- /form -->
 					<a href="" class="forgot-password">
 						Quên mật khẩu?
@@ -98,7 +88,7 @@
 							<input type="date" class="form-control" ng-model="register.birthday" required placeholder="Ngày sinh">
 						</div>
 						<div class="row">
-							<div class="col-md-6" ng-init="register.sex='1'">
+							<div class="col-md-6">
 								<div class="form-group">						
 								      <select ng-model="register.sex" required class="form-control"  >
 								        <option value="1" selected>Nam</option>
@@ -106,9 +96,9 @@
 								      </select>
 								</div>
 							</div>
-							<div class="col-md-6" ng-init="register.areacode='2'">
+							<div class="col-md-6">
 								<select ng-model="register.areacode" class="form-control" placeholder="tỉnh thành" required >
-							        <option ng-repeat="areaCode in areaCodes "  value="{{areaCode.id}}">{{areaCode.name}}</option>
+							        <option ng-repeat="areaCode in areaCodes "  value="{{areaCode.id}}" ng-selected="areaCode.id==2">{{areaCode.name}}</option>
 							        
 							      </select>
 							</div>

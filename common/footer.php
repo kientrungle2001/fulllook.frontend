@@ -39,14 +39,26 @@
 			</div>
 		</div>
 	</div>
-	
+	<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/56d905db5ef21b26679a3cfc/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 	<!--img class="img-fluid" src="/assets/images/footer.png" />
 	<div class="footer-bottom text-center">
 		Bản quyền thuộc về Công Ty Cổ Phần Giáo Dục Phát Triển Trí Tuệ 
 	</div-->
 </div>
 
-<!--div class="modal" id="bannerModal" tabindex="-1" role="dialog">
+<div class="modal" id="bannerModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -57,14 +69,14 @@
       </div>
       <div class="modal-body">
         <div class="relative">
-			<img src="/assets/images/uudai.png" class="img-fluid" alt="">
-			<a style="top: 75px; right: 75px;" class="btn btn-warning absolute" href="/news_detail.php?id=198">Xem chi tiết</a>
+			<img src="/assets/images/phunu.png" class="img-fluid" alt="">
+			<a style="bottom: 65px; left: 65px;" class="btn btn-warning absolute" href="/news_detail.php?id=199">Xem chi tiết</a>
 		</div>
       </div>
       
     </div>
   </div>
-</div-->
+</div>
 <style>
 #hotnew {
     display: none;
@@ -120,6 +132,8 @@
 }
 
 </style>
+
+	
 <div onclick="return opentb();" id="hotnew" class="tinmoi hidden-xs" style="display: block;">Xem tin mới</div>
 
 <div id="newbox" style="width: 320px; height: 270px; display: none;" class="alert alerttb newbox alert-dismissible hidden-xs">
@@ -167,7 +181,7 @@
 
 
 	<script src="/assets/array.js"></script>
-	<!--script src="/assets/js/locks.js"></script-->
+	<script src="/assets/js/locks.js"></script>
 
 	<script src="/assets/angular/app.js"></script>
 	<script language="JavaScript">
@@ -253,4 +267,5 @@
   ga('send', 'pageview');
 
 </script>
+
 

@@ -61,7 +61,7 @@
 							<div id="question" class="item" ng-repeat="question in questions">
 								<div class="question full">
 									<div class="item cau">
-										<div class="stt">Câu:  {{$index + 1}}</div>
+										<div class="stt">Câu:  {{$index + 1}}<?php if(isset($_REQUEST['showId'])):?> #{{question.id}}<?php endif;?></div>
 										<span id="sound-{{question.id}}" class="btn volume fa fa-volume-up" ng-click="read_question( question.id );"
 										ng-show="question.hasAudio"></span>
 									</div>
