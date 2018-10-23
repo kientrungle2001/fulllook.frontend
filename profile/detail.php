@@ -69,7 +69,7 @@
 							      <label for="class">Lớp :</label>
 							      <input type="text" class="form-control" ng-model="userDetail.classname" required placeholder="Lớp học">
 							    </div>
-							    <div class="form-group col-md-3">
+							    <div class="form-group col-md-3" ng-init="userDetail.areacode = '2'">
 							      <label for="input">Tỉnh(TP): </label>
 							      <select ng-model="userDetail.areacode"  class="form-control" >							      		
 							        <option value="{{areaCode.id}}" ng-repeat="areaCode in areaCodes">{{areaCode.name}}</option>						        

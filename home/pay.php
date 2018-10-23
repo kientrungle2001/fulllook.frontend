@@ -112,16 +112,9 @@
 						    <input type="text" ng-model="paycard.pincard" autocomplete="off" class="pm_paycard_input form-control" id="flcardId" required  name="flcardId" placeholder="Nhập mã kích hoạt">							
 						</div>
 						<div class="form-group">
-						    <label for="flcardId">Nhập mã bảo mật:</label>
-						    <div class="col-xs-5 margin-top-3">
-				    			<img src="<?php echo "/3rdparty/captcha/random_image.php";  ?> "/>
-				    		</div>
-				    		<div class="col-xs-7">
-				    			<input type="captcha" ng-model="paycard.captcha" autocomplete="off" class="pm_paycard_input form-control" id="captcha" required  name="captcha" placeholder="Nhập mã bảo mật">
-				    		</div>
-						    							
-						</div>
-			           
+							<label for="flcardId">Nhập mã giảm giá( nếu có):</label>
+							<input type="text" class="form-control" ng-model="paycard.coupon" placeholder="Mã giảm giá (nếu có)">
+						</div>						
 			            <div class="form-group alert " ng-class="{'alert-danger': paycard.success==0, 'alert-success': paycard.success==1}" ng-show="paycard.message" ng-bind-html="paycard.message">
 
 						</div>		      		
