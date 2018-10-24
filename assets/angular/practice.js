@@ -740,6 +740,7 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		if (window.navigator.userAgent.indexOf("Linux")          != -1) OSName="Linux";
 		return OSName;
 	}
+	//bao loi
 	$scope.report = {};
 	$scope.reportError = function(question) {
 		var content = $scope.report.content;
@@ -753,10 +754,13 @@ flApp.controller('PracticeController', ['$scope', function($scope) {
 		var today = new Date();
 		var created = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 		var userAgent = window.navigator.userAgent;
+		var categoryId = $scope.subject.id;
+		var topic = $scope.selectedTopic.id
+		var exercise_number = $scope.selectedExerciseNum+1
 		if(content.length > 0){
 			jQuery.ajax({
 				type: 'post',
-				url: FL_API_URL +'/questionerror?content='+content+'&questionId='+questionId+'&userId='+userId+'&username='+username+'&phone='+phone+'&email='+email+'&created='+created+'&browser='+browser+'&os='+os+'&userAgent='+userAgent, 
+				url: FL_API_URL +'/questionerror?content='+content+'&questionId='+questionId+'&userId='+userId+'&username='+username+'&phone='+phone+'&email='+email+'&created='+created+'&browser='+browser+'&os='+os+'&userAgent='+userAgent+'&categoryId='+categoryId+'&topic='+topic+'&exercise_number='+exercise_number, 
 				dataType: 'json',
 				success: function(resp) {
 					jQuery('#report'+questionId).modal('hide');
