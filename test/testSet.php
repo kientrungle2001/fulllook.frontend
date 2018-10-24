@@ -82,7 +82,8 @@
 											<tbody>
 												<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'bg-primary text-white': showAnswerStep=='showAnswerStep' && answer.status==1}">
 													<td style="padding: 10px;">
-														<input type="radio" class="float-left" name="question_answers_{{question.id}}" value="{{answer.id}}" ng-model="user_answers[question.id]" ng-disabled="finishStep=='finishStep'" ng-change="selectAnswer(question, answer)" />
+														<input type="radio" class="float-left" name="question_answers_{{question.id}}" value="{{answer.id}}" ng-model="user_answers[question.id]" ng-disabled="finishStep=='finishStep'" ng-change="selectAnswer(question, answer)"
+														onclick="jQuery(this).blur();" />
 
 														<div class="row">
 															<div class="col" ng-show="language != 'vn'">

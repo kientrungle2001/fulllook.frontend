@@ -65,7 +65,7 @@
 											<tbody>
 												<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'bg-primary text-white': showAnswersStep=='showAnswers' && answer.status}">
 													<td style="padding: 10px;">
-														<input id="answer_question_{{question.id}}_{{answer.id}}" name="user_answers[{{question.id}}]" type="radio" ng-model="user_answers[question.id]" ng-change="selectAnswer(question, answer)" class="float-left" value="{{answer.id}}" />
+														<input id="answer_question_{{question.id}}_{{answer.id}}" name="user_answers[{{question.id}}]" type="radio" ng-model="user_answers[question.id]" ng-change="selectAnswer(question, answer)" class="float-left" value="{{answer.id}}" onclick="jQuery(this).blur();" />
 														<div class="row">
 															<div class="col" ng-show="language!='vn'">
 																<label class="inline" mathjax-bind="answer.content" for="answer_question_{{question.id}}_{{answer.id}}">
