@@ -1,8 +1,38 @@
-
 <div class="full practice pb-5">
 	<div class="container mt-4 mb-3">
+	<div class="row">
+	<div class="col-md-3">
+		<div class="card">
+			<div class="list-group" ng-init="selectedSection='info'">
+				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'info'}" ng-click="selectedSection='info'">
+					Thông tin cá nhân
+				</a>
+				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'luyentap'}" ng-click="selectedSection='luyentap'">
+					Luyện tập các môn
+				</a>
+				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'tonghop'}" ng-click="selectedSection='tonghop'">
+					Ôn luyện tổng hợp
+				</a>
+				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'tienganh'}" ng-click="selectedSection='tienganh'">
+					Ôn luyện tiếng anh
+				</a>
+				
+				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'thithu'}" ng-click="selectedSection='thithu'">
+					Thi thử trần đại nghĩa
+				</a>
+				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'dethitdn'}" ng-click="selectedSection='dethitdn'">
+					Đề thi trần đại nghĩa các năm
+				</a>
+				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'testall'}" ng-click="selectedSection='testall'">
+				Tổng hợp các bài thi
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+
 		<div class="main-shadow full p-3">
-			<div class="full  p-3 mb-3">
+			<div class="full  p-3 mb-3" ng-show="selectedSection==='info'">
 				<h4 class="text-center t-weight">THÔNG TIN CÁ NHÂN</h4>				
 				<div class="row">
 					<div class="col-md-4">
@@ -29,7 +59,7 @@
 							
 						</div>
 						<!--edit infor -->
-						<div class="full bg-light" ng-show="editInfor" >
+						<div class="full bg-light-2" ng-show="editInfor" >
 							<!--edit infor -->
 							<form >
 							  <div class="form-row">
@@ -91,7 +121,7 @@
 						</div>
 						
 						<!--edit password -->
-						<div class="full bg-light" ng-show="editInfor" >
+						<div class="full bg-light-2" ng-show="editInfor" >
 							<form>
 							  <div class="form-row">
 							    <div class="form-group col-md-4">
@@ -124,7 +154,7 @@
 						
 
 						<!--edit avatar -->
-						<div class="full bg-light" ng-show="editInfor" >
+						<div class="full bg-light-2" ng-show="editInfor" >
 							<form enctype="multipart/form-data">				
 								<div class="clearfix">
 								  	<img src="" id="avatarPreview" alt="" class="rounded-circle" alt="Cinque Terre" width="304" height="304">
@@ -147,31 +177,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="full bg-light p-3 mb-3">
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-				  <li class="nav-item">
-				    <a class="nav-link active" id="luyentap-tab" data-toggle="tab" href="#luyentap" role="tab" aria-controls="luyentap" aria-selected="true">Luyện tập các môn</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link  id="tienganh-tab" data-toggle="tab" href="#tienganh" role="tab" aria-controls="tienganh" aria-selected="true">Ôn luyện tiếng Anh </a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" id="deluyentap-tab" data-toggle="tab" href="#deluyentap" role="tab" aria-controls="deluyentap" aria-selected="false">Ôn luyện tổng hợp</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" id="thithu-tab" data-toggle="tab" href="#thithu" role="tab" aria-controls="thithu" aria-selected="false">Thi thử Trần Đại Nghĩa</a>
-				  </li>	
-				  <li class="nav-item">
-				    <a class="nav-link" id="tdn-tab" data-toggle="tab" href="#tdn" role="tab" aria-controls="tdn" aria-selected="false">Đề thi Trần Đại Nghĩa các năm</a>
-				  </li>	
-				  <li class="nav-item">
-				    <a class="nav-link" id="testAll-tab" data-toggle="tab" href="#testAll" role="tab" aria-controls="tdn" aria-selected="false">Tất cả</a>
-				  </li>			  
-				</ul>
-			</div>
 			
-			<div class="tab-content pt-2  mb-5" id="myTabContent">
-			  	<div class="tab-pane fade show active bg-light" id="luyentap" role="tabpanel" aria-labelledby="luyentap-tab" >
+					<div class="section-content pt-2  mb-5" id="section-content">
+			  	<div class="section-pane bg-light-2" id="luyentap" role="tabpanel" aria-labelledby="luyentap-tab" ng-show="selectedSection==='luyentap'" >
 			  		<h5>Bài luyện tập các môn học</h5>
 			  		<table class="table table-bordered">
 					  <thead>
@@ -206,7 +214,7 @@
 					    <li class="page-item" ng-class="{'active': lessonPageSelected === 0}">
 					      <a class="page-link" ng-click="lessonPage(0)"> Trang đầu </a>
 					    </li>
-					    <li class="page-item" ng-repeat="lessonItem in lessonQuantity" ng-class="{'active': lessonPageSelected == lessonItem}">
+					    <li class="page-item" ng-repeat="lessonItem in lessonQuantity" ng-class="{'active': lessonPageSelected == lessonItem}" ng-show="lessonItem === 0 || lessonItem === lessonQuantity.length-1 || (lessonItem > lessonPageSelected - 5) && (lessonItem < lessonPageSelected + 5)">
 					    	<a class="page-link" ng-click="lessonPage(lessonItem)">{{lessonItem+1}}</a>
 					    </li>
 					    			    
@@ -214,8 +222,8 @@
 					  </ul>
 					</nav>
 			  	</div>
-			  	<div class="tab-pane fade bg-light" id="deluyentap" role="tabpanel" aria-labelledby="deluyentap-tab">
-			  		Ôn luyện tổng hợp
+			  	<div class="section-pane bg-light-2" id="deluyentap" role="tabpanel" aria-labelledby="deluyentap-tab" ng-show="selectedSection==='tonghop'">
+			  		<h5>Ôn luyện tổng hợp</h5>
 			  		<table class="table table-bordered">
 					  <thead>
 					    <tr>
@@ -247,7 +255,7 @@
 					      	<a class="page-link"  ng-click="testPage(0)">Trang đầu</a>      
 					  	  
 					    </li>
-					    <li class="page-item"  ng-class="{'active': testPageSelected === testitem}" ng-repeat="testitem in testQuantity">
+					    <li class="page-item"  ng-class="{'active': testPageSelected === testitem}" ng-repeat="testitem in testQuantity" ng-show="testitem === 0 || testitem === testQuantity.length-1 || (testitem > testPageSelected - 5) && (testitem < testPageSelected + 5)">
 					    	<a class="page-link"  ng-click="testPage(testitem)">{{testitem+1}}</a>
 					    </li>
 					    
@@ -255,8 +263,8 @@
 					</nav>
 			  	</div>
 
-			  	<div class="tab-pane fade bg-light" id="tienganh" role="tabpanel" aria-labelledby="tienganh-tab">
-			  		Ôn luyện tiếng Anh
+			  	<div class="section-pane bg-light-2" id="tienganh" role="tabpanel" aria-labelledby="tienganh-tab" ng-show="selectedSection==='tienganh'">
+			  		<h5>Ôn luyện tiếng Anh</h5>
 			  		<table class="table table-bordered">
 					  <thead>
 					    <tr>
@@ -288,7 +296,7 @@
 					      	<a class="page-link"  ng-click="testEPage(0)">Trang đầu</a>      
 					  	  
 					    </li>
-					    <li class="page-item"  ng-class="{'active': testEPageSelected === testEitem}" ng-repeat="testEitem in testEQuantity">
+					    <li class="page-item"  ng-class="{'active': testEPageSelected === testEitem}" ng-repeat="testEitem in testEQuantity" ng-show="testEitem === 0 || testEitem === testEQuantity.length-1 || (testEitem > testEPageSelected - 5) && (testEitem < testEPageSelected + 5)">
 					    	<a class="page-link"  ng-click="testEPage(testEitem)">{{testEitem+1}}</a>
 					    </li>
 					    
@@ -296,8 +304,8 @@
 					</nav>
 			  	</div>
 
-			  	<div class="tab-pane fade bg-light" id="thithu" role="tabpanel" aria-labelledby="thithu-tab" >
-			  		Đề thi thử
+			  	<div class="section-pane bg-light-2" id="thithu2" role="tabpanel" aria-labelledby="thithu-tab" ng-show="selectedSection==='thithu'">
+			  		<h5>Đề thi thử</h5>
 			  		<table class="table table-bordered">
 					  <thead>
 					    <tr>
@@ -329,7 +337,7 @@
 					      	<a class="page-link"  ng-click="tdnTestPage(0)">Trang đầu</a>      
 					  	  
 					    </li>
-					    <li class="page-item" ng-class="{'active': tdnTestPageSelected === tdnTestitem}" ng-repeat="tdnTestitem in tdnTestQuantity">
+					    <li class="page-item" ng-class="{'active': tdnTestPageSelected === tdnTestitem}" ng-repeat="tdnTestitem in tdnTestQuantity" ng-show="tdnTestitem === 0 || tdnTestitem === tdnTestQuantity.length-1 || (tdnTestitem > tdnTestPageSelected - 5) && (tdnTestitem < tdnTestPageSelected + 5)">
 					    	<a class="page-link"   ng-click="tdnTestPage(tdnTestitem)">{{tdnTestitem +1}}</a>
 					    </li>					   
 					    
@@ -337,8 +345,8 @@
 					</nav>
 				</div>
 
-				<div class="tab-pane fade bg-light" id="tdn" role="tabpanel" aria-labelledby="tdn-tab" >
-			  		Đề thi chính thức các năm
+				<div class="section-pane bg-light-2" id="tdn" role="tabpanel" aria-labelledby="tdn-tab" ng-show="selectedSection==='dethitdn'">
+			  		<h5>Đề thi chính thức các năm</h5>
 			  		<table class="table table-bordered">
 					  <thead>
 					    <tr>
@@ -370,7 +378,7 @@
 					      	<a class="page-link"  ng-click="tdnRealTestPage(0)">Trang đầu</a>      
 					  	  
 					    </li>
-					    <li class="page-item" ng-class="{'active': tdnRealTestPageSelected === tdnRealTestitem}" ng-repeat="tdnRealTestitem in tdnRealTestQuantity">
+					    <li class="page-item" ng-class="{'active': tdnRealTestPageSelected === tdnRealTestitem}" ng-repeat="tdnRealTestitem in tdnRealTestQuantity" ng-show="tdnRealTestitem === 0 || tdnRealTestitem === tdnRealTestQuantity.length-1 || (tdnRealTestitem > tdnRealTestPageSelected - 5) && (tdnRealTestitem < tdnRealTestPageSelected + 5)">
 					    	<a class="page-link"   ng-click="tdnRealTestPage(tdnRealTestitem)">{{tdnRealTestitem +1}}</a>
 					    </li>					   
 					    
@@ -378,8 +386,8 @@
 					</nav>
 				</div>
 
-				<div class="tab-pane fade bg-light" id="testAll" role="tabpanel" aria-labelledby="testAll-tab" >
-			  		Tổng hợp các bài thi
+				<div class="section-pane bg-light-2" id="testAll" role="tabpanel" aria-labelledby="testAll-tab"  ng-show="selectedSection==='testall'" >
+			  		<h5>Tổng hợp các bài thi</h5>
 			  		<table class="table table-bordered">
 					  <thead>
 					    <tr>
@@ -411,7 +419,7 @@
 					      	<a class="page-link"  ng-click="testAllPage(0)">Trang đầu</a>      
 					  	  
 					    </li>
-					    <li class="page-item" ng-class="{'active': testAllPageSelected === testAllitem}" ng-repeat="testAllitem in testAllQuantity">
+					    <li class="page-item" ng-class="{'active': testAllPageSelected === testAllitem}" ng-repeat="testAllitem in testAllQuantity" ng-show="testAllitem === 0 || testAllitem === testAllQuantity.length-1 || (testAllitem > testAllPageSelected - 5) && (testAllitem < testAllPageSelected + 5)">
 					    	<a class="page-link"   ng-click="testAllPage(testAllitem)">{{testAllitem +1}}</a>
 					    </li>					   
 					    
@@ -421,6 +429,8 @@
 				
 			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 </div>
 
