@@ -441,11 +441,12 @@
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
 					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-			  		<table class="table table-bordered">
+					<div class="table-responsive">
+						<table class="table table-bordered">
 					  <thead>
 					    <tr>
 					      <th scope="col">#</th>
-					      <th scope="col">Câu hỏi</th>					      
+					      <th scope="col">Câu hỏi và Báo lỗi</th>
 					      <th scope="col">Bài</th>
 					      <th scope="col">Ngày</th>
 								<th scope="col">Trạng thái</th>
@@ -455,21 +456,25 @@
 					  <tbody>
 					    <tr ng-repeat="error in errorSubjects">
 					      <th scope="row">{{$index +1}}</th>
-					      <td><div class="ptnn-title full" mathjax-bind="error.name" ></div></td>
-					      <td > {{ (error.categoryName !== null) ? error.categoryName + '-' + error.topicName + '-' + error.exercise_number : '' }}</td>
+					      <td>
+								<strong>Câu hỏi:</strong><br/>
+								<div class="ptnn-title full" mathjax-bind="error.name" ></div><br/>
+								<strong>Báo lỗi:</strong><br/>
+								<div class="ptnn-title full" mathjax-bind="error.content" >
+								</td>
+					      <td >
+								{{ (error.categoryName !== null) ? 'Môn: ' + error.categoryName : ''}} <br/> {{ (error.topicName !== null) ? 'Bài học: ' + error.topicName : '' }} <br/> {{ (error.exercise_number !== null) ? ' Bài:  ' + error.exercise_number : '' }}
+								</td>
 					      <td >{{error.created| date:'MM/dd/yyyy @ h:mma'}}</td>
 								<td>
-								{{ if(error.status == 1) ? 'Đã trả lời' : 'Chưa trả lời' }} <br />
+								{{ errorStatus(error.status) }} <br />
 								<!-- Button trigger modal -->
 								<div ng-show="error.status == 1">
 									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorSubject{{$index+1}}">
 										Xem trả lời
 									</button>
-								</div>
-								
-								</td>
-								
-								<!-- Modal -->
+
+										<!-- Modal -->
 								<div class="modal fade" id="errorSubject{{$index+1}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
@@ -480,18 +485,24 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												{{error.content}}
+												{{error.note}}
 											</div>
 											
 										</div>
 									</div>
 								</div>
+
+								</div>
+								
+								</td>
+								
+							
 					      
 					    </tr>					    
 					    
 					  </tbody>
 					</table>
-
+					</div>
 						<nav aria-label="...">
 					  <ul class="pagination">
 					    <li class="page-item" ng-class="{'active': selectedErrorSubjectsPage === 0}">					      
@@ -507,12 +518,12 @@
 
 					</div>
 					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-
+					<div class="table-responsive">
 			  		<table class="table table-bordered">
 					  <thead>
 					    <tr>
 					      <th scope="col">#</th>
-					      <th scope="col">Câu hỏi</th>					      
+					      <th scope="col">Câu hỏi và Báo lỗi</th>
 					      <th scope="col">Đề thi</th>
 					      <th scope="col">Ngày</th>
 								<th scope="col">Trạng thái</th>
@@ -522,43 +533,51 @@
 					  <tbody>
 					    <tr ng-repeat="error in errorTests">
 					      <th scope="row">{{$index +1}}</th>
-					      <td><div class="ptnn-title full" mathjax-bind="error.name" ></div></td>
-					      <td > {{ (error.categoryName !== null) ? error.categoryName + '-' + error.parentTestName + '-' + error.testName : '' }}</td>
+					      <td>
+								<strong>Câu hỏi:</strong><br/>
+								<div class="ptnn-title full" mathjax-bind="error.name" ></div><br />
+								<strong>Báo lỗi:</strong><br/>
+								<div class="ptnn-title full" mathjax-bind="error.content" ></div>
+								</td>
+					      <td >
+								{{ (error.categoryName !== null) ? 'Chuyên mục: ' + error.categoryName : ''}} <br/> {{ (error.parentTestName !== null) ? error.parentTestName : '' }} <br/> {{ (error.testName !== null) ? error.testName : '' }}
+								</td>
 					      <td >{{error.created| date:'MM/dd/yyyy @ h:mma'}}</td>
 								<td>
-								{{ if(error.status == 1) ? 'Đã trả lời' : 'Chưa trả lời' }} <br />
+								{{ errorStatus(error.status) }} <br />
 								<!-- Button trigger modal -->
 								<div ng-show="error.status == 1">
 									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorTest{{$index+1}}">
 										Xem trả lời
 									</button>
+									<!-- Modal -->
+									<div class="modal fade" id="errorTest{{$index+1}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLongTitle">Nội dung</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													{{error.note}}
+												</div>
+												
+											</div>
+										</div>
+									</div>
 								</div>
 								
 								</td>
 								
-								<!-- Modal -->
-								<div class="modal fade" id="errorTest{{$index+1}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLongTitle">Nội dung</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												{{error.content}}
-											</div>
-											
-										</div>
-									</div>
-								</div>
+								
 					      
 					    </tr>					    
 					    
 					  </tbody>
 					</table>
-
+					</div>
 						<nav aria-label="...">
 					  <ul class="pagination">
 					    <li class="page-item" ng-class="{'active': selectedErrorTestPage === 0}">					      

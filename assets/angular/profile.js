@@ -620,6 +620,15 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 		});
 	};
 	$scope.paginationErrorSubject(0);
-
+	$scope.errorStatus = function (status) {
+		switch(status){
+			case 1:
+			return 'Đã trả lời';
+			case -1: 
+			return 'Đóng';
+			case 0:
+			return 'Chưa trả lời';
+		}
+	}
 
 }]);
