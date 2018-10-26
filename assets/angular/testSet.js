@@ -497,11 +497,12 @@ flApp.controller('TestSetController', ['$scope', function($scope) {
 		var created = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 		var userAgent = window.navigator.userAgent;
 		var testId = $scope.selectedTest.id;
-		var parentTest = $scope.selectedTestSet.id;;
+		var parentTest = $scope.selectedTestSet.id;
+		var categoryId = u.searchParams.get('category_id');
 		if(content.length > 0){
 			jQuery.ajax({
 				type: 'post',
-				url: FL_API_URL +'/questionerror?content='+content+'&questionId='+questionId+'&userId='+userId+'&username='+username+'&phone='+phone+'&email='+email+'&created='+created+'&browser='+browser+'&os='+os+'&userAgent='+userAgent+'&testId='+testId+'&parentTest='+parentTest, 
+				url: FL_API_URL +'/questionerror?content='+content+'&questionId='+questionId+'&userId='+userId+'&username='+username+'&phone='+phone+'&email='+email+'&created='+created+'&browser='+browser+'&os='+os+'&userAgent='+userAgent+'&testId='+testId+'&parentTest='+parentTest+'&categoryId='+categoryId, 
 				dataType: 'json',
 				success: function(resp) {
 					jQuery('#report'+questionId).modal('hide');

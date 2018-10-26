@@ -539,4 +539,87 @@ flApp.controller('ProfileController', ['$scope', function($scope) {
 			$scope.$apply();
 		}
 	});
+
+
+	// Error subject
+	$scope.pageErrorSubject = 0;
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/profile/countErrorSubject', 
+		data: {
+			userId: sessionUserId			
+		},
+		dataType: 'json',
+		success: function(resp) {
+			var quantity = Math.ceil(resp/20);
+		    var result= [];
+		    for(i =0; i< quantity; i++){
+		      result.push(i);
+		    }
+			$scope.pageErrorSubject = result;
+			$scope.$apply();
+		}
+	});
+	$scope.errorSubjects = [];	
+	$scope.paginationErrorSubject = function(page){
+		$scope.selectedErrorSubjectsPage = page;
+		jQuery.ajax({
+			type: 'post',
+			url: FL_API_URL +'/profile/getErrorSubject', 
+			data: {
+				userId: sessionUserId,				
+				numberPage: page,
+				numberRow: 20
+
+			},
+			dataType: 'json',
+			success: function(resp) {
+				$scope.errorSubjects = resp;
+				$scope.$apply();
+			}
+		});
+	};
+	$scope.paginationErrorSubject(0);
+
+	// Error test
+	$scope.pageErrorTest = 0;
+	jQuery.ajax({
+		type: 'post',
+		url: FL_API_URL +'/profile/countErrorTest', 
+		data: {
+			userId: sessionUserId			
+		},
+		dataType: 'json',
+		success: function(resp) {
+			var quantity = Math.ceil(resp/20);
+		    var result= [];
+		    for(i =0; i< quantity; i++){
+		      result.push(i);
+		    }
+			$scope.pageErrorTest = result;
+			$scope.$apply();
+		}
+	});
+	$scope.errorTests = [];	
+	$scope.paginationErrorSubject = function(page){
+		$scope.selectedErrorTestPage = page;
+		jQuery.ajax({
+			type: 'post',
+			url: FL_API_URL +'/profile/getErrorTest', 
+			data: {
+				userId: sessionUserId,				
+				numberPage: page,
+				numberRow: 20
+
+			},
+			dataType: 'json',
+			success: function(resp) {
+				$scope.errorTests = resp;
+				$scope.$apply();
+			}
+		});
+	};
+	$scope.paginationErrorSubject(0);
+
+
 }]);

@@ -26,6 +26,9 @@
 				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'testall'}" ng-click="selectedSection='testall'">
 				Tổng hợp các bài thi
 				</a>
+				<a class="list-group-item list-group-item-action" href="#" onclick="return false;" ng-class="{'active': selectedSection === 'report'}" ng-click="selectedSection='report'">
+				Báo lỗi
+				</a>
 			</div>
 		</div>
 	</div>
@@ -427,6 +430,156 @@
 					</nav>
 				</div>
 				
+				<div class="section-pane bg-light-2" id="report" role="tabpanel" aria-labelledby="report-tab"  ng-show="selectedSection==='report'" >
+
+					<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Luyện tập</a>
+						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Đề thi</a>
+					
+					</div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+			  		<table class="table table-bordered">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Câu hỏi</th>					      
+					      <th scope="col">Bài</th>
+					      <th scope="col">Ngày</th>
+								<th scope="col">Trạng thái</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr ng-repeat="error in errorSubjects">
+					      <th scope="row">{{$index +1}}</th>
+					      <td><div class="ptnn-title full" mathjax-bind="error.name" ></div></td>
+					      <td > {{ (error.categoryName !== null) ? error.categoryName + '-' + error.topicName + '-' + error.exercise_number : '' }}</td>
+					      <td >{{error.created| date:'MM/dd/yyyy @ h:mma'}}</td>
+								<td>
+								{{ if(error.status == 1) ? 'Đã trả lời' : 'Chưa trả lời' }} <br />
+								<!-- Button trigger modal -->
+								<div ng-show="error.status == 1">
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorSubject{{$index+1}}">
+										Xem trả lời
+									</button>
+								</div>
+								
+								</td>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="errorSubject{{$index+1}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Nội dung</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												{{error.content}}
+											</div>
+											
+										</div>
+									</div>
+								</div>
+					      
+					    </tr>					    
+					    
+					  </tbody>
+					</table>
+
+						<nav aria-label="...">
+					  <ul class="pagination">
+					    <li class="page-item" ng-class="{'active': selectedErrorSubjectsPage === 0}">					      
+					      	<a class="page-link"  ng-click="paginationErrorSubject(0)">Trang đầu</a>      
+					  	  
+					    </li>
+					    <li class="page-item" ng-class="{'active': selectedErrorSubjectsPage === page}" ng-repeat="page in pageErrorSubject" ng-show="page === 0 || page === selectedErrorSubjectsPage.length-1 || (page > selectedErrorSubjectsPage - 5) && (page < selectedErrorSubjectsPage + 5)">
+					    	<a class="page-link"   ng-click="paginationErrorSubject(page)">{{page +1}}</a>
+					    </li>					   
+					    
+					  </ul>
+					</nav>
+
+					</div>
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+			  		<table class="table table-bordered">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Câu hỏi</th>					      
+					      <th scope="col">Đề thi</th>
+					      <th scope="col">Ngày</th>
+								<th scope="col">Trạng thái</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr ng-repeat="error in errorTests">
+					      <th scope="row">{{$index +1}}</th>
+					      <td><div class="ptnn-title full" mathjax-bind="error.name" ></div></td>
+					      <td > {{ (error.categoryName !== null) ? error.categoryName + '-' + error.parentTestName + '-' + error.testName : '' }}</td>
+					      <td >{{error.created| date:'MM/dd/yyyy @ h:mma'}}</td>
+								<td>
+								{{ if(error.status == 1) ? 'Đã trả lời' : 'Chưa trả lời' }} <br />
+								<!-- Button trigger modal -->
+								<div ng-show="error.status == 1">
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorTest{{$index+1}}">
+										Xem trả lời
+									</button>
+								</div>
+								
+								</td>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="errorTest{{$index+1}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Nội dung</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												{{error.content}}
+											</div>
+											
+										</div>
+									</div>
+								</div>
+					      
+					    </tr>					    
+					    
+					  </tbody>
+					</table>
+
+						<nav aria-label="...">
+					  <ul class="pagination">
+					    <li class="page-item" ng-class="{'active': selectedErrorTestPage === 0}">					      
+					      	<a class="page-link"  ng-click="paginationErrorSubject(0)">Trang đầu</a>      
+					  	  
+					    </li>
+					    <li class="page-item" ng-class="{'active': selectedErrorTestPage === page}" ng-repeat="page in pageErrorTest" ng-show="page === 0 || page === selectedErrorTestPage.length-1 || (page > selectedErrorTestPage - 5) && (page < selectedErrorTestPage + 5)">
+					    	<a class="page-link"   ng-click="paginationErrorSubject(page)">{{page +1}}</a>
+					    </li>					   
+					    
+					  </ul>
+					</nav>
+					
+					</div>
+				
+				</div>
+					
+					
+
+				</div>
+
 			</div>
 		</div>
 	</div>
