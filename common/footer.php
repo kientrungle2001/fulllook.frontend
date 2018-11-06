@@ -243,11 +243,14 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 
-	<!--script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script-->
-	
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML' async></script>
+	<!--
 	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	-->
 	<script type="text/x-mathjax-config"> 
 		MathJax.Hub.Config({
+			skipStartupTypeset: true,
+    		messageStyle: "none",
 			showMathMenu: false,
 			showProcessingMessages: false,
 			jax: ["input/TeX", "output/HTML-CSS"],
@@ -256,6 +259,7 @@ s0.parentNode.insertBefore(s1,s0);
 		    	preview: "none"
 		    }
 		}); 
+		MathJax.Hub.Configured();
 	</script>
 	<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

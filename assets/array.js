@@ -259,8 +259,10 @@ function count (mixedVar, mode) {
  * @param {Array} a items The array containing the items.
  */
 function shuffle(a) {
-    for (let i = a.length; i; i--) {
-        let j = Math.floor(Math.random() * i);
-        [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    for (var i = a.length; i; i--) {
+      var j = Math.floor(Math.random() * i);
+			var tmp = a[i - 1];
+			a[i - 1] = a[j];
+			a[j] = tmp;
     }
 }
