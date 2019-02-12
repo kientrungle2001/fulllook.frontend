@@ -171,7 +171,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-6">
-				<h3 class="heading text-uppercase text-center mb-3 text-white">đăng ký tư vấn</h3>
+				<h3 id="dangkydungthu" class="heading text-uppercase text-center mb-3 text-white">đăng ký dùng thử</h3>
 				
 				<form method="post">
 					<div class="form-group mb-4">

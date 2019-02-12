@@ -113,9 +113,6 @@
 							      </select>
 							</div>
 						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" ng-model="register.coupon" placeholder="Mã giảm giá (nếu có)">
-						</div>
 						<div class="form-group alert" ng-class="{'alert-danger': 	register.success==0, 'alert-success': register.success==1}" 	ng-show="register.message" ng-bind-html="register.message">
 
 						</div>

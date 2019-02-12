@@ -38,12 +38,12 @@
 							<tbody>
 								<tr ng-repeat="answer in question.ref_question_answers" ng-class="{'font-weight-bold text-success': answer.status==1, 'font-weight-bold text-danger': answer.id == userAnswers[question.id]&& answer.status !=1 }">
 									<td style="padding: 10px;" ng-if="lessons.lang != 'vn'">
-										<input  type="radio" name="{{question.id}}" id="{{answer.id}}"  value="{{answer.id}}" ng-checked="answer.id == userAnswers[question.id]" />
+										<input  type="radio" name="{{question.id}}" id="{{answer.id}}"  value="{{answer.id}}" ng-checked="answer.id == userAnswers[question.id]" disabled />
 										<span class="answers_474_38915 pl10" mathjax-bind="answer.content"></span>										
 
 									</td>
 									<td style="padding: 10px;" ng-if="lessons.lang == 'vn'">
-										<input  type="radio" name="{{question.id}}" id="{{answer.id}}"  value="{{answer.id}}"  />
+										<input  type="radio" name="{{question.id}}" id="{{answer.id}}"  value="{{answer.id}}" ng-checked="answer.id == userAnswers[question.id]" disabled  />
 										<span class="answers_474_38915 pl10" mathjax-bind="answer.content_vn"></span>
 									</td>
 								</tr>

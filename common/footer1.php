@@ -58,7 +58,7 @@ s0.parentNode.insertBefore(s1,s0);
 	</div-->
 </div>
 
-<div class="modal" id="bannerModal" tabindex="-1" role="dialog">
+<!--div class="modal" id="bannerModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -69,19 +69,14 @@ s0.parentNode.insertBefore(s1,s0);
       </div>
       <div class="modal-body">
         <div class="relative">
-									<!--
-									<a href="/news_detail.php?id=201">
-										<img src="http://s1.nextnobels.com/3rdparty/uploads/images/8d6a96a791dba6c55d26099480571686.png" class="img-fluid" alt="">
-									</a>
-									-->
-									<a href="/news_detail.php?id=202">
-										<img src="/assets/images/pop-up.png" class="img-fluid" alt="">
-									</a>
-								</div>
+			<img src="/assets/images/phunu.png" class="img-fluid" alt="">
+			<a style="bottom: 65px; left: 65px;" class="btn btn-warning absolute" href="/news_detail.php?id=199">Xem chi tiết</a>
+		</div>
       </div>
+      
     </div>
   </div>
-</div>
+</div-->
 <style>
 #hotnew {
     display: none;
@@ -154,7 +149,7 @@ s0.parentNode.insertBefore(s1,s0);
 	</div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script>
 		$.noConflict();
 	</script>
@@ -234,17 +229,6 @@ s0.parentNode.insertBefore(s1,s0);
 			jQuery('#bannerModal').modal('hide');
 			sessionStorage.setItem('closePopup', '1');
 		}
-		if(typeof URL == 'undefined') {
-			URL = function(href) {
-				this.href = href;
-			};
-			var get_inputs = <?php echo (!empty($_GET) ? json_encode($_GET): '{}');?>;
-			URL.prototype.searchParams = {
-				get: function(key) {
-					return get_inputs[key] || null;
-				}
-			};
-		}
 		if(typeof URL.prototype.searchParams == 'undefined') {
 			var get_inputs = <?php echo (!empty($_GET) ? json_encode($_GET): '{}');?>;
 			URL.prototype.searchParams = {
@@ -259,14 +243,11 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML' async></script>
-	<!--
+	<!--script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script-->
+	
 	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-	-->
 	<script type="text/x-mathjax-config"> 
 		MathJax.Hub.Config({
-			skipStartupTypeset: true,
-    		messageStyle: "none",
 			showMathMenu: false,
 			showProcessingMessages: false,
 			jax: ["input/TeX", "output/HTML-CSS"],
@@ -275,7 +256,6 @@ s0.parentNode.insertBefore(s1,s0);
 		    	preview: "none"
 		    }
 		}); 
-		MathJax.Hub.Configured();
 	</script>
 	<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

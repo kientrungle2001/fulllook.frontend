@@ -132,7 +132,9 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 		$scope.areaCodes = resp;
 		$scope.$apply();
 	}});
-	$scope.order = {};
+	$scope.order = {
+		software: 1
+	};
 	$scope.doOrder =function(){
 		if(!$scope.order.fullname|| !$scope.order.quantity || !$scope.order.phone || !$scope.order.address ){
 			return false;
@@ -160,24 +162,38 @@ flApp.controller('AboutController', ['$scope', function($scope) {
 			}
 			$scope.paycard.userId = sessionUserId;	
 			$scope.paycard.username = sessionUsername;
+			jQuery.post(url+'/3rdparty/captcha/check_session.php', $scope.paycard.captcha, function(dataResult) {
+				if(dataResult){
+					if($scope.paycard.captcha == dataResult){
+						jQuery.post(FL_API_URL+'/payment/payCard', $scope.paycard, function(dataResult) {
+						  	if(dataResult) {
+						  		if(parseInt(dataResult.result)== 1){
+						  			jQuery.post(url+'/update_paycard.php', dataResult, function(data) {
+									
+									});						
+									$scope.paycard.message = dataResult.string;
+									$scope.paycard.success = 1;
+									$scope.$apply();
+									
+						  		}else {
 
-			jQuery.post(FL_API_URL+'/payment/payCard', $scope.paycard, function(dataResult) {
-			  	if(dataResult) {
-			  		if(parseInt(dataResult.result)== 1){
-			  			jQuery.post(url+'/update_paycard.php', dataResult, function(data) {
-							
+						  			$scope.paycard.message = dataResult.string;	
+						  			$scope.paycard.success = 0;	
+						  			$scope.paycardCaptcha= '/3rdparty/captcha/random_image.php?t=' + (new Date()).getMilliseconds();
+						  			$scope.$apply();		  		
+								}
+						  	}				
 						});
-						$scope.paycard.message = dataResult.string;
-						$scope.paycard.success = 1;
+					}else {						
+						$scope.paycardCaptcha= '/3rdparty/captcha/random_image.php?t=' + (new Date()).getMilliseconds();
+						$scope.paycard.message = 'Mã bảo mật chưa đúng';	
+			  			$scope.paycard.success = 0;
 						$scope.$apply();
 						
-			  		}else {
-			  			$scope.paycard.message = dataResult.string;	
-			  			$scope.paycard.success = 0;	
-			  			$scope.$apply();		  		
 					}
-			  	}				
-			});			
+				}			
+			});
+						
 		}
 			
 	}

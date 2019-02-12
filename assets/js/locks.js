@@ -5,13 +5,13 @@ jQuery(document).ready(function(){
 		jQuery(document).on("keydown", disableF5);
 });
 
-if(1 && (window.location.href.indexOf('Admin_') === -1) && (window.location.host.indexOf('tiengviettieuhoc') === -1)) jQuery(document).bind("contextmenu", function(e) {
+if(0 && (window.location.href.indexOf('Admin_') === -1) && (window.location.host.indexOf('tiengviettieuhoc') === -1)) jQuery(document).bind("contextmenu", function(e) {
 	e.preventDefault();
 });
 
 // We also check for a text selection if ctrl/command are pressed along
 // w/certain keys
-if(1 && (window.location.href.indexOf('Admin_') === -1) && (window.location.host.indexOf('tiengviettieuhoc') === -1)) jQuery(document).keydown(function(ev) {
+if(0 && (window.location.href.indexOf('Admin_') === -1) && (window.location.host.indexOf('tiengviettieuhoc') === -1)) jQuery(document).keydown(function(ev) {
 	// capture the event for a variety of browsers
 	ev = ev || window.event;
 	// catpure the keyCode for a variety of browsers
