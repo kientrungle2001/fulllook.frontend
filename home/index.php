@@ -32,7 +32,7 @@
 	</div>
 
 </div>
-<img src="/assets/images/background1.png" alt="" class="full" />
+<img src="/assets/images/background1.jpg" alt="" class="full" />
 
 <div id="ontienganh" class="full">
 	<div class="container">
@@ -101,7 +101,7 @@
 	</div>
 	
 </div>	
-<img src="/assets/images/background2.png" alt="" class="full" />
+<img src="/assets/images/background2.png" alt="" class="full d-none" />
 
 
 
@@ -165,7 +165,7 @@
 	</div>
 </div>
 <!--end-->
-<img src="/assets/images/lydo.png" alt="" class="full" />
+<img src="/assets/images/lydo.jpg" alt="" class="full" />
 
 <div class="full bg4">
 	<div class="container">
@@ -417,19 +417,19 @@
 	<div class="full mb-5">
 		<div class="container mgb50">
 			<div class="row">
-				<div class="col-md-3 col-12"> 
+				<div class="col-md-4 col-12"> 
 					<b class="fff223 fs28">19453</b> <span class="fs16 white"> Thành viên </span>	
 				</div>		
-				<div class="col-md-3 col-12"> 
+				<div class="col-md-4 col-12"> 
 					<b class="fff223 fs28">1564</b> <span class="fs16 white">
 			 		Thành viên mới		</span>	
 				</div>	
-				<div class="col-md-3 col-12"> 
+				<div class="col-md-4 col-12"> 
 					<b class="fff223 fs28">4</b> <span class="fs16 white">
 					Người đang học trực tuyến		
 			 		</span>	
 			 	</div>
-				<div class="col-md-3 col-12"> 
+				<div class="col-md-3 col-12 d-none"> 
 					<span class="fs16 white">
 					Thành viên mới nhất: </span><b class="white">kiennguyenmai</b>
 				</div>

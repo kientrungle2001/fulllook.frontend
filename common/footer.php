@@ -1,3 +1,6 @@
+<?php
+$showPopup = false;
+?>
 <div-- id="footer" class="full">
 	<div class="footer-gradient">
 		<div class="footer-content container">
@@ -58,6 +61,7 @@ s0.parentNode.insertBefore(s1,s0);
 	</div-->
 </div>
 
+<?php if($showPopup): ?>
 <div class="modal" id="bannerModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -82,6 +86,7 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
   </div>
 </div>
+<?php endif; ?>
 <style>
 #hotnew {
     display: none;
@@ -223,7 +228,8 @@ s0.parentNode.insertBefore(s1,s0);
 				}
 			);
 		});
-	    
+					
+		<?php if($showPopup): ?>
 		jQuery(document).ready(function() {
 			if(sessionStorage.getItem('closePopup') != '1') {
 				if(window.location.pathname == '' || window.location.pathname == '/' )
@@ -234,6 +240,7 @@ s0.parentNode.insertBefore(s1,s0);
 			jQuery('#bannerModal').modal('hide');
 			sessionStorage.setItem('closePopup', '1');
 		}
+		<?php endif;?>
 		if(typeof URL == 'undefined') {
 			URL = function(href) {
 				this.href = href;

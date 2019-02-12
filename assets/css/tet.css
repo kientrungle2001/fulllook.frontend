@@ -1,0 +1,128 @@
+.homepage-body .header {
+	position: absolute;
+	z-index: 1;
+	background: transparent !important;
+}
+
+.bg-cloud {
+	background: #FFF0D9;
+}
+#practice {
+	background: linear-gradient(#FFF0D9, #FFFFFF) ;
+}
+
+.btdk {
+	bottom: 24%;
+}
+.timhieu .btn, .btdk .btn {
+	background: url(/assets/images/button.png);
+	background-size: cover;
+	font-size: 26px;
+	text-transform: uppercase;
+}
+
+/* Tet 2019 */
+#ontienganh {
+	background: linear-gradient(#ABAFB4, #DFD2D3)
+}
+#tonghop {
+	background: linear-gradient(#DFD2D3, #FFEAD7)
+}
+
+#thithu {
+	background: linear-gradient(#FFEAD7, #FFF0D9)
+}
+
+.bg3 {
+	background: url(/assets/images/background3.jpg);
+}
+
+.bg4 {
+	background: #FFF6EC;
+}
+
+.bg4 .box-hocphi {
+	font-size: 22px;
+}
+
+.bg4 .box-hocphi .fs29 {
+	text-shadow: 3px 3px lightgray;
+}
+
+.bg4 *{
+	color: red;
+}
+
+.bg4 .input {
+	border-color: red;
+}
+
+.bg4 .dangki {
+	background: red;
+	color: white;
+}
+
+.bg4 h3 {
+	text-shadow:
+   -2px -2px 0 red,  
+    1px -2px 0 red,
+    -2px 2px 0 red,
+     2px 2px 0 red;
+}
+
+.bg4 .box-hocphi {
+	box-shadow: 0px 5px 0px red;
+}
+
+.bg4 input::placeholder {
+	color: #FF4B92;
+}
+
+.bg4 input {
+	font-size: 20px;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.bg5 {
+	background-size: 100% 100%;
+}
+
+.bg5 .media .media-body {
+	color: #190053;
+}
+
+.bg5 .heading {
+	color: red !important;
+	text-shadow:
+	-2px -2px 0 #190053,  
+		1px -2px 0 #190053,
+		-2px 2px 0 #190053,
+			2px 2px 0 #190053;
+}
+.fff223 {
+	color: #FF4D00;
+	font-size: 40px;
+}
+
+.bg5 .mgb50 .fs16.white {
+	color: #190053;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.bg5 .mgb50 b.white {
+	color: #FF4D00;
+}
+
+.bg5 .thumbnail {
+	border: none;
+	box-shadow: none;
+	font-size: 20px;
+	height: 220px;
+	overflow-y: auto;
+}
+
+#footer .footer-gradient{
+	background: red;
+}

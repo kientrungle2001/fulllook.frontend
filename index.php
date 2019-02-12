@@ -9,22 +9,23 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.6.3/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/noel.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/tet.css" />
 	
 	
 	<script>
 		FL_API_URL = '<?php echo FL_API_URL?>';
 	</script>
 </head>
-<body>
+<body class="homepage-body">
 	<?php include('common/header.php'); ?>
-	<?php include('common/slider.php'); ?>
+	<?php include('common/slidertet.php'); ?>
 	<?php include('home/index.php'); ?>
 	<?php include('common/footer.php'); ?>
 	<script src="/assets/angular/home.js?t=<?php echo time(); ?>"></script>
-	<script src="/assets/js/snowfall.js">
-	</script>
+	<?php if(0):?>
+	<script src="/assets/js/snowfall.js"></script>
 	<embed src="/assets/audio/Ode_to_Joy.ogg" autostart="true" loop="true"
 width="2" height="0" />
+	<?php endif;?>
 </body>
 </html>

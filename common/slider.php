@@ -55,6 +55,7 @@
   </div>
 </div>
 
+<?php if(0):?>
 <script type="text/javascript">
  
   var clearId = setInterval(function(){
@@ -67,3 +68,4 @@
 
  
 </script>
+<?php endif;?>
