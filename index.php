@@ -9,8 +9,10 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.6.3/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/tet.css" />
-	
+	<!--
+		Tết
+	<link rel="stylesheet" type="text/css" href="assets/css/tet.css?t=<?php echo time(); ?>" />
+	-->
 	
 	<script>
 		FL_API_URL = '<?php echo FL_API_URL?>';
@@ -18,7 +20,10 @@
 </head>
 <body class="homepage-body">
 	<?php include('common/header.php'); ?>
-	<?php include('common/slidertet.php'); ?>
+	<?php 
+	include('common/slider.php');
+	//include('common/slidertet.php'); 
+	?>
 	<?php include('home/index.php'); ?>
 	<?php include('common/footer.php'); ?>
 	<script src="/assets/angular/home.js?t=<?php echo time(); ?>"></script>
